@@ -90,7 +90,7 @@ def parse_dir(root_dir, docs):
 def main():
     curr_dir = os.path.dirname(os.path.realpath(__file__))
     root_dir = os.path.dirname(curr_dir)
-    source_dir = os.path.join(root_dir, "cmake")
+    source_dir = os.path.join(root_dir, "cmake_test")
 
     docs = {}
     parse_dir(source_dir, docs)

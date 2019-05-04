@@ -58,7 +58,7 @@ def main() :
     root_dir = os.path.dirname(curr_dir)
     new_license = make_license(year, author, comment_char)
 
-    source_dir = os.path.join(root_dir, "cmake")
+    source_dir = os.path.join(root_dir, "cmake_test")
     process_files(source_dir, lines_in_lic, new_license)
 
 
