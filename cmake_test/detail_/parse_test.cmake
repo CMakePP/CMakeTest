@@ -7,8 +7,7 @@ function(_pt_debug_print)
 endfunction()
 
 function(_ct_parse_test _pt_sections _pt_contents _pt_asserts _pt_file)
-    STRING(REGEX REPLACE ";" "\\\\;" _pt_file "${_pt_file}")
-    STRING(REGEX REPLACE "\n" ";" _pt_file "${_pt_file}")
+
     set(_pt_in_test FALSE)
     set(_pt_debug_parse TRUE)
     foreach(_pt_line ${_pt_file}) #Loop over lines

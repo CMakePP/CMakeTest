@@ -1,1 +1,6 @@
+#Build directories
 docs/build
+cmake-build-debug/
+
+#CLion project settings
+.idea/
