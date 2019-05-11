@@ -1,4 +1,4 @@
-set(tests hello_world.cmake)
+set(tests tutorials/hello_world.cmake)
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR})
 
 
