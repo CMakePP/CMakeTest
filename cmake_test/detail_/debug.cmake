@@ -1,4 +1,5 @@
 include_guard()
+include(cmake_test/detail_/utilities)
 
 #FUNCTION
 #
@@ -31,4 +32,15 @@ function(_ct_result_debug)
     if(CT_DEBUG_RESULT OR CT_DEBUG_ALL)
         message("Result Debug: ${ARGN}")
     endif()
+endfunction()
+
+function(_ct_print_target _pt_handle)
+    _ct_get_value(_pt_names "${_pt_handle}" CT_TARGET_NAME)
+    message("Test Name: ${_pt_names}")
+    _ct_get_value(_pt_pass "${_pt_handle}" CT_SHOULD_PASS)
+    message("Should pass: ${_pt_pass}")
+    _ct_get_value(_pt_prints "${_pt_handle}" CT_PRINTS)
+    message("Should print: ${_pt_prints}")
+    _ct_get_value(_pt_content "${_pt_handle}" CT_CONTENT)
+    message("Content: ${_pt_content}")
 endfunction()

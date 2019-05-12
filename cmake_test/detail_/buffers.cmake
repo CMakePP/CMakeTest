@@ -1,6 +1,18 @@
 include_guard()
 
-macro(_ct_append_buffer _ab_buffer _ab_line)
+function(_ct_make_test _mt_handle _mt_name)
+
+endfunction()
+
+function(_ct_make_section _ms_handle _ms_name)
+    get_target_property(_ms_names ${_ms_handle} TEST_NAME)
+    list(LENGTH _ms_names _ms_depth)
+    if("${_ms_depth}" STREQUAL "0")
+
+
+
+function(_ct_append_buffer_guts _ab_buffer _ab_line)
+    cmake_policy(SET CMP0007 NEW) #List won't ignore empty elements
     list(LENGTH ${_ab_buffer} _ab_n)
     _ct_parse_debug("Old ${_ab_buffer} value: ${${_ab_buffer}}")
     if("${_ab_n}" STREQUAL 0)
@@ -12,6 +24,11 @@ macro(_ct_append_buffer _ab_buffer _ab_line)
         set("${_ab_buffer}" "${${_ab_buffer}}" PARENT_SCOPE)
     endif()
     _ct_parse_debug("New ${_ab_buffer} value: ${${_ab_buffer}}${_ab_line}")
+endfunction()
+
+macro(_ct_append_buffer _ab_buffer _ab_line)
+    _ct_append_buffer_guts(${_ab_buffer} "${_ab_line}")
+    set(${_ab_buffer} "${${_ab_buffer}}" PARENT_SCOPE)
 endmacro()
 
 macro(_ct_recurse_buffer _rb_buffer _rb_initial)
@@ -20,6 +37,7 @@ macro(_ct_recurse_buffer _rb_buffer _rb_initial)
 endmacro()
 
 macro(_ct_recurse_buffers)
+    _ct_recurse_buffer(_ct_test_name "")
     _ct_recurse_buffer(_ct_contents "")
     _ct_recurse_buffer(_ct_prints "")
     _ct_recurse_buffer(_ct_should_pass TRUE)
@@ -35,6 +53,7 @@ macro(_ct_pop_buffer _pb_buffer)
 endmacro()
 
 macro(_ct_pop_buffers)
+    _ct_pop_buffer(_ct_test_name)
     _ct_pop_buffer(_ct_contents)
     _ct_pop_buffer(_ct_prints)
     _ct_pop_buffer(_ct_should_pass)
@@ -48,6 +67,7 @@ function(_ct_check_empty _ce_buffer)
 endfunction()
 
 function(_ct_assert_empty)
+    _ct_check_empty(_ct_test_name)
     _ct_check_empty(_ct_contents)
     _ct_check_empty(_ct_prints)
     _ct_check_empty(_ct_should_pass)

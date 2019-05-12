@@ -1,24 +1,16 @@
 include_guard()
-include(cmake_test/detail_/buffers)
 include(cmake_test/detail_/debug)
+include(cmake_test/detail_/write_and_run_contents)
 
-macro(_ct_start_test _st_name)
+function(_ct_start_test _st_handle _st_name)
     _ct_parse_debug("Parsing test ${_st_name}")
-    #Error checking
-    if(_ct_in_test) #Can't nest tests
-        message(FATAL_ERROR "Nested test case. Did you forget ct_end_test?")
-    endif()
 
-    #Let the world know we are in a test
-    set(_ct_in_test TRUE PARENT_SCOPE)
+    _ct_update_target(${_st_handle} CT_TEST_NAME "${_st_name}")
+    message("Starting Test: ${_st_name}")
+endfunction()
 
-    #Initialize this test's properties
-    set(_ct_test_name "${_st_name}" PARENT_SCOPE)
-    _ct_recurse_buffers()
-endmacro()
-
-macro(_ct_finish_test)
+function(_ct_finish_test _ft_handle)
     _ct_parse_debug("Finished parsing test.")
-    _ct_pop_buffers()
-    _ct_assert_empty()
-endmacro()
+    _ct_write_and_run_contents("${_pd_prefix}" "${_ft_handle}")
+    #TODO clean-up target's buffers
+endfunction()

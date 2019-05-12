@@ -1,8 +1,10 @@
-set(tests tutorials/hello_world.cmake)
+set(tutorials tutorials/1_hello_world.cmake
+              #tutorials/2_sections.cmake
+)
+
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR})
 
-
-foreach(testi ${tests})
+foreach(testi ${tutorials})
     add_test(
         NAME "${testi}"
         COMMAND ${CMAKE_COMMAND}

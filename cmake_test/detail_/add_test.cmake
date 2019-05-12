@@ -1,12 +1,7 @@
 include_guard()
 include(cmake_test/detail_/debug)
 include(cmake_test/detail_/parse_dispatch)
-
-function(_ct_sanitize_name _sn_new_name _sn_old_name)
-    string(TOLOWER "${_sn_old_name}" _sn_old_name)
-    string(REPLACE " " "_" ${_sn_new_name} "${_sn_old_name}")
-    set(${_sn_new_name} "${${_sn_new_name}}" PARENT_SCOPE)
-endfunction()
+include(cmake_test/detail_/utilities)
 
 #FUNCTION
 #
@@ -25,14 +20,17 @@ function(_ct_add_test_guts _atg_test_name)
     list(LENGTH _atg_contents _atg_length)
     set(_atg_index 0)
 
-    set(_ct_section 0)
+    #Make a target to hold the values
+    string(RANDOM _atg_handle)
+
     _ct_sanitize_name(_atg_test_name "${_atg_test_name}")
     string(RANDOM _atg_suffix)
     set(_atg_prefix ${CMAKE_BINARY_DIR}/${_atg_test_name}/${_atg_suffix})
     message("Files from this run are located in: ${_atg_prefix}")
+
     while("${_atg_index}" LESS "${_atg_length}")
         list(GET _atg_contents ${_atg_index} _atg_line)
-        _ct_parse_dispatch("${_atg_line}" "${_atg_prefix}")
+        _ct_parse_dispatch("${_atg_line}" "${_atg_prefix}" "${_atg_handle}")
         math(EXPR _atg_index "${_atg_index} + 1")
     endwhile()
 endfunction()
