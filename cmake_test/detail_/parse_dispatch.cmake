@@ -6,7 +6,7 @@ include(cmake_test/detail_/parse_section)
 include(cmake_test/detail_/utilities)
 
 function(_ct_parse_dispatch _pd_line _pd_prefix _pd_handle)
-    _ct_parse_debug("Current line: ${_pd_line}")
+    #_ct_parse_debug("Current line: ${_pd_line}")
 
     #Check if it is a blank line, if it is return
     if(NOT _pd_line)
@@ -31,7 +31,6 @@ function(_ct_parse_dispatch _pd_line _pd_prefix _pd_handle)
     if(_pd_is_test OR _pd_is_section)
         string(REGEX MATCH "\\(\\s*\"(.*)\"\\s*\\)" _pd_match "${_pd_line}")
         set(_pd_args "${CMAKE_MATCH_1}")
-        _ct_parse_debug("Args: ${_pd_args}")
     endif()
 
     if(_pd_is_test) #Start of new test
@@ -43,9 +42,16 @@ function(_ct_parse_dispatch _pd_line _pd_prefix _pd_handle)
     elseif(_pd_is_esection) #End of a section
         _ct_finish_section(${_pd_handle} "${_pd_prefix}")
     elseif(_pd_is_assert) #Assert for this section
-        _ct_parse_assert(${_pd_handle} "${_pd_lc_line}")
-    elseif(_ct_in_test) #Just a line of code
-        _ct_update_target("${_pd_handle}" CT_CONTENT "${_pd_line}")
+        _ct_parse_assert(${_pd_handle} "${_pd_line}")
+    else()
+        _ct_get_value(_pd_name "${_pd_handle}" CT_TEST_NAME)
+        list(LENGTH _pd_name _pd_depth)
+        if(${_pd_depth} GREATER "0") #Just a line of code in test
+            _ct_parse_debug("Code: ${_pd_line}")
+            _ct_update_target("${_pd_handle}" CT_CONTENT "${_pd_line}")
+        else()
+            return() #Code outside test section
+        endif()
     endif()
-    _ct_print_target(${_pd_handle})
+
 endfunction()

@@ -3,7 +3,7 @@ include(cmake_test/detail_/debug)
 include(cmake_test/detail_/utilities)
 
 function(_ct_handle_should_pass _hsp_result _hsp_handle)
-    get_target_property(_hsp_sp_list ${_hsp_handle} CT_SHOULD_PASS)
+    _ct_get_value(_hsp_sp_list ${_hsp_handle} CT_SHOULD_PASS)
     _ct_lc_find(_hsp_should_fail "FALSE" "${_hsp_sp_list}")
 
     _ct_result_debug("Should the test fail: ${_hsp_should_fail}")

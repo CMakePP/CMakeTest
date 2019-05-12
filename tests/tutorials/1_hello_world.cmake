@@ -6,7 +6,7 @@
 # in your unit test (since it's in your ``CMAKE_MODULE_PATH``, you don't put the
 # ".cmake" extension).
 include(cmake_test/cmake_test)
-set(CT_DEBUG_ALL TRUE)
+
 #TUTORIAL
 #
 # Unit tests in CMakeTest mirror the Catch2 unit-testing philosophy. For our

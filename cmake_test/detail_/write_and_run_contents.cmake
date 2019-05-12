@@ -22,8 +22,8 @@ function(_ct_write_and_run_contents _warc_prefix _warc_handle)
     endforeach()
 
     _ct_write_debug("Writing: ${_warc_content} to ${_warc_file}")
-
-    list(GET _ct_test_name -1 _warc_name)
+    _ct_get_value(_warc_names ${_warc_handle} CT_TEST_NAME)
+    list(GET _warc_names -1 _warc_name)
 
 
     #The header common to each test
@@ -65,6 +65,8 @@ function(_ct_write_and_run_contents _warc_prefix _warc_handle)
         _ct_print_result("${_warc_name}" "FAILED")
         message(FATAL_ERROR "Test ${_warc_name} FAILED because ${_warc_reason}")
     else()
-        _ct_print_result("${_warc_name}" "PASSED")
+        list(LENGTH _warc_names _warc_depth)
+        math(EXPR _warc_depth "${_warc_depth} - 1")
+        _ct_print_result("${_warc_name}" "PASSED" "${_warc_depth}")
     endif()
 endfunction()
