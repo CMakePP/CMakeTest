@@ -1,6 +1,6 @@
 #TUTORIAL
 #
-# All CMake unit testing machinery is included in the CmakeTest module.
+# All CMake unit testing machinery is included in the CMakeTest module.
 # Assuming the path to that module is part of your ``CMAKE_MODULE_PATH``, all
 # you need to do to use CMakeTest is include the ``cmake_test/cmake_test.cmake``
 # in your unit test (since it's in your ``CMAKE_MODULE_PATH``, you don't put the

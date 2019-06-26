@@ -1,5 +1,16 @@
 include_guard()
 
+function(_ct_variable_is_set _vis_var)
+    cmake_policy(SET CMP0054 NEW)
+    if("${${_vis_var}}" STREQUAL "")
+        message(FATAL_ERROR "${ARGN}")
+    endif()
+endfunction()
+
+macro(_ct_return _r_var)
+    set(${${_r_var}} "${${${_r_var}}}" PARENT_SCOPE)
+endmacro()
+
 function(_ct_lc_find _lf_found _lf_str _lf_line)
     string(FIND "${_lf_line}" "${_lf_str}" _lf_pos)
     set(${_lf_found} TRUE PARENT_SCOPE)
