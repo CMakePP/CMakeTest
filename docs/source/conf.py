@@ -12,9 +12,12 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+from exhale import utils
+dir_path = os.path.dirname(os.path.realpath(__file__))
+doc_path = os.path.dirname(dir_path)
+root_path = os.path.dirname(doc_path)
+
 
 
 # -- Project information -----------------------------------------------------
@@ -41,7 +44,49 @@ release = u'1.0.0alpha'
 extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.githubpages',
+    'breathe',
+    'exhale'
 ]
+
+breathe_default_project = project
+breathe_projects = { project : os.path.join(doc_path, "build", "doxyoutput", "xml")}
+
+def specificationsForKind(kind):
+    '''
+    For a given input ``kind``, return the list of reStructuredText specifications
+    for the associated Breathe directive.
+    '''
+    # Change the defaults for .. doxygenclass:: and .. doxygenstruct::
+    if kind == "class" or kind == "struct":
+        return [
+            ":members:",
+            ":protected-members:",
+            ":private-members:",
+            ":undoc-members:"
+        ]
+    # Change the defaults for .. doxygenenum::
+    elif kind == "enum":
+        return [":no-link:"]
+    # An empty list signals to Exhale to use the defaults
+    else:
+        return []
+
+exhale_args = {
+    "containmentFolder" : "./api",
+    "rootFileName" : "library_root.rst",
+    "rootFileTitle" : "Library API",
+    "doxygenStripFromPath" : "..",
+    "createTreeView" : True,
+    "exhaleExecutesDoxygen" : True,
+    "exhaleUseDoxyfile" : True,
+    "customSpecificationsMapping" : utils.makeCustomSpecificationsMapping(
+        specificationsForKind
+    )
+}
+
+primary_domain = 'cmake'
+
+highlight_language = 'cmake'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['.templates']

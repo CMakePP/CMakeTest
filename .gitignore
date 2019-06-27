@@ -2,5 +2,8 @@
 docs/build
 cmake-build-debug/
 
+#Auto-generated directories
+docs/source/api
+
 #CLion project settings
 .idea/
