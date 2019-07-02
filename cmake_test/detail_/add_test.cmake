@@ -13,8 +13,6 @@ include(cmake_test/detail_/utilities)
 function(_ct_add_test_guts _atg_test_name)
     cmake_policy(SET CMP0007 NEW) #List won't ignore empty elements
 
-    _ct_test_state_ctor(_atg_handle "${_atg_test_name}")
-
     ############################################################################
     #                         Read in file contents                            #
     ############################################################################
@@ -22,8 +20,6 @@ function(_ct_add_test_guts _atg_test_name)
     file(READ ${CMAKE_CURRENT_LIST_FILE} _atg_contents)
     STRING(REGEX REPLACE ";" "\\\\;" _atg_contents "${_atg_contents}")
     STRING(REGEX REPLACE "\n" ";" _atg_contents "${_atg_contents}")
-
-
 
     ############################################################################
     #                        Assemble paths for files                          #
@@ -38,11 +34,12 @@ function(_ct_add_test_guts _atg_test_name)
     ############################################################################
     list(LENGTH _atg_contents _atg_length) # Loop termination condition
     set(_atg_index 0) # The loop index
+    set(_atg_handle "") # Our this pointer (currently NULL)
     while("${_atg_index}" LESS "${_atg_length}")
         list(GET _atg_contents ${_atg_index} _atg_line) # Read current line
 
         #Parse the line, run tests we find
-        _ct_parse_dispatch("${_atg_line}" "${_atg_prefix}" "${_atg_handle}")
+        _ct_parse_dispatch("${_atg_line}" "${_atg_prefix}" _atg_handle)
 
         math(EXPR _atg_index "${_atg_index} + 1") #increment index
     endwhile()

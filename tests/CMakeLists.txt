@@ -1,4 +1,4 @@
-set(tutorials #tutorials/1_hello_world.cmake
+set(tutorials tutorials/1_hello_world.cmake
               #tutorials/2_sections.cmake
               test_state.cmake
 )

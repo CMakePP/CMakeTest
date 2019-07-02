@@ -1,11 +1,10 @@
 include_guard()
 include(cmake_test/detail_/debug)
 include(cmake_test/detail_/parse_assert)
-include(cmake_test/detail_/parse_test)
-include(cmake_test/detail_/parse_section)
-include(cmake_test/detail_/utilities)
+include(cmake_test/detail_/write_and_run_contents)
+include(cmake_test/detail_/test_state/test_state)
 
-function(_ct_parse_dispatch _pd_line _pd_prefix _pd_handle)
+function(_ct_parse_dispatch _pd_line _pd_prefix _pd_identifier)
     #_ct_parse_debug("Current line: ${_pd_line}")
 
     #Check if it is a blank line, if it is return
@@ -21,10 +20,14 @@ function(_ct_parse_dispatch _pd_line _pd_prefix _pd_handle)
 
     #See if it starts a block or is an assertion
     string(TOLOWER "${_pd_line}" _pd_lc_line)
+
     _ct_lc_find(_pd_is_test "ct_add_test" "${_pd_lc_line}")
     _ct_lc_find(_pd_is_etest "ct_end_test" "${_pd_lc_line}")
+
     _ct_lc_find(_pd_is_section "ct_add_section" "${_pd_lc_line}")
     _ct_lc_find(_pd_is_esection "ct_end_section" "${_pd_lc_line}")
+
+    # All asserts start with "ct_assert"
     _ct_lc_find(_pd_is_assert "ct_assert" "${_pd_lc_line}")
 
     #Grab whatever's between the ()'s for add_test, add_section, and assert
@@ -33,25 +36,29 @@ function(_ct_parse_dispatch _pd_line _pd_prefix _pd_handle)
         set(_pd_args "${CMAKE_MATCH_1}")
     endif()
 
+    # Get the handle the TestState identifier points to
+    set(_pd_handle "${${_pd_identifier}}")
+
     if(_pd_is_test) #Start of new test
-        _ct_start_test(${_pd_handle} "${_pd_args}")
+        test_state(CTOR ${_pd_identifier} "${_pd_args}")
+        _ct_return(${_pd_identifier})
     elseif(_pd_is_etest) #End of a test
-        _ct_finish_test(${_pd_handle} "${_pd_prefix}")
+        _ct_write_and_run_contents("${_pd_prefix}" "${_pd_handle}")
+        set(${_pd_identifier} "")
+        _ct_return(${_pd_identifier})
     elseif(_pd_is_section) #Start of a section
-        _ct_start_section(${_pd_handle} "${_pd_args}")
+        test_state(ADD_SECTION ${_pd_handle} "${_pd_args}")
     elseif(_pd_is_esection) #End of a section
-        _ct_finish_section(${_pd_handle} "${_pd_prefix}")
+        _ct_write_and_run_contents("${_pd_prefix}" "${_pd_handle}")
+        test_state(END_SECTION ${_pd_handle})
     elseif(_pd_is_assert) #Assert for this section
         _ct_parse_assert(${_pd_handle} "${_pd_line}")
     else()
-        _ct_get_value(_pd_name "${_pd_handle}" CT_TEST_NAME)
-        list(LENGTH _pd_name _pd_depth)
-        if(${_pd_depth} GREATER "0") #Just a line of code in test
+        if(NOT "${_pd_handle}" STREQUAL "") #Just a line of code in test
             _ct_parse_debug("Code: ${_pd_line}")
-            _ct_update_target("${_pd_handle}" CT_CONTENT "${_pd_line}")
+            test_state(ADD_CONTENT ${_pd_handle} "${_pd_line}")
         else()
             return() #Code outside test section
         endif()
     endif()
-
 endfunction()

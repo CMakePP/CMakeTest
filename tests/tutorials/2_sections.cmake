@@ -1,71 +1,76 @@
 #TUTORIAL
 #
-# This tutorial will introduce you to the concept of sections. Sections allow
-# the creation of testing scope. The contents of a section are tested in
-# isolation from all other unit tests.
+#This tutorial will introduce you to the concept of sections. Sections allow you
+#to establish testing scopes. The contents of a testing scope are not visible to
+#CMake code outside of that testing scope. Scopes can be nested with inner
+#scopes having acess to the outer scope's state. Changes made in inner scopes
+#will not affect unit tests outside of the inner scope. This provides a
+#straightforward mechanism for unit testing changes in isolation, namely:
 #
-# As with all unit testing with CMakeTest, the first step is to include the
-# CMakeTest module, which is located in the file ``cmake_test/cmake_test.cmake``
+#- create an initial state,
+#- verify the initial state is correct,
+#- introduce a subsection/inner scope
+#- in the inner scope: modify the state
+#- in the inner scope: verify the state
+#- return to outer scope, undoing all changes in the inner scope
+#
+#These ideas are a bit abstract and can likely be made much clearer with a code
+#example. We start by defining our unit test, a variable that will be visible
+#to all inner scopes, and an assert to prove that the variable has the state we
+#think it does.
 include(cmake_test/cmake_test)
 set(CT_DEBUG_RESULT TRUE)
-#TUTORIAL
-#
-# Next we declare a test case. All unit tests in CMakeTest must be included in
-# in a test case.
 ct_add_test("Sections")
+    set(common "This variable is available to all inner tests")
+    ct_assert_equal(common "This variable is available to all inner tests")
 
     #TUTORIAL
     #
-    # Code in the ``ct_add_test`` block that is not included in a section is
-    # common to all unit tests. The next line makes a variable ``common``
-    # available to all unit tests.
-    set(common "This variable is available to all tests")
-
-    #TUTORIAL
+    #If you are reading the tutorials in order, ``ct_assert_equal`` is a new
+    #assert. ``ct_assert_equal`` will assert that the identifier recieved via
+    #its first argument contains the value provided by its second argument. Its
+    #more-or-less equivalent to the following CMake code:
     #
-    # Content at block scope in a unit test is usually things like ``include``
-    # commands. In order to ensure that your code is running correctly you want
-    # to run each part of the unit test in isolation. Sections allow you to
-    # define scopes. Here we make a section that introduces a variable
-    # ``not_common``.
+    #.. code-block:: cmake
+    #
+    #   if("${common}" STREQUAL "This variable is available to all inner tests")
+    #       # Assert passes
+    #   else()
+    #       # Assert fails
+    #   endif()
+    #
+    #with some additional bells and whistles specific to unit testing.
+    #
+    #To illustrate the concept of scope we now introduce the inner scope. This
+    #is done with the commands
+    #``ct_add_section`` and ``ct_end_section``. To the user, for all intents and
+    #purposes ``ct_add_section`` (``ct_end_section``) is the same as
+    #``ct_add_test`` (``ct_end_test``). Behind the scenes, however, the
+    #functions behave slightly different. If suffices to remember that the
+    #outermost scope must always be created with ``ct_add_test`` and ended with
+    #``ct_end_test``, whereas all inner scopes (even scopes within sections) are
+    #started with ``ct_add_section`` and ended with ``ct_end_section``.
     ct_add_section("Make a scoped variable")
         set(not_common "Only visible to this and nested sections.")
-
-        #TUTORIAL
-        #
-        # If you have been following the tutorials in order you have only seen
-        # the assert which ensures that a particular message prints. Another
-        # common assert is ``assert_equal``, which asserts that a variable has
-        # a particular value. Here we prove to you that ``common`` is in scope
-        # as is ``not_common``.
-        ct_assert_equal(common "This variable is available to all tests")
+        ct_assert_equal(common "This variable is available to all inner tests")
         ct_assert_equal(not_common "Only visible to this and nested sections.")
 
         #TUTORIAL
         #
-        # You can nest sections to your heart's content (you can not nest test
-        # cases; however, you may have as many test cases as you like). Each
-        # nested section introduces a new scope that is the union of the test
-        # case's scope and the scopes of each parent section.
+        #You can nest sections to your heart's content (realistically there is
+        #of course some limit, but it is imposed by available resources and not
+        #CMakeTest).
         ct_add_section("Nested section")
             set(not_common "This change only matters here")
             ct_assert_equal(common "This variable is available to all tests")
             ct_assert_equal(not_common "This change only matters here")
-
-        #TUTORIAL
-        #
-        # Like ``ct_add_test``, each section must be closed with a
-        # ``ct_end_section`` call.
         ct_end_section()
 
         #TUTORIAL
         #
-        # Sections are parsed on-the-fly. In other words, if you continue a
-        # section after a nested section, those changes will not be visible to
-        # the previous nested sections, but they will be visible to future
-        # nested sections. This is probably clearer with an example. First we
-        # prove that ``not_common`` has its old value, then we change this
-        # value and show that the next nested subsection sees the new value.
+        #Sections are parsed on-the-fly. In other words, the following contents
+        #will not be visible to the previous nested section, but will be visible
+        #to the following subsection.
         ct_assert_equal(not_common "Only visible to this and nested sections.")
         set(not_common "Only visible from here forward")
 
@@ -76,19 +81,65 @@ ct_add_test("Sections")
 
     #TUTORIAL
     #
-    # Code at test case scope following a section works exactly like code in a
-    # section that follows a nested section. In other words ``common`` still has
-    # its same value, if we change this value it will not break the previous
-    # sections.
+    #Code at the test case scope works exactly like code in a section. In other
+    #words the following code is only visible from here forward.
     ct_assert_equal(common "This variable is avaialable to all tests")
-
     set(common "Only visible from here forward")
     ct_assert_equal(common "Only visible from here forward")
-
-    #TUTORIAL
-    #
-    # We conclude this tutorial by proving to you that the variable
-    # ``not_common`` is not defined. That is to say, the changes in the sections
-    # also do not affect the test case scope.
-    ct_assert_not_defined(not_common)
 ct_end_test()
+
+#TUTORIAL
+#
+#To make the above even more concrete. You can think of this unit test as
+#defining the following four ``CMakeLists.txt`` and running each of them with a
+#separate invocation of the CMake command (in a clean directory, with a clean
+#build directory, a fresh CMake caches, etc.).
+#
+#The first test is ``Sections: Make a Scoped Variable: Nested Section``:
+#
+#.. code-block:: cmake
+#
+#    set(common "This variable is available to all inner tests")
+#    ct_assert_equal(common "This variable is available to all inner tests")
+#    set(not_common "Only visible to this and nested sections.")
+#    ct_assert_equal(common "This variable is available to all inner tests")
+#    ct_assert_equal(not_common "Only visible to this and nested sections.")
+#    set(not_common "This change only matters here")
+#    ct_assert_equal(common "This variable is available to all tests")
+#    ct_assert_equal(not_common "This change only matters here")
+#
+#The second test is
+#``Sections: Make a Scoped Variable: Another Nested Section``:
+#
+#.. code-block:: cmake
+#
+#    set(common "This variable is available to all inner tests")
+#    ct_assert_equal(common "This variable is available to all inner tests")
+#    set(not_common "Only visible to this and nested sections.")
+#    ct_assert_equal(common "This variable is available to all inner tests")
+#    ct_assert_equal(not_common "Only visible to this and nested sections.")
+#    ct_assert_equal(not_common "Only visible to this and nested sections.")
+#    set(not_common "Only visible from here forward")
+#
+#The third test is ``Sections: Make a Scoped Variable``:
+#
+#.. code-block:: cmake
+#
+#    set(common "This variable is available to all inner tests")
+#    ct_assert_equal(common "This variable is available to all inner tests")
+#    set(not_common "Only visible to this and nested sections.")
+#    ct_assert_equal(common "This variable is available to all inner tests")
+#    ct_assert_equal(not_common "Only visible to this and nested sections.")
+#
+#And the fourth test is ``Sections``:
+#
+#.. code-block:: cmake
+#
+#    set(common "This variable is available to all inner tests")
+#    ct_assert_equal(common "This variable is available to all inner tests")
+#    ct_assert_equal(common "This variable is avaialable to all tests")
+#    set(common "Only visible from here forward")
+#    ct_assert_equal(common "Only visible from here forward")
+#
+#Basically everytime parsing hits a ``ct_end_section`` or ``ct_end_test``
+#command a new unit test is spun off.
