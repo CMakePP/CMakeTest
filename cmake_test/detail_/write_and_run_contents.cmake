@@ -48,7 +48,6 @@ function(_ct_write_and_run_contents _warc_prefix _warc_handle)
     test_state(
         POST_TEST_ASSERTS ${_warc_handle}
                           "${_warc_result}"
-                          "${_warc_output}"
-                          "${_warc_errors}"
+                          "${_warc_output}\n${_warc_errors}"
     )
 endfunction()

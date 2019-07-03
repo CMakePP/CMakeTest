@@ -52,8 +52,7 @@ endfunction()
 #  @param[in] handle
 function(_ct_test_state_post_test_asserts _tspta_handle
                                           _tspta_result
-                                          _tspta_output
-                                          _tspta_errors)
+                                          _tspta_output)
 
     set(_tspta_passed TRUE)
     _ct_test_state_get_title("${_tspta_handle}" _tspta_name)
@@ -69,12 +68,12 @@ function(_ct_test_state_post_test_asserts _tspta_handle
     _ct_get_prop(_tspta_prints "${_tspta_handle}" "print_assert")
     #Note that CMake prints to standard error
     foreach(_tspta_print ${_tspta_prints})
-        string(FIND "${_tspta_errors}" "${_tspta_print}" _tspta_found)
+        string(FIND "${_tspta_output}" "${_tspta_print}" _tspta_found)
         if("${_tspta_found}" STREQUAL "-1")
             set(_tspta_passed FALSE)
             set(
                 _tspta_reason
-                "${_tspta_print} was not found in ${_tspta_errors}"
+                "${_tspta_print} was not found in ${_tspta_output}"
             )
             break()
         endif()

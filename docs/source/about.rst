@@ -14,4 +14,6 @@ CMake build system. Using ``ctest`` is orthogonal to testing CMake modules.
 Features
 --------
 
-To be added.
+- 100% CMake (non-CMake files in this repo are for generating documentation)
+   - No external dependencies
+   - Integrates naturally into existing CMake scripts

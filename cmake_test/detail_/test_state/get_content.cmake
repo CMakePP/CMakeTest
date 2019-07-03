@@ -25,7 +25,9 @@ include(cmake_test/detail_/test_state/get_prop)
 #  @param[in] handle The handle to the TargetState object
 #  @param[out] content An identifirer to hold the contents of the current test.
 function(_ct_test_state_get_content _tsgc_handle _tsgc_content)
+    cmake_policy(SET CMP0007 NEW)
     _ct_get_prop(_tsgc_test_content "${_tsgc_handle}" "test_content")
+
     list(LENGTH _tsgc_test_content _tsgc_length)
     set(_tsgc_counter 0)
     set(${_tsgc_content} "")

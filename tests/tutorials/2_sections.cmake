@@ -19,7 +19,6 @@
 #to all inner scopes, and an assert to prove that the variable has the state we
 #think it does.
 include(cmake_test/cmake_test)
-set(CT_DEBUG_RESULT TRUE)
 ct_add_test("Sections")
     set(common "This variable is available to all inner tests")
     ct_assert_equal(common "This variable is available to all inner tests")
