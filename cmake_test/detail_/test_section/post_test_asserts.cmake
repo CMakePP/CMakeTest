@@ -1,14 +1,7 @@
 include_guard()
-include(cmake_test/detail_/print_status)
 include(cmake_test/detail_/test_section/get_prop)
 include(cmake_test/detail_/test_section/title)
-
-function(_ct_fail_test _ft_handle)
-    _ct_test_section_get_title("${_ft_handle}" _ft_name)
-    _ct_test_section_depth(${_ft_handle} _ft_depth)
-    _ct_print_result("${_ft_name}" "FAILED" "${_ft_depth}")
-    message(FATAL_ERROR "Reason:\n\n${ARGN}")
-endfunction()
+include(cmake_test/detail_/utilities/print_result)
 
 ## @memberof TestState
 #  @public
@@ -41,12 +34,18 @@ function(_ct_test_section_post_test_asserts _tspta_handle
 
     # Error if test passed and it should not have
     if(_tspta_did_pass AND (NOT _tspta_should_pass))
-        _ct_fail_test(${_tspta_handle} "Test passed and it should have failed")
+        _ct_print_fail(
+            ${_tspta_name}
+            ${_tspta_depth}
+            "Test passed and it should have failed"
+        )
     endif()
 
     # Error if test failed and it should not have
     if((NOT _tspta_did_pass) AND _tspta_should_pass)
-        _ct_fail_test(${_tspta_handle} "Output: ${_tspta_output}")
+        _ct_print_fail(
+            ${_tspta_name} ${_tspta_depth} "Output: ${_tspta_output}"
+        )
     endif()
 
     # Ensure all messages printed
@@ -54,11 +53,14 @@ function(_ct_test_section_post_test_asserts _tspta_handle
     foreach(_tspta_print ${_tspta_prints})
         string(FIND "${_tspta_output}" "${_tspta_print}" _tspta_found)
         if("${_tspta_found}" STREQUAL "-1")
-            _ct_fail_test(
-                ${_tspta_handle} "${_tspta_print} was not found in output"
+            _ct_print_fail(
+                ${_tspta_name}
+                ${_tspta_depth}
+                "${_tspta_print} was not found in output. "
+                "Output: ${_tspta_output}"
         )
         endif()
     endforeach()
 
-    _ct_print_result("${_tspta_name}" "PASSED" "${_tspta_depth}")
+    _ct_print_pass(${_tspta_name} ${_tspta_depth})
 endfunction()

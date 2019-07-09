@@ -1,5 +1,4 @@
 include_guard()
-include(cmake_test/detail_/debug)
 include(cmake_test/detail_/parsing/parse_dispatch)
 include(cmake_test/detail_/utilities/sanitize_name)
 
@@ -16,10 +15,10 @@ function(_ct_add_test_guts _atg_test_name)
     ############################################################################
     #                         Read in file contents                            #
     ############################################################################
-    _ct_parse_debug("Parsing: ${CMAKE_CURRENT_LIST_FILE}")
     file(READ ${CMAKE_CURRENT_LIST_FILE} _atg_contents)
     STRING(REGEX REPLACE ";" "\\\\;" _atg_contents "${_atg_contents}")
     STRING(REGEX REPLACE "\n" ";" _atg_contents "${_atg_contents}")
+    STRING(REGEX REPLACE "\\$" "\\\\$" _atg_contents "${_atg_contents}")
 
     ############################################################################
     #                        Assemble paths for files                          #
@@ -36,10 +35,8 @@ function(_ct_add_test_guts _atg_test_name)
     set(_atg_index 0) # The loop index
     set(_atg_handle "") # Our this pointer (currently NULL)
     while("${_atg_index}" LESS "${_atg_length}")
-        list(GET _atg_contents ${_atg_index} _atg_line) # Read current line
-
         #Parse the line, run tests we find
-        _ct_parse_dispatch("${_atg_line}" "${_atg_prefix}" _atg_handle)
+        _ct_parse_dispatch(_atg_contents _atg_index "${_atg_prefix}" _atg_handle)
 
         math(EXPR _atg_index "${_atg_index} + 1") #increment index
     endwhile()

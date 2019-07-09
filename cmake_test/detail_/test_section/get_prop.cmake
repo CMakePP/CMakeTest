@@ -23,7 +23,7 @@ function(_ct_get_prop _gp_value _gp_target _gp_name)
     _ct_is_handle(_gp_target)
     _ct_nonempty_string(_gp_name)
 
-    _ct_name_mangle(_gp_handle "${_gp_target}" "${_gp_name}")
+    _ct_name_mangle("${_gp_target}" _gp_handle "${_gp_name}")
     get_property(${_gp_value} GLOBAL PROPERTY "${_gp_handle}")
     _ct_return(${_gp_value})
 endfunction()

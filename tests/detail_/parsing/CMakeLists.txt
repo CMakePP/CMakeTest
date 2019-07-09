@@ -1,0 +1,1 @@
+add_cmake_test_test(empty_dispatch)

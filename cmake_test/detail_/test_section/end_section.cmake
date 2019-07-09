@@ -1,5 +1,4 @@
 include_guard()
-include(cmake_test/detail_/test_section/add_prop)
 include(cmake_test/detail_/test_section/get_prop)
 
 ## @memberof TestState

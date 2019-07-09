@@ -1,5 +1,12 @@
 include_guard()
 
+## @fn _ct_nonempty(var)
+#  @brief Asserts that the provided variable is defined.
+#
+#  This function can be used to assert that a variable is defined. It does not
+#  assert that the variable is set to any particular value.
+#
+#  @param[in] var The identifier to check for defined-ness.
 function(_ct_nonempty _n_var)
     cmake_policy(SET CMP0054 NEW)
     if("${${_n_var}}" STREQUAL "")

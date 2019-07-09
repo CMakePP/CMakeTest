@@ -1,7 +1,7 @@
 include_guard()
-include(cmake_test/detail_/debug)
 include(cmake_test/detail_/test_section/test_section)
 include(cmake_test/detail_/utilities/input_check)
+include(cmake_test/detail_/utilities/lc_find)
 
 ## @fn _ct_parse_assert(handle, line)
 #  @brief Parses an assert found in a unit test
@@ -17,7 +17,6 @@ include(cmake_test/detail_/utilities/input_check)
 function(_ct_parse_assert _pa_handle _pa_line)
     _ct_is_handle(_pa_handle)
     _ct_nonempty_string(_pa_line)
-    _ct_parse_debug("Assert: ${_pa_line}")
 
     # See if this is one of the special assertions
     _ct_lc_find(_pa_is_print "ct_assert_prints" "${_pa_line}")
@@ -28,7 +27,8 @@ function(_ct_parse_assert _pa_handle _pa_line)
         test_section(MUST_PRINT ${_pa_handle} "${CMAKE_MATCH_1}")
     elseif(_pa_is_fail)
         string(REGEX MATCH "\\(\\s*\"(.*)\"\\s*\\)" _pa_match "${_pa_line}")
-        test_sectoin(MUST_PRINT ${_pa_handle} "${CMAKE_MATCH_1}")
+        test_section(MUST_PRINT ${_pa_handle} "${CMAKE_MATCH_1}")
+        _ct_add_prop(${_pa_handle} "should_pass" FALSE)
     else() # dispatch for all other assertions
         test_section(ADD_CONTENT ${_pa_handle} "${_pa_line}")
     endif()

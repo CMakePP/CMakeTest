@@ -1,7 +1,7 @@
 include_guard()
+include(cmake_test/detail_/test_section/get_prop)
 include(cmake_test/detail_/utilities/input_check)
 include(cmake_test/detail_/utilities/return)
-include(cmake_test/detail_/test_section/get_prop)
 
 ## @memberof TestSection
 #  @public

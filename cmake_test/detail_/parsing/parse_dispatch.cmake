@@ -1,11 +1,13 @@
 include_guard()
-include(cmake_test/detail_/debug)
 include(cmake_test/detail_/parsing/parse_assert)
 include(cmake_test/detail_/write_and_run_contents)
 include(cmake_test/detail_/test_section/test_section)
 include(cmake_test/detail_/utilities/input_check)
 
-function(_ct_parse_dispatch _pd_line _pd_prefix _pd_identifier)
+function(_ct_parse_dispatch _pd_contents _pd_index _pd_prefix _pd_identifier)
+    cmake_policy(SET CMP0007 NEW) #List won't ignore empty elements
+    list(GET ${_pd_contents} ${${_pd_index}} _pd_line)
+
     # line can be empty
     _ct_nonempty_string(_pd_prefix)
     _ct_nonempty_string(_pd_identifier)
@@ -71,6 +73,7 @@ function(_ct_parse_dispatch _pd_line _pd_prefix _pd_identifier)
         _ct_parse_assert(${_pd_handle} "${_pd_line}")
     else()
         if(NOT "${_pd_handle}" STREQUAL "") #Just a line of code in test
+            STRING(REGEX REPLACE ";" "\\\\\\\\;" _pd_line "${_pd_line}")
             test_section(ADD_CONTENT ${_pd_handle} "${_pd_line}")
         else()
             return() #Code outside test section

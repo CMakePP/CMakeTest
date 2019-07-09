@@ -19,6 +19,6 @@ function(_ct_add_prop _ap_target _ap_name _ap_default_value)
     _ct_is_handle(_ap_target)
     _ct_nonempty_string(_ap_name)
 
-    _ct_name_mangle(_ap_handle "${_ap_target}" "${_ap_name}")
+    _ct_name_mangle("${_ap_target}" _ap_handle "${_ap_name}")
     set_property(GLOBAL PROPERTY "${_ap_handle}" "${_ap_default_value}")
 endfunction()

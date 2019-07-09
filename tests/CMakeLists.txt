@@ -10,5 +10,6 @@ function(add_cmake_test_test)
     endforeach()
 endfunction()
 
+add_subdirectory(asserts)
 add_subdirectory(detail_)
 add_subdirectory(tutorials)
