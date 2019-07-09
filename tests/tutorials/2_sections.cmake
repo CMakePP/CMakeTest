@@ -20,8 +20,8 @@
 #think it does.
 include(cmake_test/cmake_test)
 ct_add_test("Sections")
-    set(common "This variable is available to all inner tests")
-    ct_assert_equal(common "This variable is available to all inner tests")
+    set(common "This variable is available to all tests")
+    ct_assert_equal(common "This variable is available to all tests")
 
     #TUTORIAL
     #
@@ -32,7 +32,7 @@ ct_add_test("Sections")
     #
     #.. code-block:: cmake
     #
-    #   if("${common}" STREQUAL "This variable is available to all inner tests")
+    #   if("${common}" STREQUAL "This variable is available to all tests")
     #       # Assert passes
     #   else()
     #       # Assert fails
@@ -51,7 +51,7 @@ ct_add_test("Sections")
     #started with ``ct_add_section`` and ended with ``ct_end_section``.
     ct_add_section("Make a scoped variable")
         set(not_common "Only visible to this and nested sections.")
-        ct_assert_equal(common "This variable is available to all inner tests")
+        ct_assert_equal(common "This variable is available to all tests")
         ct_assert_equal(not_common "Only visible to this and nested sections.")
 
         #TUTORIAL
@@ -82,7 +82,7 @@ ct_add_test("Sections")
     #
     #Code at the test case scope works exactly like code in a section. In other
     #words the following code is only visible from here forward.
-    ct_assert_equal(common "This variable is avaialable to all tests")
+    ct_assert_equal(common "This variable is available to all tests")
     set(common "Only visible from here forward")
     ct_assert_equal(common "Only visible from here forward")
 ct_end_test()
@@ -98,10 +98,10 @@ ct_end_test()
 #
 #.. code-block:: cmake
 #
-#    set(common "This variable is available to all inner tests")
-#    ct_assert_equal(common "This variable is available to all inner tests")
+#    set(common "This variable is available to all tests")
+#    ct_assert_equal(common "This variable is available to all tests")
 #    set(not_common "Only visible to this and nested sections.")
-#    ct_assert_equal(common "This variable is available to all inner tests")
+#    ct_assert_equal(common "This variable is available to all tests")
 #    ct_assert_equal(not_common "Only visible to this and nested sections.")
 #    set(not_common "This change only matters here")
 #    ct_assert_equal(common "This variable is available to all tests")
@@ -112,10 +112,10 @@ ct_end_test()
 #
 #.. code-block:: cmake
 #
-#    set(common "This variable is available to all inner tests")
-#    ct_assert_equal(common "This variable is available to all inner tests")
+#    set(common "This variable is available to all tests")
+#    ct_assert_equal(common "This variable is available to all tests")
 #    set(not_common "Only visible to this and nested sections.")
-#    ct_assert_equal(common "This variable is available to all inner tests")
+#    ct_assert_equal(common "This variable is available to all tests")
 #    ct_assert_equal(not_common "Only visible to this and nested sections.")
 #    ct_assert_equal(not_common "Only visible to this and nested sections.")
 #    set(not_common "Only visible from here forward")
@@ -124,18 +124,18 @@ ct_end_test()
 #
 #.. code-block:: cmake
 #
-#    set(common "This variable is available to all inner tests")
-#    ct_assert_equal(common "This variable is available to all inner tests")
+#    set(common "This variable is available to all tests")
+#    ct_assert_equal(common "This variable is available to all tests")
 #    set(not_common "Only visible to this and nested sections.")
-#    ct_assert_equal(common "This variable is available to all inner tests")
+#    ct_assert_equal(common "This variable is available to all tests")
 #    ct_assert_equal(not_common "Only visible to this and nested sections.")
 #
 #And the fourth test is ``Sections``:
 #
 #.. code-block:: cmake
 #
-#    set(common "This variable is available to all inner tests")
-#    ct_assert_equal(common "This variable is available to all inner tests")
+#    set(common "This variable is available to all tests")
+#    ct_assert_equal(common "This variable is available to all tests")
 #    ct_assert_equal(common "This variable is avaialable to all tests")
 #    set(common "Only visible from here forward")
 #    ct_assert_equal(common "Only visible from here forward")

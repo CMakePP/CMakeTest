@@ -1,10 +1,10 @@
 include_guard()
-include(cmake_test/detail_/utilities)
+include(cmake_test/detail_/utilities/return)
 
-## @memberof TestState
+## @memberof TestSection
 #  @private
 #  @fn _ct_name_mangle(mangled_name, target, attribute)
-#  @brief Handles name mangling for the TestState class
+#  @brief Handles name mangling for the TestSection class
 #
 # This function wraps the details of how we mangle our target's attributes.
 # Ultimately when we want to create or access our target's attributes we

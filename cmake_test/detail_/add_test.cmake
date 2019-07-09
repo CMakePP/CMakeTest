@@ -1,7 +1,7 @@
 include_guard()
 include(cmake_test/detail_/debug)
-include(cmake_test/detail_/parse_dispatch)
-include(cmake_test/detail_/utilities)
+include(cmake_test/detail_/parsing/parse_dispatch)
+include(cmake_test/detail_/utilities/sanitize_name)
 
 #FUNCTION
 #

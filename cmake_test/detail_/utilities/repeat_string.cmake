@@ -1,0 +1,11 @@
+include_guard()
+include(cmake_test/detail_/utilities/return)
+
+function(_ct_repeat_string _rs_result _rs_str _rs_n)
+    set(_rs_counter 0)
+    while("${_rs_counter}" LESS "${_rs_n}")
+        set(${_rs_result} "${${_rs_result}}${_rs_str}")
+        math(EXPR _rs_counter "${_rs_counter} + 1")
+    endwhile()
+    _ct_return(${_rs_result})
+endfunction()

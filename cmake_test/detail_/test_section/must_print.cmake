@@ -1,0 +1,33 @@
+include_guard()
+include(cmake_test/detail_/utilities/input_check)
+include(cmake_test/detail_/test_section/add_prop)
+include(cmake_test/detail_/test_section/get_prop)
+
+## @memberof TestSection
+#  @public
+#  @fn MUST_PRINT(handle, message)
+#  @brief Adds to the current section, a check for the provided message
+#
+#  The user may request that we assert that a particular test prints one or
+#  messages. This is done after the test runs by parsing the output. This
+#  function is responsible for adding a message to the list of messages that
+#  must appear in the output.
+#
+#  The actual list of messages is a list of lists such that element i of the
+#  outer list is the list of messages that must appear in tests of depth i or
+#  greater. To avoid issues with escaping the list characters, the internal list
+#  is flattened out. As a result, in a separate list `passert_per_level` we
+#  store the number of messages per depth.
+#
+# @param[in] handle The TestSection to add the assert to.
+# @param[in] message The message that must appear in the output of the current
+#                    test.
+function(_ct_test_section_must_print _tsmp_handle _tsmp_message)
+    _ct_is_handle(_tsmp_handle)
+    _ct_nonempty_string(_tsmp_message)
+
+    # Add the message
+    _ct_get_prop(_tsmp_asserts ${_tsmp_handle} "print_assert")
+    list(APPEND _tsmp_asserts "${_tsmp_message}")
+    _ct_add_prop(${_tsmp_handle} "print_assert" "${_tsmp_asserts}")
+endfunction()

@@ -1,15 +1,14 @@
-set(tutorials tutorials/1_hello_world.cmake
-              tutorials/2_sections.cmake
-              test_state.cmake
-)
+function(add_cmake_test_test)
+    foreach(testi ${ARGN})
+        set(full_path ${CMAKE_CURRENT_LIST_DIR}/${testi}.cmake)
+        add_test(
+            NAME "${testi}"
+            COMMAND ${CMAKE_COMMAND}
+            -DCMAKE_MODULE_PATH=${PROJECT_SOURCE_DIR}
+            -P ${full_path}
+        )
+    endforeach()
+endfunction()
 
-list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR})
-
-foreach(testi ${tutorials})
-    add_test(
-        NAME "${testi}"
-        COMMAND ${CMAKE_COMMAND}
-                "-DCMAKE_MODULE_PATH=${CMAKE_MODULE_PATH}"
-                -P ${CMAKE_CURRENT_SOURCE_DIR}/${testi}
-    )
-endforeach()
+add_subdirectory(detail_)
+add_subdirectory(tutorials)
