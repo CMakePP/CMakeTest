@@ -40,7 +40,10 @@ function(_ct_write_and_run_contents _warc_prefix _warc_handle)
         OUTPUT_STRIP_TRAILING_WHITESPACE
         ERROR_STRIP_TRAILING_WHITESPACE
     )
-    file(WRITE ${_warc_dir}/log.txt "${_warc_output}")
+
+    file(WRITE ${_warc_dir}/output_log.txt "${_warc_output}")
+    file(WRITE ${_warc_dir}/error_log.txt  "${_warc_errors}")
+
     test_section(
         POST_TEST_ASSERTS ${_warc_handle}
                           "${_warc_result}"

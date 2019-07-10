@@ -1,7 +1,6 @@
 include_guard()
 include(cmake_test/detail_/utilities/input_check)
-include(cmake_test/detail_/test_section/add_prop)
-include(cmake_test/detail_/test_section/get_prop)
+include(cmake_test/detail_/test_section/private)
 
 ## @memberof TestSection
 #  @public
@@ -27,7 +26,7 @@ function(_ct_test_section_must_print _tsmp_handle _tsmp_message)
     _ct_nonempty_string(_tsmp_message)
 
     # Add the message
-    _ct_get_prop(_tsmp_asserts ${_tsmp_handle} "print_assert")
+    _ct_get_prop(${_tsmp_handle} _tsmp_asserts  "print_assert")
     list(APPEND _tsmp_asserts "${_tsmp_message}")
     _ct_add_prop(${_tsmp_handle} "print_assert" "${_tsmp_asserts}")
 endfunction()

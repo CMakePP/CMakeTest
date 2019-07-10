@@ -1,5 +1,5 @@
 include_guard()
-include(cmake_test/detail_/test_section/get_prop)
+include(cmake_test/detail_/test_section/private)
 include(cmake_test/detail_/utilities/input_check)
 include(cmake_test/detail_/utilities/return)
 
@@ -16,6 +16,6 @@ function(_ct_test_section_get_title _tsgt_handle _tsgt_title)
     _ct_is_handle(_tsgt_handle)
     _ct_nonempty_string(_tsgt_title)
 
-    _ct_get_prop(${_tsgt_title} "${_tsgt_handle}" "title")
+    _ct_get_prop("${_tsgt_handle}" ${_tsgt_title} "title")
     _ct_return(${_tsgt_title})
 endfunction()

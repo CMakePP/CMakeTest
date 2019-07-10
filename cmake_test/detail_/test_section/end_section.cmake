@@ -1,5 +1,5 @@
 include_guard()
-include(cmake_test/detail_/test_section/get_prop)
+include(cmake_test/detail_/test_section/private)
 
 ## @memberof TestState
 #  @public
@@ -14,6 +14,6 @@ include(cmake_test/detail_/test_section/get_prop)
 function(_ct_test_section_end_section _tses_handle _tses_parent)
     cmake_policy(SET CMP0007 NEW) #List won't ignore empty elements
 
-    _ct_get_prop(${_tses_parent} "${_tses_handle}" "parent_section")
+    _ct_get_prop("${_tses_handle}" ${_tses_parent} "parent_section")
     _ct_return(${_tses_parent})
 endfunction()

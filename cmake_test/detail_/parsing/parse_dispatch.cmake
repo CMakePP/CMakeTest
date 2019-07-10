@@ -1,4 +1,6 @@
 include_guard()
+include(cmake_test/detail_/parsing/comment_dispatch)
+include(cmake_test/detail_/parsing/empty_dispatch)
 include(cmake_test/detail_/parsing/parse_assert)
 include(cmake_test/detail_/write_and_run_contents)
 include(cmake_test/detail_/test_section/test_section)
@@ -11,28 +13,9 @@ function(_ct_parse_dispatch _pd_contents _pd_index _pd_prefix _pd_identifier)
     # line can be empty
     _ct_nonempty_string(_pd_prefix)
     _ct_nonempty_string(_pd_identifier)
-    #_ct_parse_debug("Current line: ${_pd_line}")
 
-    #Does it contain one of our commands
-
-    # If yes, it's something like <command><ws>(<ws><stuff><ws>)
-    # where <command> is the name of the command, <ws> is white space, and
-    # <stuff> is what we care about (possibly with some whitespace in it too)
-    # we thus need to keep reading lines until we find the opening and closing
-    # parenthesis and have all of "stuff"
-    #
-    # For now we throw an error if everything's not on one line
-
-    #If it doesn't contain our command check if it is a blank line
-    if(NOT _pd_line)
-        return()
-    endif()
-
-    #Check if it is a comment, if it is return
-    string(REGEX MATCH "\\s*#" _pd_match "${_pd_line}")
-    if(_pd_match)
-        return()
-    endif()
+    _ct_empty_dispatch("${_pd_line}") # Handle empty/blank lines
+    _ct_comment_dispatch("${_pd_line}") # Handle comments
 
     #See if it starts a block or is an assertion
     string(TOLOWER "${_pd_line}" _pd_lc_line)

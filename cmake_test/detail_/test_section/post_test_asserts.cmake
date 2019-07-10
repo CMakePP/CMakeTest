@@ -1,5 +1,5 @@
 include_guard()
-include(cmake_test/detail_/test_section/get_prop)
+include(cmake_test/detail_/test_section/private)
 include(cmake_test/detail_/test_section/title)
 include(cmake_test/detail_/utilities/print_result)
 
@@ -49,7 +49,7 @@ function(_ct_test_section_post_test_asserts _tspta_handle
     endif()
 
     # Ensure all messages printed
-    _ct_get_prop(_tspta_prints "${_tspta_handle}" "print_assert")
+    _ct_get_prop("${_tspta_handle}" _tspta_prints  "print_assert")
     foreach(_tspta_print ${_tspta_prints})
         string(FIND "${_tspta_output}" "${_tspta_print}" _tspta_found)
         if("${_tspta_found}" STREQUAL "-1")

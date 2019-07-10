@@ -1,5 +1,5 @@
 include_guard()
-include(cmake_test/detail_/test_section/get_prop)
+include(cmake_test/detail_/test_section/private)
 include(cmake_test/detail_/utilities/input_check)
 include(cmake_test/detail_/utilities/return)
 
@@ -19,6 +19,6 @@ function(_ct_test_section_should_pass _tssp_handle _tssp_result)
     _ct_is_handle(_tssp_handle)
     _ct_nonempty_string(_tssp_result)
 
-    _ct_get_prop(${_tssp_result} ${_tssp_handle} "should_pass")
+    _ct_get_prop( ${_tssp_handle} ${_tssp_result} "should_pass")
     _ct_return(${_tssp_result})
 endfunction()

@@ -1,7 +1,7 @@
 include_guard()
 include(cmake_test/detail_/utilities/input_check)
 include(cmake_test/detail_/test_section/depth)
-include(cmake_test/detail_/test_section/get_prop)
+include(cmake_test/detail_/test_section/private)
 
 ## @memberof TestSection
 #  @public
@@ -17,7 +17,7 @@ function(_ct_test_section_print _tsp_handle)
     _ct_is_handle(_tsp_handle)
 
     # Print the hierarchy up to this section
-    _ct_get_prop(_tsp_parent ${_tsp_handle} "parent_section")
+    _ct_get_prop(${_tsp_handle} _tsp_parent "parent_section")
     if(NOT "${_tsp_parent}" STREQUAL "0")
         _ct_test_section_print(${_tsp_parent})
     endif()
@@ -32,10 +32,10 @@ function(_ct_test_section_print _tsp_handle)
     endwhile()
 
     # Get this section's properties
-    _ct_get_prop(_tsp_title ${_tsp_handle} "title")
-    _ct_get_prop(_tsp_pass ${_tsp_handle} "should_pass")
-    _ct_get_prop(_tsp_prints ${_tsp_handle} "print_assert")
-    _ct_get_prop(_tsp_content ${_tsp_handle} "content")
+    _ct_get_prop(${_tsp_handle} _tsp_title "title")
+    _ct_get_prop(${_tsp_handle} _tsp_pass "should_pass")
+    _ct_get_prop(${_tsp_handle} _tsp_prints "print_assert")
+    _ct_get_prop(${_tsp_handle} _tsp_content "content")
 
     # Print this section out
     message("${_tsp_tabs}${_tsp_title}:")

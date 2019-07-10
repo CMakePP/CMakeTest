@@ -1,5 +1,5 @@
 include_guard()
-include(cmake_test/detail_/test_section/get_prop)
+include(cmake_test/detail_/test_section/private)
 include(cmake_test/detail_/utilities/input_check)
 include(cmake_test/detail_/utilities/return)
 
@@ -32,8 +32,8 @@ function(_ct_test_section_get_content _tsgc_handle _tsgc_content)
 
     # Get our content and our parent
     cmake_policy(SET CMP0007 NEW) # Gets the content even if it's empty
-    _ct_get_prop(_tsgc_test_content "${_tsgc_handle}" "content")
-    _ct_get_prop(_tsgc_parent "${_tsgc_handle}" "parent_section")
+    _ct_get_prop("${_tsgc_handle}" _tsgc_test_content  "content")
+    _ct_get_prop("${_tsgc_handle}" _tsgc_parent "parent_section")
 
     # Get parent section's content (if we have a parent)
     if(NOT "${_tsgc_parent}" STREQUAL "0")

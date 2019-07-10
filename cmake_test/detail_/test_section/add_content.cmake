@@ -1,6 +1,5 @@
 include_guard()
-include(cmake_test/detail_/test_section/add_prop)
-include(cmake_test/detail_/test_section/get_prop)
+include(cmake_test/detail_/test_section/private)
 include(cmake_test/detail_/utilities/input_check)
 
 ## @memberof TestSection
@@ -20,7 +19,7 @@ function(_ct_test_section_add_content _tsac_handle _tsac_content)
     cmake_policy(SET CMP0007 NEW) #No skipping empty elements
 
     # Get the list of existing content
-    _ct_get_prop(_tsac_test_content ${_tsac_handle} "content")
+    _ct_get_prop( ${_tsac_handle} _tsac_test_content "content")
 
     # Commit the new list of content
     _ct_add_prop(

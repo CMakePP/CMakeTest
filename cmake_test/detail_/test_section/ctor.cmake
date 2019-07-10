@@ -1,7 +1,7 @@
 include_guard()
 include(cmake_test/detail_/utilities/return)
 include(cmake_test/detail_/utilities/input_check)
-include(cmake_test/detail_/test_section/add_prop)
+include(cmake_test/detail_/test_section/private)
 
 ## @memberof TestSection
 #  @public
@@ -25,6 +25,7 @@ function(_ct_test_section_ctor _tsc_handle _tsc_name)
     _ct_nonempty_string(_tsc_name)
 
     string(RANDOM _tsc_temp_handle) #Basically our this pointer
+    set(_tsc_temp_handle "${_tsc_temp_handle}_test_section")
 
     # Add properties to our class
     # Title of the section

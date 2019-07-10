@@ -1,4 +1,5 @@
-add_cmake_test_test(lc_find
+add_cmake_test_test(input_check
+                    lc_find
                     print_result
                     repeat_string
                     return
