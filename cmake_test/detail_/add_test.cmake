@@ -2,6 +2,7 @@ include_guard()
 include(cmake_test/detail_/parsing/parse_dispatch)
 include(cmake_test/detail_/utilities/sanitize_name)
 
+
 #FUNCTION
 #
 # This function is the driver for unit testing. It will:
@@ -16,9 +17,22 @@ function(_ct_add_test_guts _atg_test_name)
     #                         Read in file contents                            #
     ############################################################################
     file(READ ${CMAKE_CURRENT_LIST_FILE} _atg_contents)
-    STRING(REGEX REPLACE ";" "\\\\;" _atg_contents "${_atg_contents}")
-    STRING(REGEX REPLACE "\n" ";" _atg_contents "${_atg_contents}")
-    STRING(REGEX REPLACE "\\$" "\\\\$" _atg_contents "${_atg_contents}")
+    string(REGEX REPLACE ";" "\\\\;" _atg_contents "${_atg_contents}")
+    set(_atg_mangled_n "_ct_end_line_char_ct_")
+    string(
+        REGEX REPLACE "\\\\n"
+                      "${_atg_mangled_n}"
+                      _atg_contents
+                      "${_atg_contents}"
+    )
+    string(REGEX REPLACE "\n" ";" _atg_contents "${_atg_contents}")
+    string(
+        REGEX REPLACE "${_atg_mangled_n}"
+                      "\\\\n"
+                      _atg_contents
+                      "${_atg_contents}"
+    )
+
 
     ############################################################################
     #                        Assemble paths for files                          #

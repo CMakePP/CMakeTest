@@ -14,7 +14,7 @@ function(ct_assert_equal _ae_var _ae_contents)
         message(
             FATAL_ERROR
             "Assertion: \"${_ae_var}\" == \"${_ae_contents}\" failed. "
-            "${_ae_var} contents: ${${_ae_var}}"
+            "${_ae_var} contents: \"${${_ae_var}}\""
         )
     endif()
 endfunction()
@@ -33,7 +33,7 @@ function(ct_assert_not_equal _ane_var _ane_content)
         message(
             FATAL_ERROR
            "Assertion: \"${_ane_var}\" != \"${_ane_content}\" failed. "
-           "${_ane_var} contents: ${${_ane_var}}"
+           "${_ane_var} contents: \"${${_ane_var}}\""
         )
     endif()
 endfunction()

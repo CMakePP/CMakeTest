@@ -15,7 +15,7 @@ include(cmake_test/detail_/utilities/return)
 #  ```.cmake
 #  ct_add_test("test name")
 #  X
-#      ct_section("section")
+#      ct_add_section("section")
 #      Y
 #      ct_end_section()
 #  ct_end_test()
@@ -38,9 +38,11 @@ function(_ct_test_section_get_content _tsgc_handle _tsgc_content)
     # Get parent section's content (if we have a parent)
     if(NOT "${_tsgc_parent}" STREQUAL "0")
         _ct_test_section_get_content("${_tsgc_parent}" ${_tsgc_content})
+        # Append our content and return
+        set(${_tsgc_content} "${${_tsgc_content}}\n${_tsgc_test_content}")
+    else() # No parent
+        set(${_tsgc_content} "${_tsgc_test_content}")
     endif()
 
-    # Append our content and return
-    set(${_tsgc_content} "${${_tsgc_content}}\n${_tsgc_test_content}")
     _ct_return(${_tsgc_content})
 endfunction()

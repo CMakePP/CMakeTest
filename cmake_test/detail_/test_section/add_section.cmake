@@ -10,9 +10,9 @@ include(cmake_test/detail_/utilities/repeat_string)
 #  @fn ADD_SECTION(handle, child, name)
 #  @brief Creates a subsection of the provided parent section
 #
-#  Subsections create new unit testing scope. The new scope includes everything
-#  from the outer scope as well as the contents of the added section (less any
-#  subsections added in that content).
+#  Subsections create new unit testing scope such that the contents of the new
+#  subsection are not visible to the outter section, whereas the contents of the
+#  outter section are visible to the new subsection.
 #
 #  @param[in] handle The TestSection object to add the section to
 #  @param[out] child The handle of the new section

@@ -8,7 +8,8 @@ include(cmake_test/detail_/utilities/return)
 #  @fn TITLE(handle, title)
 #  @brief Returns the title of the current section.
 #
-#  This function will return the title of the current subsection
+#  This function will return the title of the section modled by the provided
+#  TestSection instance.
 #
 #  @param[in] handle The handle to the section
 #  @param[out] title The title of the current test case.

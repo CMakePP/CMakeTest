@@ -3,9 +3,9 @@ include(cmake_test/detail_/test_section/private)
 include(cmake_test/detail_/test_section/title)
 include(cmake_test/detail_/utilities/print_result)
 
-## @memberof TestState
+## @memberof TestSection
 #  @public
-#  @fn POST_TEST_ASSERTS(handle, result, output, errors)
+#  @fn POST_TEST_ASSERTS(handle, result, output)
 #  @brief Runs assertions that can only be performed after a test has completed.
 #
 #  After the literal contents of the CMakeLists.txt have been run there are
@@ -14,16 +14,21 @@ include(cmake_test/detail_/utilities/print_result)
 #  1. Did the test run sucessfully (and was it supposed to)?
 #  2. Did the correct output get printed?
 #
-#  @param[in] handle The TestState instance with the test's state
+#  @param[in] handle The TestSection instance with the test's state
 #  @param[in] result The value returned from running the unit test
-#  @param[in] output The standard output and errors concatenated together.
+#  @param[in] output All output of running the test (standard out and errors
+#                    concatentated together)
 function(_ct_test_section_post_test_asserts _tspta_handle
                                             _tspta_result
                                             _tspta_output)
 
+    _ct_is_handle(_tspta_handle)
+    _ct_nonempty_string(_tspta_result)
+
     _ct_test_section_get_title("${_tspta_handle}" _tspta_name)
     _ct_test_section_depth(${_tspta_handle} _tspta_depth)
 
+    # Should the test pass?
     _ct_test_section_should_pass("${_tspta_handle}" _tspta_should_pass)
 
     # Did the test pass?

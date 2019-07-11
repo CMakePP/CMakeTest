@@ -12,21 +12,16 @@ include(cmake_test/detail_/test_section/private)
 #  function is responsible for adding a message to the list of messages that
 #  must appear in the output.
 #
-#  The actual list of messages is a list of lists such that element i of the
-#  outer list is the list of messages that must appear in tests of depth i or
-#  greater. To avoid issues with escaping the list characters, the internal list
-#  is flattened out. As a result, in a separate list `passert_per_level` we
-#  store the number of messages per depth.
-#
 # @param[in] handle The TestSection to add the assert to.
 # @param[in] message The message that must appear in the output of the current
-#                    test.
+#                    test. Can not be empty.
 function(_ct_test_section_must_print _tsmp_handle _tsmp_message)
     _ct_is_handle(_tsmp_handle)
-    _ct_nonempty_string(_tsmp_message)
+    _ct_nonempty(_tsmp_message)
 
     # Add the message
     _ct_get_prop(${_tsmp_handle} _tsmp_asserts  "print_assert")
+    string(REGEX REPLACE ";" "\\\\;" _tsmp_message "${_tsmp_message}")
     list(APPEND _tsmp_asserts "${_tsmp_message}")
     _ct_add_prop(${_tsmp_handle} "print_assert" "${_tsmp_asserts}")
 endfunction()

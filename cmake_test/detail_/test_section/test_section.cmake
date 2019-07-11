@@ -7,6 +7,7 @@ include(cmake_test/detail_/test_section/get_content)
 include(cmake_test/detail_/test_section/must_print)
 include(cmake_test/detail_/test_section/post_test_asserts)
 include(cmake_test/detail_/test_section/print)
+include(cmake_test/detail_/test_section/should_fail)
 include(cmake_test/detail_/test_section/should_pass)
 include(cmake_test/detail_/test_section/title)
 
@@ -31,6 +32,9 @@ include(cmake_test/detail_/test_section/title)
 #  and the various `<argX>` are the arguments to the function. Internal
 #  references should go through the normal function call.
 #
+#  @note This function is a macro in order to avoid needing to forward the
+#        returns of each member function.
+#
 #  @param[in] fxn The member function to call.
 macro(test_section fxn)
     if("${fxn}" STREQUAL "CTOR")
@@ -51,6 +55,8 @@ macro(test_section fxn)
         _ct_test_section_post_test_asserts(${ARGN})
     elseif("${fxn}" STREQUAL "SHOULD_PASS")
         _ct_test_section_should_pass(${ARGN})
+    elseif("${fxn}" STREQUAL "SHOULD_FAIL")
+        _ct_test_section_should_fail(${ARGN})
     elseif("${fxn}" STREQUAL "MUST_PRINT")
         _ct_test_section_must_print(${ARGN})
     else()

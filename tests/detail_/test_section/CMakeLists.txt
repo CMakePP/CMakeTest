@@ -1,1 +1,14 @@
-add_cmake_test_test(private)
+add_cmake_test_test(add_content
+                    add_section
+                    ctor
+                    depth
+                    end_section
+                    get_content
+                    must_print
+                    post_test_asserts
+                    private
+                    should_fail
+                    should_pass
+                    test_section
+                    title
+)

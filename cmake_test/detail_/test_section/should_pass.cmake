@@ -9,9 +9,9 @@ include(cmake_test/detail_/utilities/return)
 #  @brief Returns whether the current test should pass or not.
 #
 #  An important part of unit testing is ensuring that code fails when it is
-#  supposed to. For this reason the TestState class has an internal attribute
+#  supposed to. For this reason the TestSection class has an internal attribute
 #  which keeps track of whether or not the test should fail. This function can
-#  be used to retrieve whether it should or not.
+#  be used to retrieve whether the current section should pass.
 #
 #  @param[in] handle A TestSection instance
 #  @param[out] result An identifier to hold whether the test should fail.

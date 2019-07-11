@@ -16,7 +16,9 @@ include(cmake_test/detail_/test_section/private)
 #  - content: A list of CMake code in the section
 #  - print_assert: A list of strings that must be in the output
 #  - should_pass: Should the current section pass
-#  - subsections: A list of subsections under this section
+#  - parent_section: A handle to the this section's supersection
+#  - printed: Has the title of this section been printed
+#    - needed to avoid printing section's title everytime we add a section
 #
 # @param[out] handle The identifier to hold the object's handle
 # @param[in] name The name of this section.

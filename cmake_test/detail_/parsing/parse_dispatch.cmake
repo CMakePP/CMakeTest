@@ -53,11 +53,11 @@ function(_ct_parse_dispatch _pd_contents _pd_index _pd_prefix _pd_identifier)
         test_section(END_SECTION ${_pd_handle} ${_pd_identifier})
         _ct_return(${_pd_identifier})
     elseif(_pd_is_assert) #Assert for this section
-        _ct_parse_assert(${_pd_handle} "${_pd_line}")
+        _ct_parse_assert(${_pd_handle} _pd_line)
     else()
         if(NOT "${_pd_handle}" STREQUAL "") #Just a line of code in test
-            STRING(REGEX REPLACE ";" "\\\\\\\\;" _pd_line "${_pd_line}")
-            test_section(ADD_CONTENT ${_pd_handle} "${_pd_line}")
+            #STRING(REGEX REPLACE ";" "\\\\\\\\;" _pd_line "${_pd_line}")
+            test_section(ADD_CONTENT ${_pd_handle} _pd_line)
         else()
             return() #Code outside test section
         endif()
