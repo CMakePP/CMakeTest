@@ -266,7 +266,6 @@ def main():
         os.mkdir(tutorial_dir)
 
     make_tutorials(examples_dir, tutorial_dir)
-    subprocess.call(["make", "html"])
 
 
 if __name__ == "__main__":
