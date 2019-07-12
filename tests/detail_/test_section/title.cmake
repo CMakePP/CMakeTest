@@ -4,7 +4,7 @@ ct_add_test("TestSection::title")
     include(cmake_test/detail_/test_section/title)
     include(cmake_test/detail_/test_section/test_section)
 
-    test_section(CTOR handle "title")
+    _ct_test_section(CTOR handle "title")
 
     ct_add_section("fails if arg 1 is not a handle")
         _ct_test_section_get_title(handle2 result)

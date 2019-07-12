@@ -4,7 +4,7 @@ ct_add_test("TestSection::add_section")
     include(cmake_test/detail_/test_section/add_section)
     include(cmake_test/detail_/test_section/test_section)
 
-    test_section(CTOR handle "title")
+    _ct_test_section(CTOR handle "title")
 
     ct_add_section("fails if arg 1 is not a handle")
         _ct_test_section_add_section(handle2 child "subsection")
@@ -25,7 +25,7 @@ ct_add_test("TestSection::add_section")
         _ct_test_section_add_section(${handle} child "subsection")
 
         ct_add_section("sets child title correctly")
-            test_section(TITLE ${child} result)
+            _ct_test_section(TITLE ${child} result)
             ct_assert_equal(result "subsection")
         ct_end_section()
 
@@ -42,7 +42,7 @@ ct_add_test("TestSection::add_section")
             _ct_test_section_add_section(${child} grandchild "subsubsection")
 
             ct_add_section("sets granchild title correctly")
-                test_section(TITLE ${grandchild} result)
+                _ct_test_section(TITLE ${grandchild} result)
                 ct_assert_equal(result "subsubsection")
             ct_end_section()
 

@@ -4,11 +4,13 @@ add_cmake_test_test(add_content
                     depth
                     end_section
                     get_content
+                    make_flags
                     must_print
                     post_test_asserts
                     private
                     should_fail
                     should_pass
+                    test_prefix
                     test_section
                     title
 )

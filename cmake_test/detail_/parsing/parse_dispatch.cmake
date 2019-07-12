@@ -39,25 +39,25 @@ function(_ct_parse_dispatch _pd_contents _pd_index _pd_prefix _pd_identifier)
     set(_pd_handle "${${_pd_identifier}}")
 
     if(_pd_is_test) #Start of new test
-        test_section(CTOR ${_pd_identifier} "${_pd_args}")
+        _ct_test_section(CTOR ${_pd_identifier} "${_pd_args}")
         _ct_return(${_pd_identifier})
     elseif(_pd_is_etest) #End of a test
         _ct_write_and_run_contents("${_pd_prefix}" "${_pd_handle}")
         set(${_pd_identifier} "")
         _ct_return(${_pd_identifier})
     elseif(_pd_is_section) #Start of a section
-        test_section(ADD_SECTION ${_pd_handle} ${_pd_identifier} "${_pd_args}")
+        _ct_test_section(ADD_SECTION ${_pd_handle} ${_pd_identifier} "${_pd_args}")
         _ct_return(${_pd_identifier})
     elseif(_pd_is_esection) #End of a section
         _ct_write_and_run_contents("${_pd_prefix}" "${_pd_handle}")
-        test_section(END_SECTION ${_pd_handle} ${_pd_identifier})
+        _ct_test_section(END_SECTION ${_pd_handle} ${_pd_identifier})
         _ct_return(${_pd_identifier})
     elseif(_pd_is_assert) #Assert for this section
         _ct_parse_assert(${_pd_handle} _pd_line)
     else()
         if(NOT "${_pd_handle}" STREQUAL "") #Just a line of code in test
             #STRING(REGEX REPLACE ";" "\\\\\\\\;" _pd_line "${_pd_line}")
-            test_section(ADD_CONTENT ${_pd_handle} _pd_line)
+            _ct_test_section(ADD_CONTENT ${_pd_handle} _pd_line)
         else()
             return() #Code outside test section
         endif()

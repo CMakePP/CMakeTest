@@ -1,6 +1,6 @@
 include_guard()
-
-## @fn _ct_comment_dispatch(line)
+## @fn ct_comment_dispatch(line)
+#  @memberof utilities
 #  @brief Determines if the provided line is commented out.
 #
 #  While dispatching there is nothing to be done for lines that are purely

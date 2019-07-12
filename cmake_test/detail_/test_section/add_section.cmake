@@ -34,7 +34,6 @@ function(_ct_test_section_add_section _tsas_handle _tsas_child _tsas_name)
     endif()
 
     # Create the new section and return it
-    _ct_test_section_ctor(${_tsas_child} "${_tsas_name}")
-    _ct_add_prop(${${_tsas_child}} "parent_section" ${_tsas_handle})
+    _ct_test_section_ctor(${_tsas_child} "${_tsas_name}" ${_tsas_handle})
     _ct_return(${_tsas_child})
 endfunction()

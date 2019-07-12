@@ -12,17 +12,17 @@ macro(_ct_capture_dispatch _cd_contents _cd_index _cd_identifier)
         _ct_parse_ct_command(_cd_args ${_cd_index} ${_cd_contents})
 
         if(_cd_is_test) #Start of new test
-            test_section(CTOR ${_cd_identifier} "${_cd_args}")
+            _ct_test_section(CTOR ${_cd_identifier} "${_cd_args}")
             _ct_return(${_cd_identifier})
         elseif(_cd_is_section) #Start of a section
-            test_section(
+            _ct_test_section(
                     ADD_SECTION ${_cd_handle} ${_cd_identifier} "${_cd_args}"
             )
             _ct_return(${_cd_identifier})
         elseif(_cd_is_print)
-            test_section(MUST_PRINT ${_cd_handle} "${_cd_args}")
+            _ct_test_section(MUST_PRINT ${_cd_handle} "${_cd_args}")
         elseif(_cd_is_fail)
-            test_section(MUST_PRINT ${_cd_handle} "${_cd_args}")
+            _ct_test_section(MUST_PRINT ${_cd_handle} "${_cd_args}")
             _ct_add_prop(${_cd_handle} "should_pass" FALSE)
         endif()
 

@@ -4,7 +4,7 @@ ct_add_test("TestSection::must_print")
     include(cmake_test/detail_/test_section/must_print)
     include(cmake_test/detail_/test_section/test_section)
 
-    test_section(CTOR handle "title")
+    _ct_test_section(CTOR handle "title")
 
     ct_add_section("fails if arg 1 is not a handle")
         _ct_test_section_must_print(handle2 "hello")

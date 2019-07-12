@@ -39,7 +39,7 @@ function(_ct_add_test_guts _atg_test_name)
     ############################################################################
     _ct_sanitize_name(_atg_test_name "${_atg_test_name}")
     string(RANDOM _atg_suffix)
-    set(_atg_prefix ${CMAKE_BINARY_DIR}/${_atg_test_name}/${_atg_suffix})
+    set(_atg_prefix ${CMAKE_BINARY_DIR}/${_atg_suffix})
     message("Files from this run are located in: ${_atg_prefix}")
 
     ############################################################################

@@ -8,5 +8,5 @@ CMakeTest
    about
    faqs
    tutorials/index
-   api/library_root
+   api/index
    developer/index

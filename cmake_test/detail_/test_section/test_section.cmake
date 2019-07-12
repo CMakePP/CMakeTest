@@ -9,6 +9,7 @@ include(cmake_test/detail_/test_section/post_test_asserts)
 include(cmake_test/detail_/test_section/print)
 include(cmake_test/detail_/test_section/should_fail)
 include(cmake_test/detail_/test_section/should_pass)
+include(cmake_test/detail_/test_section/test_prefix)
 include(cmake_test/detail_/test_section/title)
 
 
@@ -25,7 +26,7 @@ include(cmake_test/detail_/test_section/title)
 #  To access a member function from outside the class use the syntax:
 #
 #  ```.cmake
-#  test_section(<fxn_name> <arg1> <arg2> ...)
+#  _ct_test_section(<fxn_name> <arg1> <arg2> ...)
 #  ```
 #
 #  where `<fxn_name>` is the name of the function as listed in the documentation
@@ -36,7 +37,7 @@ include(cmake_test/detail_/test_section/title)
 #        returns of each member function.
 #
 #  @param[in] fxn The member function to call.
-macro(test_section fxn)
+macro(_ct_test_section fxn)
     if("${fxn}" STREQUAL "CTOR")
         _ct_test_section_ctor(${ARGN})
     elseif("${fxn}" STREQUAL "TITLE")
@@ -57,6 +58,8 @@ macro(test_section fxn)
         _ct_test_section_should_pass(${ARGN})
     elseif("${fxn}" STREQUAL "SHOULD_FAIL")
         _ct_test_section_should_fail(${ARGN})
+    elseif("${fxn}" STREQUAL "TEST_PREFIX")
+        _ct_test_section_test_prefix(${ARGN})
     elseif("${fxn}" STREQUAL "MUST_PRINT")
         _ct_test_section_must_print(${ARGN})
     else()

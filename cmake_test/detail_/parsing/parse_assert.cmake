@@ -6,7 +6,7 @@ include(cmake_test/detail_/utilities/lc_find)
 ## @fn _ct_parse_assert(handle, line)
 #  @brief Parses an assert found in a unit test
 #
-#  This funciton is responsible for dispatching among the various types of
+#  This function is responsible for dispatching among the various types of
 #  assertions. For the most part the assertions simply need to be dumped into
 #  the contents of the unit test; however, there are a few assertions such as
 #  "ct_assert_prints, which require different handeling. The logic for these
@@ -24,12 +24,12 @@ function(_ct_parse_assert _pa_handle _pa_line)
 
     if(_pa_is_print)
         string(REGEX MATCH "\\(\\s*\"(.*)\"\\s*\\)" _pa_match "${${_pa_line}}")
-        test_section(MUST_PRINT ${_pa_handle} "${CMAKE_MATCH_1}")
+        _ct_test_section(MUST_PRINT ${_pa_handle} "${CMAKE_MATCH_1}")
     elseif(_pa_is_fail)
         string(REGEX MATCH "\\(\\s*\"(.*)\"\\s*\\)" _pa_match "${${_pa_line}}")
-        test_section(MUST_PRINT ${_pa_handle} ${CMAKE_MATCH_1})
-        test_section(SHOULD_FAIL ${_pa_handle})
+        _ct_test_section(MUST_PRINT ${_pa_handle} ${CMAKE_MATCH_1})
+        _ct_test_section(SHOULD_FAIL ${_pa_handle})
     else() # dispatch for all other assertions
-        test_section(ADD_CONTENT ${_pa_handle} "${_pa_line}")
+        _ct_test_section(ADD_CONTENT ${_pa_handle} "${_pa_line}")
     endif()
 endfunction()

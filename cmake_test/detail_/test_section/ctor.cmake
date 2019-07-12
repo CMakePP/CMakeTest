@@ -22,9 +22,11 @@ include(cmake_test/detail_/test_section/private)
 #
 # @param[out] handle The identifier to hold the object's handle
 # @param[in] name The name of this section.
+# @param[in] parent Handle to the parent section. Defaults to null
 function(_ct_test_section_ctor _tsc_handle _tsc_name)
     _ct_nonempty(_tsc_handle)
     _ct_nonempty_string(_tsc_name)
+    set(_tsc_optional_args "${ARGN}")
 
     string(RANDOM _tsc_temp_handle) #Basically our this pointer
     set(_tsc_temp_handle "${_tsc_temp_handle}_test_section")
@@ -39,14 +41,23 @@ function(_ct_test_section_ctor _tsc_handle _tsc_name)
     # A list of strings that must appear in the output
     _ct_add_prop(${_tsc_temp_handle} "print_assert" "")
 
-    # Whether this section should pass
-    _ct_add_prop(${_tsc_temp_handle} "should_pass" "TRUE")
+    # The section this section belongs to
+    if("${ARGC}" GREATER "2")
+        list(GET _tsc_optional_args 0 _tsc_parent)
+        _ct_is_handle(_tsc_parent)
+        _ct_add_prop(${_tsc_temp_handle} "parent_section" ${_tsc_parent})
+    else()
+        _ct_add_prop(${_tsc_temp_handle} "parent_section" "0")
+    endif()
 
-    # A list of subsections
-    _ct_add_prop(${_tsc_temp_handle} "parent_section" "0")
+    # Should the section pass
+    _ct_add_prop(${_tsc_temp_handle} "should_pass" TRUE)
 
     # Has title been printed
     _ct_add_prop(${_tsc_temp_handle} "printed" FALSE)
+
+    # List of CMake variables to pass to the test
+    _ct_add_prop(${_tsc_temp_handle} "cmake_var" "")
 
     set(${_tsc_handle} ${_tsc_temp_handle})
     _ct_return(${_tsc_handle})
