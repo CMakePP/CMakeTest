@@ -2,6 +2,7 @@ include_guard()
 include(cmake_test/asserts/list)
 
 ## @fn _ct_nonempty(var)
+#  @memberof utilities
 #  @brief Asserts that the provided identifier is set to a value other than the
 #         empty string.
 #
@@ -18,6 +19,7 @@ function(_ct_nonempty _n_var)
 endfunction()
 
 ## @fn _ct_nonempty_string(var)
+#  @memberof utilities
 #  @brief Asserts that the identifier contains a non-empty string.
 #
 #  This function will ensure that the provided identifier is set to a value and
@@ -32,6 +34,7 @@ function(_ct_nonempty_string _ns_var)
 endfunction()
 
 ## @fn _ct_is_handle(var)
+#  @memberof utilities
 #  @brief Asserts that the identifier is a handle to a TestSection instance
 #
 #  This function will ensure that the provided identifier is a handle to a
