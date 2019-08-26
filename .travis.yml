@@ -1,0 +1,33 @@
+language: cpp
+compiler:
+  - gcc
+
+install:
+  - bin_dir="${TRAVIS_BUILD_DIR}/cmake_${CMAKE_VER}"
+  - mkdir ${bin_dir} && cd ${bin_dir}
+  - veri=${CMAKE_VER}
+  - reli=${veri}.1
+  - wget https://cmake.org/files/v${veri}/cmake-${reli}-Linux-x86_64.tar.gz
+  - tar -xvf cmake-${reli}-Linux-x86_64.tar.gz > /dev/null
+  - mv cmake-${reli}-Linux-x86_64/ cmake-${veri}
+  - cd ${TRAVIS_BUILD_DIR}
+
+env:
+  - CMAKE_VER=3.10
+  - CMAKE_VER=3.11
+  - CMAKE_VER=3.12
+  - CMAKE_VER=3.13
+  - CMAKE_VER=3.14
+  - CMAKE_VER=3.15
+
+before_script:
+  - PATH=${bin_dir}/cmake-${CMAKE_VER}/bin:$PATH
+  - cmake -Bbuild_${CMAKE_VER} -H.
+
+script:
+  - cmake --version
+  - cmake --build build_${CMAKE_VER}
+  - cd build_${CMAKE_VER}
+  - ctest -j 5
+  - cd ${TRAVIS_BUILD_DIR}
+

@@ -1,5 +1,7 @@
 # CMakeTest
 
+[![Build Status](https://travis-ci.org/CMakePP/CMakeTest.svg?branch=master)](https://travis-ci.org/CMakePP/CMakeTest)
+
 CMake ships with `ctest` which helps integrate your project's tests into your
 project's build system. `ctest`, is a powerful solution for managing your
 project's tests, but it is designed to be decoupled from the framework used to

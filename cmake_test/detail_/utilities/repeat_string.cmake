@@ -2,6 +2,7 @@ include_guard()
 include(cmake_test/detail_/utilities/return)
 
 ## @fn _ct_repeat_string(result, str, n)
+#  @memberof utilities
 #  @brief Creates a string by repeating a substring
 #
 #  This function is used to create a new string by repeating a substring a

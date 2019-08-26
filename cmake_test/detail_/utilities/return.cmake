@@ -1,6 +1,7 @@
 include_guard()
 
 ## @fn _ct_return(var)
+#  @memberof utilities
 #  @brief Syntactic sugar for returning a value from a function
 #
 #  CMake allows you to return variables by adding them to the parent namespace.

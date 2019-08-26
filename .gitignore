@@ -1,10 +1,11 @@
 #Build directories
 docs/build
-cmake-build-debug/
+cmake-build*/
 
 #Auto-generated directories
 docs/source/api
 docs/source/tutorials/*.rst
+docs/source/make_tutorials.py
 !docs/source/tutorials/index.rst
 
 #CLion project settings
