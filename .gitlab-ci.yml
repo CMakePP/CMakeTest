@@ -1,0 +1,11 @@
+default:
+  image: ubuntu:18.04
+
+.job_templates: &job_definition
+  parallel: 5
+  script: cmake -Bbuild -H. && cmake --build build && cd build && ctest -j 5
+
+cmake 3.11:
+  <<: *job_definition
+  before_script:
+    apt-get install cmake
