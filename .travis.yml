@@ -8,7 +8,7 @@ install:
   - veri=${CMAKE_VER}
   - reli=${veri}.1
   - wget https://cmake.org/files/v${veri}/cmake-${reli}-Linux-x86_64.tar.gz
-  - tar -xvf cmake-${reli}.1-Linux-x86_64.tar.gz > /dev/null
+  - tar -xvf cmake-${reli}-Linux-x86_64.tar.gz > /dev/null
   - mv cmake-${reli}-Linux-x86_64/ cmake-${veri}
   - cd ${TRAVIS_BUILD_DIR}
 
