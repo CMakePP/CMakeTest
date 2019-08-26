@@ -3,7 +3,7 @@ compiler:
   - gcc
 
 install:
-  - bin_dir="${TRAVIS_BUILD_DIR}/bin"
+  - bin_dir="${TRAVIS_BUILD_DIR}/cmake_install"
   - versions=(3.10 3.11 3.12)
   - releases=(3.10.3 3.11.4 3.12.4)
   - mkdir ${bin_dir} && cd ${bin_dir}
