@@ -2,6 +2,7 @@ include_guard()
 include(cmake_test/detail_/utilities/return)
 
 ## @fn _ct_sanitize_name(new_name, old_name)
+#  @memberof utilities
 #  @brief Makes the provided name more filesystem friendly
 #
 #  CMakeTest will need to turn test names into file names in a few places. This

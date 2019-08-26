@@ -1,6 +1,7 @@
 include_guard()
 
 ## @fn _ct_lc_find(found, substring, string)
+#  @memeberof utilities
 #  @brief Case-insensitive search for a substring.
 #
 #  @param[out] found An identifier to hold the result.

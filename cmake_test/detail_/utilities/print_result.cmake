@@ -2,6 +2,7 @@ include_guard()
 include(cmake_test/detail_/utilities/repeat_string)
 
 ## @fn _ct_print_result(name, result, depth)
+#  @memberof utilities
 #  @brief Wraps the process of printing a test's result
 #
 #  This function largely serves as code factorization for print_pass and
