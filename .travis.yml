@@ -27,7 +27,7 @@ before_script:
   - cmake -Bbuild_${CMAKE_VER} -H.
 
 script:
-  - echo "Testing CMake versions: ${CMAKE_VER}"
+  - cmake --version
   - cmake --build build_${CMAKE_VER}
   - cd build_${CMAKE_VER}
   - ctest -j 5
