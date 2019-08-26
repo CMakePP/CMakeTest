@@ -4,11 +4,11 @@ compiler:
 
 install:
   - bin_dir="${TRAVIS_BUILD_DIR}/cmake_install"
-  - versions=(3.10 3.11 3.12)
-  - releases=(3.10.3 3.11.4 3.12.4)
+  - versions=(3.10 3.11 3.12 3.13 3.14 3.15)
+  - releases=(3.10.3 3.11.4 3.12.4 3.13.5 3.14.6 3.15.2)
   - mkdir ${bin_dir} && cd ${bin_dir}
   - |
-    for i in {0..2}; do
+    for i in {0..${#versions[@]}}; do
         veri=${versions[${i}]}
         reli=${releases[${i}]}
         wget https://cmake.org/files/v${veri}/cmake-${reli}-Linux-x86_64.tar.gz
@@ -21,6 +21,9 @@ env:
   - CMAKE_VER=3.10
   - CMAKE_VER=3.11
   - CMAKE_VER=3.12
+  - CMAKE_VER=3.13
+  - CMAKE_VER=3.14
+  - CMAKE_VER=3.15
 
 before_script:
   - PATH=${bin_dir}/cmake-${CMAKE_VER}/bin:$PATH
