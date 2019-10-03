@@ -14,13 +14,14 @@ include(cmake_test/detail_/utilities/input_check)
 #
 # - empty lines
 # - comments
-# - `ct_add_test` : Signals the beginning of the unit test.
-# - `ct_end_test` : Used to signal the end of a unit test.
-# - `ct_add_section` : Used to signal the start of a section.
-# - `ct_end_section` : Used to signal the end of the current section.
+# - normal CMake code
+#
+# and the following CMakeTest special fenced sections:
+#
+# - `ct_add_test`/`ct_end_test` : Signals a block encoding a unit test
+# - `ct_add_section`/`ct_end_section` : A block that contains part of a unit
+#                                       test.
 # - `ct_assert` : Signals a check that CMakeTest must perform.
-# - everything else: Assumed to be CMake code that will be dumped verbatim into
-#                    the resulting unit test.
 #
 # :param _pd_contents: The contents of the file containing the unit test.
 # :type _pd_contents: [str]
