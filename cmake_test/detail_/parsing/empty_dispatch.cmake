@@ -1,18 +1,22 @@
 include_guard()
 
-## @fn _ct_empty_dispatch(line)
-#  @brief Handles dispatching if the current line is a blank line.
+#[[[ Handles parsing of a blank line.
 #
 #  While parsing the input file we don't want to waste our time with blank
 #  lines. This function will examine the current line we are parsing and return
 #  control to the main driver if the line we are currently looking at is a blank
 #  line.
 #
-#  @note This function is a macro as it is inteded to be used as a logical
-#        factorization inside parse_dispatch and we don't want parse_dispatch
-#        to have to act on the results of this function.
+#  .. note:
 #
-#  @param[in] line The line whose emptyness is in question.
+#     This function is a macro as it is inteded to be used as a logical
+#     factorization inside parse_dispatch and we don't want parse_dispatch
+#     to have to act on the results of this function. Since it is a macro, if it
+#     calls ``return()`` it actually will return from ``_ct_parse_dispatch()``.
+#
+# :param _ed_line: The line whose emptyness is in question.
+# :type _ed_line: str
+#]]
 macro(_ct_empty_dispatch _ed_line)
     if("${_ed_line}" STREQUAL "")
         return()
