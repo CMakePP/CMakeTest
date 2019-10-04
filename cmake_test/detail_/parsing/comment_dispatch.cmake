@@ -5,9 +5,17 @@ include_guard()
 # the lines that are purely comments (*i.e.*, the first non-whitespace character
 # is `#`). This function will determine if the provided line is a comment. If
 # the line is a comment this function will return control from the calling
-# function (assumed to be ``_parse_dispatch``). At the moment our parser will
-# get screwed-up if we consider comment lines and those lines contain CMakeTest
+# function (assumed to be ``_parse_dispatch``). If the line is not a comment
+# then this function will do nothing. At the moment our parser will get
+# screwed-up if we consider comment lines and those lines contain CMakeTest
 # commands, which is why we must filter comments out.
+#
+# .. note:
+#
+#    This function is a macro as it is inteded to be used as a logical
+#    factorization inside parse_dispatch and we don't want parse_dispatch
+#    to have to act on the results of this function. Since it is a macro, if it
+#    calls ``return()`` it actually will return from ``_ct_parse_dispatch()``
 #
 # .. todo::
 #

@@ -5,7 +5,7 @@ include_guard()
 #  While parsing the input file we don't want to waste our time with blank
 #  lines. This function will examine the current line we are parsing and return
 #  control to the main driver if the line we are currently looking at is a blank
-#  line.
+#  line. If the line is not blank this function does nothing.
 #
 #  .. note:
 #

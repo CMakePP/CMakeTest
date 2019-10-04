@@ -32,7 +32,7 @@ include(cmake_test/detail_/utilities/input_check)
 # :param _pd_identifier: The "this" pointer of the object associated with this
 #                        unit test.
 # :type _pd_identifier: CMakeTest object
-# :return _pd_identifier: The updated object.
+# :returns: The updated object.
 #]]
 function(_ct_parse_dispatch _pd_contents _pd_index _pd_prefix _pd_identifier)
     cmake_policy(SET CMP0007 NEW) #List won't ignore empty elements
