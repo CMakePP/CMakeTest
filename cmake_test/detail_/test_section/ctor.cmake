@@ -3,10 +3,7 @@ include(cmake_test/detail_/utilities/return)
 include(cmake_test/detail_/utilities/input_check)
 include(cmake_test/detail_/test_section/private)
 
-## @memberof TestSection
-#  @public
-#  @fn CTOR(handle, name)
-#  @brief Creates a TestState instance for the provided unit test
+#[[[ Creates a new TestState instance
 #
 #  This function wraps the process of creating a TestSection object. This
 #  includes  creating the "this pointer" and adding the appropriate attributes
@@ -20,9 +17,14 @@ include(cmake_test/detail_/test_section/private)
 #  - printed: Has the title of this section been printed
 #    - needed to avoid printing section's title everytime we add a section
 #
-# @param[out] handle The identifier to hold the object's handle
-# @param[in] name The name of this section.
-# @param[in] parent Handle to the parent section. Defaults to null
+# :param _tsc_handle: The identifier which will hold the created object.
+# :type _tsc_handle: str
+# :param _tsc_name: The name of this section.
+# :type _tsc_name: str
+# :param _tsc_parent: The TestSection instance that the resulting instance will
+#                     be a subsection of. Defaults to null.
+# :returns: The created instance will be returned as ``${_tsc_handle}``.
+#]]
 function(_ct_test_section_ctor _tsc_handle _tsc_name)
     _ct_nonempty(_tsc_handle)
     _ct_nonempty_string(_tsc_name)
