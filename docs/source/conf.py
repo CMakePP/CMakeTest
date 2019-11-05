@@ -16,7 +16,6 @@ import os
 import sys
 import subprocess
 import urllib.request
-from exhale import utils
 dir_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(0,dir_path)
 
@@ -30,9 +29,6 @@ from make_tutorials import make_tutorials
 doc_path = os.path.dirname(dir_path)
 root_path = os.path.dirname(doc_path)
 build_path = os.path.join(doc_path, "build")
-doxy_path  = os.path.join(build_path, "doxyoutput")
-
-
 
 # -- General configuration ---------------------------------------------------
 highlight_language = 'cmake'
