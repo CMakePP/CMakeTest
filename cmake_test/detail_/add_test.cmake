@@ -10,6 +10,9 @@ include(cmake_test/detail_/utilities/sanitize_name)
 # - read-in the contents of the file it was called from
 # - create a target to store the test information
 # - parse the file
+#
+# :param _atg_test_name: The name of the test
+# :type _atg_test_name: str
 #]]
 function(_ct_add_test_guts _atg_test_name)
     cmake_policy(SET CMP0007 NEW) #List won't ignore empty elements

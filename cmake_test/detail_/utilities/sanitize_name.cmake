@@ -13,7 +13,9 @@ include(cmake_test/detail_/utilities/return)
 # :param _sn_new_name: An identifier to which the new name will be assigned
 # :type _sn_new_name: Identifier
 # :param _sn_old_name: The string that we are sanitizing.
-# :type _sn_old_name: String
+# :type _sn_old_name: str
+# :returns: A string containing the sanitized name. The result is accessible to
+#           the caller via ``_sn_new_name``.
 #]]
 function(_ct_sanitize_name _sn_new_name _sn_old_name)
     string(TOLOWER "${_sn_old_name}" _sn_old_name)

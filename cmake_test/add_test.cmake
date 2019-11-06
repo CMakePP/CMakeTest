@@ -15,7 +15,7 @@ include(cmake_test/detail_/add_test)
 # commands.
 #
 # :param _at_test_name: The name of the unit test.
-# :type _at_test_name: string
+# :type _at_test_name: str
 #]]
 macro(ct_add_test _at_test_name)
     _ct_add_test_guts("${_at_test_name}")

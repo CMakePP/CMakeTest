@@ -4,6 +4,18 @@ include(cmake_test/detail_/test_section/test_prefix)
 include(cmake_test/detail_/utilities/input_check)
 include(cmake_test/detail_/utilities/print_result)
 
+#[[[ Actually creates the ``CMakeLists.txt`` file for the unit test and runs it.
+#
+# This function is called when we have the contents for a full test. This occurs
+# upon finding ``ct_end_test()`` or ``ct_end_section()``. This function creates
+# a ``CMakeLists.txt`` with the content of the test, runs it via a subcall to
+# the ``cmake`` command, and analyzes the results.
+#
+# :param _warc_prefix: The prefix where test cases for this test are stored.
+# :type _warc_prefix: str
+# :param _warc_handle: The instance storing the unit test
+# :type _warc_handle: TargetState
+#]]
 function(_ct_write_and_run_contents _warc_prefix _warc_handle)
     _ct_nonempty_string(_warc_prefix)
     _ct_is_handle(_warc_handle)

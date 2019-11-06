@@ -8,11 +8,11 @@ include(cmake_test/detail_/utilities/repeat_string)
 #  current nesting, and then enough dots to right align the result.
 #
 #  :param _pr_name: The name of the test we are printing the result of.
-#  :type _pr_name: String
+#  :type _pr_name: str
 #  :param _pr_result: What to print as the result (usually "PASSED" or "FAILED")
-#  :type _pr_result: String
+#  :type _pr_result: str
 #  :param _pr_depth: How many sections is this test nested?
-#  :type _pr_depth: String
+#  :type _pr_depth: str
 #]]
 function(_ct_print_result _pr_name _pr_result _pr_depth)
     # Get the indent
@@ -45,9 +45,9 @@ endfunction()
 # successfully.
 #
 # :param _pp_name: The test we are printing the result of.
-# :type _pp_name: String
+# :type _pp_name: str
 # :param _pp_depth: How many sections is this test nested?
-# :type _pp_depth: String
+# :type _pp_depth: str
 #]]
 function(_ct_print_pass _pp_name _pp_depth)
     _ct_print_result(${_pp_name} "PASSED" ${_pp_depth})
@@ -62,9 +62,9 @@ endfunction()
 # error stopping the test.
 #
 # :param _pf_name: The name of the test that just failed.
-# :type _pf_name: String
+# :type _pf_name: str
 # :param _pf_depth: How many sections is this test nested?
-# :type _pf_depth: String
+# :type _pf_depth: str
 #]]
 function(_ct_print_fail _pf_name _pf_depth)
     _ct_print_result(${_pf_name} "FAILED" ${_pf_depth})

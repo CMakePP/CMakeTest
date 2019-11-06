@@ -10,9 +10,11 @@ include(cmake_test/detail_/utilities/return)
 # :param _rs_result: An identifier to save the result to.
 # :type _rs_result: Identifier
 # :param _rs_str: The substring to repeat.
-# :type _rs_str: String
+# :type _rs_str: str
 # :param  _rs_n: The number of times to repeat ``${_rs_str}``.
-# :type _rs_n: String
+# :type _rs_n: str
+# :returns: A string containing the created string. The result is accessible to
+#           the caller via ``_rs_result``.
 #]]
 function(_ct_repeat_string _rs_result _rs_str _rs_n)
     set(_rs_counter 0)
