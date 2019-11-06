@@ -38,7 +38,8 @@ function(_ct_test_section_make_flags _tsmf_handle _tsmf_result _tsmf_dir)
         list(
             APPEND ${_tsmf_result} "-DCMAKE_INSTALL_PREFIX=${_tsmf_dir}/install"
         )
-        list(APPEND ${_tsmf_result} "-DCMAKE_MODULE_PATH=${CMAKE_MODULE_PATH}")
+        string(REGEX REPLACE ";" "\\\;" _tsmf_mod_path "${CMAKE_MODULE_PATH}")
+        list(APPEND ${_tsmf_result} "-DCMAKE_MODULE_PATH=${_tsmf_mod_path}")
     else()
         _ct_test_section_make_flags(
            ${_tsmf_parent} ${_tsmf_result} ${_tsmf_dir}
