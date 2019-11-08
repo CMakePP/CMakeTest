@@ -15,7 +15,7 @@ if("${PROJECT_SOURCE_DIR}" STREQUAL "${PROJECT_BINARY_DIR}")
     )
 endif()
 
-option(BUILD_TESTS "Should we build and run the unit tests?" TRUE)
+option(BUILD_TESTS "Should we build and run the unit tests?" FALSE)
 install(
     DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/cmake_test
     DESTINATION  cmake
