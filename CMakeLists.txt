@@ -4,7 +4,7 @@ project(CMakeTest VERSION 1.0.0)
 option(BUILD_TESTING "Should we build and run the unit tests?" OFF)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
-set(CMAKE_MODULE_PATH CACHE STRING "" FORCE)
+set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" CACHE STRING "" FORCE)
 
 if("${BUILD_TESTING}")
     include(CTest)
