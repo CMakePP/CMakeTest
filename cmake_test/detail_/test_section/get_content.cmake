@@ -3,28 +3,32 @@ include(cmake_test/detail_/test_section/private)
 include(cmake_test/detail_/utilities/input_check)
 include(cmake_test/detail_/utilities/return)
 
-## @memberof TestSection
-#  @public
-#  @fn GET_CONTENT(handle, content)
-#  @brief Returns the contents of the current test's section.
+#[[[ Returns the contents of the current test's section.
 #
-#  This function will return the contents of the CMakeLists.txt for the current
-#  test section. The contents of the current section is obtained by
-#  concatenating the contents encountered so far. For example given:
+# This function will return the contents of the CMakeLists.txt for the current
+# test section. The contents of the current section is obtained by
+# concatenating the contents encountered so far. For example given:
 #
-#  ```.cmake
-#  ct_add_test("test name")
-#  X
-#      ct_add_section("section")
-#      Y
-#      ct_end_section()
-#  ct_end_test()
-#  ```
-#  where `X` and `Y` are normal, native CMake content, this function would
-#  return the string `"X\nY"`.
+# .. code-block:: cmake
 #
-#  @param[in] handle The handle to the TestSection object
-#  @param[out] content An identifirer to hold the contents of the current test.
+#    ct_add_test("test name")
+#        X
+#        ct_add_section("section")
+#            Y
+#        ct_end_section()
+#    ct_end_test()
+#
+#  where ``X`` and ``Y`` are normal, native CMake content, this function would
+#  return the string ``"X\nY"``.
+#
+# :param _tsgc_handle: The TestSection object we are getting the content from.
+# :type _tsgc_handle: TestSection
+# :param _tsgc_content: An identifirer to hold the contents of the current
+#                       test.
+# :type _tsgc_content: str
+# :returns: The contents of the TestSection, as it should be dumped into a file.
+#           The contents can be accessed by ``${${_tsgc_content}}``.
+#]]
 function(_ct_test_section_get_content _tsgc_handle _tsgc_content)
     # Validate input
     _ct_is_handle(_tsgc_handle)

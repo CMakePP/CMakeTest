@@ -3,13 +3,17 @@ include(cmake_test/detail_/parsing/parse_dispatch)
 include(cmake_test/detail_/utilities/sanitize_name)
 
 
-#FUNCTION
+#[[[ Defines the top-level driver for CMakeTest.
 #
 # This function is the driver for unit testing. It will:
 #
 # - read-in the contents of the file it was called from
 # - create a target to store the test information
-# -
+# - parse the file
+#
+# :param _atg_test_name: The name of the test
+# :type _atg_test_name: str
+#]]
 function(_ct_add_test_guts _atg_test_name)
     cmake_policy(SET CMP0007 NEW) #List won't ignore empty elements
 
@@ -32,7 +36,6 @@ function(_ct_add_test_guts _atg_test_name)
                       _atg_contents
                       "${_atg_contents}"
     )
-
 
     ############################################################################
     #                        Assemble paths for files                          #

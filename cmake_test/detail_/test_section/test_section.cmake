@@ -13,30 +13,32 @@ include(cmake_test/detail_/test_section/test_prefix)
 include(cmake_test/detail_/test_section/title)
 
 
-## @class TestSection test_section cmake_test/detail_/test_section.cmake
+#[[[ Class for holding a section of the unit test
 #
-#  @brief Class for holding a section of the unit test
+# The TestSection class holds a section of the test that is currently being
+# parsed. While we document and use it as if it is a class it is important to
+# realize it's not really a class (even in the CMakePP object sense). The
+# decision to not use a CMakePP object was made in order to keep CMakeTest
+# stand alone.
 #
-#  The TestSection class holds a section of the test that is currently being
-#  parsed. While we document and use it as if it is a class it is important to
-#  realize it's not really a class (even in the CMakePP object sense). The
-#  decision to not use a CMakePP object was made in order to keep CMakeTest
-#  stand alone.
+# To access a member function from outside the class use the syntax:
 #
-#  To access a member function from outside the class use the syntax:
+# .. code-block:: cmake
 #
-#  ```.cmake
-#  _ct_test_section(<fxn_name> <arg1> <arg2> ...)
-#  ```
+#    _ct_test_section(<fxn_name> <arg1> <arg2> ...)
 #
-#  where `<fxn_name>` is the name of the function as listed in the documentation
-#  and the various `<argX>` are the arguments to the function. Internal
-#  references should go through the normal function call.
 #
-#  @note This function is a macro in order to avoid needing to forward the
-#        returns of each member function.
+# where ``<fxn_name>`` is the name of the function as listed in the
+# documentation and the various `<argX>` are the arguments to the function.
+# Internal references should go through the normal function call.
 #
-#  @param[in] fxn The member function to call.
+# .. note::
+#
+#    This function is a macro in order to avoid needing to forward the returns
+#    of each member function.
+#
+# :param fxn: The member function to call.
+#]]
 macro(_ct_test_section fxn)
     if("${fxn}" STREQUAL "CTOR")
         _ct_test_section_ctor(${ARGN})

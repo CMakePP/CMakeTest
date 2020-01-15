@@ -1,6 +1,4 @@
 include_guard()
-## @class utilities
-
 
 include(cmake_test/detail_/utilities/input_check)
 include(cmake_test/detail_/utilities/lc_find)

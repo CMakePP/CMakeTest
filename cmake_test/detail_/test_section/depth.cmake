@@ -3,17 +3,18 @@ include(cmake_test/detail_/utilities/input_check)
 include(cmake_test/detail_/utilities/return)
 include(cmake_test/detail_/test_section/private)
 
-## @memberof TestSection
-#  @public
-#  @fn DEPTH(handle, depth)
-#  @brief Determines how nested the current section is.
+#[[[ Determines how nested the current section is.
 #
-#  Particularly for printing, it is useful to know how nested a section is. This
-#  function computes the nesting by recursing until a section with no parent is
-#  found. The number of recursions necessary is in turn the depth.
+# Particularly for printing, it is useful to know how nested a section is. This
+# function computes the nesting by recursing until a section with no parent is
+# found. The number of recursions necessary is in turn the depth.
 #
-#  @param[in] handle The TestSection we want to know the depth of.
-#  @param[out] depth An identifier to set to the current section's depth.
+# :param _tsd_handle: The TestSection we want to know the depth of.
+# :type _tsd_handle: TestSection
+# :param[out] _tsd_depth: An identifier to set to the current section's depth.
+# :type _tsd_depth: str
+# :returns: The depth, as an integer, accessible via ``${_tsd_depth}``.
+#]]
 function(_ct_test_section_depth _tsd_handle _tsd_depth)
     _ct_is_handle(_tsd_handle)
     _ct_nonempty_string(_tsd_depth)

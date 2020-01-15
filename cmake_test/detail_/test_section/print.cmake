@@ -3,16 +3,15 @@ include(cmake_test/detail_/utilities/input_check)
 include(cmake_test/detail_/test_section/depth)
 include(cmake_test/detail_/test_section/private)
 
-## @memberof TestSection
-#  @public
-#  @fn PRINT(handle)
-#  @brief Prints out the provided TestState's state.
+#[[[ Prints out the provided TestState's state.
 #
-#  This function is intendeded primarily for debugging purposes. It will print
-#  to standard out the state (including the state of all parent sections) of the
-#  current section.
+# This function is intendeded primarily for debugging purposes. It will print
+# to standard out the state (including the state of all parent sections) of the
+# current section.
 #
-#  @param[in] handle The handle to the TestSection object
+# :param _tsp_handle: The handle to the TestSection object
+# :type _tsp_handle: TestSection
+#]]
 function(_ct_test_section_print _tsp_handle)
     _ct_is_handle(_tsp_handle)
 

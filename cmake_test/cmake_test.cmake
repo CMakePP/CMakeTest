@@ -1,4 +1,3 @@
-#"Convenience" header for using the CMakeTest module
 include_guard()
 
 # Allows us to capture the root directory of the CMakeTest module

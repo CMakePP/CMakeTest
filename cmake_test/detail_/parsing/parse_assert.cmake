@@ -3,17 +3,23 @@ include(cmake_test/detail_/test_section/test_section)
 include(cmake_test/detail_/utilities/input_check)
 include(cmake_test/detail_/utilities/lc_find)
 
-## @fn _ct_parse_assert(handle, line)
-#  @brief Parses an assert found in a unit test
+#[[[ Parses an assert found in a unit test.
 #
-#  This function is responsible for dispatching among the various types of
-#  assertions. For the most part the assertions simply need to be dumped into
-#  the contents of the unit test; however, there are a few assertions such as
-#  "ct_assert_prints, which require different handeling. The logic for these
-#  special asserts is encapsulated within this function.
+# This function is responsible for dispatching among the various types of
+# assertions. For the most part the assertions simply need to be dumped into
+# the contents of the unit test; however, there are a few assertions such as
+# "ct_assert_prints, which require different handeling. The logic for these
+# special asserts is encapsulated within this function. At the moment the
+# special asserts are:
 #
-#  @param[in] handle The handle to the TargetState object
-#  @param[in] line The assertion line we found in the unit test
+# - ``ct_assert_prints``
+# - ``ct_assert_fails_as``
+#
+# :param _pa_handle: The unit test instance we are building up.
+# :type _pa_handle: TargetObject
+# :param _pa_line: The line in the unit test we are parsing.
+# :type _pa_line: str
+#]]
 function(_ct_parse_assert _pa_handle _pa_line)
     _ct_is_handle(_pa_handle)
     _ct_nonempty_string(_pa_line)

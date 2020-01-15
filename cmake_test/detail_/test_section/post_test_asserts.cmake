@@ -3,21 +3,22 @@ include(cmake_test/detail_/test_section/private)
 include(cmake_test/detail_/test_section/title)
 include(cmake_test/detail_/utilities/print_result)
 
-## @memberof TestSection
-#  @public
-#  @fn POST_TEST_ASSERTS(handle, result, output)
-#  @brief Runs assertions that can only be performed after a test has completed.
+#[[[ Runs assertions that can only be performed after a test has completed.
 #
-#  After the literal contents of the CMakeLists.txt have been run there are
-#  still asserts that need to be considered. That list presently includes:
+# After the literal contents of the CMakeLists.txt have been run there are
+# still asserts that need to be considered. That list presently includes:
 #
-#  1. Did the test run sucessfully (and was it supposed to)?
-#  2. Did the correct output get printed?
+# 1. Did the test run sucessfully (and was it supposed to)?
+# 2. Did the correct output get printed?
 #
-#  @param[in] handle The TestSection instance with the test's state
-#  @param[in] result The value returned from running the unit test
-#  @param[in] output All output of running the test (standard out and errors
-#                    concatentated together)
+# :param _tspta_handle: The TestSection instance with the test's state
+# :type _tspta_handle: TestSection
+# :param _tspta_result: The value returned from running the unit test
+# :type _tspta_result: str
+# :param _tspta_output: All output of running the test (standard out and errors
+#                       concatentated together)
+# :type _tspta_output: str
+#]]
 function(_ct_test_section_post_test_asserts _tspta_handle
                                             _tspta_result
                                             _tspta_output)

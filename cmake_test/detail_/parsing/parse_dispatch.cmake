@@ -6,6 +6,34 @@ include(cmake_test/detail_/write_and_run_contents)
 include(cmake_test/detail_/test_section/test_section)
 include(cmake_test/detail_/utilities/input_check)
 
+#[[[ Defines the top-level of the unit test parser.
+#
+# This function is responsible for parsing a line of the unit test. It starts by
+# looking at the contents of the line and determining what the line encodes. In
+# particular it looks for:
+#
+# - empty lines
+# - comments
+# - normal CMake code
+#
+# and the following CMakeTest special fenced sections:
+#
+# - `ct_add_test`/`ct_end_test` : Signals a block encoding a unit test
+# - `ct_add_section`/`ct_end_section` : A block that contains part of a unit
+#                                       test.
+# - `ct_assert` : Signals a check that CMakeTest must perform.
+#
+# :param _pd_contents: The contents of the file containing the unit test.
+# :type _pd_contents: [str]
+# :param _pd_index: The line number (entry) of ``_pd_contents`` to parse.
+# :type _pd_index: int
+# :param _pd_prefix: The unique file path prefix to use for generated files.
+# :type _pd_prefix: str
+# :param _pd_identifier: The "this" pointer of the object associated with this
+#                        unit test.
+# :type _pd_identifier: CMakeTest object
+# :returns: The updated object.
+#]]
 function(_ct_parse_dispatch _pd_contents _pd_index _pd_prefix _pd_identifier)
     cmake_policy(SET CMP0007 NEW) #List won't ignore empty elements
     list(GET ${_pd_contents} ${${_pd_index}} _pd_line)

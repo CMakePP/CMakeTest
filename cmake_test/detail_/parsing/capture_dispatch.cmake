@@ -1,5 +1,30 @@
 include_guard()
-
+#[[[ Parses CMakeTest commands that require arguments to be captured.
+#
+# This function is responsible for dispatching among the various CMakeTest
+# commands that require us to capture their arguments. If the line currently
+# being parsed is not one of the commands that require capture this function
+# does nothing. If the line is one of the commands this function will parse the
+# line, updated/create the instance, and advance the buffers.
+#
+# :param _cd_contents: The text inside the unit test file currently being
+#                      parsed.
+# :type _cd_contents: [str]
+# :param _cd_index: Which line number of the contents should this function be
+#                   parsing?
+# :type _cd_index: int
+# :param _cd_identifier: The instance storing the contents of the unit test.
+# :type _cd_identifier: TestSection
+# :returns: All input quantities are also returned (and possibly updated).
+#
+# .. note:
+#
+#    This function is a macro as it is inteded to be used as a logical
+#    factorization inside parse_dispatch and we don't want parse_dispatch
+#    to have to act on the results of this function. Since it is a macro, if it
+#    calls ``return()`` it actually will return from ``_ct_parse_dispatch()``
+#
+#]]
 macro(_ct_capture_dispatch _cd_contents _cd_index _cd_identifier)
     set(_cd_handle "${${_cd_identifier}}")
     list(GET ${_cd_contents} ${${_cd_index}} _cd_line)

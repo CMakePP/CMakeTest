@@ -1,17 +1,19 @@
 include_guard()
 include(cmake_test/detail_/utilities/repeat_string)
 
-## @fn _ct_print_result(name, result, depth)
-#  @memberof utilities
-#  @brief Wraps the process of printing a test's result
+#[[[ Wraps the process of printing a test's result
 #
-#  This function largely serves as code factorization for print_pass and
-#  print_fail. This function will print an indent appropriate for the current
-#  nesting, and then enough dots to right align the result.
+#  This function largely serves as code factorization for ``_ct_print_pass`` and
+#  ``_ct_print_fail``. This function will print an indent appropriate for the
+#  current nesting, and then enough dots to right align the result.
 #
-#  @param[in] name The test we are printing the result of.
-#  @param[in] result Whether the test passed or failed
-#  @param[in] depth How many sections is this test nested?
+#  :param _pr_name: The name of the test we are printing the result of.
+#  :type _pr_name: str
+#  :param _pr_result: What to print as the result (usually "PASSED" or "FAILED")
+#  :type _pr_result: str
+#  :param _pr_depth: How many sections is this test nested?
+#  :type _pr_depth: str
+#]]
 function(_ct_print_result _pr_name _pr_result _pr_depth)
     # Get the indent
     _ct_repeat_string(_pr_tab "    " ${_pr_depth})
@@ -36,30 +38,34 @@ function(_ct_print_result _pr_name _pr_result _pr_depth)
     message("${_pr_prefix}${_pr_dots}${_pr_result}")
 endfunction()
 
-## @fn _ct_print_pass(name, depth)
-#  @brief Wraps the process of printing that a test passed.
+##[[[ Wraps the process of printing that a test passed.
 #
-#  This function is called after all asserts on a test have been run. When
-#  called this function will print to the standard output that the test ran
-#  successfully.
+# This function is called after all asserts on a test have been run. When
+# called this function will print to the standard output that the test ran
+# successfully.
 #
-#  @param[in] name The test we are printing the result of.
-#  @param[in] depth How many sections is this test nested?
+# :param _pp_name: The test we are printing the result of.
+# :type _pp_name: str
+# :param _pp_depth: How many sections is this test nested?
+# :type _pp_depth: str
+#]]
 function(_ct_print_pass _pp_name _pp_depth)
     _ct_print_result(${_pp_name} "PASSED" ${_pp_depth})
 endfunction()
 
-## @fn _ct_print_fail(name, depth)
-#  @brief Wraps the process of printing that a test failed.
+#[[[ Wraps the process of printing that a test failed.
 #
-#  This function is called after one or more asserts on a test have failed. When
-#  called this function will print to the standard output that the test failed.
-#  It will then print any additional content passed via `${ARGN}` assuming it is
-#  the reason why the test failed. Finally, this function will issue a fatal
-#  error stopping the test.
+# This function is called after one or more asserts on a test have failed. When
+# called this function will print to the standard output that the test failed.
+# It will then print any additional content passed via `${ARGN}` assuming it is
+# the reason why the test failed. Finally, this function will issue a fatal
+# error stopping the test.
 #
-#  @param[in] name The test that just failed.
-#  @param[in] depth How many sections is this test nested?
+# :param _pf_name: The name of the test that just failed.
+# :type _pf_name: str
+# :param _pf_depth: How many sections is this test nested?
+# :type _pf_depth: str
+#]]
 function(_ct_print_fail _pf_name _pf_depth)
     _ct_print_result(${_pf_name} "FAILED" ${_pf_depth})
     message(FATAL_ERROR "Reason:\n\n${ARGN}")

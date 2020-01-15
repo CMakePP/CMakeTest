@@ -5,16 +5,19 @@ include(cmake_test/detail_/utilities/input_check)
 include(cmake_test/detail_/utilities/return)
 include(cmake_test/detail_/utilities/sanitize_name)
 
-## @memberof TestSection
-#  @fn _ct_test_section_test_prefix(handle, result)
-#  @brief Assembles the relative file path for the test section.
+#[[[ Assembles the relative file path for the test section.
 #
-#  Each test section is run in its own directory. This function will assemble
-#  the prefix for the this section's directory. The resulting prefix is relative
-#  to the test root.
+# Each test section is run in its own directory. This function will assemble
+# the prefix for the this section's directory. The resulting prefix is relative
+# to the test root.
 #
-#  @param[in] handle The TestSection instance we are generating the prefix for.
-#  @param[out] result An identifier to hold the resulting prefix.
+# :param _tstp_handle: The instance we are generating the prefix for.
+# :type _tstp_handle: TestSection
+# :param _tstp_result: An identifier to hold the resulting prefix.
+# :type _tstp_result: Identifier
+# :returns: A string containing the test prefix accessible to the caller by
+#           ``_tstp_result``.
+#]]
 function(_ct_test_section_test_prefix _tstp_handle _tstp_result)
     _ct_is_handle(_tstp_handle)
     _ct_nonempty_string(_tstp_result)

@@ -2,18 +2,20 @@ include_guard()
 include(cmake_test/detail_/utilities/input_check)
 include(cmake_test/detail_/utilities/return)
 
-## @memberof TestSection
-#  @private
-#  @fn _ct_name_mangle(target, mangled_name, attribute)
-#  @brief Handles name mangling for the TestSection class
+#[[[ Handles name mangling for the TestSection class
 #
-#  This function wraps the details of how we mangle our target's attributes.
-#  Ultimately when we want to create or access our target's attributes we
-#  rely on this function to mangle the name for us.
+# This function wraps the details of how we mangle our target's attributes.
+# Ultimately when we want to create or access our target's attributes we
+# rely on this function to mangle the name for us.
 #
-# @param[in] target The handle to the TargetState object
-# @param[out] mangled_name Variable name to assign the mangled name to.
-# @param[in] attribute The name of the attribute we want a mangled name for.
+# :param _nm_target: The handle to the TargetState object
+# :type _nm_target: TargetState
+# :param _nm_mangled_name: Identifier to assign the mangled name to.
+# :type _nm_mangled_name: Identifier
+# :param _nm_attribute: The name of the attribute we want a mangled name for.
+# :type _nm_attribute: str
+# :returns: The mangled name of the attribute via ``${${_nm_mangled_name}}``.
+#]]
 function(_ct_name_mangle _nm_target _nm_mangled_name _nm_attribute)
     _ct_is_handle(_nm_target)
     _ct_nonempty_string(_nm_mangled_name)
@@ -23,19 +25,19 @@ function(_ct_name_mangle _nm_target _nm_mangled_name _nm_attribute)
     _ct_return(${_nm_mangled_name})
 endfunction()
 
-## @memberof TestSection
-#  @private
-#  @fn _ct_add_prop(handle, name, value)
-#  @brief Adds a property to the the TestSection instance
+#[[[ Adds a property to the the TestSection instance
 #
 # This function wraps the process of adding a property to a TestSection
 # instance. If the property already exists its value will be overridden. Hence
 # this  function is used for the initial creation as well as updating the value.
 #
-# @param[in] handle The handle of the TestSection instance we are adding the
-#                   attribute to.
-# @param[in] name The name of the attribute we are adding.
-# @param[in] value The value to set the attribute to.
+# :param _ap_handle: The handle of the TestSection instance we are adding the
+#                    attribute to.
+# :type _ap_handle: TestSection
+# :param _ap_name: The name of the attribute we are adding.
+# :type _ap_name: str
+# :param _ap_value: The value to set the attribute to.
+#]]
 function(_ct_add_prop _ap_target _ap_name _ap_default_value)
     _ct_is_handle(_ap_target)
     _ct_nonempty_string(_ap_name)
@@ -51,18 +53,20 @@ function(_ct_add_prop _ap_target _ap_name _ap_default_value)
     set_property(GLOBAL PROPERTY "${_ap_handle}" "${_ap_default_value}")
 endfunction()
 
-## @memberof TestSection
-#  @private
-#  @fn _ct_get_prop(handle, value, property)
-#  @brief Retrieves a property from the TestSection instance
+#[[[ Retrieves a property from the TestSection instance
 #
 # This function wraps the process of retrieving a property's value from a
 # TestSection instance.
 #
-# @param[in] handle The handle of the TestSection instance we are retrieving the
-#                   attribute from.
-# @param[out] value The value of the requested attribute..
-# @param[in] property The name of the attribute we want the value of.
+# :param _gp_handle: The handle of the TestSection instance we are retrieving
+#                    the attribute from.
+# :type _gp_handle: TestSection
+# :param _gp_value: An identifier to hold the value of the requested attribute.
+# :type _gp_value: Identifier
+# :param _gp_property: The name of the attribute we want the value of.
+# :type _gp_property: str
+# :returns: The value of the requested attribute via ``${${_gp_value}}``.
+#]]
 function(_ct_get_prop _gp_target _gp_value _gp_name)
     _ct_is_handle(_gp_target)
     _ct_nonempty_string(_gp_value)
