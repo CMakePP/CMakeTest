@@ -1,4 +1,4 @@
-#TUTORIAL
+#TUTORIALprint 'hello world!'
 #
 #To use CMakeTest in your CMake project first ensure that the path to the
 #directory containing ``cmake_test/cmake_test.cmake`` is part of your
