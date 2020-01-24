@@ -1,8 +1,5 @@
 name: CMakeTest CI
 on:
-  push:
-    branches:
-      - master
   pull_request:
     branches:
       - master
@@ -22,14 +19,13 @@ jobs:
           cmake-3.16.3-Linux-x86_64/bin/cmake -H. -Bbuild -DBUILD_TESTING=ON
       - name: unit_test
         run: |
+          cd build
           cmake-3.16.3-Linux-x86_64/bin/ctest  -j 2 --output-on-failure
-
-
-#  docs:
-#    runs-on: ubuntu-latest
-#    steps:
-#    - uses: actions/checkout@v1
-#    - uses: ammaraskar/sphinx-action@master
-#      with:
-#        docs-folder: "docs/"
-#        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+  docs_test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: ammaraskar/sphinx-action@master
+      with:
+        docs-folder: "docs/"
+        repo-token: "${{ secrets.GITHUB_TOKEN }}"
