@@ -20,9 +20,9 @@ jobs:
       - name: unit_test
         run: |
           'cmake-3.16.3-Linux-x86_64/bin/ctest
-            --build-and-test . build
-            --build-generator "Unix Makefiles"
-            --build-options BUILD_TESTING=TRUE'
+           --build-and-test . build
+           --build-generator "Unix Makefiles"
+           --build-options BUILD_TESTING=TRUE'
 
 
 #  docs:
