@@ -20,6 +20,6 @@ ct_add_test("sanitize_name")
 
     ct_add_section("replaces colons")
         _ct_sanitize_name(result "has:")
-        ct_assert_equal(result "has-")
+        ct_assert_equal(result "has_")
     ct_end_section()
 ct_end_test()
