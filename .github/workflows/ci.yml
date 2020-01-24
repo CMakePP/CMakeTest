@@ -1,0 +1,35 @@
+name: CMakeTest CI
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  unit_test:
+    runs-on: ubunt-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: get-cmake
+        run: |
+          version=3.16.3
+          url_prefix=https://github.com/Kitware/CMake/releases/download
+          wget "${url_prefix}/v${version}/cmake-${version}-Linux-x86_64.sh"
+          yes | /bin/sh "cmake-${version}-Linux-x86_64.sh"
+      - name: unit_test
+        run: >
+          cmake-3.16.3-Linux-x86_64/bin/ctest
+            --build-and-test . build
+            --build-generator "Unix Makefiles"
+            --build-options BUILD_TESTING=TRUE
+
+
+#  docs:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - uses: actions/checkout@v1
+#    - uses: ammaraskar/sphinx-action@master
+#      with:
+#        docs-folder: "docs/"
+#        repo-token: "${{ secrets.GITHUB_TOKEN }}"
