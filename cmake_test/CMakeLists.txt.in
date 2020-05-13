@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.13)
+project(CMakeTest VERSION 1.0.0 LANGUAGES NONE)
+
+list(APPEND CMAKE_MODULE_PATH "@CMAKE_CURRENT_SOURCE_DIR@")
+set(CMAKE_TEST_EXECUTE True) #This switches CMakeTest to a mode where it only executes the EXPECTEDFAIL tests
+include("@_CT_CMAKE_TEST_ROOT@/add_test.cmake")
+
+include("@CMAKE_CURRENT_LIST_FILE@")
