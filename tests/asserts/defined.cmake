@@ -1,6 +1,6 @@
 include(cmake_test/cmake_test)
 
-ct_add_test("defined")
+ct_add_test("assert_defined")
     include(cmake_test/asserts/defined)
 
     ct_add_section("is defined")
@@ -14,7 +14,7 @@ ct_add_test("defined")
     ct_end_section()
 ct_end_test()
 
-ct_add_test("not_defined")
+ct_add_test("assert_not_defined")
     include(cmake_test/asserts/defined)
 
     ct_add_section("is defined")

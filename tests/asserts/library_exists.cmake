@@ -1,0 +1,46 @@
+include(cmake_test/cmake_test)
+
+ct_add_test("assert_library_exists")
+    include(cmake_test/asserts/library_exists)
+
+    ct_add_section("Target exists")
+        ct_add_section("Target is library")
+            file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/a.c" "")
+            add_library(my_lib "${CMAKE_CURRENT_BINARY_DIR}/a.c")
+            ct_assert_library_exists(my_lib)
+        ct_end_section()
+
+        ct_add_section("Target is not library")
+            add_custom_target(non_lib_target ALL)
+            ct_assert_library_exists(non_lib_target)
+            ct_assert_fails_as("Target non_lib_target is not a library.")
+        ct_end_section()
+    ct_end_section()
+
+    ct_add_section("Library does not exist")
+        ct_assert_library_exists(non_existant_lib)
+        ct_assert_fails_as("Library target non_existant_lib does not exist.")
+    ct_end_section()
+ct_end_test()
+
+ct_add_test("assert_library_does_not_exist")
+    include(cmake_test/asserts/library_exists)
+
+    ct_add_section("Target exists")
+        ct_add_section("Target is library")
+            file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/a.c" "")
+            add_library(my_lib "${CMAKE_CURRENT_BINARY_DIR}/a.c")
+            ct_assert_library_does_not_exist(my_lib)
+            ct_assert_Fails_as("Library target my_lib does exist.")
+        ct_end_section()
+
+        ct_add_section("Target is not library")
+            add_custom_target(non_lib_target ALL)
+            ct_assert_library_does_not_exist(non_lib_target)
+        ct_end_section()
+    ct_end_section()
+
+    ct_add_section("Library does not exist")
+        ct_assert_library_does_not_exist(non_existant_lib)
+    ct_end_section()
+ct_end_test()
