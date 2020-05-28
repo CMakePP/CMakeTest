@@ -1,7 +1,7 @@
 include_guard()
 include(cmake_test/asserts/file_exists)
 
-#[[[ Assert a file does contain the specified text.
+#[[[ Assert a file contains the specified text.
 #
 # Asserts that the file at the specified path contains the specified text.
 #

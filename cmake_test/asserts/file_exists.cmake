@@ -1,6 +1,6 @@
 include_guard()
 
-#[[[ Asserts that the file at the provided path exists.
+#[[[ Assert that the file at the provided path exists.
 #
 # :param _afe_path: The path to check
 # :type _afe_path: Path
@@ -13,7 +13,7 @@ function(ct_assert_file_exists _afe_path)
     endif()
 endfunction()
 
-#[[[ Asserts that a file does not exist at the provided path.
+#[[[ Assert that a file does not exist at the provided path.
 #
 # :param _afdne_path: The path to check
 # :type _afdne_path: Path

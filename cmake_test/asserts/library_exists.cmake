@@ -30,12 +30,12 @@ endfunction()
 #]]
 function(ct_assert_library_does_not_exist _aldne_name)
     # Check that the target does not exist or is not a library
-    if(TARGET _ale_name)
+    if(TARGET "${_aldne_name}")
         get_target_property(_aldne_target_type "${_aldne_name}" TYPE)
-        if (_ale_target_type STREQUAL "STATIC_LIBRARY" OR
-            _ale_target_type STREQUAL "MODULE_LIBRARY" OR
-            _ale_target_type STREQUAL "SHARED_LIBRARY")
-            message(FATAL_ERROR "Library target ${_ale_name} does exist.")
+        if (_aldne_target_type STREQUAL "STATIC_LIBRARY" OR
+            _aldne_target_type STREQUAL "MODULE_LIBRARY" OR
+            _aldne_target_type STREQUAL "SHARED_LIBRARY")
+            message(FATAL_ERROR "Library target ${_aldne_name} does exist.")
         endif()
     endif()
 endfunction()

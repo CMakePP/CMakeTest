@@ -2,7 +2,7 @@ include_guard()
 include(cmake_test/asserts/target_exists)
 
 
-#[[[ Asserts that a target has a property.
+#[[[ Assert that a target has a property.
 #
 # :param _athp_target: The name of the target
 # :type _athp_target: String
@@ -23,7 +23,7 @@ function(ct_assert_target_has_property _athp_target _athp_property)
     endif()
 endfunction()
 
-#[[[ Asserts that a target does not have a property.
+#[[[ Assert that a target does not have a property.
 #
 # :param _atdnhp_target: The name of the target
 # :type _atdnhp_target: String

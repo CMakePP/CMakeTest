@@ -1,6 +1,6 @@
 include_guard()
 
-#[[[ Asserts that a target exists.
+#[[[ Assert that a target exists.
 #
 # :param _ate_name: The name of the target
 # :type _ate_name: String
@@ -12,7 +12,7 @@ function(ct_assert_target_exists _ate_name)
     endif()
 endfunction()
 
-#[[[ Asserts that a target does not exist.
+#[[[ Assert that a target does not exist.
 #
 # :param _ate_name: The name of the target
 # :type _ate_name: String
