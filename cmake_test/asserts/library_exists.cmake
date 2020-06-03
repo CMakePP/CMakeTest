@@ -26,7 +26,7 @@ endfunction()
 #]]
 function(ct_assert_library_does_not_exist _aldne_name)
     # Check that the target does not exist or is not a library
-    message("_aldne_result: ${_aldne_result}")
+    ct_library_target_exists(_aldne_result "${_aldne_name}")
     if(_aldne_result EQUAL 0)
         message(FATAL_ERROR "Library target ${_aldne_name} does exist.")
     endif()
