@@ -6,21 +6,20 @@ include(cmake_test/asserts/file_exists)
 # Asserts that the file at the specified path contains the specified text.
 #
 # :param _afc_file: The file to check
-# :type _afc_file: Path
+# :type _afc_file: path
 # :param _afc_text: The text to check for
-# :type _afc_text: String
+# :type _afc_text: string
 #]]
 function(ct_assert_file_contains _afc_file _afc_text)
     # Ensure the file exists
     ct_assert_file_exists("${_afc_file}")
 
-    # Read the file and ensure it contains the text
-    file(READ "${_afc_file}" _afc_contents)
-    string(FIND "${_afc_contents}" "${_afc_text}" _afc_res)
-    if(${_afc_res} EQUAL -1)
+    # Throw error if the file does not contain the text
+    ct_file_contains(_afc_result "${_afc_file}" "${_afc_text}")
+    if(NOT _afc_result)
         message(
             FATAL_ERROR
-            "File at ${_afc_file} does not contain text \"${_afc_text}\""
+            "File at ${_afc_file} does not contain text \"${_afc_text}\"."
         )
     endif()
 endfunction()
@@ -31,21 +30,46 @@ endfunction()
 # text.
 #
 # :param _afdnc_file: The file to check
-# :type _afdnc_file: Path
+# :type _afdnc_file: path
 # :param _afdnc_text: The text to check for
-# :type _afdnc_text: String
+# :type _afdnc_text: string
 #]]
 function(ct_assert_file_does_not_contain _afdnc_file _afdnc_text)
     # Ensure the file exists
     ct_assert_file_exists("${_afdnc_file}")
 
-    # Read the file and ensure it does not contain the text
-    file(READ "${_afdnc_file}" _adnfc_contents)
-    string(FIND "${_adnfc_contents}" "${_afdnc_text}" _afdnc_res)
-    if(NOT ${_afdnc_res} EQUAL -1)
+    # Throw error if the file contains the text
+    ct_file_contains(_afdnc_result "${_afdnc_file}" "${_afdnc_text}")
+    if(_afdnc_result)
         message(
             FATAL_ERROR
-            "File at ${_afdnc_file} contains text \"${_afdnc_text}\""
-    )
+            "File at ${_afdnc_file} contains text \"${_afdnc_text}\"."
+        )
+    endif()
+endfunction()
+
+#[[[ Determines if a file contains some text.
+#
+# This function checks whether a file contains some text and returns a boolean
+# result.
+#
+# :param _fc_result: Name to use for the variable which will hold the result.
+# :type _fc_result: bool
+# :param _fc_file: The file to check.
+# :type _fc_file: string
+# :param _fc_text: The text to check for.
+# :type _fc_text: string
+# :returns: ``_fc_result`` will be set to ``TRUE`` if file contains the text
+            and ``FALSE`` if it does not.
+# :rtype: bool
+#]]
+function(ct_file_contains _fc_result _fc_file _fc_text)
+    # Read the file to determine if it contains the text
+    file(READ "${_fc_file}" _fc_contents)
+    string(FIND "${_fc_contents}" "${_fc_text}" _fc_index)
+    if(${_fc_index} EQUAL -1)
+        set("${_fc_result}" FALSE PARENT_SCOPE)
+    else()
+        set("${_fc_result}" TRUE PARENT_SCOPE)
     endif()
 endfunction()
