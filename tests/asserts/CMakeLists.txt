@@ -1,4 +1,12 @@
-add_cmake_test_test(defined
-                    equal
-                    list
-                    string)
+add_cmake_test_test(
+    defined
+    equal
+    file_contains
+    file_exists
+    library_exists
+    list
+    string
+    true_false
+    target_exists
+    target_has_property
+)

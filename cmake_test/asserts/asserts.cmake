@@ -1,5 +1,10 @@
 include_guard()
 include(cmake_test/asserts/defined)
 include(cmake_test/asserts/equal)
+include(cmake_test/asserts/file_contains)
+include(cmake_test/asserts/file_exists)
 include(cmake_test/asserts/list)
-
+include(cmake_test/asserts/library_exists)
+include(cmake_test/asserts/target_exists)
+include(cmake_test/asserts/target_has_property)
+include(cmake_test/asserts/true_false)
