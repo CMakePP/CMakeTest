@@ -1,6 +1,7 @@
 #Build directories
 docs/build
 cmake-build*/
+build/
 
 #Auto-generated directories
 docs/source/api
