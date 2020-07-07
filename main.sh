@@ -1,14 +1,15 @@
 #!/bin/bash
-pushd .
-rm -rf ~/git/CMakeTest/build
-mkdir ~/git/CMakeTest/build
+pushd . > /dev/null
+#rm -rf ~/git/CMakeTest/build
+#mkdir ~/git/CMakeTest/build
 cd ~/git/CMakeTest/build
 #for i in {1..500}
 #do
-#	cmake -P main.cmake > /dev/null 2> /dev/null
+#        echo $i
+#        cmake .. 2> /dev/null > /dev/null
 #done
 cmake ..
 ret=$?
 
-popd
+popd > /dev/null
 exit $ret

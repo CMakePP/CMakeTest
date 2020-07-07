@@ -8,21 +8,25 @@ include_guard()
 # unit tests).
 #]]
 function(get_cpp)
+    include(cpp/cpp OPTIONAL RESULT_VARIABLE cpp_found)
+    if(NOT cpp_found)
 
-    # Store whether we are building tests or not, then turn off the tests
-    set(build_testing_old "${BUILD_TESTING}")
-    set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
 
-    # Download CMakePP and bring it into scope
-    include(FetchContent)
-    FetchContent_Declare(
-         cpp
-         GIT_REPOSITORY https://github.com/CMakePP/CMakePackagingProject
-    )
-    FetchContent_MakeAvailable(cpp)
 
-    # Restore the previous value
-    set(BUILD_TESTING "${build_testing_old}" CACHE BOOL "" FORCE)
+        # Store whether we are building tests or not, then turn off the tests
+        set(build_testing_old "${BUILD_TESTING}")
+        set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
+        # Download CMakePP and bring it into scope
+        include(FetchContent)
+        FetchContent_Declare(
+             cpp
+             GIT_REPOSITORY https://github.com/CMakePP/CMakePackagingProject
+       )
+       FetchContent_MakeAvailable(cpp)
+
+       # Restore the previous value
+       set(BUILD_TESTING "${build_testing_old}" CACHE BOOL "" FORCE)
+    endif()
 endfunction()
 
 # Call the function we just wrote to get CMakePP

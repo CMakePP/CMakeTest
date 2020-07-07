@@ -9,7 +9,6 @@ set(CMAKE_TEST_USE_COLORS "True")
 #set(PROJECT_SOURCE_DIR ".")
 include("${PROJECT_SOURCE_DIR}/cmake/get_cpp.cmake")
 get_filename_component(CMAKE_TEST_CURRENT_FILE "${PROJECT_SOURCE_DIR}/CMakeTest.cmake" ABSOLUTE)
-
 set(_length 500)
 set(_index 0) # The loop index
 #while("${_index}" LESS "${_length}")

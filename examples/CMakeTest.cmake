@@ -38,7 +38,7 @@ function(${test_this})
     #message(STATUS "User Specified CMake Arguments: ${CMAKE_ARGS}")
 
     #ct_add_section(NAME test_section PARENTTEST ${test_this} EXPECTFAIL)
-    ct_add_section(NAME test_section)
+    ct_add_section(NAME test_section EXPECTFAIL)
     function(${test_section})
         message(FATAL_ERROR "Running section")
         cpp_raise(ASSERT_FAIL "Assertion failed")

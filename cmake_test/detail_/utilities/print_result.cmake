@@ -50,7 +50,7 @@ endfunction()
 # :type _pp_depth: str
 #]]
 function(_ct_print_pass _pp_name _pp_depth)
-    _ct_print_result(${_pp_name} "PASSED" ${_pp_depth})
+    _ct_print_result(${_pp_name} "${BoldGreen}PASSED${ColorReset}" ${_pp_depth})
 endfunction()
 
 #[[[ Wraps the process of printing that a test failed.
@@ -67,6 +67,6 @@ endfunction()
 # :type _pf_depth: str
 #]]
 function(_ct_print_fail _pf_name _pf_depth)
-    _ct_print_result(${_pf_name} "FAILED" ${_pf_depth})
-    message(FATAL_ERROR "Reason:\n\n${ARGN}")
+    _ct_print_result(${_pf_name} "${BoldRed}FAILED${ColorReset}" ${_pf_depth})
+    #message(FATAL_ERROR "Reason:\n\n${ARGN}")
 endfunction()
