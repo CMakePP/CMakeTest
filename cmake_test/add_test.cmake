@@ -130,7 +130,7 @@ function(ct_exec_tests)
 
     get_property(tests GLOBAL PROPERTY "CMAKE_TEST_TESTS")
 
-    foreach(curr_test ${tests})
+    foreach(curr_test IN LISTS tests)
         #Set the fully qualified identifier for this test, used later for exception tracking and section/subsection execution
         set_property(GLOBAL PROPERTY "CT_CURRENT_EXECUTION_UNIT" "${curr_test}")
         get_property(friendly_name GLOBAL PROPERTY "CMAKE_TEST_${curr_test}_FRIENDLY_NAME")
@@ -153,7 +153,7 @@ function(ct_exec_tests)
                 #file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/${curr_test}/${curr_test}.cmake" "${curr_test}()")
                 #include("${CMAKE_CURRENT_BINARY_DIR}/${curr_test}/${curr_test}.cmake")
                 #ct_exec_sections()
-                foreach(exc ${ct_exceptions})
+                foreach(exc IN LISTS ct_exceptions)
                     message("${BoldRed}Test named \"${friendly_name}\" raised exception:")
                     message("${exc}${ColorReset}")
                 endforeach()
@@ -181,7 +181,7 @@ function(ct_exec_sections)
     #Get the identifier for the current execution unit (test/section/subsection)
     get_property(ct_original_unit GLOBAL PROPERTY "CT_CURRENT_EXECUTION_UNIT")
     get_property(unit_sections GLOBAL PROPERTY "CMAKE_TEST_${ct_original_unit}_SECTIONS")
-    foreach(curr_section "${unit_sections}")
+    foreach(curr_section IN LISTS unit_sections)
 
 
         #Set the new execution unit so that the exceptions can be tracked and new subsections executed properly
@@ -204,7 +204,7 @@ function(ct_exec_sections)
 
         else()
             if(NOT "${ct_exceptions}" STREQUAL "")
-                foreach(exc ${ct_exceptions})
+                foreach(exc IN LISTS ct_exceptions)
                     message("${BoldRed}Section named \"${friendly_name}\" raised exception:")
                     message("${exc}${ColorReset}")
                 endforeach()
@@ -216,6 +216,8 @@ function(ct_exec_sections)
         else()
             _ct_print_pass("${friendly_name}" 1)
         endif()
+        ct_exec_sections()
+
     endforeach()
     set_property(GLOBAL PROPERTY "CT_CURRENT_EXECUTION_UNIT" "${ct_original_unit}")
 

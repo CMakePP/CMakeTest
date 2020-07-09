@@ -42,6 +42,11 @@ function(${test_this})
     function(${test_section})
         message(FATAL_ERROR "Running section")
         cpp_raise(ASSERT_FAIL "Assertion failed")
+        ct_add_section(NAME section_2)
+        function(${section_2})
+            message("Section 2")
+        endfunction()
+
     endfunction(${test_section})
 
 
