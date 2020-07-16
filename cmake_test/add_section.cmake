@@ -19,23 +19,23 @@ include_guard()
 macro(ct_add_section)
 
     #TODO Set sections as a subproperty of CT_CURRENT_EXECUTION_UNIT instead of as a single global variable
-    set(options EXPECTFAIL)
-    set(oneValueArgs NAME)
-    set(multiValueArgs "")
-    cmake_parse_arguments(CT_ADD_SECTION "${options}" "${oneValueArgs}"
-                          "${multiValueArgs}" ${ARGN} )
+    set(_as_options EXPECTFAIL)
+    set(_as_one_value_args NAME)
+    set(_as_multi_value_args "")
+    cmake_parse_arguments(CT_ADD_SECTION "${as_options}" "${as_one_value_args}"
+                          "${_as_multi_value_args}" ${ARGN} )
 
     #[[_ct_add_test_guts("${_at_test_name}")
     #return()
     #]]
 
     string(RANDOM ALPHABET "abcdefghijklmnopqrstuvwxyz" "${CT_ADD_SECTION_NAME}") #Generate random section ID, using only alphabetical characters
-    get_property(curr_exec_unit GLOBAL PROPERTY "CT_CURRENT_EXECUTION_UNIT")
-    get_property(curr_sections GLOBAL PROPERTY "CMAKETEST_TEST_${curr_exec_unit}_SECTIONS")
-    list(APPEND curr_sections "${${CT_ADD_SECTION_NAME}}")
-    set_property(GLOBAL PROPERTY CMAKETEST_TEST_${curr_exec_unit}_SECTIONS "${curr_sections}") #Append the section ID to the list of sections, since this will be executed in the test's scope we need to set it in pare>
+    get_property(_as_curr_exec_unit GLOBAL PROPERTY "CT_CURRENT_EXECUTION_UNIT")
+    get_property(_as_curr_sections GLOBAL PROPERTY "CMAKETEST_TEST_${curr_exec_unit}_SECTIONS")
+    list(APPEND _as_curr_sections "${${CT_ADD_SECTION_NAME}}")
+    set_property(GLOBAL PROPERTY CMAKETEST_TEST_${_as_curr_exec_unit}_SECTIONS "${_as_curr_sections}") #Append the section ID to the list of sections, since this will be executed in the test's scope we need to set it in pare>
     #message(STATUS "Adding section: ${CT_ADD_SECTION_NAME}")
-    set_property(GLOBAL PROPERTY "CMAKETEST_TEST_${curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_EXPECTFAIL" "${CT_ADD_SECTION_EXPECTFAIL}") #Set a flag for whether the section is expected to fail or not
-    set_property(GLOBAL PROPERTY "CMAKETEST_TEST_${curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_FRIENDLY_NAME" "${CT_ADD_SECTION_NAME}") #Store the friendly name for the test
+    set_property(GLOBAL PROPERTY "CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_EXPECTFAIL" "${CT_ADD_SECTION_EXPECTFAIL}") #Set a flag for whether the section is expected to fail or not
+    set_property(GLOBAL PROPERTY "CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_FRIENDLY_NAME" "${CT_ADD_SECTION_NAME}") #Store the friendly name for the test
 
 endmacro()
