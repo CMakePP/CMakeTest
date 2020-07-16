@@ -31,11 +31,11 @@ macro(ct_add_section)
 
     string(RANDOM ALPHABET "abcdefghijklmnopqrstuvwxyz" "${CT_ADD_SECTION_NAME}") #Generate random section ID, using only alphabetical characters
     get_property(curr_exec_unit GLOBAL PROPERTY "CT_CURRENT_EXECUTION_UNIT")
-    get_property(curr_sections GLOBAL PROPERTY "CMAKE_TEST_${curr_exec_unit}_SECTIONS")
+    get_property(curr_sections GLOBAL PROPERTY "CMAKETEST_TEST_${curr_exec_unit}_SECTIONS")
     list(APPEND curr_sections "${${CT_ADD_SECTION_NAME}}")
-    set_property(GLOBAL PROPERTY CMAKE_TEST_${curr_exec_unit}_SECTIONS "${curr_sections}") #Append the section ID to the list of sections, since this will be executed in the test's scope we need to set it in pare>
+    set_property(GLOBAL PROPERTY CMAKETEST_TEST_${curr_exec_unit}_SECTIONS "${curr_sections}") #Append the section ID to the list of sections, since this will be executed in the test's scope we need to set it in pare>
     #message(STATUS "Adding section: ${CT_ADD_SECTION_NAME}")
-    set_property(GLOBAL PROPERTY "CMAKE_TEST_${curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_EXPECTFAIL" "${CT_ADD_SECTION_EXPECTFAIL}") #Set a flag for whether the section is expected to fail or not
-    set_property(GLOBAL PROPERTY "CMAKE_TEST_${curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_FRIENDLY_NAME" "${CT_ADD_SECTION_NAME}") #Store the friendly name for the test
+    set_property(GLOBAL PROPERTY "CMAKETEST_TEST_${curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_EXPECTFAIL" "${CT_ADD_SECTION_EXPECTFAIL}") #Set a flag for whether the section is expected to fail or not
+    set_property(GLOBAL PROPERTY "CMAKETEST_TEST_${curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_FRIENDLY_NAME" "${CT_ADD_SECTION_NAME}") #Store the friendly name for the test
 
 endmacro()

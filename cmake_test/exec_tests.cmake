@@ -19,7 +19,7 @@ function(ct_exec_tests)
 
     message(STATUS "Executing tests")
 
-    set(CMAKE_TESTS_DID_PASS "TRUE" PARENT_SCOPE) #Default to true and set to false once one does not pass
+    set(CMAKETEST_TESTS_DID_PASS "TRUE" PARENT_SCOPE) #Default to true and set to false once one does not pass
 
     # Add general exception handler that catches all exceptions
     cpp_catch(ALL_EXCEPTIONS)
@@ -33,13 +33,13 @@ function(ct_exec_tests)
         #set_property(GLOBAL PROPERTY "${curr_exec}_EXCEPTION_DETAILS" "Type: ${exce_type}, Details: ${message}")
     endfunction()
 
-    get_property(tests GLOBAL PROPERTY "CMAKE_TEST_TESTS")
+    get_property(tests GLOBAL PROPERTY "CMAKETEST_TEST_TESTS")
 
     foreach(curr_test IN LISTS tests)
         #Set the fully qualified identifier for this test, used later for exception tracking and section/subsection execution
         set_property(GLOBAL PROPERTY "CT_CURRENT_EXECUTION_UNIT" "${curr_test}")
-        get_property(friendly_name GLOBAL PROPERTY "CMAKE_TEST_${curr_test}_FRIENDLY_NAME")
-        get_property(expect_fail GLOBAL PROPERTY "CMAKE_TEST_${curr_test}_EXPECTFAIL")
+        get_property(friendly_name GLOBAL PROPERTY "CMAKETEST_TEST_${curr_test}_FRIENDLY_NAME")
+        get_property(expect_fail GLOBAL PROPERTY "CMAKETEST_TEST_${curr_test}_EXPECTFAIL")
         #message(STATUS "Running test named \"${friendly_name}\"")
 
         file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/${curr_test}/${curr_test}.cmake" "${curr_test}()")
@@ -49,9 +49,9 @@ function(ct_exec_tests)
         #get_property(ct_exception_details GLOBAL PROPERTY "${curr_test}_EXCEPTION_DETAILS")
         if(expect_fail)
             if("${ct_exceptions}" STREQUAL "")
-                message("${BoldRed}Test named \"${friendly_name}\" was expected to fail but did not throw any exceptions or errors.${ColorReset}")
-                set(CMAKE_TESTS_DID_PASS "FALSE" PARENT_SCOPE) #At least one test failed, so we will inform the caller that not all tests passed.
-                set(CMAKE_TEST_FAIL "TRUE")
+                message("${CT_BoldRed}Test named \"${friendly_name}\" was expected to fail but did not throw any exceptions or errors.${CT_ColorReset}")
+                set(CMAKETEST_TESTS_DID_PASS "FALSE" PARENT_SCOPE) #At least one test failed, so we will inform the caller that not all tests passed.
+                set(CMAKETEST_TEST_FAIL "TRUE")
             endif()
         else()
             if(NOT ("${ct_exceptions}" STREQUAL ""))
@@ -59,15 +59,15 @@ function(ct_exec_tests)
                 #include("${CMAKE_CURRENT_BINARY_DIR}/${curr_test}/${curr_test}.cmake")
                 #ct_exec_sections()
                 foreach(exc IN LISTS ct_exceptions)
-                    message("${BoldRed}Test named \"${friendly_name}\" raised exception:")
-                    message("${exc}${ColorReset}")
+                    message("${CT_BoldRed}Test named \"${friendly_name}\" raised exception:")
+                    message("${exc}${CT_ColorReset}")
                 endforeach()
-                set(CMAKE_TESTS_DID_PASS "FALSE" PARENT_SCOPE) #At least one test failed, so we will inform the caller that not all tests passed.
-                set(CMAKE_TEST_FAIL "TRUE")
+                set(CMAKETEST_TESTS_DID_PASS "FALSE" PARENT_SCOPE) #At least one test failed, so we will inform the caller that not all tests passed.
+                set(CMAKETEST_TEST_FAIL "TRUE")
             endif()
         endif()
 
-        if(CMAKE_TEST_FAIL)
+        if(CMAKETEST_TEST_FAIL)
             _ct_print_fail("${friendly_name}" 0)
         else()
             _ct_print_pass("${friendly_name}" 0)

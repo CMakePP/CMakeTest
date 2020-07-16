@@ -29,14 +29,14 @@ macro(ct_add_test)
     #]]
 
     string(RANDOM ALPHABET "abcdefghijklmnopqrstuvwxyz" "${CT_ADD_TEST_NAME}") #Randomized identifier, only alphabetical characters so it generates a valid identifier.
-    get_property(curr_tests GLOBAL PROPERTY "CMAKE_TEST_TESTS")
+    get_property(curr_tests GLOBAL PROPERTY "CMAKETEST_TEST_TESTS")
 
     list(APPEND curr_tests "${${CT_ADD_TEST_NAME}}") #Add the test ID to the list of tests being executed
-    set_property(GLOBAL PROPERTY "CMAKE_TEST_TESTS" "${curr_tests}") #Update the global list of tests
+    set_property(GLOBAL PROPERTY "CMAKETEST_TEST_TESTS" "${curr_tests}") #Update the global list of tests
 
-    get_property(tests GLOBAL PROPERTY "CMAKE_TEST_TESTS")
-    set_property(GLOBAL PROPERTY "CMAKE_TEST_${${CT_ADD_TEST_NAME}}_EXPECTFAIL" "${CT_ADD_TEST_EXPECTFAIL}") #Mark the test as expecting to fail or not
-    set_property(GLOBAL PROPERTY "CMAKE_TEST_${${CT_ADD_TEST_NAME}}_FRIENDLY_NAME" "${CT_ADD_TEST_NAME}") #Store the friendly name for the test
+    get_property(tests GLOBAL PROPERTY "CMAKETEST_TEST_TESTS")
+    set_property(GLOBAL PROPERTY "CMAKETEST_TEST_${${CT_ADD_TEST_NAME}}_EXPECTFAIL" "${CT_ADD_TEST_EXPECTFAIL}") #Mark the test as expecting to fail or not
+    set_property(GLOBAL PROPERTY "CMAKETEST_TEST_${${CT_ADD_TEST_NAME}}_FRIENDLY_NAME" "${CT_ADD_TEST_NAME}") #Store the friendly name for the test
 endmacro()
 
 
