@@ -22,20 +22,22 @@ macro(ct_add_section)
     set(_as_options EXPECTFAIL)
     set(_as_one_value_args NAME)
     set(_as_multi_value_args "")
-    cmake_parse_arguments(CT_ADD_SECTION "${as_options}" "${as_one_value_args}"
+    cmake_parse_arguments(CT_ADD_SECTION "${_as_options}" "${_as_one_value_args}"
                           "${_as_multi_value_args}" ${ARGN} )
 
     #[[_ct_add_test_guts("${_at_test_name}")
     #return()
     #]]
 
-    string(RANDOM ALPHABET "abcdefghijklmnopqrstuvwxyz" "${CT_ADD_SECTION_NAME}") #Generate random section ID, using only alphabetical characters
-    get_property(_as_curr_exec_unit GLOBAL PROPERTY "CT_CURRENT_EXECUTION_UNIT")
-    get_property(_as_curr_sections GLOBAL PROPERTY "CMAKETEST_TEST_${curr_exec_unit}_SECTIONS")
-    list(APPEND _as_curr_sections "${${CT_ADD_SECTION_NAME}}")
-    set_property(GLOBAL PROPERTY CMAKETEST_TEST_${_as_curr_exec_unit}_SECTIONS "${_as_curr_sections}") #Append the section ID to the list of sections, since this will be executed in the test's scope we need to set it in pare>
+    cpp_unique_id("${CT_ADD_SECTION_NAME}") #Generate random section ID, using only alphabetical characters
+    cpp_get_global(_as_curr_exec_unit "CT_CURRENT_EXECUTION_UNIT")
+    #cpp_get_global(_as_curr_sections "CMAKETEST_TEST_${_as_curr_exec_unit}_SECTIONS")
+    #list(APPEND _as_curr_sections "${${CT_ADD_SECTION_NAME}}")
+    #set_property(GLOBAL PROPERTY CMAKETEST_TEST_${_as_curr_exec_unit}_SECTIONS "${_as_curr_sections}") #Append the section ID to the list of sections, since this will be executed in the test's scope we need to set it in pare>
+    cpp_append_global(CMAKETEST_TEST_${_as_curr_exec_unit}_SECTIONS "${${CT_ADD_SECTION_NAME}}")
+
     #message(STATUS "Adding section: ${CT_ADD_SECTION_NAME}")
-    set_property(GLOBAL PROPERTY "CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_EXPECTFAIL" "${CT_ADD_SECTION_EXPECTFAIL}") #Set a flag for whether the section is expected to fail or not
-    set_property(GLOBAL PROPERTY "CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_FRIENDLY_NAME" "${CT_ADD_SECTION_NAME}") #Store the friendly name for the test
+    cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_EXPECTFAIL" "${CT_ADD_SECTION_EXPECTFAIL}") #Set a flag for whether the section is expected to fail or not
+    cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_FRIENDLY_NAME" "${CT_ADD_SECTION_NAME}") #Store the friendly name for the test
 
 endmacro()
