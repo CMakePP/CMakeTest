@@ -19,7 +19,7 @@ function(ct_exec_tests)
 
     message(STATUS "Executing tests")
 
-    set(CMAKETEST_TESTS_DID_PASS "TRUE" PARENT_SCOPE) #Default to true and set to false once one does not pass
+    cpp_set_global(CMAKETEST_TESTS_DID_PASS "TRUE") #Default to true and set to false once one does not pass
 
     # Add general exception handler that catches all exceptions
     cpp_catch(ALL_EXCEPTIONS)
@@ -52,8 +52,8 @@ function(ct_exec_tests)
         if(_et_expect_fail)
             if("${_et_exceptions}" STREQUAL "")
                 message("${CT_BoldRed}Test named \"${_et_friendly_name}\" was expected to fail but did not throw any exceptions or errors.${CT_ColorReset}")
-                set(CMAKETEST_TESTS_DID_PASS "FALSE" PARENT_SCOPE) #At least one test failed, so we will inform the caller that not all tests passed.
-                set(CMAKETEST_TEST_FAIL "TRUE")
+                cpp_set_global(CMAKETEST_TESTS_DID_PASS "FALSE") #At least one test failed, so we will inform the caller that not all tests passed.
+                set(_et_test_fail "TRUE")
             endif()
         else()
             if(NOT ("${_et_exceptions}" STREQUAL ""))
@@ -64,12 +64,12 @@ function(ct_exec_tests)
                     message("${CT_BoldRed}Test named \"${_et_friendly_name}\" raised exception:")
                     message("${_et_exc}${CT_ColorReset}")
                 endforeach()
-                set(CMAKETEST_TESTS_DID_PASS "FALSE" PARENT_SCOPE) #At least one test failed, so we will inform the caller that not all tests passed.
-                set(CMAKETEST_TEST_FAIL "TRUE")
+                cpp_set_global(CMAKETEST_TESTS_DID_PASS "FALSE") #At least one test failed, so we will inform the caller that not all tests passed.
+                set(_et_test_fail "TRUE")
             endif()
         endif()
 
-        if(CMAKETEST_TEST_FAIL)
+        if(_et_test_fail)
             _ct_print_fail("${_et_friendly_name}" 0)
         else()
             _ct_print_pass("${_et_friendly_name}" 0)
