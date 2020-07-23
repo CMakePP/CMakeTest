@@ -13,8 +13,11 @@ include_guard()
 #        message(STATUS "This code will run in a test section")
 #    endfunction()
 #
-# :param EXPECTFAIL: Option indicating whether the section is expected to fail or not, if specified will cause the section to be ran in a subprocess.
-# :param NAME name: Required argument specifying the name variable of the section. Will set a variable with specified name containing the generated function ID to use.
+# :param **kwargs: See below
+#
+# :Keyword Arguments:
+#    * *NAME* (``pointer``) -- Required argument specifying the name variable of the section. Will set a variable with specified name containing the generated function ID to use.
+#    * *EXPECTFAIL* (``option``) -- Option indicating whether the section is expected to fail or not, if specified will cause test failure when no exceptions were caught and success upon catching any exceptions.
 #]]
 macro(ct_add_section)
 
