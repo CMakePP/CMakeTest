@@ -19,12 +19,12 @@ endfunction()
 # This function will cause the CMake interpreter to stop processing immediately and it will throw a stack trace. There is unfortunately no way to silence the stacktrace.
 # Details of why the interpreter was exited may be entered as the first argument to this function.
 #]]
-function(exit)
+function(ct_exit)
     if(ARGC GREATER 0)
-        set(msg "Testing forcibly stopped, no further tests will be executed. Details: ${ARGV0}")
+        set(msg "${CT_BoldRed}Testing forcibly stopped, no further tests will be executed. Details: ${ARGV0}${CT_ColorReset}")
     else()
-        set(msg "Testing forcibly stopped, no further tests will be executed.")
+        set(msg "${CT_BoldRed}Testing forcibly stopped, no further tests will be executed.${CT_ColorReset}")
 
     endif()
-    _message(FATAL_ERROR msg)
+    _message(FATAL_ERROR "${msg}")
 endfunction()
