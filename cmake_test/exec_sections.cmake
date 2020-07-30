@@ -9,6 +9,11 @@ function(ct_exec_sections)
     #Get the identifier for the current execution unit (test/section/subsection)
     cpp_get_global(_es_original_unit "CT_CURRENT_EXECUTION_UNIT")
     cpp_get_global(_es_unit_sections "CMAKETEST_TEST_${_es_original_unit}_SECTIONS")
+
+    cpp_get_global(_es_old_section_depth "CMAKETEST_SECTION_DEPTH")
+    math(EXPR _es_new_section_depth "${_es_old_section_depth} + 1")
+    cpp_set_global("CMAKETEST_SECTION_DEPTH" "${_es_new_section_depth}")
+
     foreach(_es_curr_section IN LISTS _es_unit_sections)
 
 
@@ -42,15 +47,15 @@ function(ct_exec_sections)
            endif()
        endif()
        if(_es_section_fail)
-            _ct_print_fail("${_es_friendly_name}" 1)
+            _ct_print_fail("${_es_friendly_name}" "${_es_new_section_depth}")
             cpp_set_global(CMAKETEST_TESTS_DID_PASS "FALSE") #At least one test failed, so we will inform the caller that not all tests passed.
         else()
-            _ct_print_pass("${_es_friendly_name}" 1)
+            _ct_print_pass("${_es_friendly_name}" "${_es_new_section_depth}")
         endif()
         ct_exec_sections()
 
     endforeach()
     cpp_set_global("CT_CURRENT_EXECUTION_UNIT" "${_es_original_unit}")
-
+    cpp_set_global("CMAKETEST_SECTION_DEPTH" "${_es_old_section_depth}")
 
 endfunction()

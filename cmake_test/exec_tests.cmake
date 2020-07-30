@@ -42,6 +42,9 @@ function(ct_exec_tests)
         cpp_set_global("CT_CURRENT_EXECUTION_UNIT" "${_et_curr_test}")
         cpp_get_global(_et_friendly_name "CMAKETEST_TEST_${_et_curr_test}_FRIENDLY_NAME")
         cpp_get_global(_et_expect_fail "CMAKETEST_TEST_${_et_curr_test}_EXPECTFAIL")
+
+        cpp_set_global("CMAKETEST_SECTION_DEPTH" 0)
+
         #message(STATUS "Running test named \"${friendly_name}\"")
 
         file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/${_et_curr_test}/${_et_curr_test}.cmake" "${_et_curr_test}()")

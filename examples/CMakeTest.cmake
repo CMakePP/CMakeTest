@@ -44,10 +44,15 @@ function(${test_this})
         cpp_raise(ASSERT_FAIL "Assertion failed")
         ct_add_section(NAME section_2)
         function(${section_2})
-            message("Section 2")
+           # message("Section 2")
         endfunction()
 
     endfunction(${test_section})
+
+    ct_add_section(NAME section_3)
+    function(${section_3})
+        #Don't do anything here
+    endfunction()
 
 
 endfunction()
