@@ -11,7 +11,21 @@ include("${PROJECT_SOURCE_DIR}/cmake/get_cpp.cmake")
 
 
 if("${BUILD_TESTING}")
-    add_subdirectory("tests")
+    message("Building tests")
+    #add_subdirectory("tests")
+    include(CTest)
+    enable_testing()
+    add_test(
+        NAME
+            CMakeTest
+        COMMAND
+            "${CMAKE_CTEST_COMMAND}"
+                --build-and-test "${CMAKE_CURRENT_SOURCE_DIR}/tests"
+                                 "${CMAKE_CURRENT_BINARY_DIR}/tests"
+                --build-generator "${CMAKE_GENERATOR}"
+                --test-command "${CMAKE_CTEST_COMMAND}"
+    )
+
 endif()
 
 
