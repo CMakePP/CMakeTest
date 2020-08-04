@@ -9,6 +9,12 @@ set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" CACHE STRING "" FORCE)
 include(cmake_test/cmake_test)
 include("${PROJECT_SOURCE_DIR}/cmake/get_cpp.cmake")
 
+
+if("${BUILD_TESTING}")
+    add_subdirectory("tests")
+endif()
+
+
 #Example on how to execute a test
 #get_filename_component(CMAKETEST_CURRENT_FILE "${PROJECT_SOURCE_DIR}/examples/CMakeTest.cmake" ABSOLUTE)
 

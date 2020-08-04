@@ -19,7 +19,7 @@ function(ct_assert_file_contains _afc_file _afc_text)
     if(NOT _afc_result)
         message(
             FATAL_ERROR
-            "File at ${_afc_file} does not contain text \"${_afc_text}\"."
+            "File at ${_afc_file} does not contain text ${_afc_text}."
         )
     endif()
 endfunction()
@@ -43,7 +43,7 @@ function(ct_assert_file_does_not_contain _afdnc_file _afdnc_text)
     if(_afdnc_result)
         message(
             FATAL_ERROR
-            "File at ${_afdnc_file} contains text \"${_afdnc_text}\"."
+            "File at ${_afdnc_file} contains text ${_afdnc_text}."
         )
     endif()
 endfunction()
