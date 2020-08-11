@@ -5,7 +5,7 @@ function(${assert_equal})
     include(cmake_test/asserts/equal)
 
     ct_add_section(NAME "test_string")
-    macro(${test_string}) #Macro so ${temp} is available to all subsections
+    function(${test_string})
         set(temp "hello world")
 
         ct_add_section(NAME strings_are_equal)
@@ -17,10 +17,10 @@ function(${assert_equal})
         function(${strings_not_equal})
             ct_assert_equal(temp "Good bye")
         endfunction()
-    endmacro()
+    endfunction()
 
     ct_add_section(NAME test_list)
-    macro(${test_list}) #Macro so ${temp} is available to all subsections
+    function(${test_list})
         set(temp "hello;world")
 
         ct_add_section(NAME lists_are_equal)
@@ -32,12 +32,12 @@ function(${assert_equal})
         function(${lists_not_equal})
             ct_assert_equal(temp "hello")
         endfunction()
-    endmacro()
+    endfunction()
 endfunction()
 
 
 ct_add_test(NAME assert_not_equal)
-macro(${assert_not_equal}) #Macro so ${temp} is available to all subsections
+function(${assert_not_equal})
     include(cmake_test/asserts/equal)
     set(temp "hello world")
 
@@ -50,4 +50,4 @@ macro(${assert_not_equal}) #Macro so ${temp} is available to all subsections
     function(${strings_not_equal})
         ct_assert_not_equal(temp "Good bye")
     endfunction()
-endmacro()
+endfunction()

@@ -25,7 +25,6 @@ if("${BUILD_TESTING}")
                 --build-generator "${CMAKE_GENERATOR}"
                 --test-command "${CMAKE_CTEST_COMMAND}"
     )
-
 endif()
 
 

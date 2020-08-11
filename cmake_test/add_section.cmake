@@ -27,7 +27,6 @@ macro(ct_add_section)
     set(_as_multi_value_args "")
     cmake_parse_arguments(CT_ADD_SECTION "${_as_options}" "${_as_one_value_args}"
                           "${_as_multi_value_args}" ${ARGN} )
-
     #[[_ct_add_test_guts("${_at_test_name}")
     #return()
     #]]
@@ -42,5 +41,65 @@ macro(ct_add_section)
     #message(STATUS "Adding section: ${CT_ADD_SECTION_NAME}")
     cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_EXPECTFAIL" "${CT_ADD_SECTION_EXPECTFAIL}") #Set a flag for whether the section is expected to fail or not
     cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_FRIENDLY_NAME" "${CT_ADD_SECTION_NAME}") #Store the friendly name for the test
+
+
+    #set(_as_curr_section "${${CT_ADD_SECTION_NAME}}")
+    set(_as_original_unit "${_as_curr_exec_unit}")
+    cpp_get_global(_as_exec_section "CMAKETEST_TEST_${_as_curr_exec_unit}_EXECUTE_SECTIONS") #Get whether we should execute section now
+
+    if(_as_exec_section)
+        cpp_get_global(_as_old_section_depth "CMAKETEST_SECTION_DEPTH")
+        math(EXPR _as_new_section_depth "${_as_old_section_depth} + 1")
+        cpp_set_global("CMAKETEST_SECTION_DEPTH" "${_as_new_section_depth}")
+        cpp_get_global(_as_curr_section "CMAKETEST_TEST_${_as_curr_exec_unit}_${CT_ADD_SECTION_NAME}_ID")
+        #Set the new execution unit so that the exceptions can be tracked and new subsections executed properly
+        cpp_set_global("CT_CURRENT_EXECUTION_UNIT" "${_as_original_unit}_${_as_curr_section}")
+        cpp_get_global(_as_friendly_name "CMAKETEST_TEST_${_as_original_unit}_${_as_curr_section}_FRIENDLY_NAME")
+
+
+
+
+        file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}.cmake" "${_as_curr_section}()")
+        include("${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}.cmake")
+        cpp_get_global(_as_exceptions "${_as_original_unit}_${_as_curr_section}_EXCEPTIONS")
+        #get_property(ct_exception_details GLOBAL PROPERTY "${ct_original_unit}_${curr_section}_EXCEPTION_DETAILS")
+        cpp_get_global(_as_expect_fail "CMAKETEST_TEST_${_as_original_unit}_${_as_curr_section}_EXPECTFAIL")
+        #message(STATUS "Executing section named \"${_as_friendly_name}\", expectfail=${_as_expect_fail}")
+
+        if(_as_expect_fail)
+            if("${_as_exceptions}" STREQUAL "")
+                message("${CT_BoldRed}Section named \"${_as_friendly_name}\" was expected to fail but did not throw any exceptions or errors.${CT_ColorReset}")
+                set(_as_section_fail "TRUE")
+            endif()
+
+        else()
+            if(NOT "${_as_exceptions}" STREQUAL "")
+                foreach(_as_exc IN LISTS _as_exceptions)
+                    message("${CT_BoldRed}Section named \"${_as_friendly_name}\" raised exception:")
+                    message("${_as_exc}${CT_ColorReset}")
+                endforeach()
+                set(_as_section_fail "TRUE")
+           endif()
+       endif()
+       if(_as_section_fail)
+           _ct_print_fail("${_as_friendly_name}" "${_as_new_section_depth}")
+           cpp_set_global(CMAKETEST_TESTS_DID_PASS "FALSE") #At least one test failed, so we will inform the caller that not all tests passed.
+       else()
+           _ct_print_pass("${_as_friendly_name}" "${_as_new_section_depth}")
+       endif()
+
+
+       #Execute the section again, this time executing subsections
+       cpp_set_global("CMAKETEST_TEST_${_as_original_unit}_${_as_curr_section}_EXECUTE_SECTIONS" TRUE)
+       include("${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}.cmake")
+       cpp_set_global("CT_CURRENT_EXECUTION_UNIT" "${_as_original_unit}")
+       cpp_set_global("CMAKETEST_SECTION_DEPTH" "${_as_old_section_depth}")
+    else()
+        #First time run, set the ID so we don't lose it on the second run.
+        #This will only cause conflicts if two sections in the same test
+        #use the same friendly name (the variable used to store the ID and used in the function definition), which no sane programmer would do
+        cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${CT_ADD_SECTION_NAME}_ID" "${${CT_ADD_SECTION_NAME}}")
+
+    endif()
 
 endmacro()

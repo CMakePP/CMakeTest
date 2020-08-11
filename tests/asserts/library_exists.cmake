@@ -3,7 +3,6 @@ include(cmake_test/cmake_test)
 ct_add_test(NAME assert_library_exists)
 function(${assert_library_exists})
     include(cmake_test/asserts/library_exists)
-
     ct_add_section(NAME test_target_exists)
     function(${test_target_exists})
         ct_add_section(NAME test_target_is_library)

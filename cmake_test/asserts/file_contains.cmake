@@ -16,7 +16,7 @@ function(ct_assert_file_contains _afc_file _afc_text)
 
     # Throw error if the file does not contain the text
     ct_file_contains(_afc_result "${_afc_file}" "${_afc_text}")
-    if(NOT _afc_result)
+    if(NOT ${_afc_result})
         message(
             FATAL_ERROR
             "File at ${_afc_file} does not contain text ${_afc_text}."
@@ -40,7 +40,7 @@ function(ct_assert_file_does_not_contain _afdnc_file _afdnc_text)
 
     # Throw error if the file contains the text
     ct_file_contains(_afdnc_result "${_afdnc_file}" "${_afdnc_text}")
-    if(_afdnc_result)
+    if(${_afdnc_result})
         message(
             FATAL_ERROR
             "File at ${_afdnc_file} contains text ${_afdnc_text}."
@@ -64,12 +64,16 @@ endfunction()
 # :rtype: bool
 #]]
 function(ct_file_contains _fc_result _fc_file _fc_text)
+    # Ensure the file exists
+    ct_assert_file_exists("${_fc_file}")
+
     # Read the file to determine if it contains the text
     file(READ "${_fc_file}" _fc_contents)
     string(FIND "${_fc_contents}" "${_fc_text}" _fc_index)
     if(${_fc_index} EQUAL -1)
         set("${_fc_result}" FALSE PARENT_SCOPE)
     else()
+        message("File contains search term")
         set("${_fc_result}" TRUE PARENT_SCOPE)
     endif()
 endfunction()

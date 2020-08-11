@@ -77,6 +77,10 @@ function(ct_exec_tests)
         else()
             _ct_print_pass("${_et_friendly_name}" 0)
         endif()
-        ct_exec_sections()
+        #ct_exec_sections()
+        cpp_set_global("CMAKETEST_TEST_${_et_curr_test}_EXECUTE_SECTIONS" TRUE)
+        include("${CMAKE_CURRENT_BINARY_DIR}/${_et_curr_test}/${_et_curr_test}.cmake")
+
+
     endforeach()
 endfunction()

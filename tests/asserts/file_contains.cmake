@@ -5,7 +5,7 @@ function(${assert_file_contains})
     include(cmake_test/asserts/file_contains)
 
     ct_add_section(NAME test_file_exists)
-    macro(${test_file_exists})
+    function(${test_file_exists})
         # Create file and match / no match strings
         set(file_name "${CMAKE_CURRENT_BINARY_DIR}/test_file.txt")
         set(match_string "match string")
@@ -20,10 +20,9 @@ function(${assert_file_contains})
 
         ct_add_section(NAME test_file_does_not_contain_text EXPECTFAIL)
         function(${test_file_does_not_contain_text})
-            message("File name: ${file_name}")
             ct_assert_file_contains("${file_name}" "${no_match_string}")
         endfunction()
-    endmacro()
+    endfunction()
 
     ct_add_section(NAME test_file_does_not_exist EXPECTFAIL)
     function(${test_file_does_not_exist})
@@ -41,7 +40,7 @@ function(${assert_file_does_not_contain})
     include(cmake_test/asserts/file_contains)
 
     ct_add_section(NAME test_file_exists)
-    macro(${test_file_exists})
+    function(${test_file_exists})
         # Create file and match / no match strings
         set(file_name "${CMAKE_CURRENT_BINARY_DIR}/test_file.txt")
         set(match_string "match string")
@@ -58,7 +57,7 @@ function(${assert_file_does_not_contain})
         function(${test_file_does_not_contain_text})
             ct_assert_file_does_not_contain("${file_name}" "${no_match_string}")
         endfunction()
-    endmacro()
+    endfunction()
 
     ct_add_section(NAME test_file_does_not_exist EXPECTFAIL)
     function(${test_file_does_not_exist})

@@ -3,7 +3,6 @@ include(cmake_test/cmake_test)
 ct_add_test(NAME assert_target_exists)
 function(${assert_target_exists})
     include(cmake_test/asserts/target_exists)
-
     file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/a.c" "")
     add_library(my_lib "${CMAKE_CURRENT_BINARY_DIR}/a.c")
 
