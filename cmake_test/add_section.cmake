@@ -13,6 +13,15 @@ include_guard()
 #        message(STATUS "This code will run in a test section")
 #    endfunction()
 #
+# Upon being executed, this function will check if the CMAKETEST_TEST_${current_exec_unit}_EXECUTE_SECTIONS CMakePP global is set.
+# If it is not, ct_add_section() will generate an ID for the section function and sets the variable pointed to by the NAME parameter to it.
+#
+# If the flag is set, ct_add_section() will increment the CMAKETEST_SECTION_DEPTH CMakePP global, write a file to the build directory with a line calling the section function,
+# and include the file to execute the function. Exceptions will be tracked while the function is being executed. After completion of the test, the test status will be output
+# to the screen. The CMAKETEST_TEST_${current_exec_unit}_${section_id}_EXECUTE_SECTIONS flag will then be set. The section function will then be executed again, and
+# any subsections will then execute as well, following this same flow until there are no more subsections. Section depth is tracked by the CMAKETEST_SECTION_DEPTH CMakePP global.
+#
+#
 # :param **kwargs: See below
 #
 # :Keyword Arguments:
@@ -31,7 +40,7 @@ macro(ct_add_section)
     #return()
     #]]
 
-    cpp_unique_id("${CT_ADD_SECTION_NAME}") #Generate random section ID, using only alphabetical characters
+    cpp_unique_id("${CT_ADD_SECTION_NAME}") #Generate random section ID
     cpp_get_global(_as_curr_exec_unit "CT_CURRENT_EXECUTION_UNIT")
     #cpp_get_global(_as_curr_sections "CMAKETEST_TEST_${_as_curr_exec_unit}_SECTIONS")
     #list(APPEND _as_curr_sections "${${CT_ADD_SECTION_NAME}}")

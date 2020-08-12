@@ -15,6 +15,13 @@ include_guard()
 #    endfunction()
 #
 # This helps tests avoid name collisions and also allows the testing framework to keep track of them.
+#
+# :param **kwargs: See below
+#
+# :Keyword Arguments:
+#    * *NAME* (``pointer``) -- Required argument specifying the name variable of the section. Will set a variable with specified name containing the generated function ID to use.
+#    * *EXPECTFAIL* (``option``) -- Option indicating whether the section is expected to fail or not, if specified will cause test failure when no exceptions were caught and success upon catching any exceptions.
+#
 #]]
 macro(ct_add_test)
     cpp_get_global(_at_exec_unit "CT_CURRENT_EXECUTION_UNIT")
@@ -27,9 +34,9 @@ macro(ct_add_test)
 
     set(_at_options EXPECTFAIL)
     set(_at_one_value_args NAME)
-    set(_as_multi_value_args "")
+    set(_at_multi_value_args "")
     cmake_parse_arguments(CT_ADD_TEST "${_at_options}" "${_at_one_value_args}"
-                          "${_as_multi_value_args}" ${ARGN} )
+                          "${_at_multi_value_args}" ${ARGN} )
 
     #[[_ct_add_test_guts("${_at_test_name}")
     #return()

@@ -2,9 +2,16 @@ include_guard()
 
 #[[[
 # Execute all declared tests in a file. This function will be ran after ``include()``ing the test file.
-# It will execute a subprocess for all declared tests that are expected to fail, but run all other tests in-process.
+# This function will first write a file into the build directory containing a line calling the test function.
+# This file will then be included, which causes said test function to be executed. All exceptions are tracked while the test is ran.
+# Once the test has been executed, a flag will be set to execute the subsections, and the function executed once more.
+# This will result in the subsections being executed, and their exceptions will also be tracked.
+# Pass/fail output will be printed to the screen after each test or section has been executed, results are not aggregated at the end
+# to prevent a faulty test from causing the interpeter to fail before results are printed.
 #
 # .. seealso:: :func:`add_test.cmake.ct_add_test` for details on EXPECTFAIL.
+#
+# .. seealso:: :func:`add_section.cmake.ct_add_section` for details on section execution.
 #]]
 function(ct_exec_tests)
     #[[
