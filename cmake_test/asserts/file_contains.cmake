@@ -13,7 +13,9 @@ include(cmake_test/asserts/file_exists)
 function(ct_assert_file_contains _afc_file _afc_text)
     # Ensure the file exists
     ct_assert_file_exists("${_afc_file}")
-
+    if(NOT EXISTS "${_afc_file}")
+        return()
+    endif()
     # Throw error if the file does not contain the text
     ct_file_contains(_afc_result "${_afc_file}" "${_afc_text}")
     if(NOT ${_afc_result})
@@ -37,6 +39,9 @@ endfunction()
 function(ct_assert_file_does_not_contain _afdnc_file _afdnc_text)
     # Ensure the file exists
     ct_assert_file_exists("${_afdnc_file}")
+    if(NOT EXISTS "${_afdnc_file}")
+        return()
+    endif()
 
     # Throw error if the file contains the text
     ct_file_contains(_afdnc_result "${_afdnc_file}" "${_afdnc_text}")
@@ -66,6 +71,9 @@ endfunction()
 function(ct_file_contains _fc_result _fc_file _fc_text)
     # Ensure the file exists
     ct_assert_file_exists("${_fc_file}")
+    if(NOT EXISTS "${_fc_file}")
+        return()
+    endif()
 
     # Read the file to determine if it contains the text
     file(READ "${_fc_file}" _fc_contents)
