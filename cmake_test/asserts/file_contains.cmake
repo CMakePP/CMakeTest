@@ -4,6 +4,7 @@ include(cmake_test/asserts/file_exists)
 #[[[ Assert a file contains the specified text.
 #
 # Asserts that the file at the specified path contains the specified text.
+# Will return if the file does not exist, the assertion failure will be logged as a fatal error.
 #
 # :param _afc_file: The file to check
 # :type _afc_file: path
@@ -30,6 +31,8 @@ endfunction()
 #
 # Asserts that the file at the specified path does not contain the specified
 # text.
+#
+# Will return if the file does not exist, the assertion failure will be logged as a fatal error.
 #
 # :param _afdnc_file: The file to check
 # :type _afdnc_file: path
@@ -58,6 +61,8 @@ endfunction()
 # This function checks whether a file contains some text and returns a boolean
 # result.
 #
+# Will return if the file does not exist, the assertion failure will be logged as a fatal error.
+#
 # :param _fc_result: Name to use for the variable which will hold the result.
 # :type _fc_result: bool
 # :param _fc_file: The file to check.
@@ -65,7 +70,7 @@ endfunction()
 # :param _fc_text: The text to check for.
 # :type _fc_text: string
 # :returns: ``_fc_result`` will be set to ``TRUE`` if file contains the text
-            and ``FALSE`` if it does not.
+#           and ``FALSE`` if it does not.
 # :rtype: bool
 #]]
 function(ct_file_contains _fc_result _fc_file _fc_text)

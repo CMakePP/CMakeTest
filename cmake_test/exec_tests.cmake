@@ -9,6 +9,9 @@ include_guard()
 # Pass/fail output will be printed to the screen after each test or section has been executed, results are not aggregated at the end
 # to prevent a faulty test from causing the interpeter to fail before results are printed.
 #
+# A test that is not expected to fail that raises an exception or a fatal error will result in the immediate termination of the interpreter
+# due to unknown state and therefore leading to undefined behavior.
+#
 # .. seealso:: :func:`add_test.cmake.ct_add_test` for details on EXPECTFAIL.
 #
 # .. seealso:: :func:`add_section.cmake.ct_add_section` for details on section execution.
