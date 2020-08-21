@@ -21,12 +21,20 @@ include_guard()
 # to the screen. The CMAKETEST_TEST_${current_exec_unit}_${section_id}_EXECUTE_SECTIONS flag will then be set. The section function will then be executed again, and
 # any subsections will then execute as well, following this same flow until there are no more subsections. Section depth is tracked by the CMAKETEST_SECTION_DEPTH CMakePP global.
 #
+# If a section raises an exception when it is not expected to, testing will halt immediately. To keep parity between different types of tests, EXPECTFAIL sections that do not raise
+# exceptions will also halt all testing.
+#
 #
 # :param **kwargs: See below
 #
 # :Keyword Arguments:
 #    * *NAME* (``pointer``) -- Required argument specifying the name variable of the section. Will set a variable with specified name containing the generated function ID to use.
 #    * *EXPECTFAIL* (``option``) -- Option indicating whether the section is expected to fail or not, if specified will cause test failure when no exceptions were caught and success upon catching any exceptions.
+#
+# .. seealso:: :func:`add_test.cmake.ct_add_test` for details on EXPECTFAIL.
+#
+# .. seealso:: :func:`exec_test.cmake.ct_exec_test` for details on halting tests on exceptions.
+#
 #]]
 macro(ct_add_section)
 
