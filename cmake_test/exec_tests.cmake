@@ -90,6 +90,7 @@ function(ct_exec_tests)
 
         if(_et_test_fail)
             _ct_print_fail("${_et_friendly_name}" 0)
+            ct_exit()
         else()
             _ct_print_pass("${_et_friendly_name}" 0)
         endif()

@@ -93,6 +93,7 @@ macro(ct_add_section)
        if(_as_section_fail)
            _ct_print_fail("${_as_friendly_name}" "${_as_new_section_depth}")
            cpp_set_global(CMAKETEST_TESTS_DID_PASS "FALSE") #At least one test failed, so we will inform the caller that not all tests passed.
+           ct_exit()
        else()
            _ct_print_pass("${_as_friendly_name}" "${_as_new_section_depth}")
        endif()
