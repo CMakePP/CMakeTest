@@ -32,22 +32,3 @@ function(_ct_nonempty_string _ns_var)
     _ct_nonempty("${_ns_var}")
     ct_assert_not_list("${_ns_var}")
 endfunction()
-
-#[[[ Asserts that the identifier is a handle to a TestSection instance
-#
-#  This function will ensure that the provided identifier is a handle to a
-#  TestSection instance. Under the hood this entails ensuring that the
-#  identifier is set to a string value, and that the string value contains the
-#  substring "test_section". Consequentially, this function is easy to violate
-#  with malicious intent, but should reliably catch accidental coding errors.
-#
-#  :param _ih_var: The identifier which must be a TestSection instance.
-#  :type _ih_var: Identifier
-#]]
-function(_ct_is_handle _ih_var)
-    _ct_nonempty_string(${_ih_var})
-    string(FIND "${${_ih_var}}" "test_section" _ih_result)
-    if("${_ih_result}" STREQUAL "-1")
-        message(FATAL_ERROR "${_ih_var} is not a handle to a TestSection.")
-    endif()
-endfunction()
