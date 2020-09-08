@@ -6,25 +6,26 @@ set(CMAKETEST_USE_COLORS "True")
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" CACHE STRING "" FORCE)
-include(cmake_test/cmake_test)
 include("${PROJECT_SOURCE_DIR}/cmake/get_cpp.cmake")
-
+include(cmake_test/cmake_test)
 
 if("${BUILD_TESTING}")
     message("Building tests")
-    #add_subdirectory("tests")
+
     include(CTest)
     enable_testing()
-    add_test(
-        NAME
-            CMakeTest
-        COMMAND
-            "${CMAKE_CTEST_COMMAND}"
-                --build-and-test "${CMAKE_CURRENT_SOURCE_DIR}/tests"
-                                 "${CMAKE_CURRENT_BINARY_DIR}/tests"
-                --build-generator "${CMAKE_GENERATOR}"
-                --test-command "${CMAKE_CTEST_COMMAND}"
-    )
+    add_subdirectory("tests")
+
+    #add_test(
+    #    NAME
+    #        CMakeTest
+    #    COMMAND
+    #        "${CMAKE_CTEST_COMMAND}"
+    #            --build-and-test "${CMAKE_CURRENT_SOURCE_DIR}/tests"
+    #                             "${CMAKE_CURRENT_BINARY_DIR}/tests"
+    #            --build-generator "${CMAKE_GENERATOR}"
+    #            --test-command "${CMAKE_CTEST_COMMAND}"
+    #)
 endif()
 
 

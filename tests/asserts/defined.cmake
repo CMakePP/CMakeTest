@@ -1,4 +1,3 @@
-include(cmake_test/cmake_test)
 
 ct_add_test(NAME assert_defined)
 function(${assert_defined})
