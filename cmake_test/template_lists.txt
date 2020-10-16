@@ -11,7 +11,7 @@ set(CMAKE_MODULE_PATH "@CMAKE_MODULE_PATH@" CACHE STRING "" FORCE)
 
 include("cmake_test/cmake_test")
 
-include("@testi@")
+include("@_atd_test_file@")
 ct_exec_tests()
 #include("@PROJECT_SOURCE_DIR@/CMakeLists.txt")
 #@testi@()

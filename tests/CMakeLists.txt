@@ -5,8 +5,8 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../")
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" CACHE STRING "" FORCE)
 
 
-#Enable colors in Unix environments, ignored on Windows. Will not work with pipes
-set(CMAKETEST_USE_COLORS "True")
+#Enable colors in Unix environments, ignored on Windows. Will output garbage for pipes and text files
+set(CMAKETEST_USE_COLORS "FALSE")
 
 include(cmake_test/cmake_test)
 include("${PROJECT_SOURCE_DIR}/../cmake/get_cpp.cmake")
@@ -28,7 +28,8 @@ function(add_cmake_test_test)
     endforeach()
 endfunction()
 
-add_subdirectory(asserts)
+ct_add_dir("asserts")
+#add_subdirectory(asserts)
 #add_subdirectory(detail_)
 #add_subdirectory(tutorials)
 #ct_exec_tests()
