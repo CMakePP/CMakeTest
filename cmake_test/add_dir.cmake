@@ -1,4 +1,4 @@
-\include_guard()
+include_guard()
 set(_ct_add_dir_file_dir "${CMAKE_CURRENT_LIST_DIR}")
 
 

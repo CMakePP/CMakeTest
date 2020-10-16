@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 3.14) #Required for FetchContent_MakeAvailable()
+set(_ct_min_cmake_version "3.14")
+cmake_minimum_required(VERSION "${_ct_min_cmake_version}") #Required for FetchContent_MakeAvailable()
 project(CMakeTest VERSION 1.0.0 LANGUAGES NONE)
 
 #Enable colors in Unix environments, ignored on Windows. Will not work with pipes

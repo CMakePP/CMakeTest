@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14) #Required for FetchContent_MakeAvailable()
+cmake_minimum_required(VERSION "${_ct_min_cmake_version}") #Required for FetchContent_MakeAvailable()
 
 project(CMakeTest LANGUAGES C) #Need C language so CMake doesn't complain about no linker language for some empty files used for tests
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../")

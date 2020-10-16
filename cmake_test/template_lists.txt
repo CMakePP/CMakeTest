@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14) #Required for FetchContent_MakeAvailable()
+cmake_minimum_required(VERSION @_ct_min_cmake_version@) #Required for FetchContent_MakeAvailable()
 
 project(@testi@ LANGUAGES C) #Needed so dummy libraries don't complain about not having a linkage language
 
