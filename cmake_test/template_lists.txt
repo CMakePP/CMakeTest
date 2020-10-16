@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.14) #Required for FetchContent_MakeAvailable()
+
+project(@testi@ LANGUAGES C) #Needed so dummy libraries don't complain about not having a linkage language
+
+
+#Enable colors in Unix environments, ignored on Windows. Will not work with pipes
+set(CMAKETEST_USE_COLORS "True")
+
+#list(APPEND CMAKE_MODULE_PATH "@CMAKE_CURRENT_SOURCE_DIR@/../")
+set(CMAKE_MODULE_PATH "@CMAKE_MODULE_PATH@" CACHE STRING "" FORCE)
+
+include("cmake_test/cmake_test")
+
+include("@testi@")
+ct_exec_tests()
+#include("@PROJECT_SOURCE_DIR@/CMakeLists.txt")
+#@testi@()

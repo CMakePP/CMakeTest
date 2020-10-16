@@ -7,7 +7,7 @@ include_guard()
 # If the first argument is not FATAL_ERROR, this function will behave exactly as the original message().
 #]]
 function(message)
-    if(${ARGC} GREATER 1 AND ${ARGV0} STREQUAL "FATAL_ERROR")
+    if(ARGC GREATER 1 AND ARGV0 STREQUAL "FATAL_ERROR")
         cpp_raise(GENERIC_ERROR "${ARGV1}")
         return()
     endif()
