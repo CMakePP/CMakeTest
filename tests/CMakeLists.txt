@@ -29,6 +29,7 @@ function(add_cmake_test_test)
 endfunction()
 
 ct_add_dir("asserts")
+ct_add_dir("detail_")
 #add_subdirectory(asserts)
 #add_subdirectory(detail_)
 #add_subdirectory(tutorials)

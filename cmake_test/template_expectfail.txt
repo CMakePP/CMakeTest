@@ -4,7 +4,7 @@
 
 
 cmake_minimum_required(VERSION @_ct_min_cmake_version@) #Required for FetchContent_MakeAvailable()
-set(_ct_min_cmake_version @_ct_min_cmake_version@) #Propagate min version down
+
 project(@_ad_test_file@ LANGUAGES C) #Needed so dummy libraries don't complain about not having a linkage language
 
 
@@ -16,7 +16,22 @@ set(CMAKE_MODULE_PATH "@CMAKE_MODULE_PATH@" CACHE STRING "" FORCE)
 
 include("cmake_test/cmake_test")
 
-include("@_ad_test_file@")
-ct_exec_tests()
+cpp_set_global("CT_EXEC_EXPECTFAIL" TRUE)
+cpp_set_global("CT_CURRENT_EXECUTION_UNIT" "@_as_section_root@")
+
+
+#Register handler so we know when a test fails
+ct_register_exception_handler()
+
+#Set test and section ID definitions
+@_as_section_id_defines@
+
+#Include root file
+include("@_as_section_root_file@")
+
+#Parent tree contains function call list
+@_as_section_parent_tree@
+#include("@_ad_test_file@")
+#ct_exec_tests()
 #include("@PROJECT_SOURCE_DIR@/CMakeLists.txt")
 #@testi@()
