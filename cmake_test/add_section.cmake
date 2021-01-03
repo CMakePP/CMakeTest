@@ -133,11 +133,11 @@ macro(ct_add_section)
 
 
                 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}_EXPECTFAIL/build")
-                execute_process(COMMAND "${CMAKE_COMMAND}" -S "${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}_EXPECTFAIL/" -B "${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}_EXPECTFAIL/build/" RESULT_VARIABLE _as_expectfail_result_code OUTPUT_VARIABLE _as_expectfail_output)
+                execute_process(COMMAND "${CMAKE_COMMAND}" -S "${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}_EXPECTFAIL/" -B "${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}_EXPECTFAIL/build/" RESULT_VARIABLE _as_expectfail_result_code OUTPUT_VARIABLE _as_expectfail_output ERROR_VARIABLE _as_expectfail_stderr)
                 #message("Subprocess output: ${_as_expectfail_output}")
                 #message("Subprocess exit code: ${_as_expectfail_result_code}")
                 if (NOT _as_expectfail_result_code)
-                     ct_exit("Section ${CT_ADD_SECTION_NAME} was expected to fail but instead returned ${_as_expectfail_result_code}. Subprocess output: ${_as_expectfail_output}")
+                     ct_exit("Section ${CT_ADD_SECTION_NAME} was expected to fail but instead returned ${_as_expectfail_result_code}. Subprocess output: ${_as_expectfail_output}\nSubprocess error: ${_as_expectfail_stderr}")
                 endif()
 
            else()
