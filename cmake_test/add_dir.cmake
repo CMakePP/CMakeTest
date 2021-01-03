@@ -13,7 +13,7 @@ set(_ct_add_dir_file_dir "${CMAKE_CURRENT_LIST_DIR}")
 #]]
 function(ct_add_dir _ad_dir)
     get_filename_component(_ad_abs_test_dir "${_ad_dir}" REALPATH)
-    file(GLOB_RECURSE _ad_files LIST_DIRECTORIES TRUE FOLLOW_SYMLINKS "${_ad_abs_test_dir}/*.cmake") #Recurse over target dir to find all cmake files
+    file(GLOB_RECURSE _ad_files LIST_DIRECTORIES FALSE FOLLOW_SYMLINKS "${_ad_abs_test_dir}/*.cmake") #Recurse over target dir to find all cmake files
 
     foreach(_ad_test_file ${_ad_files})
         file(RELATIVE_PATH _ad_rel_path "${_ad_abs_test_dir}" "${_ad_test_file}") #Find rel path so we don't end up with insanely long paths under test folders
