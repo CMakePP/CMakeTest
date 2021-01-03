@@ -29,7 +29,7 @@ include("${PROJECT_SOURCE_DIR}/../cmake/get_cpp.cmake")
 #endfunction()
 
 ct_add_dir("asserts")
-ct_add_dir("detail_")
+#ct_add_dir("detail_")
 #add_subdirectory(asserts)
 #add_subdirectory(detail_)
 #add_subdirectory(tutorials)
