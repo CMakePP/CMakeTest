@@ -129,7 +129,7 @@ macro(ct_add_section)
                 list(APPEND _as_section_parent_tree "") #Force delimiter at the end
                 string (REGEX REPLACE "(^|[^\\\\]);" "\\1\(\)\n" _as_section_parent_tree "${_as_section_parent_tree}") #Replace list-delimiters with newlines and parentheses, constructing a function call list
                 #Write subprocess file, exec subprocess
-                configure_file("${_ct_add_dir_file_dir}/template_expectfail.txt" "${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}_EXPECTFAIL/CMakeLists.txt" @ONLY) #Fill in boilerplate, copy to build dir
+                configure_file("${_ct_add_dir_file_dir}/templates/template_expectfail.txt" "${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}_EXPECTFAIL/CMakeLists.txt" @ONLY) #Fill in boilerplate, copy to build dir
 
 
                 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}_EXPECTFAIL/build")

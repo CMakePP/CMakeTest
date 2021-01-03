@@ -18,7 +18,7 @@ function(ct_add_dir _ad_dir)
     foreach(_ad_test_file ${_ad_files})
         file(RELATIVE_PATH _ad_rel_path "${_ad_abs_test_dir}" "${_ad_test_file}") #Find rel path so we don't end up with insanely long paths under test folders
 
-        configure_file("${_ct_add_dir_file_dir}/template_lists.txt" "${CMAKE_CURRENT_BINARY_DIR}/tests/${_ad_rel_path}/src/CMakeLists.txt" @ONLY) #Fill in boilerplate, copy to build dir
+        configure_file("${_ct_add_dir_file_dir}/templates/template_lists.txt" "${CMAKE_CURRENT_BINARY_DIR}/tests/${_ad_rel_path}/src/CMakeLists.txt" @ONLY) #Fill in boilerplate, copy to build dir
         add_test(
         NAME
             ${_ad_rel_path}

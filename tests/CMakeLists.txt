@@ -11,22 +11,22 @@ set(CMAKETEST_USE_COLORS "FALSE")
 include(cmake_test/cmake_test)
 include("${PROJECT_SOURCE_DIR}/../cmake/get_cpp.cmake")
 
-function(add_cmake_test_test)
-    foreach(testi ${ARGN})
+#function(add_cmake_test_test)
+#    foreach(testi ${ARGN})
         #include(${CMAKE_CURRENT_LIST_DIR}/${testi}.cmake)
-        configure_file("${PROJECT_SOURCE_DIR}/../tests/template_lists.txt" "${CMAKE_CURRENT_BINARY_DIR}/tests/${testi}/src/CMakeLists.txt" @ONLY)
-        add_test(
-        NAME
-            ${testi}
-        COMMAND
-            "${CMAKE_CTEST_COMMAND}"
-                --build-and-test "${CMAKE_CURRENT_BINARY_DIR}/tests/${testi}/src"
-                                 "${CMAKE_CURRENT_BINARY_DIR}/tests/${testi}"
-                --build-generator "${CMAKE_GENERATOR}"
-                --test-command "${CMAKE_CTEST_COMMAND}"
-        )
-    endforeach()
-endfunction()
+#        configure_file("${PROJECT_SOURCE_DIR}/../tests/template_lists.txt" "${CMAKE_CURRENT_BINARY_DIR}/tests/${testi}/src/CMakeLists.txt" @ONLY)
+#        add_test(
+#        NAME
+#            ${testi}
+#        COMMAND
+#            "${CMAKE_CTEST_COMMAND}"
+#                --build-and-test "${CMAKE_CURRENT_BINARY_DIR}/tests/${testi}/src"
+#                                 "${CMAKE_CURRENT_BINARY_DIR}/tests/${testi}"
+#                --build-generator "${CMAKE_GENERATOR}"
+#                --test-command "${CMAKE_CTEST_COMMAND}"
+#        )
+#    endforeach()
+#endfunction()
 
 ct_add_dir("asserts")
 ct_add_dir("detail_")
