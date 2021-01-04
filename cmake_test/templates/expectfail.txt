@@ -17,20 +17,20 @@ set(CMAKE_MODULE_PATH "@CMAKE_MODULE_PATH@" CACHE STRING "" FORCE)
 include("cmake_test/cmake_test")
 
 cpp_set_global("CT_EXEC_EXPECTFAIL" TRUE)
-cpp_set_global("CT_CURRENT_EXECUTION_UNIT" "@_as_section_root@")
+cpp_set_global("CT_CURRENT_EXECUTION_UNIT" "@_es_section_root@")
 
 
 #Register handler so we know when a test fails
 ct_register_exception_handler()
 
 #Set test and section ID definitions
-@_as_section_id_defines@
+@_es_section_id_defines@
 
 #Include root file
-include("@_as_section_root_file@")
+include("@_es_section_root_file@")
 
-#Parent tree contains function call list
-@_as_section_parent_tree@
+#Execute the only test there is, ignoring subsections that do not comprise the call tree
+ct_exec_tests()
 #include("@_ad_test_file@")
 #ct_exec_tests()
 #include("@PROJECT_SOURCE_DIR@/CMakeLists.txt")

@@ -36,7 +36,7 @@ include_guard()
 # .. seealso:: :func:`exec_test.cmake.ct_exec_test` for details on halting tests on exceptions.
 #
 #]]
-macro(ct_add_section)
+function(ct_add_section)
 
     #TODO Set sections as a subproperty of CT_CURRENT_EXECUTION_UNIT instead of as a single global variable
     set(_as_options EXPECTFAIL)
@@ -45,20 +45,29 @@ macro(ct_add_section)
     cmake_parse_arguments(CT_ADD_SECTION "${_as_options}" "${_as_one_value_args}"
                           "${_as_multi_value_args}" ${ARGN} )
 
-
     cpp_get_global(_as_curr_exec_unit "CT_CURRENT_EXECUTION_UNIT")
     cpp_get_global(_as_curr_section "CMAKETEST_TEST_${_as_curr_exec_unit}_${CT_ADD_SECTION_NAME}_ID")
 
+    cpp_get_global(_as_exec_expectfail "CT_EXEC_EXPECTFAIL") #Unset in main interpreter, TRUE in subprocess
+
+    if(_as_exec_expectfail)
+        if("${${CT_ADD_SECTION_NAME}}" STREQUAL "" OR "${${CT_ADD_SECTION_NAME}}" STREQUAL "_")
+            set("${CT_ADD_SECTION_NAME}" "_" PARENT_SCOPE)
+            return() #If section is not part of the call tree, immediately return
+        endif()
+    endif()
+
     if("${${CT_ADD_SECTION_NAME}}" STREQUAL "")
-         cpp_unique_id("${CT_ADD_SECTION_NAME}") #Generate random section ID
+         cpp_unique_id(_as_section_name) #Generate random section ID
+         set("${CT_ADD_SECTION_NAME}" "${_as_section_name}") #Need to duplicate because CMake scoping rules are inconsistent. Setting in parent scope does not set in current scope
+         set("${CT_ADD_SECTION_NAME}" "${_as_section_name}" PARENT_SCOPE)
          #cpp_get_global(_as_curr_sections "CMAKETEST_TEST_${_as_curr_exec_unit}_SECTIONS")
          #list(APPEND _as_curr_sections "${${CT_ADD_SECTION_NAME}}")
          #set_property(GLOBAL PROPERTY CMAKETEST_TEST_${_as_curr_exec_unit}_SECTIONS "${_as_curr_sections}") #Append the section ID to the list of sections, since this will be executed in the test's scope we need to set it in pare>
-         cpp_append_global(CMAKETEST_TEST_${_as_curr_exec_unit}_SECTIONS "${${CT_ADD_SECTION_NAME}}")
-
          #message(STATUS "Adding section: ${CT_ADD_SECTION_NAME}")
     endif()
 
+    cpp_append_global(CMAKETEST_TEST_${_as_curr_exec_unit}_SECTIONS "${${CT_ADD_SECTION_NAME}}")
 
     cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_EXPECTFAIL" "${CT_ADD_SECTION_EXPECTFAIL}") #Set a flag for whether the section is expected to fail or not
     cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_FRIENDLY_NAME" "${CT_ADD_SECTION_NAME}") #Store the friendly name for the test
@@ -80,7 +89,7 @@ macro(ct_add_section)
     set(_as_original_unit "${_as_curr_exec_unit}")
     cpp_get_global(_as_exec_section "CMAKETEST_TEST_${_as_curr_exec_unit}_EXECUTE_SECTIONS") #Get whether we should execute section now
 
-    if(_as_exec_section)
+    if(_as_exec_section) #Time to execute our section
         cpp_get_global(_as_old_section_depth "CMAKETEST_SECTION_DEPTH")
         math(EXPR _as_new_section_depth "${_as_old_section_depth} + 1")
         cpp_set_global("CMAKETEST_SECTION_DEPTH" "${_as_new_section_depth}")
@@ -95,54 +104,25 @@ macro(ct_add_section)
         #get_property(ct_exception_details GLOBAL PROPERTY "${ct_original_unit}_${curr_section}_EXCEPTION_DETAILS")
         #message(STATUS "Executing section named \"${_as_friendly_name}\", expectfail=${_as_expect_fail}")
 
-        cpp_get_global(_as_exec_expectfail "CT_EXEC_EXPECTFAIL") #Unset in main interpreter, TRUE in subprocess
 
-        if(_as_expect_fail)
+        if(_as_expect_fail) #If this section expects to fail
 
-            if(NOT _as_exec_expectfail)
-                cpp_get_global(_as_section_parent_tree "CMAKETEST_TEST_${_as_curr_exec_unit}_${_as_curr_section}_PARENT_TREE")
-
-                list(REMOVE_ITEM _as_section_parent_tree "") #Remove empty list items
-
-
-                list(GET _as_section_parent_tree 0 _as_section_root) #Get the root test
-                cpp_get_global(_as_section_root_file "CMAKETEST_TEST_${_as_section_root}_FILE")
-
-                set(_as_section_id_defines "") #Set a blank ID list in case one is already defined
-                set(_as_constructed_exec_unit "") #Blank constructed exec unit. This will be expanded in the following foreach loop as the parent list is traversed
-                foreach(_as_parent_tree_id IN LISTS _as_section_parent_tree)
-                     set(_as_parent_friendly_name "") #Clear
-                     if(_as_constructed_exec_unit STREQUAL "")
-                          cpp_get_global(_as_parent_friendly_name "CMAKETEST_TEST_${_as_parent_tree_id}_FRIENDLY_NAME")
-                          set(_as_constructed_exec_unit ${_as_parent_tree_id})
-                          #list(APPEND _as_section_id_defines "cpp_set_global(\"CMAKETEST_TEST_${_as_parent_friendly_name}_ID\" ${_as_parent_tree_id})")
-                     else()
-                          cpp_get_global(_as_parent_friendly_name "CMAKETEST_TEST_${_as_constructed_exec_unit}_${_as_parent_tree_id}_FRIENDLY_NAME")
-                          set(_as_constructed_exec_unit "${_as_constructed_exec_unit}_${_as_parent_tree_id}")
-                          #list(APPEND _as_section_id_defines "cpp_set_global(\"CMAKETEST_TEST_${_as_constructed_exec_unit}_${_as_parent_friendly_name}_ID\" ${_as_parent_tree_id})")
-                     endif()
-                     list(APPEND _as_section_id_defines "set(${_as_parent_friendly_name} \"${_as_parent_tree_id}\")")
-                endforeach()
-
-                string (REGEX REPLACE "(^|[^\\\\]);" "\\1\n" _as_section_id_defines "${_as_section_id_defines}") #Replace list delimiters with newlines for full call list
-
-                list(APPEND _as_section_parent_tree "") #Force delimiter at the end
-                string (REGEX REPLACE "(^|[^\\\\]);" "\\1\(\)\n" _as_section_parent_tree "${_as_section_parent_tree}") #Replace list-delimiters with newlines and parentheses, constructing a function call list
-                #Write subprocess file, exec subprocess
-                configure_file("${_ct_add_dir_file_dir}/templates/expectfail.txt" "${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}_EXPECTFAIL/CMakeLists.txt" @ONLY) #Fill in boilerplate, copy to build dir
-
-
-                file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}_EXPECTFAIL/build")
-                execute_process(COMMAND "${CMAKE_COMMAND}" -S "${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}_EXPECTFAIL/" -B "${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}_EXPECTFAIL/build/" RESULT_VARIABLE _as_expectfail_result_code OUTPUT_VARIABLE _as_expectfail_output ERROR_VARIABLE _as_expectfail_stderr)
-                #message("Subprocess output: ${_as_expectfail_output}")
-                #message("Subprocess exit code: ${_as_expectfail_result_code}")
-                if (NOT _as_expectfail_result_code)
-                     ct_exit("Section ${CT_ADD_SECTION_NAME} was expected to fail but instead returned ${_as_expectfail_result_code}. Subprocess output: ${_as_expectfail_output}\nSubprocess error: ${_as_expectfail_stderr}")
-                endif()
-
-           else()
+            if(NOT _as_exec_expectfail) #We're in main interpreter so we need to configure and execute the subprocess
+                ct_expectfail_subprocess("${_as_curr_exec_unit}" "${_as_curr_section}")
+            else() #We're in subprocess
+                #file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}.cmake" "${_as_curr_section}()")
+                #include("${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}.cmake")
                 file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}.cmake" "${_as_curr_section}()")
                 include("${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}.cmake")
+                cpp_get_global(_as_exceptions "${_as_original_unit}_${_as_curr_section}_EXCEPTIONS")
+
+                if(NOT "${_as_exceptions}" STREQUAL "")
+                    foreach(_as_exc IN LISTS _as_exceptions)
+                        message("${CT_BoldRed}Section named \"${_as_friendly_name}\" raised exception:")
+                        message("${_as_exc}${CT_ColorReset}")
+                    endforeach()
+                    set(_as_section_fail "TRUE")
+               endif()
            endif()
 
         else()
@@ -167,7 +147,7 @@ macro(ct_add_section)
        endif()
 
 
-       if(NOT _as_expect_fail AND NOT _as_exec_expectfail)
+       if((NOT _as_expect_fail AND NOT _as_exec_expectfail) OR (_as_exec_expectfail)) #If in main interpreter and not expecting to fail OR in subprocess
            #Execute the section again, this time executing subsections. Only do when not executing expectfail
            cpp_set_global("CMAKETEST_TEST_${_as_original_unit}_${_as_curr_section}_EXECUTE_SECTIONS" TRUE)
            include("${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}.cmake")
@@ -182,4 +162,4 @@ macro(ct_add_section)
 
     endif()
 
-endmacro()
+endfunction()
