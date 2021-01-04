@@ -5,9 +5,6 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../")
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" CACHE STRING "" FORCE)
 
 
-#Enable colors in Unix environments, ignored on Windows. Will output garbage for pipes and text files
-set(CMAKETEST_USE_COLORS "FALSE")
-
 include(cmake_test/cmake_test)
 include("${PROJECT_SOURCE_DIR}/../cmake/get_cpp.cmake")
 

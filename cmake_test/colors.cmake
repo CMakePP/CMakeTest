@@ -1,6 +1,9 @@
 include_guard()
 
-if(NOT WIN32 AND DEFINED CMAKETEST_USE_COLORS)
+#Enable colors in Unix environments, ignored on Windows. Will output garbage for pipes and text files
+option(CMAKETEST_USE_COLORS "This option enables coloration in CMakeTest output. If enabled will mangle log files or pipes that do not support coloration. This option is ignored on Windows." "FALSE")
+
+if(NOT WIN32 AND CMAKETEST_USE_COLORS)
   string(ASCII 27 Esc)
   set(CT_ColorReset "${Esc}[m")
   set(CT_ColorBold  "${Esc}[1m")
