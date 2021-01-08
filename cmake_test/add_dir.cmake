@@ -1,5 +1,4 @@
 include_guard()
-set(_ct_add_dir_file_dir "${CMAKE_CURRENT_LIST_DIR}")
 
 #[[[
 # This function will find all *.cmake files in the specified directory as well as recursively through all subdirectories.
@@ -18,7 +17,7 @@ function(ct_add_dir _ad_dir)
     foreach(_ad_test_file ${_ad_files})
         file(RELATIVE_PATH _ad_rel_path "${_ad_abs_test_dir}" "${_ad_test_file}") #Find rel path so we don't end up with insanely long paths under test folders
 
-        configure_file("${_ct_add_dir_file_dir}/templates/lists.txt" "${CMAKE_CURRENT_BINARY_DIR}/tests/${_ad_rel_path}/src/CMakeLists.txt" @ONLY) #Fill in boilerplate, copy to build dir
+        configure_file("${_CT_TEMPLATES_DIR}/lists.txt" "${CMAKE_CURRENT_BINARY_DIR}/tests/${_ad_rel_path}/src/CMakeLists.txt" @ONLY) #Fill in boilerplate, copy to build dir
         add_test(
         NAME
             ${_ad_rel_path}
