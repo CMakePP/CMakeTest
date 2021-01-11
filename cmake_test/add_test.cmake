@@ -26,7 +26,7 @@ include_guard()
 macro(ct_add_test)
     cpp_get_global(_at_exec_unit "CT_CURRENT_EXECUTION_UNIT")
     cpp_get_global(_at_exec_expectfail "CT_EXEC_EXPECTFAIL") #Unset in main interpreter, TRUE in subprocess
-    #message("${_at_exec_unit}")
+
     if(NOT ("${_at_exec_unit}" STREQUAL "") AND NOT _at_exec_expectfail)
         cpp_get_global(_at_exec_unit_friendly_name "CMAKETEST_TEST_${_at_exec_unit}_FRIENDLY_NAME")
         ct_exit("ct_add_test() encountered while executing a CMakeTest test or section named \"${_at_exec_unit_friendly_name}\"")
@@ -43,10 +43,7 @@ macro(ct_add_test)
     if("${${CT_ADD_TEST_NAME}}" STREQUAL "")
          cpp_unique_id("${CT_ADD_TEST_NAME}") #Randomized identifier, only alphabetical characters so it generates a valid identifier.
     endif()
-    #get_property(_at_curr_tests GLOBAL PROPERTY "CMAKETEST_TESTS")
 
-    #list(APPEND _at_curr_tests "${${CT_ADD_TEST_NAME}}") #Add the test ID to the list of tests being executed
-    #set_property(GLOBAL PROPERTY "CMAKETEST_TESTS" "${_at_curr_tests}") #Update the global list of tests
     cpp_append_global("CMAKETEST_TESTS" "${${CT_ADD_TEST_NAME}}")
 
     cpp_set_global("CMAKETEST_TEST_${${CT_ADD_TEST_NAME}}_EXPECTFAIL" "${CT_ADD_TEST_EXPECTFAIL}") #Mark the test as expecting to fail or not

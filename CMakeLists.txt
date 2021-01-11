@@ -14,21 +14,14 @@ if("${BUILD_TESTING}")
     enable_testing()
     add_subdirectory("tests")
 
-    #add_test(
-    #    NAME
-    #        CMakeTest
-    #    COMMAND
-    #        "${CMAKE_CTEST_COMMAND}"
-    #            --build-and-test "${CMAKE_CURRENT_SOURCE_DIR}/tests"
-    #                             "${CMAKE_CURRENT_BINARY_DIR}/tests"
-    #            --build-generator "${CMAKE_GENERATOR}"
-    #            --test-command "${CMAKE_CTEST_COMMAND}"
-    #)
 endif()
 
 
-#Example on how to execute a test
-#get_filename_component(CMAKETEST_CURRENT_FILE "${PROJECT_SOURCE_DIR}/examples/CMakeTest.cmake" ABSOLUTE)
+#----------------------------------#
+# Example on how to execute a test #
+#----------------------------------#
 
-#include("${CMAKETEST_CURRENT_FILE}")
-#ct_exec_tests()
+# get_filename_component(CMAKETEST_CURRENT_FILE "${PROJECT_SOURCE_DIR}/examples/CMakeTest.cmake" ABSOLUTE)
+# include("${CMAKETEST_CURRENT_FILE}")
+# ct_exec_tests()
+

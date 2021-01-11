@@ -61,10 +61,6 @@ function(ct_add_section)
          cpp_unique_id(_as_section_name) #Generate random section ID
          set("${CT_ADD_SECTION_NAME}" "${_as_section_name}") #Need to duplicate because CMake scoping rules are inconsistent. Setting in parent scope does not set in current scope
          set("${CT_ADD_SECTION_NAME}" "${_as_section_name}" PARENT_SCOPE)
-         #cpp_get_global(_as_curr_sections "CMAKETEST_TEST_${_as_curr_exec_unit}_SECTIONS")
-         #list(APPEND _as_curr_sections "${${CT_ADD_SECTION_NAME}}")
-         #set_property(GLOBAL PROPERTY CMAKETEST_TEST_${_as_curr_exec_unit}_SECTIONS "${_as_curr_sections}") #Append the section ID to the list of sections, since this will be executed in the test's scope we need to set it in pare>
-         #message(STATUS "Adding section: ${CT_ADD_SECTION_NAME}")
     endif()
 
     cpp_append_global(CMAKETEST_TEST_${_as_curr_exec_unit}_SECTIONS "${${CT_ADD_SECTION_NAME}}")
@@ -79,13 +75,13 @@ function(ct_add_section)
         set(_as_parents_parent_tree "${_as_curr_exec_unit}") #Set parent tree to root
     endif()
     cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_PARENT_TREE" "${_as_parents_parent_tree};${${CT_ADD_SECTION_NAME}}")
-    #cpp_append_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_PARENT_TREE" "${${CT_ADD_SECTION_NAME}}")
+
     cpp_get_global(_as_test_tree "CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_PARENT_TREE")
 
     list(GET _as_test_tree 1 _as_test_tree_first)
 
 
-    #set(_as_curr_section "${${CT_ADD_SECTION_NAME}}")
+
     set(_as_original_unit "${_as_curr_exec_unit}")
     cpp_get_global(_as_exec_section "CMAKETEST_TEST_${_as_curr_exec_unit}_EXECUTE_SECTIONS") #Get whether we should execute section now
 
@@ -101,8 +97,6 @@ function(ct_add_section)
 
         cpp_get_global(_as_expect_fail "CMAKETEST_TEST_${_as_original_unit}_${_as_curr_section}_EXPECTFAIL")
 
-        #get_property(ct_exception_details GLOBAL PROPERTY "${ct_original_unit}_${curr_section}_EXCEPTION_DETAILS")
-        #message(STATUS "Executing section named \"${_as_friendly_name}\", expectfail=${_as_expect_fail}")
 
 
         if(_as_expect_fail) #If this section expects to fail
@@ -110,8 +104,6 @@ function(ct_add_section)
             if(NOT _as_exec_expectfail) #We're in main interpreter so we need to configure and execute the subprocess
                 ct_expectfail_subprocess("${_as_curr_exec_unit}" "${_as_curr_section}")
             else() #We're in subprocess
-                #file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}.cmake" "${_as_curr_section}()")
-                #include("${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}.cmake")
                 file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}.cmake" "${_as_curr_section}()")
                 include("${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}.cmake")
                 cpp_get_global(_as_exceptions "${_as_original_unit}_${_as_curr_section}_EXCEPTIONS")

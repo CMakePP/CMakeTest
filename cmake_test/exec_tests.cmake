@@ -18,14 +18,6 @@ include_guard()
 # .. seealso:: :func:`add_section.cmake.ct_add_section` for details on section execution.
 #]]
 function(ct_exec_tests)
-    #[[
-    #set(options EXPECTFAIL)
-    #set(oneValueArgs NAME)
-    #set(multiValueArgs "")
-    #cmake_parse_arguments(CT_EXEC_TEST "${options}" "${oneValueArgs}"
-    #                      "${multiValueArgs}" ${ARGN} )
-    #]]
-
 
 
     message(STATUS "Executing tests")
@@ -45,13 +37,12 @@ function(ct_exec_tests)
 
         cpp_set_global("CMAKETEST_SECTION_DEPTH" 0)
 
-        #message(STATUS "Running test named \"${friendly_name}\"")
+
 
         file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/${_et_curr_test}/${_et_curr_test}.cmake" "${_et_curr_test}()")
         include("${CMAKE_CURRENT_BINARY_DIR}/${_et_curr_test}/${_et_curr_test}.cmake")
-        #ct_exec_sections()
         cpp_get_global(_et_exceptions "${_et_curr_test}_EXCEPTIONS")
-        #get_property(ct_exception_details GLOBAL PROPERTY "${curr_test}_EXCEPTION_DETAILS")
+
         if(_et_expect_fail)
             if("${_et_exceptions}" STREQUAL "")
                 message("${CT_BoldRed}Test named \"${_et_friendly_name}\" was expected to fail but did not throw any exceptions or errors.${CT_ColorReset}")
@@ -60,9 +51,7 @@ function(ct_exec_tests)
             endif()
         else()
             if(NOT ("${_et_exceptions}" STREQUAL ""))
-                #file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/${curr_test}/${curr_test}.cmake" "${curr_test}()")
-                #include("${CMAKE_CURRENT_BINARY_DIR}/${curr_test}/${curr_test}.cmake")
-                #ct_exec_sections()
+
                 foreach(_et_exc IN LISTS _et_exceptions)
                     message("${CT_BoldRed}Test named \"${_et_friendly_name}\" raised exception:")
                     message("${_et_exc}${CT_ColorReset}")
@@ -78,7 +67,7 @@ function(ct_exec_tests)
         else()
             _ct_print_pass("${_et_friendly_name}" 0)
         endif()
-        #ct_exec_sections()
+
         cpp_set_global("CMAKETEST_TEST_${_et_curr_test}_EXECUTE_SECTIONS" TRUE)
         include("${CMAKE_CURRENT_BINARY_DIR}/${_et_curr_test}/${_et_curr_test}.cmake")
 

@@ -11,7 +11,7 @@ project(@_ad_test_file@ LANGUAGES C) #Needed so dummy libraries don't complain a
 #Enable colors in Unix environments, ignored on Windows. Will not work with pipes
 set(CMAKETEST_USE_COLORS "@CMAKETEST_USE_COLORS@")
 
-#list(APPEND CMAKE_MODULE_PATH "@CMAKE_CURRENT_SOURCE_DIR@/../")
+
 set(CMAKE_MODULE_PATH "@CMAKE_MODULE_PATH@" CACHE STRING "" FORCE)
 
 include("cmake_test/cmake_test")
@@ -31,7 +31,3 @@ include("@_es_section_root_file@")
 
 #Execute the only test there is, ignoring subsections that do not comprise the call tree
 ct_exec_tests()
-#include("@_ad_test_file@")
-#ct_exec_tests()
-#include("@PROJECT_SOURCE_DIR@/CMakeLists.txt")
-#@testi@()
