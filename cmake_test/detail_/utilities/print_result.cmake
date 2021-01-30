@@ -21,8 +21,15 @@ function(_ct_print_result _pr_name _pr_result _pr_depth)
     # This will be the LHS of the dots
     set(_pr_prefix "${_pr_tab}${_pr_name}")
 
+    #Ignore control characters for color reset, bold green, and bold red when calculating length
+    set(_pr_visible_chars "${_pr_prefix}${_pr_result}")
+    if(NOT WIN32 AND CMAKETEST_USE_COLORS)
+        string(REPLACE "${CT_ColorReset}" "" _pr_visible_chars "${_pr_visible_chars}")
+        string(REPLACE "${CT_BoldGreen}" "" _pr_visible_chars "${_pr_visible_chars}")
+        string(REPLACE "${CT_BoldRed}" "" _pr_visible_chars "${_pr_visible_chars}")
+    endif()
     # This is how many characters our result takes up
-    string(LENGTH "${_pr_prefix}${_pr_result}" _pr_n)
+    string(LENGTH "${_pr_visible_chars}" _pr_n)
 
     # Get the number of dots to print
     set(_pr_width 80)
