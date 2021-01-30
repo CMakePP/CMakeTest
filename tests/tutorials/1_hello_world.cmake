@@ -23,7 +23,7 @@ include(cmake_test/cmake_test)
 ct_add_test(NAME hello_world)
 function(${hello_world})
     message("Hello World")
-    #ct_assert_prints("Hello World")
+    ct_assert_prints("Hello World")
 endfunction()
 
 #TUTORIAL
