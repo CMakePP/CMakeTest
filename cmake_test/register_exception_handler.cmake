@@ -1,3 +1,13 @@
+include_guard()
+
+
+#[[[
+# Defines the exception handler and registers it with CMakePP.
+#
+# The exception handler gather information from the globals about the currently running
+# test and then outputs the information to the terminal before shutting down the interpreter.
+#
+#]]
 function(ct_register_exception_handler)
     cpp_catch(ALL_EXCEPTIONS)
     function("${ALL_EXCEPTIONS}" exce_type message)

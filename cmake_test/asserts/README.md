@@ -17,3 +17,4 @@ Assertion Summaries:
 - `equal.cmake` : Assertions for comparing values
 - `list.cmake` : Determines if an identifier contains a list
 - `string.cmake` : Asserts that an identifier contains a string
+- `prints.cmake` : Asserts that a string was printed using `message()`
