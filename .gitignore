@@ -1,12 +1,14 @@
 #Build directories
 docs/build
 cmake-build*/
+build/
 
 #Auto-generated directories
 docs/source/api
 docs/source/tutorials/*.rst
 docs/source/make_tutorials.py
 !docs/source/tutorials/index.rst
+__pycache__/
 
 #CLion project settings
 .idea/

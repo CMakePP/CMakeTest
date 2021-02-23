@@ -50,8 +50,8 @@ def process_files(root_dir, lines_in_lic, new_license):
 
 
 def main() :
-    year = "2018"
-    author = "Ryan M. Richard"
+    year = "2020"
+    author = "Ryan M. Richard, Branden Butler"
     comment_char = '#'
     lines_in_lic = 15
     curr_dir = os.path.dirname(os.path.realpath(__file__))

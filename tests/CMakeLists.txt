@@ -1,15 +1,6 @@
-function(add_cmake_test_test)
-    foreach(testi ${ARGN})
-        set(full_path ${CMAKE_CURRENT_LIST_DIR}/${testi}.cmake)
-        add_test(
-            NAME "${testi}"
-            COMMAND ${CMAKE_COMMAND}
-            -DCMAKE_MODULE_PATH=${PROJECT_SOURCE_DIR}
-            -P ${full_path}
-        )
-    endforeach()
-endfunction()
+cmake_minimum_required(VERSION "${_ct_min_cmake_version}") #Required for FetchContent_MakeAvailable()
 
-add_subdirectory(asserts)
-add_subdirectory(detail_)
-add_subdirectory(tutorials)
+include(cmake_test/cmake_test)
+include("${PROJECT_SOURCE_DIR}/cmake/get_cpp.cmake")
+
+ct_add_dir(".")

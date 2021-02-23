@@ -19,7 +19,8 @@
 #to all inner scopes, and an assert to prove that the variable has the state we
 #think it does.
 include(cmake_test/cmake_test)
-ct_add_test("Sections")
+ct_add_test(NAME "_test_sections")
+function(${_test_sections})
     set(common "This variable is available to all tests")
     ct_assert_equal(common "This variable is available to all tests")
 
@@ -42,14 +43,15 @@ ct_add_test("Sections")
     #
     #To illustrate the concept of scope we now introduce the inner scope. This
     #is done with the commands
-    #``ct_add_section`` and ``ct_end_section``. To the user, for all intents and
-    #purposes ``ct_add_section`` (``ct_end_section``) is the same as
+    #``ct_add_section`` and ``endfunction``. To the user, for all intents and
+    #purposes ``ct_add_section`` (``endfunction``) is the same as
     #``ct_add_test`` (``ct_end_test``). Behind the scenes, however, the
     #functions behave slightly different. If suffices to remember that the
     #outermost scope must always be created with ``ct_add_test`` and ended with
     #``ct_end_test``, whereas all inner scopes (even scopes within sections) are
-    #started with ``ct_add_section`` and ended with ``ct_end_section``.
-    ct_add_section("Make a scoped variable")
+    #started with ``ct_add_section`` and ended with ``endfunction``.
+    ct_add_section(NAME "_scoped_variable")
+    function(${_scoped_variable})
         set(not_common "Only visible to this and nested sections.")
         ct_assert_equal(common "This variable is available to all tests")
         ct_assert_equal(not_common "Only visible to this and nested sections.")
@@ -59,11 +61,12 @@ ct_add_test("Sections")
         #You can nest sections to your heart's content (realistically there is
         #of course some limit, but it is imposed by available resources and not
         #CMakeTest).
-        ct_add_section("Nested section")
+        ct_add_section(NAME "_nested_section")
+        function(${_nested_section})
             set(not_common "This change only matters here")
             ct_assert_equal(common "This variable is available to all tests")
             ct_assert_equal(not_common "This change only matters here")
-        ct_end_section()
+        endfunction()
 
         #TUTORIAL
         #
@@ -73,10 +76,11 @@ ct_add_test("Sections")
         ct_assert_equal(not_common "Only visible to this and nested sections.")
         set(not_common "Only visible from here forward")
 
-        ct_add_section("Another nested section")
+        ct_add_section(NAME "_another_nested_section")
+        function(${_another_nested_section})
             ct_assert_equal(not_common "Only visible from here forward")
-        ct_end_section()
-    ct_end_section()
+        endfunction()
+    endfunction()
 
     #TUTORIAL
     #
@@ -85,7 +89,7 @@ ct_add_test("Sections")
     ct_assert_equal(common "This variable is available to all tests")
     set(common "Only visible from here forward")
     ct_assert_equal(common "Only visible from here forward")
-ct_end_test()
+endfunction()
 
 #TUTORIAL
 #
@@ -140,5 +144,5 @@ ct_end_test()
 #    set(common "Only visible from here forward")
 #    ct_assert_equal(common "Only visible from here forward")
 #
-#Basically everytime parsing hits a ``ct_end_section`` or ``ct_end_test``
+#Basically everytime parsing hits a ``endfunction`` or ``ct_end_test``
 #command a new unit test is spun off.

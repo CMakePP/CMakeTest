@@ -14,9 +14,7 @@ include_guard()
 function(ct_assert_list _al_var)
     list(LENGTH ${_al_var} _al_length)
     if("${_al_length}" LESS 2)
-        message(
-            FATAL_ERROR "${_al_var} is not a list. Contents: ${${_al_var}}"
-        )
+        cpp_raise(ASSERTION_FAILED "${_al_var} is not a list. Contents: ${${_al_var}}")
     endif()
 endfunction()
 
@@ -34,6 +32,6 @@ endfunction()
 function(ct_assert_not_list _anl_var)
     list(LENGTH ${_anl_var} _anl_length)
     if("${_anl_length}" GREATER 1)
-        message(FATAL_ERROR "${_anl_var} is list: ${${_anl_var}}")
+        cpp_raise(ASSERTION_FAILED "${_anl_var} is list: ${${_anl_var}}")
     endif()
 endfunction()

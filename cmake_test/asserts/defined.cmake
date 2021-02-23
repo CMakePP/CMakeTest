@@ -11,7 +11,7 @@ include_guard()
 #]]
 function(ct_assert_defined _ad_var)
     if(NOT DEFINED ${_ad_var})
-        message(FATAL_ERROR "${_ad_var} is not defined.")
+        cpp_raise(ASSERTION_FAILED "${_ad_var} is not defined.")
     endif()
 endfunction()
 
@@ -25,6 +25,6 @@ endfunction()
 #]]
 function(ct_assert_not_defined _and_var)
     if(DEFINED ${_and_var})
-        message(FATAL_ERROR "${_and_var} is defined.")
+        cpp_raise(ASSERTION_FAILED "${_and_var} is defined.")
     endif()
 endfunction()

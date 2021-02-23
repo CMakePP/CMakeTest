@@ -1,0 +1,33 @@
+#This file is a template intended to be configured via CMakeTest.
+#The configured file will be used as the CTest entrypoint and will
+#include() the intended test file before executing the tests found.
+
+
+cmake_minimum_required(VERSION @_ct_min_cmake_version@) #Required for FetchContent_MakeAvailable()
+
+project(@_ad_test_file@ LANGUAGES C) #Needed so dummy libraries don't complain about not having a linkage language
+
+
+#Enable colors in Unix environments, ignored on Windows. Will not work with pipes
+set(CMAKETEST_USE_COLORS "@CMAKETEST_USE_COLORS@")
+
+
+set(CMAKE_MODULE_PATH "@CMAKE_MODULE_PATH@" CACHE STRING "" FORCE)
+
+include("cmake_test/cmake_test")
+
+cpp_set_global("CT_EXEC_EXPECTFAIL" TRUE)
+cpp_set_global("CT_CURRENT_EXECUTION_UNIT" "@_es_section_root@")
+
+
+#Register handler so we know when a test fails
+ct_register_exception_handler()
+
+#Set test and section ID definitions
+@_es_section_id_defines@
+
+#Include root file
+include("@_es_section_root_file@")
+
+#Execute the only test there is, ignoring subsections that do not comprise the call tree
+ct_exec_tests()

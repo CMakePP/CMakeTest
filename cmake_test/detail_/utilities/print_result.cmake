@@ -21,8 +21,15 @@ function(_ct_print_result _pr_name _pr_result _pr_depth)
     # This will be the LHS of the dots
     set(_pr_prefix "${_pr_tab}${_pr_name}")
 
+    #Ignore control characters for color reset, bold green, and bold red when calculating length
+    set(_pr_visible_chars "${_pr_prefix}${_pr_result}")
+    if(NOT WIN32 AND CMAKETEST_USE_COLORS)
+        string(REPLACE "${CT_ColorReset}" "" _pr_visible_chars "${_pr_visible_chars}")
+        string(REPLACE "${CT_BoldGreen}" "" _pr_visible_chars "${_pr_visible_chars}")
+        string(REPLACE "${CT_BoldRed}" "" _pr_visible_chars "${_pr_visible_chars}")
+    endif()
     # This is how many characters our result takes up
-    string(LENGTH "${_pr_prefix}${_pr_result}" _pr_n)
+    string(LENGTH "${_pr_visible_chars}" _pr_n)
 
     # Get the number of dots to print
     set(_pr_width 80)
@@ -50,7 +57,7 @@ endfunction()
 # :type _pp_depth: str
 #]]
 function(_ct_print_pass _pp_name _pp_depth)
-    _ct_print_result(${_pp_name} "PASSED" ${_pp_depth})
+    _ct_print_result(${_pp_name} "${CT_BoldGreen}PASSED${CT_ColorReset}" ${_pp_depth})
 endfunction()
 
 #[[[ Wraps the process of printing that a test failed.
@@ -67,6 +74,6 @@ endfunction()
 # :type _pf_depth: str
 #]]
 function(_ct_print_fail _pf_name _pf_depth)
-    _ct_print_result(${_pf_name} "FAILED" ${_pf_depth})
-    message(FATAL_ERROR "Reason:\n\n${ARGN}")
+    _ct_print_result(${_pf_name} "${CT_BoldRed}FAILED${CT_ColorReset}" ${_pf_depth})
+    #message(FATAL_ERROR "Reason:\n\n${ARGN}")
 endfunction()

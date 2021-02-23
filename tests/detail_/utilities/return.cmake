@@ -1,6 +1,7 @@
 include(cmake_test/cmake_test)
 
-ct_add_test("return")
+ct_add_test(NAME "_test_return")
+function(${_test_return})
     include(cmake_test/detail_/utilities/return)
 
     ct_assert_not_defined(the_return)
@@ -11,4 +12,4 @@ ct_add_test("return")
     endfunction()
     dummy_fxn()
     ct_assert_equal(the_return "hello world")
-ct_end_test()
+endfunction()
