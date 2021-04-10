@@ -10,3 +10,7 @@ docs/source/make_tutorials.py
 
 #CLion project settings
 .idea/
+
+#Python compiled files
+__pycache__/
+*.pyc
