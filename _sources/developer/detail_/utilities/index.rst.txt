@@ -1,0 +1,22 @@
+
+#################
+detail_/utilities
+#################
+
+.. toctree:: 
+   :maxdepth: 2
+
+   sanitize_name
+
+   lc_find
+
+   repeat_string
+
+   print_result
+
+   utilities
+
+   input_check
+
+   return
+

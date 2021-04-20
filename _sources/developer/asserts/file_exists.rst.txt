@@ -1,0 +1,33 @@
+
+#########################
+asserts/file_exists.cmake
+#########################
+
+.. module:: asserts/file_exists.cmake
+
+
+.. function:: ct_assert_file_exists(_afe_path)
+
+   Assert that the file at the provided path exists.
+
+   
+
+   :param _afe_path: The path to check
+
+   :type _afe_path: Path
+
+   
+
+
+.. function:: ct_assert_file_does_not_exist(_afdne_path)
+
+   Assert that a file does not exist at the provided path.
+
+   
+
+   :param _afdne_path: The path to check
+
+   :type _afdne_path: Path
+
+   
+

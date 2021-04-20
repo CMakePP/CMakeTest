@@ -1,0 +1,308 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>asserts/file_contains.cmake &mdash; CMakeTest 1.0.0alpha documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="asserts/asserts.cmake" href="asserts.html" />
+    <link rel="prev" title="asserts/list.cmake" href="list.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> CMakeTest
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About CMakeTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faqs.html">Frequently Asked Questions (FAQs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing_tests/index.html">Writing Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Developer</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../add_dir.html">add_dir.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../register_exception_handler.html">register_exception_handler.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overrides.html">overrides.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exec_tests.html">exec_tests.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cmake_test.html">cmake_test.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../add_test.html">add_test.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../colors.html">colors.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../add_section.html">add_section.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../expectfail_subprocess.html">expectfail_subprocess.cmake</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">asserts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="defined.html">asserts/defined.cmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="equal.html">asserts/equal.cmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list.html">asserts/list.cmake</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">asserts/file_contains.cmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asserts.html">asserts/asserts.cmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library_exists.html">asserts/library_exists.cmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prints.html">asserts/prints.cmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="string.html">asserts/string.cmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="target_has_property.html">asserts/target_has_property.cmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="true_false.html">asserts/true_false.cmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="target_exists.html">asserts/target_exists.cmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_exists.html">asserts/file_exists.cmake</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../templates/index.html">templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../detail_/index.html">detail</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CMakeTest</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Developer</a> &raquo;</li>
+        
+          <li><a href="index.html">asserts</a> &raquo;</li>
+        
+      <li>asserts/file_contains.cmake</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/developer/asserts/file_contains.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-asserts-file_contains.cmake">
+<span id="module-asserts/file_contains.cmake"></span><span id="asserts-file-contains-cmake"></span><h1>asserts/file_contains.cmake<a class="headerlink" href="#module-asserts-file_contains.cmake" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="asserts-file_contains.cmake.ct_assert_file_contains">
+<span id="asserts/file_contains.cmake.ct_assert_file_contains"></span><code class="sig-prename descclassname"><span class="pre">asserts/file_contains.cmake.</span></code><code class="sig-name descname"><span class="pre">ct_assert_file_contains</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">_afc_file</span> <span class="pre">_afc_text</span></em><span class="sig-paren">)</span><a class="headerlink" href="#asserts-file_contains.cmake.ct_assert_file_contains" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assert a file contains the specified text.</p>
+<p>Asserts that the file at the specified path contains the specified text.</p>
+<p>Will return if the file does not exist, the assertion failure will be logged as a fatal error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_afc_file</strong> (<em>path</em>) – The file to check</p></li>
+<li><p><strong>_afc_text</strong> (<em>string</em>) – The text to check for</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="asserts-file_contains.cmake.ct_assert_file_does_not_contain">
+<span id="asserts/file_contains.cmake.ct_assert_file_does_not_contain"></span><code class="sig-prename descclassname"><span class="pre">asserts/file_contains.cmake.</span></code><code class="sig-name descname"><span class="pre">ct_assert_file_does_not_contain</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">_afdnc_file</span> <span class="pre">_afdnc_text</span></em><span class="sig-paren">)</span><a class="headerlink" href="#asserts-file_contains.cmake.ct_assert_file_does_not_contain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assert a file does not contain the specified text.</p>
+<p>Asserts that the file at the specified path does not contain the specified</p>
+<p>text.</p>
+<p>Will return if the file does not exist, the assertion failure will be logged as a fatal error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_afdnc_file</strong> (<em>path</em>) – The file to check</p></li>
+<li><p><strong>_afdnc_text</strong> (<em>string</em>) – The text to check for</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="asserts-file_contains.cmake.ct_file_contains">
+<span id="asserts/file_contains.cmake.ct_file_contains"></span><code class="sig-prename descclassname"><span class="pre">asserts/file_contains.cmake.</span></code><code class="sig-name descname"><span class="pre">ct_file_contains</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">_fc_result</span> <span class="pre">_fc_file</span> <span class="pre">_fc_text</span></em><span class="sig-paren">)</span><a class="headerlink" href="#asserts-file_contains.cmake.ct_file_contains" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines if a file contains some text.</p>
+<p>This function checks whether a file contains some text and returns a boolean</p>
+<p>result.</p>
+<p>Will return if the file does not exist, the assertion failure will be logged as a fatal error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_fc_result</strong> (<em>bool</em>) – Name to use for the variable which will hold the result.</p></li>
+<li><p><strong>_fc_file</strong> (<em>string</em>) – The file to check.</p></li>
+<li><p><strong>_fc_text</strong> (<em>string</em>) – The text to check for.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><code class="docutils literal notranslate"><span class="pre">_fc_result</span></code> will be set to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> if file contains the text</p>
+<p>and <code class="docutils literal notranslate"><span class="pre">FALSE</span></code> if it does not.</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="asserts.html" class="btn btn-neutral float-right" title="asserts/asserts.cmake" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="list.html" class="btn btn-neutral float-left" title="asserts/list.cmake" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, CMakePP Organization.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

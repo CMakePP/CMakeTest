@@ -1,0 +1,41 @@
+
+#################################
+asserts/target_has_property.cmake
+#################################
+
+.. module:: asserts/target_has_property.cmake
+
+
+.. function:: ct_assert_target_has_property(_athp_target _athp_property)
+
+   Assert that a target has a property.
+
+   
+
+   :param _athp_target: The name of the target
+
+   :type _athp_target: String
+
+   :param _athp_property: The name of the property
+
+   :type _athp_property: String
+
+   
+
+
+.. function:: ct_assert_target_does_not_have_property(_atdnhp_target _atdnhp_property)
+
+   Assert that a target does not have a property.
+
+   
+
+   :param _atdnhp_target: The name of the target
+
+   :type _atdnhp_target: String
+
+   :param _atdnhp_property: The name of the property
+
+   :type _atdnhp_property: String
+
+   
+
