@@ -25,11 +25,21 @@ include_guard()
 # exceptions will also halt all testing.
 #
 #
+# Print length of pass/fail lines can be adjusted with the `PRINT_LENGTH` option.
+#
+# Priority for print length is as follows (first most important):
+#  1. Current execution unit's PRINT_LENGTH option
+#  2. Parent's PRINT_LENGTH option
+#  3. Length set by ct_set_print_length()
+#  4. Built-in default of 80.
+#
+#
 # :param **kwargs: See below
 #
 # :Keyword Arguments:
 #    * *NAME* (``pointer``) -- Required argument specifying the name variable of the section. Will set a variable with specified name containing the generated function ID to use.
 #    * *EXPECTFAIL* (``option``) -- Option indicating whether the section is expected to fail or not, if specified will cause test failure when no exceptions were caught and success upon catching any exceptions.
+#    * *PRINT_LENGTH* (``int``) -- Optional argument specifying the desired print length of pass/fail output lines.
 #
 # .. seealso:: :func:`add_test.cmake.ct_add_test` for details on EXPECTFAIL.
 #
@@ -39,6 +49,7 @@ include_guard()
 function(ct_add_section)
     cpp_get_global(_as_curr_exec_unit "CT_CURRENT_EXECUTION_UNIT")
     cpp_get_global(_as_parent_print_length "CMAKETEST_TEST_${_as_curr_exec_unit}_PRINT_LENGTH")
+    cpp_get_global(_as_parent_print_length_forced "CMAKETEST_TEST_${_as_curr_exec_unit}_PRINT_LENGTH_FORCED")
 
     #TODO Set sections as a subproperty of CT_CURRENT_EXECUTION_UNIT instead of as a single global variable
     set(_as_options EXPECTFAIL)
@@ -47,9 +58,15 @@ function(ct_add_section)
     cmake_parse_arguments(CT_ADD_SECTION "${_as_options}" "${_as_one_value_args}"
                           "${_as_multi_value_args}" ${ARGN} )
 
-    #Set default print length to parent print length. Can be overriden with PRINT_LENGTH option to this function
-    if(NOT CT_ADD_SECTION_PRINT_LENGTH GREATER 0)
-        set(CT_ADD_SECTION_PRINT_LENGTH "${_as_parent_print_length}")
+    set(_as_print_length_forced "NO")
+
+    #Set default print length to CT_PRINT_LENGTH. Can be overriden with PRINT_LENGTH option to this function or parent execution unit
+    set(_as_print_length "${CT_PRINT_LENGTH}")
+    if(CT_ADD_SECTION_PRINT_LENGTH GREATER 0)
+        set(_as_print_length_forced "YES")
+        set(_as_print_length "${CT_ADD_SECTION_PRINT_LENGTH}")
+    elseif(_as_parent_print_length_forced)
+        set(_as_print_length "${_as_parent_print_length}")
     endif()
 
     cpp_get_global(_as_curr_section "CMAKETEST_TEST_${_as_curr_exec_unit}_${CT_ADD_SECTION_NAME}_ID")
@@ -74,7 +91,8 @@ function(ct_add_section)
 
     cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_EXPECTFAIL" "${CT_ADD_SECTION_EXPECTFAIL}") #Set a flag for whether the section is expected to fail or not
     cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_FRIENDLY_NAME" "${CT_ADD_SECTION_NAME}") #Store the friendly name for the test
-    cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_PRINT_LENGTH" "${CT_ADD_SECTION_PRINT_LENGTH}") #Store print length in case it's overriden
+    cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_PRINT_LENGTH" "${_as_print_length}") #Store print length in case it's overriden
+    cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_PRINT_LENGTH_FORCED" "${_as_print_length_forced}") #Store whether PRINT_LENGTH option was used
 
     #Store this section's parent and its parents so we can trace the execution path back
     cpp_get_global(_as_parents_parent_tree "CMAKETEST_TEST_${_as_curr_exec_unit}_PARENT_TREE") #Get our parent's parent tree

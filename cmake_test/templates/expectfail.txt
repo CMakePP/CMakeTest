@@ -11,6 +11,8 @@ project(@_ad_test_file@ LANGUAGES C) #Needed so dummy libraries don't complain a
 #Enable colors in Unix environments, ignored on Windows. Will not work with pipes
 set(CMAKETEST_USE_COLORS "@CMAKETEST_USE_COLORS@")
 
+#Propagate CT_PRINT_LENGTH
+set(CT_PRINT_LENGTH "@CT_PRINT_LENGTH@")
 
 set(CMAKE_MODULE_PATH "@CMAKE_MODULE_PATH@" CACHE STRING "" FORCE)
 
