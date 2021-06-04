@@ -37,18 +37,25 @@ include_guard()
 #
 #]]
 function(ct_add_section)
+    cpp_get_global(_as_curr_exec_unit "CT_CURRENT_EXECUTION_UNIT")
+    cpp_get_global(_as_parent_print_length "CMAKETEST_TEST_${_as_curr_exec_unit}_PRINT_LENGTH")
 
     #TODO Set sections as a subproperty of CT_CURRENT_EXECUTION_UNIT instead of as a single global variable
     set(_as_options EXPECTFAIL)
-    set(_as_one_value_args NAME)
+    set(_as_one_value_args NAME PRINT_LENGTH)
     set(_as_multi_value_args "")
     cmake_parse_arguments(CT_ADD_SECTION "${_as_options}" "${_as_one_value_args}"
                           "${_as_multi_value_args}" ${ARGN} )
 
-    cpp_get_global(_as_curr_exec_unit "CT_CURRENT_EXECUTION_UNIT")
+    #Set default print length to parent print length. Can be overriden with PRINT_LENGTH option to this function
+    if(NOT CT_ADD_SECTION_PRINT_LENGTH GREATER 0)
+        set(CT_ADD_SECTION_PRINT_LENGTH "${_as_parent_print_length}")
+    endif()
+
     cpp_get_global(_as_curr_section "CMAKETEST_TEST_${_as_curr_exec_unit}_${CT_ADD_SECTION_NAME}_ID")
 
     cpp_get_global(_as_exec_expectfail "CT_EXEC_EXPECTFAIL") #Unset in main interpreter, TRUE in subprocess
+
 
     if(_as_exec_expectfail)
         if("${${CT_ADD_SECTION_NAME}}" STREQUAL "" OR "${${CT_ADD_SECTION_NAME}}" STREQUAL "_")
@@ -67,7 +74,7 @@ function(ct_add_section)
 
     cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_EXPECTFAIL" "${CT_ADD_SECTION_EXPECTFAIL}") #Set a flag for whether the section is expected to fail or not
     cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_FRIENDLY_NAME" "${CT_ADD_SECTION_NAME}") #Store the friendly name for the test
-
+    cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_PRINT_LENGTH" "${CT_ADD_SECTION_PRINT_LENGTH}") #Store print length in case it's overriden
 
     #Store this section's parent and its parents so we can trace the execution path back
     cpp_get_global(_as_parents_parent_tree "CMAKETEST_TEST_${_as_curr_exec_unit}_PARENT_TREE") #Get our parent's parent tree
@@ -96,7 +103,7 @@ function(ct_add_section)
 
 
         cpp_get_global(_as_expect_fail "CMAKETEST_TEST_${_as_original_unit}_${_as_curr_section}_EXPECTFAIL")
-
+        cpp_get_global(_as_print_length "CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_PRINT_LENGTH")
 
 
         if(_as_expect_fail) #If this section expects to fail
@@ -131,11 +138,11 @@ function(ct_add_section)
            endif()
        endif()
        if(_as_section_fail)
-           _ct_print_fail("${_as_friendly_name}" "${_as_new_section_depth}")
+           _ct_print_fail("${_as_friendly_name}" "${_as_new_section_depth}" "${_as_print_length}")
            cpp_set_global(CMAKETEST_TESTS_DID_PASS "FALSE") #At least one test failed, so we will inform the caller that not all tests passed.
            ct_exit()
        else()
-           _ct_print_pass("${_as_friendly_name}" "${_as_new_section_depth}")
+           _ct_print_pass("${_as_friendly_name}" "${_as_new_section_depth}" "${_as_print_length}")
        endif()
 
 

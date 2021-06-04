@@ -34,6 +34,7 @@ function(ct_exec_tests)
         cpp_set_global("CT_CURRENT_EXECUTION_UNIT" "${_et_curr_test}")
         cpp_get_global(_et_friendly_name "CMAKETEST_TEST_${_et_curr_test}_FRIENDLY_NAME")
         cpp_get_global(_et_expect_fail "CMAKETEST_TEST_${_et_curr_test}_EXPECTFAIL")
+        cpp_get_global(_et_print_length "CMAKETEST_TEST_${_et_curr_test}_PRINT_LENGTH")
 
         cpp_set_global("CMAKETEST_SECTION_DEPTH" 0)
 
@@ -62,10 +63,10 @@ function(ct_exec_tests)
         endif()
 
         if(_et_test_fail)
-            _ct_print_fail("${_et_friendly_name}" 0)
+            _ct_print_fail("${_et_friendly_name}" 0 "${_et_print_length}")
             ct_exit()
         else()
-            _ct_print_pass("${_et_friendly_name}" 0)
+            _ct_print_pass("${_et_friendly_name}" 0 "${_et_print_length}")
         endif()
 
         cpp_set_global("CMAKETEST_TEST_${_et_curr_test}_EXECUTE_SECTIONS" TRUE)

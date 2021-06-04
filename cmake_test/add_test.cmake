@@ -35,7 +35,7 @@ macro(ct_add_test)
 
 
     set(_at_options EXPECTFAIL)
-    set(_at_one_value_args NAME)
+    set(_at_one_value_args NAME PRINT_LENGTH)
     set(_at_multi_value_args "")
     cmake_parse_arguments(CT_ADD_TEST "${_at_options}" "${_at_one_value_args}"
                           "${_at_multi_value_args}" ${ARGN} )
@@ -46,6 +46,7 @@ macro(ct_add_test)
 
     cpp_append_global("CMAKETEST_TESTS" "${${CT_ADD_TEST_NAME}}")
 
+    cpp_set_global("CMAKETEST_TEST_${${CT_ADD_TEST_NAME}}_PRINT_LENGTH" "${CT_ADD_TEST_PRINT_LENGTH}") #Set print length to be used for this test
     cpp_set_global("CMAKETEST_TEST_${${CT_ADD_TEST_NAME}}_EXPECTFAIL" "${CT_ADD_TEST_EXPECTFAIL}") #Mark the test as expecting to fail or not
     cpp_set_global("CMAKETEST_TEST_${${CT_ADD_TEST_NAME}}_FRIENDLY_NAME" "${CT_ADD_TEST_NAME}") #Store the friendly name for the test
     cpp_set_global("CMAKETEST_TEST_${${CT_ADD_TEST_NAME}}_FILE" "${CMAKE_CURRENT_LIST_FILE}") #Store the file location for when we need to re-execute in subprocess
