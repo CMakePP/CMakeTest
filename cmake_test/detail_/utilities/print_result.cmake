@@ -13,8 +13,16 @@ include(cmake_test/detail_/utilities/repeat_string)
 #  :type _pr_result: str
 #  :param _pr_depth: How many sections is this test nested?
 #  :type _pr_depth: str
+#  :param _pr_print_length: The total length of the line to be printed, including dots and whitespace
+#  :type _pr_print_length: int
 #]]
-function(_ct_print_result _pr_name _pr_result _pr_depth)
+function(_ct_print_result _pr_name _pr_result _pr_depth _pr_print_length)
+    #message("Print length is: ${_pr_print_length}")
+
+    if(NOT _pr_print_length GREATER 0)
+        set(_pr_print_length 80)
+    endif()
+
     # Get the indent
     _ct_repeat_string(_pr_tab "    " ${_pr_depth})
 
@@ -32,7 +40,7 @@ function(_ct_print_result _pr_name _pr_result _pr_depth)
     string(LENGTH "${_pr_visible_chars}" _pr_n)
 
     # Get the number of dots to print
-    set(_pr_width 80)
+    set(_pr_width "${_pr_print_length}")
     set(_pr_n_dot 0)
     if("${_pr_n}" LESS ${_pr_width})
         math(EXPR _pr_n_dot "${_pr_width} - ${_pr_n}")
@@ -55,9 +63,11 @@ endfunction()
 # :type _pp_name: str
 # :param _pp_depth: How many sections is this test nested?
 # :type _pp_depth: str
+#  :param _pp_print_length: The total length of the line to be printed, including dots and whitespace
+#  :type _pp_print_length: int
 #]]
-function(_ct_print_pass _pp_name _pp_depth)
-    _ct_print_result(${_pp_name} "${CT_BoldGreen}PASSED${CT_ColorReset}" ${_pp_depth})
+function(_ct_print_pass _pp_name _pp_depth _pp_print_length)
+    _ct_print_result(${_pp_name} "${CT_BoldGreen}PASSED${CT_ColorReset}" ${_pp_depth} "${_pp_print_length}")
 endfunction()
 
 #[[[ Wraps the process of printing that a test failed.
@@ -72,8 +82,10 @@ endfunction()
 # :type _pf_name: str
 # :param _pf_depth: How many sections is this test nested?
 # :type _pf_depth: str
+#  :param _pf_print_length: The total length of the line to be printed, including dots and whitespace
+#  :type _pf_print_length: int
 #]]
-function(_ct_print_fail _pf_name _pf_depth)
-    _ct_print_result(${_pf_name} "${CT_BoldRed}FAILED${CT_ColorReset}" ${_pf_depth})
+function(_ct_print_fail _pf_name _pf_depth _pf_print_length)
+    _ct_print_result(${_pf_name} "${CT_BoldRed}FAILED${CT_ColorReset}" ${_pf_depth} "${_pf_print_length}")
     #message(FATAL_ERROR "Reason:\n\n${ARGN}")
 endfunction()

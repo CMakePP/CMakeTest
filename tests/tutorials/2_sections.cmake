@@ -52,6 +52,14 @@ function(${_test_sections})
     #started with ``ct_add_section`` and ended with ``endfunction``.
     ct_add_section(NAME "_scoped_variable")
     function(${_scoped_variable})
+
+        #TUTORIAL
+        #
+        #You can override the default print length for tests and subsections
+        #by calling this function. It will be propagated down, so if it's
+        #not overriden again subsequent subsections will use the new print length.
+        ct_set_print_length(120)
+
         set(not_common "Only visible to this and nested sections.")
         ct_assert_equal(common "This variable is available to all tests")
         ct_assert_equal(not_common "Only visible to this and nested sections.")
@@ -61,7 +69,15 @@ function(${_test_sections})
         #You can nest sections to your heart's content (realistically there is
         #of course some limit, but it is imposed by available resources and not
         #CMakeTest).
-        ct_add_section(NAME "_nested_section")
+        #You can also forcibly override the print length for this section and subsequent
+        #sections by setting the PRINT_LENGTH option. This option overrides any length
+        #set by parents or by the ct_set_print_length() macro.
+        #Priority for print length is as follows (first most important):
+        # 1. This section's PRINT_LENGTH option
+        # 2. Parent's PRINT_LENGTH option
+        # 3. Length set by ct_set_print_length()
+        # 4. Built-in default of 80.
+        ct_add_section(NAME "_nested_section" PRINT_LENGTH 180)
         function(${_nested_section})
             set(not_common "This change only matters here")
             ct_assert_equal(common "This variable is available to all tests")

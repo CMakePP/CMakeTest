@@ -22,6 +22,8 @@ include_guard()
 #
 #]]
 function(ct_expectfail_subprocess _es_curr_exec_unit _es_curr_section)
+                cpp_get_global(_es_print_length "CMAKETEST_TEST_${_es_curr_exec_unit}_${_es_curr_section}_PRINT_LENGTH")
+
                 cpp_get_global(_es_section_parent_tree "CMAKETEST_TEST_${_es_curr_exec_unit}_${_es_curr_section}_PARENT_TREE")
 
                 list(REMOVE_ITEM _es_section_parent_tree "") #Remove empty list items
