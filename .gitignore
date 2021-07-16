@@ -4,7 +4,7 @@ cmake-build*/
 build/
 
 #Auto-generated directories
-docs/source/api
+docs/source/developer/
 docs/source/tutorials/*.rst
 docs/source/make_tutorials.py
 !docs/source/tutorials/index.rst

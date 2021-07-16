@@ -19,7 +19,12 @@ function(message)
     else()
         cpp_set_global(CT_LAST_MESSAGE "${ARGV}")
     endif()
-    _message(${ARGV})
+
+    if("${ARGV}" STREQUAL "")
+        _message("")
+    else()
+        _message(${ARGV})
+    endif()
 endfunction()
 
 
