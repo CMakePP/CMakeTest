@@ -17,10 +17,12 @@ if("${BUILD_TESTING}")
 endif()
 
 if(BUILD_DOCS)
+    ct_register_exception_handler() #Catch any exceptions while building docs
+
     include("${PROJECT_SOURCE_DIR}/cmake/get_cminx.cmake")
     include(cminx)
 
-    ct_register_exception_handler() #Catch any exceptions while building docs
+
 
     cminx_gen_rst("${CMAKE_CURRENT_SOURCE_DIR}/cmake_test/" "${CMAKE_CURRENT_SOURCE_DIR}/docs/source/developer/")
 
