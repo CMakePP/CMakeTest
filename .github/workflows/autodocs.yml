@@ -1,0 +1,12 @@
+#This is the main workflow to autogenerate documentation
+
+name: autodocs
+on: [push]
+jobs:
+  autodoc:
+    runs-on: ubuntu-18.04
+    name: autodoc-gen
+    steps:
+      - uses: CMakePP/cminx-auto-update-action@main
+        with:
+          push: true
