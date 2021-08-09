@@ -1,7 +1,10 @@
 #This is the main workflow to autogenerate documentation
 
 name: autodocs
-on: [push]
+on:
+  push:
+    branches:
+      - master
 jobs:
   autodoc:
     runs-on: ubuntu-18.04
