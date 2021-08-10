@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -39,8 +42,8 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="colors.cmake" href="colors.html" />
-    <link rel="prev" title="cmake_test.cmake" href="cmake_test.html" /> 
+    <link rel="next" title="add_dir.cmake" href="add_dir.html" />
+    <link rel="prev" title="expectfail_subprocess.cmake" href="expectfail_subprocess.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -94,19 +97,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../faqs.html">Frequently Asked Questions (FAQs)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../writing_tests/index.html">Writing Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="add_dir.html">add_dir.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="register_exception_handler.html">register_exception_handler.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overrides.html">overrides.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exec_tests.html">exec_tests.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cmake_test.html">cmake_test.cmake</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">add_test.cmake</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">#</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="colors.html">colors.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmake_test.html">cmake_test.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="set_print_length.html">set_print_length.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="register_exception_handler.html">register_exception_handler.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec_tests.html">exec_tests.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overrides.html">overrides.cmake</a></li>
 <li class="toctree-l2"><a class="reference internal" href="add_section.html">add_section.cmake</a></li>
 <li class="toctree-l2"><a class="reference internal" href="expectfail_subprocess.html">expectfail_subprocess.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="asserts/index.html">asserts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="templates/index.html">templates</a></li>
-<li class="toctree-l2"><a class="reference internal" href="detail_/index.html">detail</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">add_test.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="add_dir.html">add_dir.cmake</a></li>
 </ul>
 </li>
 </ul>
@@ -157,7 +158,7 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="index.html">Developer</a> &raquo;</li>
+          <li><a href="index.html">#</a> &raquo;</li>
         
       <li>add_test.cmake</li>
     
@@ -181,8 +182,8 @@
   <div class="section" id="module-add_test.cmake">
 <span id="add-test-cmake"></span><h1>add_test.cmake<a class="headerlink" href="#module-add_test.cmake" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="add_test.cmake.ct_add_test">
-<code class="sig-prename descclassname"><span class="pre">add_test.cmake.</span></code><code class="sig-name descname"><span class="pre">ct_add_test</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#add_test.cmake.ct_add_test" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="add_test.cmake.ct_add_test">
+<span class="sig-prename descclassname"><span class="pre">add_test.cmake.</span></span><span class="sig-name descname"><span class="pre">ct_add_test</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#add_test.cmake.ct_add_test" title="Permalink to this definition">¶</a></dt>
 <dd><div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This is a macro, and so does not introduce a new scope.</p>
@@ -202,6 +203,16 @@
 </pre></div>
 </div>
 <p>This helps tests avoid name collisions and also allows the testing framework to keep track of them.</p>
+<p>Print length of pass/fail lines can be adjusted with the <cite>PRINT_LENGTH</cite> option.</p>
+<p>Priority for print length is as follows (first most important):</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Current execution unit’s PRINT_LENGTH option</p></li>
+<li><p>Parent’s PRINT_LENGTH option</p></li>
+<li><p>Length set by ct_set_print_length()</p></li>
+<li><p>Built-in default of 80.</p></li>
+</ol>
+</div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>**kwargs</strong> – <p>See below</p>
@@ -211,6 +222,7 @@
 <dd class="field-even"><ul class="simple">
 <li><p><em>NAME</em> (<code class="docutils literal notranslate"><span class="pre">pointer</span></code>) – Required argument specifying the name variable of the section. Will set a variable with specified name containing the generated function ID to use.</p></li>
 <li><p><em>EXPECTFAIL</em> (<code class="docutils literal notranslate"><span class="pre">option</span></code>) – Option indicating whether the section is expected to fail or not, if specified will cause test failure when no exceptions were caught and success upon catching any exceptions.</p></li>
+<li><p><em>PRINT_LENGTH</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – Optional argument specifying the desired print length of pass/fail output lines.</p></li>
 </ul>
 </dd>
 </dl>
@@ -224,8 +236,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="colors.html" class="btn btn-neutral float-right" title="colors.cmake" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="cmake_test.html" class="btn btn-neutral float-left" title="cmake_test.cmake" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="add_dir.html" class="btn btn-neutral float-right" title="add_dir.cmake" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="expectfail_subprocess.html" class="btn btn-neutral float-left" title="expectfail_subprocess.cmake" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
