@@ -110,7 +110,10 @@ function(ct_add_section)
     set(_as_original_unit "${_as_curr_exec_unit}")
     cpp_get_global(_as_exec_section "CMAKETEST_TEST_${_as_curr_exec_unit}_EXECUTE_SECTIONS") #Get whether we should execute section now
 
+
     if(_as_exec_section) #Time to execute our section
+
+
         cpp_get_global(_as_old_section_depth "CMAKETEST_SECTION_DEPTH")
         math(EXPR _as_new_section_depth "${_as_old_section_depth} + 1")
         cpp_set_global("CMAKETEST_SECTION_DEPTH" "${_as_new_section_depth}")
@@ -164,13 +167,18 @@ function(ct_add_section)
        endif()
 
 
-       if((NOT _as_expect_fail AND NOT _as_exec_expectfail) OR (_as_exec_expectfail)) #If in main interpreter and not expecting to fail OR in subprocess
+       # Get whether this section has subsections, only run again if subsections detected
+       cpp_get_global(_as_has_subsections "CMAKETEST_TEST_${_as_original_unit}_${_as_curr_section}_SECTIONS")
+       if((NOT _as_has_subsections STREQUAL "") AND ((NOT _as_expect_fail AND NOT _as_exec_expectfail) OR (_as_exec_expectfail))) #If in main interpreter and not expecting to fail OR in subprocess
            #Execute the section again, this time executing subsections. Only do when not executing expectfail
            cpp_set_global("CMAKETEST_TEST_${_as_original_unit}_${_as_curr_section}_EXECUTE_SECTIONS" TRUE)
            include("${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}.cmake")
            cpp_set_global("CT_CURRENT_EXECUTION_UNIT" "${_as_original_unit}")
            cpp_set_global("CMAKETEST_SECTION_DEPTH" "${_as_old_section_depth}")
       endif()
+
+      #cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_EXECUTE_SECTIONS" FALSE) #Get whether we should execute section now
+
     else()
         #First time run, set the ID so we don't lose it on the second run.
         #This will only cause conflicts if two sections in the same test
