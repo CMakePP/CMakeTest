@@ -178,7 +178,6 @@ function(ct_add_section)
 
       cpp_set_global("CT_CURRENT_EXECUTION_UNIT" "${_as_original_unit}")
       cpp_set_global("CMAKETEST_SECTION_DEPTH" "${_as_old_section_depth}")
-
       #cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_EXECUTE_SECTIONS" FALSE) #Get whether we should execute section now
 
     else()
