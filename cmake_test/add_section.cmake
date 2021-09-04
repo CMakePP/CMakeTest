@@ -173,10 +173,11 @@ function(ct_add_section)
            #Execute the section again, this time executing subsections. Only do when not executing expectfail
            cpp_set_global("CMAKETEST_TEST_${_as_original_unit}_${_as_curr_section}_EXECUTE_SECTIONS" TRUE)
            include("${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}.cmake")
-           cpp_set_global("CT_CURRENT_EXECUTION_UNIT" "${_as_original_unit}")
-           cpp_set_global("CMAKETEST_SECTION_DEPTH" "${_as_old_section_depth}")
+
       endif()
 
+      cpp_set_global("CT_CURRENT_EXECUTION_UNIT" "${_as_original_unit}")
+      cpp_set_global("CMAKETEST_SECTION_DEPTH" "${_as_old_section_depth}")
       #cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_EXECUTE_SECTIONS" FALSE) #Get whether we should execute section now
 
     else()
