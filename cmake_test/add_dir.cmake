@@ -11,6 +11,10 @@ include_guard()
 #
 #]]
 function(ct_add_dir _ad_dir)
+    set(_ad_multi_value_args "CMAKE_OPTIONS")
+    cmake_parse_arguments(PARSE_ARGV 1 ADD_DIR "" "" "${_ad_multi_value_args}")
+    message("CMAKE_OPTIONS: ${ADD_DIR_CMAKE_OPTIONS}")
+
     get_filename_component(_ad_abs_test_dir "${_ad_dir}" REALPATH)
     file(GLOB_RECURSE _ad_files LIST_DIRECTORIES FALSE FOLLOW_SYMLINKS "${_ad_abs_test_dir}/*.cmake") #Recurse over target dir to find all cmake files
 
@@ -25,6 +29,7 @@ function(ct_add_dir _ad_dir)
             "${CMAKE_COMMAND}"
                -S "${CMAKE_CURRENT_BINARY_DIR}/tests/${_ad_rel_path}/src"
                -B "${CMAKE_CURRENT_BINARY_DIR}/tests/${_ad_rel_path}"
+               "${ADD_DIR_CMAKE_OPTIONS}"
         )
 
     endforeach()
