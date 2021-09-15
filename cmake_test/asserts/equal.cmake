@@ -32,11 +32,11 @@ endfunction()
 # :param _ane_contents: What the identifier should not be set to.
 # :type _ane_contents: String
 #]]
-function(ct_assert_not_equal _ane_var _ane_content)
-    if("${${_ane_var}}" STREQUAL "${_ane_content}")
+function(ct_assert_not_equal _ane_var _ane_contents)
+    if("${${_ane_var}}" STREQUAL "${_ane_contents}")
         cpp_raise(
            ASSERTION_FAILED
-           "Assertion: ${${_ane_var}} != ${_ane_content} failed. "
+           "Assertion: ${${_ane_var}} != ${_ane_contents} failed. "
            "${_ane_var} contents: ${${_ane_var}}"
         )
     endif()
