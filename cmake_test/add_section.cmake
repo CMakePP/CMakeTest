@@ -109,9 +109,9 @@ function(ct_add_section)
 
     set(_as_original_unit "${_as_curr_exec_unit}")
     cpp_get_global(_as_exec_section "CMAKETEST_TEST_${_as_curr_exec_unit}_EXECUTE_SECTIONS") #Get whether we should execute section now
+    cpp_get_global(_as_executed_tests "CMAKETEST_TESTS_EXECUTED")
 
-
-    if(_as_exec_section) #Time to execute our section
+    if(_as_exec_section AND NOT ("${_as_curr_exec_unit}_${_as_curr_section}" IN_LIST _as_executed_tests)) #Time to execute our section
 
 
         cpp_get_global(_as_old_section_depth "CMAKETEST_SECTION_DEPTH")

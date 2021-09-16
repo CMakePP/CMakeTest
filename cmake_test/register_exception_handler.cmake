@@ -18,6 +18,9 @@ function(ct_register_exception_handler)
         cpp_append_global("${_ae_curr_exec}_EXCEPTIONS" "Type: ${exce_type}, Details: ${message}")
         cpp_get_global(_ae_expect_fail "CMAKETEST_TEST_${_ae_curr_exec}_EXPECTFAIL")
 
+        cpp_append_global("CMAKETEST_TESTS_EXECUTED" "${_ae_curr_exec}")
+        ct_exec_tests()
+
         ct_exit("Unexpected exception caught while executing test \"${_ae_curr_exec_friendly_name}\". Type: ${exce_type}, Details: ${message}")
 
     endfunction()
