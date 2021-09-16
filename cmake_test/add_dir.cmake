@@ -11,7 +11,8 @@ include_guard()
 # :param **kwargs: See below
 #
 # :Keyword Arguments:
-# * *CMAKE_OPTIONS* (``list``) -- List of additional CMake options to be passed to all test invocations.
+# * *CMAKE_OPTIONS* (``list``) -- List of additional CMake options to be passed to all test invocations. Options should follow the syntax: `-D<variable_name>=<value>`
+ 
 #
 #
 #]]
