@@ -24,6 +24,18 @@ add_dir.cmake
 
    :type _ad_dir: path
 
+   :param **kwargs: See below
+
+   
+
+   :Keyword Arguments:
+
+   * *CMAKE_OPTIONS* (``list``) -- List of additional CMake options to be passed to all test invocations. Options should follow the syntax: `-D<variable_name>=<value>`
+
+   
+
+   
+
    
 
    

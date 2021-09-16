@@ -189,9 +189,18 @@
 <p>file found in the specified directory is assumed to contain CMakeTest tests.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>_ad_dir</strong> (<em>path</em>) – The directory to search for <a href="#id5"><span class="problematic" id="id6">*</span></a>.cmake files. Subdirectories will be recursively searched.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_ad_dir</strong> (<em>path</em>) – The directory to search for <a href="#id5"><span class="problematic" id="id6">*</span></a>.cmake files. Subdirectories will be recursively searched.</p></li>
+<li><p><strong>**kwargs</strong> – <p>See below</p>
+</p></li>
+</ul>
 </dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><p></p></dd>
 </dl>
+<ul class="simple">
+<li><p><em>CMAKE_OPTIONS</em> (<code class="docutils literal notranslate"><span class="pre">list</span></code>) – List of additional CMake options to be passed to all test invocations. Options should follow the syntax: <cite>-D&lt;variable_name&gt;=&lt;value&gt;</cite></p></li>
+</ul>
 </dd></dl>
 
 </div>
