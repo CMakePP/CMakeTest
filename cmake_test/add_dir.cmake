@@ -34,7 +34,7 @@ function(ct_add_dir _ad_dir)
             "${CMAKE_COMMAND}"
                -S "${CMAKE_CURRENT_BINARY_DIR}/tests/${_ad_rel_path}/src"
                -B "${CMAKE_CURRENT_BINARY_DIR}/tests/${_ad_rel_path}"
-               "${ADD_DIR_CMAKE_OPTIONS}"
+               ${ADD_DIR_CMAKE_OPTIONS}
         )
 
     endforeach()
