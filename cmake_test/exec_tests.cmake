@@ -69,9 +69,13 @@ function(ct_exec_tests)
             _ct_print_pass("${_et_friendly_name}" 0 "${_et_print_length}")
         endif()
 
-        cpp_set_global("CMAKETEST_TEST_${_et_curr_test}_EXECUTE_SECTIONS" TRUE)
-        include("${CMAKE_CURRENT_BINARY_DIR}/${_et_curr_test}/${_et_curr_test}.cmake")
 
+        #Only execute second time if sections detected
+        cpp_get_global(_et_has_sections "CMAKETEST_TEST_${_et_curr_test}_SECTIONS")
+	if(NOT _et_has_sections STREQUAL "")
+            cpp_set_global("CMAKETEST_TEST_${_et_curr_test}_EXECUTE_SECTIONS" TRUE)
+            include("${CMAKE_CURRENT_BINARY_DIR}/${_et_curr_test}/${_et_curr_test}.cmake")
+        endif()
 
     endforeach()
 endfunction()
