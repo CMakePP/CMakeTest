@@ -20,8 +20,6 @@ include_guard()
 function(ct_exec_tests)
 
 
-    message(STATUS "Executing tests")
-
     cpp_set_global(CMAKETEST_TESTS_DID_PASS "TRUE") #Default to true and set to false once one does not pass
 
     # Add general exception handler that catches all exceptions
