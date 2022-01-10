@@ -41,9 +41,7 @@
     
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="add_test.cmake" href="add_test.html" />
-    <link rel="prev" title="add_section.cmake" href="add_section.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -92,24 +90,12 @@
               
             
             
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About CMakeTest</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faqs.html">Frequently Asked Questions (FAQs)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../writing_tests/index.html">Writing Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">#</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="colors.html">colors.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cmake_test.html">cmake_test.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="set_print_length.html">set_print_length.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="register_exception_handler.html">register_exception_handler.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exec_tests.html">exec_tests.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overrides.html">overrides.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add_section.html">add_section.cmake</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">expectfail_subprocess.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add_test.html">add_test.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add_dir.html">add_dir.cmake</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">#</a></li>
 </ul>
 
             
@@ -158,8 +144,6 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="index.html">#</a> &raquo;</li>
-        
       <li>expectfail_subprocess.cmake</li>
     
     
@@ -185,16 +169,16 @@
 <dt class="sig sig-object py" id="expectfail_subprocess.cmake.ct_expectfail_subprocess">
 <span class="sig-prename descclassname"><span class="pre">expectfail_subprocess.cmake.</span></span><span class="sig-name descname"><span class="pre">ct_expectfail_subprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">_es_curr_exec_unit</span> <span class="pre">_es_curr_section</span></em><span class="sig-paren">)</span><a class="headerlink" href="#expectfail_subprocess.cmake.ct_expectfail_subprocess" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructs the files needed for a test to be executed in a subprocess and then executes the subprocess.</p>
-<p>This function will only be called for sections marked with EXPECTFAIL. Subprocesses are required because</p>
-<p>there is no way to handle exceptions correctly and not leave a test in an indeterminate state. A full</p>
-<p>interpreter shutdown is required to prevent code from proceeding from the exception point as if nothing</p>
-<p>had happened.</p>
-<p>This function first pulls data about the current execution unit and the current section from globals,</p>
-<p>then builds a tree describing the section’s parents. This tree is then converted to a list of variable</p>
-<p>declarations and inserted into a template CMakeLists.txt. These declarations ensure only the section and</p>
-<p>its direct parents are executed to prevent a different section or test from running. Finally, the template</p>
-<p>is executed in a subprocess, resulting in the section and its parents being executed. The subprocess result</p>
-<p>code is stored, and if the code is reported as succeeding testing is halted since we expect it to fail.</p>
+<p>This function will only be called for sections marked with EXPECTFAIL. Subprocesses are required because
+there is no way to handle exceptions correctly and not leave a test in an indeterminate state. A full
+interpreter shutdown is required to prevent code from proceeding from the exception point as if nothing
+had happened.</p>
+<p>This function first pulls data about the current execution unit and the current section from globals,
+then builds a tree describing the section’s parents. This tree is then converted to a list of variable
+declarations and inserted into a template CMakeLists.txt. These declarations ensure only the section and
+its direct parents are executed to prevent a different section or test from running. Finally, the template
+is executed in a subprocess, resulting in the section and its parents being executed. The subprocess result
+code is stored, and if the code is reported as succeeding testing is halted since we expect it to fail.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -212,10 +196,6 @@
            
           </div>
           <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="add_test.html" class="btn btn-neutral float-right" title="add_test.cmake" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="add_section.html" class="btn btn-neutral float-left" title="add_section.cmake" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-    </div>
 
   <hr/>
 

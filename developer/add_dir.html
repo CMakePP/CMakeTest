@@ -41,8 +41,7 @@
     
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="add_test.cmake" href="add_test.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -91,24 +90,12 @@
               
             
             
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About CMakeTest</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faqs.html">Frequently Asked Questions (FAQs)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../writing_tests/index.html">Writing Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">#</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="colors.html">colors.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cmake_test.html">cmake_test.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="set_print_length.html">set_print_length.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="register_exception_handler.html">register_exception_handler.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exec_tests.html">exec_tests.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overrides.html">overrides.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add_section.html">add_section.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="expectfail_subprocess.html">expectfail_subprocess.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add_test.html">add_test.cmake</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">add_dir.cmake</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">#</a></li>
 </ul>
 
             
@@ -157,8 +144,6 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="index.html">#</a> &raquo;</li>
-        
       <li>add_dir.cmake</li>
     
     
@@ -183,10 +168,10 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="add_dir.cmake.ct_add_dir">
 <span class="sig-prename descclassname"><span class="pre">add_dir.cmake.</span></span><span class="sig-name descname"><span class="pre">ct_add_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_ad_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#add_dir.cmake.ct_add_dir" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function will find all <a href="#id1"><span class="problematic" id="id2">*</span></a>.cmake files in the specified directory as well as recursively through all subdirectories.</p>
-<p>It will then configure the boilerplate template to include() each cmake file and register each configured boilerplate</p>
-<p>with CTest. The configured templates will be executed seperately via CTest during the Test phase, and each <a href="#id3"><span class="problematic" id="id4">*</span></a>.cmake</p>
-<p>file found in the specified directory is assumed to contain CMakeTest tests.</p>
+<dd><p>This function will find all <a href="#id1"><span class="problematic" id="id2">*</span></a>.cmake files in the specified directory as well as recursively through all subdirectories.
+It will then configure the boilerplate template to include() each cmake file and register each configured boilerplate
+with CTest. The configured templates will be executed seperately via CTest during the Test phase, and each <a href="#id3"><span class="problematic" id="id4">*</span></a>.cmake
+file found in the specified directory is assumed to contain CMakeTest tests.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -210,9 +195,6 @@
            
           </div>
           <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="add_test.html" class="btn btn-neutral float-left" title="add_test.cmake" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-    </div>
 
   <hr/>
 

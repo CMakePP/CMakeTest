@@ -41,9 +41,7 @@
     
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="expectfail_subprocess.cmake" href="expectfail_subprocess.html" />
-    <link rel="prev" title="overrides.cmake" href="overrides.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -92,24 +90,12 @@
               
             
             
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About CMakeTest</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faqs.html">Frequently Asked Questions (FAQs)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../writing_tests/index.html">Writing Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">#</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="colors.html">colors.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cmake_test.html">cmake_test.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="set_print_length.html">set_print_length.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="register_exception_handler.html">register_exception_handler.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exec_tests.html">exec_tests.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overrides.html">overrides.cmake</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">add_section.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="expectfail_subprocess.html">expectfail_subprocess.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add_test.html">add_test.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add_dir.html">add_dir.cmake</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">#</a></li>
 </ul>
 
             
@@ -158,8 +144,6 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="index.html">#</a> &raquo;</li>
-        
       <li>add_section.cmake</li>
     
     
@@ -184,37 +168,33 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="add_section.cmake.ct_add_section">
 <span class="sig-prename descclassname"><span class="pre">add_section.cmake.</span></span><span class="sig-name descname"><span class="pre">ct_add_section</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#add_section.cmake.ct_add_section" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds a test section, should be called inside of a declared test function directly before declaring the section function.</p>
-<p>The NAME parameter will be populated as by set() with the generated section function name. Declare the section function using this generated name. Ex:</p>
+<dd><p>Adds a test section, should be called inside of a declared test function directly before declaring the section function.
+The NAME parameter will be populated as by set() with the generated section function name. Declare the section function using this generated name. Ex:</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c">#This is inside of a declared test function</span>
-
 <span class="nb">ct_add_section</span><span class="p">(</span><span class="s">NAME</span> <span class="s">this_section</span><span class="p">)</span>
-
 <span class="nb">function</span><span class="p">(</span><span class="o">${</span><span class="nv">this_section</span><span class="o">}</span><span class="p">)</span>
-
     <span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span> <span class="s2">&quot;This code will run in a test section&quot;</span><span class="p">)</span>
-
 <span class="nb">endfunction</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Upon being executed, this function will check if the CMAKETEST_TEST_${current_exec_unit}_EXECUTE_SECTIONS CMakePP global is set.</p>
-<p>If it is not, ct_add_section() will generate an ID for the section function and sets the variable pointed to by the NAME parameter to it.</p>
-<p>If the flag is set, ct_add_section() will increment the CMAKETEST_SECTION_DEPTH CMakePP global, write a file to the build directory with a line calling the section function,</p>
-<p>and include the file to execute the function. Exceptions will be tracked while the function is being executed. After completion of the test, the test status will be output</p>
-<p>to the screen. The CMAKETEST_TEST_${current_exec_unit}_${section_id}_EXECUTE_SECTIONS flag will then be set. The section function will then be executed again, and</p>
-<p>any subsections will then execute as well, following this same flow until there are no more subsections. Section depth is tracked by the CMAKETEST_SECTION_DEPTH CMakePP global.</p>
-<p>If a section raises an exception when it is not expected to, testing will halt immediately. To keep parity between different types of tests, EXPECTFAIL sections that do not raise</p>
-<p>exceptions will also halt all testing.</p>
+<p>Upon being executed, this function will check if the CMAKETEST_TEST_${current_exec_unit}_EXECUTE_SECTIONS CMakePP global is set.
+If it is not, ct_add_section() will generate an ID for the section function and sets the variable pointed to by the NAME parameter to it.</p>
+<p>If the flag is set, ct_add_section() will increment the CMAKETEST_SECTION_DEPTH CMakePP global, write a file to the build directory with a line calling the section function,
+and include the file to execute the function. Exceptions will be tracked while the function is being executed. After completion of the test, the test status will be output
+to the screen. The CMAKETEST_TEST_${current_exec_unit}_${section_id}_EXECUTE_SECTIONS flag will then be set. The section function will then be executed again, and
+any subsections will then execute as well, following this same flow until there are no more subsections. Section depth is tracked by the CMAKETEST_SECTION_DEPTH CMakePP global.</p>
+<p>If a section raises an exception when it is not expected to, testing will halt immediately. To keep parity between different types of tests, EXPECTFAIL sections that do not raise
+exceptions will also halt all testing.</p>
 <p>Print length of pass/fail lines can be adjusted with the <cite>PRINT_LENGTH</cite> option.</p>
-<p>Priority for print length is as follows (first most important):</p>
-<blockquote>
-<div><ol class="arabic simple">
+<dl class="simple">
+<dt>Priority for print length is as follows (first most important):</dt><dd><ol class="arabic simple">
 <li><p>Current execution unit’s PRINT_LENGTH option</p></li>
 <li><p>Parent’s PRINT_LENGTH option</p></li>
 <li><p>Length set by ct_set_print_length()</p></li>
 <li><p>Built-in default of 80.</p></li>
 </ol>
-</div></blockquote>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>**kwargs</strong> – <p>See below</p>
@@ -245,10 +225,6 @@
            
           </div>
           <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="expectfail_subprocess.html" class="btn btn-neutral float-right" title="expectfail_subprocess.cmake" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="overrides.html" class="btn btn-neutral float-left" title="overrides.cmake" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-    </div>
 
   <hr/>
 

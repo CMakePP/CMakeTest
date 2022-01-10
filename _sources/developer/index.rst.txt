@@ -5,24 +5,14 @@
 
 .. toctree:: 
    :maxdepth: 2
-
-   colors
-
-   cmake_test
-
-   set_print_length
-
-   register_exception_handler
-
-   exec_tests
-
-   overrides
-
    add_section
-
-   expectfail_subprocess
-
    add_test
-
+   set_print_length
+   expectfail_subprocess
+   cmake_test
    add_dir
+   exec_tests
+   overrides
+   register_exception_handler
+   colors
 
