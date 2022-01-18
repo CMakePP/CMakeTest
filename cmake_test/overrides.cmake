@@ -12,8 +12,18 @@ function(message)
         list(REMOVE_AT _msg_message_with_level 0)
         cpp_set_global(CT_LAST_MESSAGE "${_msg_message_with_level}")
         if(ARGV0 STREQUAL "FATAL_ERROR")
-            cpp_raise(GENERIC_ERROR "${ARGV1}")
-            return()
+            cpp_get_global(_m_exception_handlers "_CPP_EXCEPTION_HANDLERS_")
+            cpp_map(GET "${_m_exception_handlers}" _m_handlers_list "GENERIC_ERROR")
+            cpp_map(GET "${_m_exception_handlers}" _m__all_handlers_list "ALL_EXCEPTIONS")
+            if("${_m_handlers_list}" STREQUAL "" AND "${_m_all_handlers_list}" STREQUAL "" )
+                #No handlers set, will cause infinite recursion if we raise error
+                #so force terminate
+                ct_exit("Uncaught exception: ${ARGN}")
+
+            else()
+                cpp_raise(GENERIC_ERROR "${ARGV1}")
+                return()
+            endif()
         endif()
 
     else()
