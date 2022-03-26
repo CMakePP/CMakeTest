@@ -76,5 +76,13 @@ function(ct_exec_tests)
             cpp_append_global(CMAKETEST_TESTS_EXECUTED "${et_curr_test}")
         endif()
 
+
+        #Only execute second time if sections detected
+        cpp_get_global(_et_has_sections "CMAKETEST_TEST_${_et_curr_test}_SECTIONS")
+	if(NOT _et_has_sections STREQUAL "")
+            cpp_set_global("CMAKETEST_TEST_${_et_curr_test}_EXECUTE_SECTIONS" TRUE)
+            include("${CMAKE_CURRENT_BINARY_DIR}/${_et_curr_test}/${_et_curr_test}.cmake")
+        endif()
+
     endforeach()
 endfunction()

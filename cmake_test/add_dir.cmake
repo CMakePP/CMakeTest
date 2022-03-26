@@ -8,9 +8,18 @@ include_guard()
 #
 # :param _ad_dir: The directory to search for *.cmake files. Subdirectories will be recursively searched.
 # :type _ad_dir: path
+# :param **kwargs: See below
+#
+# :Keyword Arguments:
+# * *CMAKE_OPTIONS* (``list``) -- List of additional CMake options to be passed to all test invocations. Options should follow the syntax: `-D<variable_name>=<value>`
+#
+#
 #
 #]]
 function(ct_add_dir _ad_dir)
+    set(_ad_multi_value_args "CMAKE_OPTIONS")
+    cmake_parse_arguments(PARSE_ARGV 1 ADD_DIR "" "" "${_ad_multi_value_args}")
+
     get_filename_component(_ad_abs_test_dir "${_ad_dir}" REALPATH)
     file(GLOB_RECURSE _ad_files LIST_DIRECTORIES FALSE FOLLOW_SYMLINKS "${_ad_abs_test_dir}/*.cmake") #Recurse over target dir to find all cmake files
 
@@ -22,11 +31,11 @@ function(ct_add_dir _ad_dir)
         NAME
             ${_ad_rel_path}
         COMMAND
-            "${CMAKE_CTEST_COMMAND}"
-                --build-and-test "${CMAKE_CURRENT_BINARY_DIR}/tests/${_ad_rel_path}/src"
-                                 "${CMAKE_CURRENT_BINARY_DIR}/tests/${_ad_rel_path}"
-                --build-generator "${CMAKE_GENERATOR}"
-                --test-command "${CMAKE_CTEST_COMMAND}"
-        ) #Register boilerplate with CTest
+            "${CMAKE_COMMAND}"
+               -S "${CMAKE_CURRENT_BINARY_DIR}/tests/${_ad_rel_path}/src"
+               -B "${CMAKE_CURRENT_BINARY_DIR}/tests/${_ad_rel_path}"
+               ${ADD_DIR_CMAKE_OPTIONS}
+        )
+
     endforeach()
 endfunction()
