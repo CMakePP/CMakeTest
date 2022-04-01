@@ -11,8 +11,8 @@ set(_CT_TEMPLATES_DIR "${CMAKE_CURRENT_LIST_DIR}/templates")
 # Despite the way a unit test looks to the user, this is the only module the
 # user needs to load.
 
-include(cmake_test/execution_unit)
 include(cmake_test/set_print_length)
+include(cmake_test/execution_unit)
 include(cmake_test/detail_/utilities/print_result)
 include(cmake_test/add_test)
 include(cmake_test/add_section)

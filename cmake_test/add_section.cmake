@@ -47,9 +47,12 @@ include_guard()
 #
 #]]
 function(ct_add_section)
+    cpp_get_global(_as_curr_instance "CT_CURRENT_EXECUTION_UNIT_INSTANCE")
     cpp_get_global(_as_curr_exec_unit "CT_CURRENT_EXECUTION_UNIT")
-    cpp_get_global(_as_parent_print_length "CMAKETEST_TEST_${_as_curr_exec_unit}_PRINT_LENGTH")
-    cpp_get_global(_as_parent_print_length_forced "CMAKETEST_TEST_${_as_curr_exec_unit}_PRINT_LENGTH_FORCED")
+    #cpp_get_global(_as_parent_print_length "CMAKETEST_TEST_${_as_curr_exec_unit}_PRINT_LENGTH")
+    #cpp_get_global(_as_parent_print_length_forced "CMAKETEST_TEST_${_as_curr_exec_unit}_PRINT_LENGTH_FORCED")
+    CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_print_length print_length)
+    CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_print_length_forced print_length_forced)
 
     #TODO Set sections as a subproperty of CT_CURRENT_EXECUTION_UNIT instead of as a single global variable
     set(_as_options EXPECTFAIL)
@@ -87,12 +90,6 @@ function(ct_add_section)
          set("${CT_ADD_SECTION_NAME}" "${_as_section_name}" PARENT_SCOPE)
     endif()
 
-    cpp_append_global(CMAKETEST_TEST_${_as_curr_exec_unit}_SECTIONS "${${CT_ADD_SECTION_NAME}}")
-
-    cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_EXPECTFAIL" "${CT_ADD_SECTION_EXPECTFAIL}") #Set a flag for whether the section is expected to fail or not
-    cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_FRIENDLY_NAME" "${CT_ADD_SECTION_NAME}") #Store the friendly name for the test
-    cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_PRINT_LENGTH" "${_as_print_length}") #Store print length in case it's overriden
-    cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_PRINT_LENGTH_FORCED" "${_as_print_length_forced}") #Store whether PRINT_LENGTH option was used
 
     #Store this section's parent and its parents so we can trace the execution path back
     cpp_get_global(_as_parents_parent_tree "CMAKETEST_TEST_${_as_curr_exec_unit}_PARENT_TREE") #Get our parent's parent tree
@@ -184,6 +181,17 @@ function(ct_add_section)
         #First time run, set the ID so we don't lose it on the second run.
         #This will only cause conflicts if two sections in the same test
         #use the same friendly name (the variable used to store the ID and used in the function definition), which no sane programmer would do
+
+        CTExecutionUnit(CTOR _as_new_section "${${CT_ADD_SECTION_NAME}}" "${CT_ADD_SECTION_NAME}" "${CT_ADD_SECTION_EXPECTFAIL}")
+        CTExecutionUnit(SET "${_as_new_section}" parent "${_as_curr_instance}")
+        CTExecutionUnit(append_child "${_as_curr_instance}" "${_as_new_section}")
+
+        cpp_append_global(CMAKETEST_TEST_${_as_curr_exec_unit}_SECTIONS "${${CT_ADD_SECTION_NAME}}")
+
+        cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_EXPECTFAIL" "${CT_ADD_SECTION_EXPECTFAIL}") #Set a flag for whether the section is expected to fail or not
+        cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_FRIENDLY_NAME" "${CT_ADD_SECTION_NAME}") #Store the friendly name for the test
+        cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_PRINT_LENGTH" "${_as_print_length}") #Store print length in case it's overriden
+        cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${${CT_ADD_SECTION_NAME}}_PRINT_LENGTH_FORCED" "${_as_print_length_forced}") #Store whether PRINT_LENGTH option was used
         cpp_set_global("CMAKETEST_TEST_${_as_curr_exec_unit}_${CT_ADD_SECTION_NAME}_ID" "${${CT_ADD_SECTION_NAME}}")
 
     endif()

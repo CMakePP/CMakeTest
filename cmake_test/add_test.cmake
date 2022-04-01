@@ -63,6 +63,12 @@ macro(ct_add_test)
          cpp_unique_id("${CT_ADD_TEST_NAME}") #Randomized identifier, only alphabetical characters so it generates a valid identifier.
     endif()
 
+    CTExecutionUnit(CTOR test_instance "${${CT_ADD_TEST_NAME}}" "${CT_ADD_TEST_NAME}" "${CT_ADD_TEST_EXPECTFAIL}")
+    CTExecutionUnit(SET "${test_instance}" print_length "${_at_print_length}")
+    CTExecutionUnit(SET "${test_instance}" print_length_forced "${_at_print_length_forced}")
+    CTExecutionUnit(SET "${test_instance}" file "${CMAKE_CURRENT_LIST_FILE}")
+
+    cpp_append_global("CMAKETEST_TEST_INSTANCES" "${test_instance}")
     cpp_append_global("CMAKETEST_TESTS" "${${CT_ADD_TEST_NAME}}")
 
     cpp_set_global("CMAKETEST_TEST_${${CT_ADD_TEST_NAME}}_PRINT_LENGTH_FORCED" "${_at_print_length_forced}") #Set whether the PRINT_LENGTH option was used

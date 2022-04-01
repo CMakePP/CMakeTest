@@ -28,13 +28,25 @@ function(ct_exec_tests)
     ct_register_exception_handler()
 
     cpp_get_global(_et_tests "CMAKETEST_TESTS")
+    cpp_get_global(_et_instances "CMAKETEST_TEST_INSTANCES")
 
-    foreach(_et_curr_test IN LISTS _et_tests)
+
+    list(LENGTH "${_et_tests}" _et_num_tests)
+    foreach(_et_iterator RANGE "${_et_num_tests}")
+        list(GET _et_tests "${_et_iterator}" _et_curr_test)
+        list(GET _et_instances "${_et_iterator}" _et_curr_instance)
+
+
+
         #Set the fully qualified identifier for this test, used later for exception tracking and section/subsection execution
+        cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${_et_curr_instance}")
         cpp_set_global("CT_CURRENT_EXECUTION_UNIT" "${_et_curr_test}")
-        cpp_get_global(_et_friendly_name "CMAKETEST_TEST_${_et_curr_test}_FRIENDLY_NAME")
-        cpp_get_global(_et_expect_fail "CMAKETEST_TEST_${_et_curr_test}_EXPECTFAIL")
-        cpp_get_global(_et_print_length "CMAKETEST_TEST_${_et_curr_test}_PRINT_LENGTH")
+        #cpp_get_global(_et_friendly_name "CMAKETEST_TEST_${_et_curr_test}_FRIENDLY_NAME")
+        #cpp_get_global(_et_expect_fail "CMAKETEST_TEST_${_et_curr_test}_EXPECTFAIL")
+        #cpp_get_global(_et_print_length "CMAKETEST_TEST_${_et_curr_test}_PRINT_LENGTH")
+        CTExecutionUnit(GET "${_et_curr_instance}" _et_friendly_name friendly_name)
+        CTExecutionUnit(GET "${_et_curr_instance}" _et_expect_fail expect_fail)
+        CTExecutionUnit(GET "${_et_curr_instance}" _et_print_length print_length)
 
         cpp_set_global("CMAKETEST_SECTION_DEPTH" 0)
 
@@ -43,6 +55,9 @@ function(ct_exec_tests)
         file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/${_et_curr_test}/${_et_curr_test}.cmake" "${_et_curr_test}()")
         include("${CMAKE_CURRENT_BINARY_DIR}/${_et_curr_test}/${_et_curr_test}.cmake")
         cpp_get_global(_et_exceptions "${_et_curr_test}_EXCEPTIONS")
+
+        CTExecutionUnit(to_string "${_et_curr_instance}" ret)
+        message("${ret}")
 
         if(_et_expect_fail)
             if("${_et_exceptions}" STREQUAL "")
@@ -71,7 +86,8 @@ function(ct_exec_tests)
 
 
         #Only execute second time if sections detected
-        cpp_get_global(_et_has_sections "CMAKETEST_TEST_${_et_curr_test}_SECTIONS")
+        #cpp_get_global(_et_has_sections "CMAKETEST_TEST_${_et_curr_test}_SECTIONS")
+        CTExecutionUnit(GET "${_et_curr_instance}" _et_has_sections children)
 	if(NOT _et_has_sections STREQUAL "")
             cpp_set_global("CMAKETEST_TEST_${_et_curr_test}_EXECUTE_SECTIONS" TRUE)
             include("${CMAKE_CURRENT_BINARY_DIR}/${_et_curr_test}/${_et_curr_test}.cmake")
