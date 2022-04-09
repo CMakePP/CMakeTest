@@ -21,7 +21,7 @@ include_guard()
 # :type _es_curr_section: string
 #
 #]]
-function(ct_expectfail_subprocess _es_curr_exec_unit _es_curr_section)
+function(ct_expectfail_subprocess _es_curr_exec_unit _es_curr_section _es_curr_section_instance)
                 cpp_get_global(_es_print_length "CMAKETEST_TEST_${_es_curr_exec_unit}_${_es_curr_section}_PRINT_LENGTH")
 
                 cpp_get_global(_es_section_parent_tree "CMAKETEST_TEST_${_es_curr_exec_unit}_${_es_curr_section}_PARENT_TREE")

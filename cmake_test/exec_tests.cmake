@@ -87,9 +87,11 @@ function(ct_exec_tests)
 
         #Only execute second time if sections detected
         #cpp_get_global(_et_has_sections "CMAKETEST_TEST_${_et_curr_test}_SECTIONS")
-        CTExecutionUnit(GET "${_et_curr_instance}" _et_has_sections children)
+        CTExecutionUnit(GET "${_et_curr_instance}" _et_section_map children)
+        cpp_map(KEYS "${_et_section_map}" _et_has_sections)
 	if(NOT _et_has_sections STREQUAL "")
             cpp_set_global("CMAKETEST_TEST_${_et_curr_test}_EXECUTE_SECTIONS" TRUE)
+            CTExecutionUnit(SET "${_et_curr_instance}" execute_sections TRUE)
             include("${CMAKE_CURRENT_BINARY_DIR}/${_et_curr_test}/${_et_curr_test}.cmake")
         endif()
 
