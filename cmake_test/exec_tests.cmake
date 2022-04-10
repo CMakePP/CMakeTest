@@ -47,6 +47,7 @@ function(ct_exec_tests)
         CTExecutionUnit(GET "${_et_curr_instance}" _et_friendly_name friendly_name)
         CTExecutionUnit(GET "${_et_curr_instance}" _et_expect_fail expect_fail)
         CTExecutionUnit(GET "${_et_curr_instance}" _et_print_length print_length)
+        CTExecutionUnit(GET "${_et_curr_instance}" _et_exceptions exceptions)
 
         cpp_set_global("CMAKETEST_SECTION_DEPTH" 0)
 
@@ -54,7 +55,6 @@ function(ct_exec_tests)
 
         file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/${_et_curr_test}/${_et_curr_test}.cmake" "${_et_curr_test}()")
         include("${CMAKE_CURRENT_BINARY_DIR}/${_et_curr_test}/${_et_curr_test}.cmake")
-        cpp_get_global(_et_exceptions "${_et_curr_test}_EXCEPTIONS")
 
         CTExecutionUnit(to_string "${_et_curr_instance}" ret)
         message("${ret}")
