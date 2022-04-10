@@ -142,7 +142,7 @@ function(ct_add_section)
             else() #We're in subprocess
                 file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}.cmake" "${_as_curr_section}()")
                 include("${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section}.cmake")
-                cpp_get_global(_as_exceptions "${_as_original_unit}_${_as_curr_section}_EXCEPTIONS")
+                CTExecutionUnit(GET "${_as_curr_section_instance}" _as_exceptions exceptions)
 
                 if(NOT "${_as_exceptions}" STREQUAL "")
                     foreach(_as_exc IN LISTS _as_exceptions)

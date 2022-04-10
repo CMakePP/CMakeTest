@@ -14,6 +14,7 @@ cpp_class(CTExecutionUnit)
 	cpp_attr(CTExecutionUnit print_length_forced FALSE)
         cpp_attr(CTExecutionUnit execute_sections FALSE)
         cpp_attr(CTExecutionUnit section_names_to_ids)
+        cpp_attr(CTExecutionUnit exceptions)
 
 
 	cpp_constructor(CTOR CTExecutionUnit desc desc bool)
