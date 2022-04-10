@@ -29,7 +29,7 @@ ct_register_exception_handler()
 @_es_section_id_defines@
 
 #Include root file
-include("@_es_section_root_file@")
+include("@_es_section_file@")
 
 #Execute the only test there is, ignoring subsections that do not comprise the call tree
 ct_exec_tests()

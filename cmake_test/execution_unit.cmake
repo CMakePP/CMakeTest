@@ -36,6 +36,20 @@ cpp_class(CTExecutionUnit)
                 cpp_map(SET "${children}" "${key}" "${child}")
         endfunction()
 
+        cpp_member(get_parent_list CTExecutionUnit desc)
+        function("${get_parent_list}" self ret)
+
+            CTExecutionUnit(GET "${self}" next_parent parent)
+            while(NOT next_parent STREQUAL "")
+                CTExecutionUnit(GET "${next_parent}" parent_id name)
+                list(APPEND ret_list "${next_parent}")
+                CTExecutionUnit(GET "${next_parent}" next_parent parent)
+            endwhile()
+            set("${ret}" "${ret_list}" PARENT_SCOPE)
+
+        endfunction()
+
+
 	cpp_member(to_string CTExecutionUnit desc)
 	function("${to_string}" self ret)
 		CTExecutionUnit(GET "${self}" name friendly_name)
