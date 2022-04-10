@@ -19,7 +19,6 @@ set(CMAKE_MODULE_PATH "@CMAKE_MODULE_PATH@" CACHE STRING "" FORCE)
 include("cmake_test/cmake_test")
 
 cpp_set_global("CT_EXEC_EXPECTFAIL" TRUE)
-cpp_set_global("CT_CURRENT_EXECUTION_UNIT" "@_es_section_root@")
 
 
 #Register handler so we know when a test fails
