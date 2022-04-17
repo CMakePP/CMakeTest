@@ -32,7 +32,7 @@ function(ct_exec_tests)
 
 
     foreach(_et_curr_instance IN LISTS _et_instances)
-        CTExecutionUnit(GET "${_et_curr_instance}" _et_curr_test_id name)
+        CTExecutionUnit(GET "${_et_curr_instance}" _et_curr_test_id test_id)
 
 
         #Set the fully qualified identifier for this test, used later for exception tracking and section/subsection execution

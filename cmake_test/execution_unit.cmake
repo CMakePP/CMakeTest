@@ -25,7 +25,7 @@ cpp_class(CTExecutionUnit)
         # is used to name the function
         # this unit is linked to.
         #]]
-	cpp_attr(CTExecutionUnit name)
+	cpp_attr(CTExecutionUnit test_id)
 
         #[[[
         # The "friendly name" of the execution unit.
@@ -42,7 +42,7 @@ cpp_class(CTExecutionUnit)
         # this unit's declaration. This value is propagated
         # down from the root test to all sections and subsections.
         #]]
-	cpp_attr(CTExecutionUnit file)
+	cpp_attr(CTExecutionUnit test_file)
 
         #[[[
         # A boolean describing whether this unit is intended
@@ -99,10 +99,18 @@ cpp_class(CTExecutionUnit)
         cpp_attr(CTExecutionUnit exceptions)
 
 
-	cpp_constructor(CTOR CTExecutionUnit desc desc bool)
-	function("${CTOR}" self id name expect_fail)
-		CTExecutionUnit(SET "${self}" name "${id}")
-		CTExecutionUnit(SET "${self}" friendly_name "${name}")
+	cpp_constructor(CTOR CTExecutionUnit str str bool)
+	function("${CTOR}" self id test_id expect_fail)
+                # Name could be a description or a function because it
+                # isn't considered invalid to do so, such as using
+                # a test name of "set"
+                #
+                # ID could be a desc or a function as well,
+                # depending on whether the section/test function has
+                # been initialized or not yet
+
+		CTExecutionUnit(SET "${self}" test_id "${id}")
+		CTExecutionUnit(SET "${self}" friendly_name "${test_id}")
 		CTExecutionUnit(SET "${self}" expect_fail "${expect_fail}")
                 cpp_map(CTOR section_names_map)
                 CTExecutionUnit(SET "${self}" section_names_to_ids "${section_names_map}")
@@ -119,11 +127,12 @@ cpp_class(CTExecutionUnit)
         # :param key: ID of the new subsection
         # :param child: Reference to the new subsection.
         #]]
-        cpp_member(append_child CTExecutionUnit desc CTExecutionUnit)
+        cpp_member(append_child CTExecutionUnit str CTExecutionUnit)
         function("${append_child}" self key child)
+                #key could be desc or fxn
                 cpp_get_global(_as_curr_instance "CT_CURRENT_EXECUTION_UNIT_INSTANCE")
-                CTExecutionUnit(GET "${_as_curr_instance}" parent_name name)
-                CTExecutionUnit(GET "${self}" name name)
+                CTExecutionUnit(GET "${_as_curr_instance}" parent_name test_id)
+                CTExecutionUnit(GET "${self}" test_id test_id)
 		CTExecutionUnit(GET "${self}" children children)
                 cpp_map(SET "${children}" "${key}" "${child}")
         endfunction()
@@ -142,7 +151,7 @@ cpp_class(CTExecutionUnit)
 
             CTExecutionUnit(GET "${self}" next_parent parent)
             while(NOT next_parent STREQUAL "")
-                CTExecutionUnit(GET "${next_parent}" parent_id name)
+                CTExecutionUnit(GET "${next_parent}" parent_id test_id)
                 list(APPEND ret_list "${next_parent}")
                 CTExecutionUnit(GET "${next_parent}" next_parent parent)
             endwhile()
@@ -154,7 +163,7 @@ cpp_class(CTExecutionUnit)
 	cpp_member(to_string CTExecutionUnit desc)
 	function("${to_string}" self ret)
 		CTExecutionUnit(GET "${self}" name friendly_name)
-                CTExecutionUnit(GET "${self}" id name)
+                CTExecutionUnit(GET "${self}" id test_id)
 		CTExecutionUnit(GET "${self}" expect_fail expect_fail)
 		CTExecutionUnit(GET "${self}" print_length print_length)
 		CTExecutionUnit(GET "${self}" parent parent)
@@ -173,7 +182,7 @@ cpp_class(CTExecutionUnit)
 
                 endforeach()
 
-		set("${ret}" "Name: ${name}, EXPECTFAIL:  ${expect_fail}, Print length: ${print_length}\n\
+		set("${ret}" "Name: $test_id, EXPECTFAIL:  ${expect_fail}, Print length: ${print_length}\n\
 		Parent:\n\
 			${parent}\n\
 		Children:\n\

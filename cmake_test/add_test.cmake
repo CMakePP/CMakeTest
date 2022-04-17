@@ -66,7 +66,7 @@ macro(ct_add_test)
     CTExecutionUnit(CTOR test_instance "${${CT_ADD_TEST_NAME}}" "${CT_ADD_TEST_NAME}" "${CT_ADD_TEST_EXPECTFAIL}")
     CTExecutionUnit(SET "${test_instance}" print_length "${_at_print_length}")
     CTExecutionUnit(SET "${test_instance}" print_length_forced "${_at_print_length_forced}")
-    CTExecutionUnit(SET "${test_instance}" file "${CMAKE_CURRENT_LIST_FILE}")
+    CTExecutionUnit(SET "${test_instance}" test_file "${CMAKE_CURRENT_LIST_FILE}")
 
     cpp_append_global("CMAKETEST_TEST_INSTANCES" "${test_instance}")
 

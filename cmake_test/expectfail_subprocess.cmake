@@ -25,9 +25,9 @@ function(ct_expectfail_subprocess _es_curr_section_instance)
 
                 CTExecutionUnit(GET "${_es_curr_section_instance}" _es_print_length print_length)
                 CTExecutionUnit(get_parent_list "${_es_curr_section_instance}" _es_section_parent_tree)
-                CTExecutionUnit(GET "${_es_curr_section_instance}" _es_section_id name)
+                CTExecutionUnit(GET "${_es_curr_section_instance}" _es_section_id test_id)
                 CTExecutionUnit(GET "${_es_curr_section_instance}" _es_section_friendly_name friendly_name)
-                CTExecutionUnit(GET "${_es_curr_section_instance}" _es_section_file file)
+                CTExecutionUnit(GET "${_es_curr_section_instance}" _es_section_file test_file)
 
                 list(REMOVE_ITEM _es_section_parent_tree "") #Remove empty list items
 
@@ -36,7 +36,7 @@ function(ct_expectfail_subprocess _es_curr_section_instance)
                 #Traverse the parent list and construct the section ID definitions
                 set(_es_section_id_defines "") #Set a blank ID list in case one is already defined
                 foreach(_es_parent_tree_instance IN LISTS _es_section_parent_tree)
-                     CTExecutionUnit(GET "${_es_parent_tree_instance}" _es_parent_tree_id name)
+                     CTExecutionUnit(GET "${_es_parent_tree_instance}" _es_parent_tree_id test_id)
                      set(_es_parent_friendly_name "") #Clear
                      CTExecutionUnit(GET "${_es_parent_tree_instance}" _es_parent_friendly_name friendly_name)
                      list(APPEND _es_section_id_defines "set(${_es_parent_friendly_name} \"${_es_parent_tree_id}\")")

@@ -172,13 +172,13 @@ function(ct_add_section)
         #This will only cause conflicts if two sections in the same test
         #use the same friendly name (the variable used to store the ID and used in the function definition), which no sane programmer would do
 
-        CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_file file)
+        CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_file test_file)
 
         CTExecutionUnit(CTOR _as_new_section "${${CT_ADD_SECTION_NAME}}" "${CT_ADD_SECTION_NAME}" "${CT_ADD_SECTION_EXPECTFAIL}")
         CTExecutionUnit(SET "${_as_new_section}" parent "${_as_curr_instance}")
         CTExecutionUnit(SET "${_as_new_section}" print_length_forced "${_as_print_length_forced}")
         CTExecutionUnit(SET "${_as_new_section}" print_length "${_as_print_length}")
-        CTExecutionUnit(SET "${_as_new_section}" file "${_as_parent_file}")
+        CTExecutionUnit(SET "${_as_new_section}" test_file "${_as_parent_file}")
         CTExecutionUnit(append_child "${_as_curr_instance}" "${${CT_ADD_SECTION_NAME}}" "${_as_new_section}")
         CTExecutionUnit(GET "${_as_curr_instance}" _as_siblings section_names_to_ids)
         cpp_map(SET "${_as_siblings}" "${CT_ADD_SECTION_NAME}" "${${CT_ADD_SECTION_NAME}}")
