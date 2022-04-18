@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -38,9 +41,7 @@
     
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="asserts/prints.cmake" href="prints.html" />
-    <link rel="prev" title="asserts/asserts.cmake" href="asserts.html" /> 
+    <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -89,40 +90,12 @@
               
             
             
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../about.html">About CMakeTest</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faqs.html">Frequently Asked Questions (FAQs)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../writing_tests/index.html">Writing Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Developer</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../add_dir.html">add_dir.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../register_exception_handler.html">register_exception_handler.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../overrides.html">overrides.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../exec_tests.html">exec_tests.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cmake_test.html">cmake_test.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../add_test.html">add_test.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../colors.html">colors.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../add_section.html">add_section.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../expectfail_subprocess.html">expectfail_subprocess.cmake</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="index.html">asserts</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="defined.html">asserts/defined.cmake</a></li>
-<li class="toctree-l3"><a class="reference internal" href="equal.html">asserts/equal.cmake</a></li>
-<li class="toctree-l3"><a class="reference internal" href="list.html">asserts/list.cmake</a></li>
-<li class="toctree-l3"><a class="reference internal" href="file_contains.html">asserts/file_contains.cmake</a></li>
-<li class="toctree-l3"><a class="reference internal" href="asserts.html">asserts/asserts.cmake</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">asserts/library_exists.cmake</a></li>
-<li class="toctree-l3"><a class="reference internal" href="prints.html">asserts/prints.cmake</a></li>
-<li class="toctree-l3"><a class="reference internal" href="string.html">asserts/string.cmake</a></li>
-<li class="toctree-l3"><a class="reference internal" href="target_has_property.html">asserts/target_has_property.cmake</a></li>
-<li class="toctree-l3"><a class="reference internal" href="true_false.html">asserts/true_false.cmake</a></li>
-<li class="toctree-l3"><a class="reference internal" href="target_exists.html">asserts/target_exists.cmake</a></li>
-<li class="toctree-l3"><a class="reference internal" href="file_exists.html">asserts/file_exists.cmake</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../templates/index.html">templates</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../detail_/index.html">detail</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">#</a></li>
 </ul>
 
             
@@ -171,10 +144,6 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="../index.html">Developer</a> &raquo;</li>
-        
-          <li><a href="index.html">asserts</a> &raquo;</li>
-        
       <li>asserts/library_exists.cmake</li>
     
     
@@ -197,10 +166,11 @@
   <div class="section" id="module-asserts-library_exists.cmake">
 <span id="module-asserts/library_exists.cmake"></span><span id="asserts-library-exists-cmake"></span><h1>asserts/library_exists.cmake<a class="headerlink" href="#module-asserts-library_exists.cmake" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="asserts-library_exists.cmake.ct_assert_library_target_exists">
-<span id="asserts/library_exists.cmake.ct_assert_library_target_exists"></span><code class="sig-prename descclassname"><span class="pre">asserts/library_exists.cmake.</span></code><code class="sig-name descname"><span class="pre">ct_assert_library_target_exists</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_ale_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asserts-library_exists.cmake.ct_assert_library_target_exists" title="Permalink to this definition">¶</a></dt>
-<dd><p>Asserts that a library exists.</p>
-<p>Asserts that the target exists and is a library.</p>
+<dt class="sig sig-object py" id="asserts-library_exists.cmake.ct_assert_library_target_exists">
+<span id="asserts/library_exists.cmake.ct_assert_library_target_exists"></span><span class="sig-prename descclassname"><span class="pre">asserts/library_exists.cmake.</span></span><span class="sig-name descname"><span class="pre">ct_assert_library_target_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_ale_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asserts-library_exists.cmake.ct_assert_library_target_exists" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Asserts</span> <span class="pre">that</span> <span class="pre">a</span> <span class="pre">library</span> <span class="pre">exists.</span></span></dt>
+<dd><p>Asserts that the target exists and is a library.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>_ale_name</strong> – The name of the library</p>
@@ -209,10 +179,11 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="asserts-library_exists.cmake.ct_assert_library_does_not_exist">
-<span id="asserts/library_exists.cmake.ct_assert_library_does_not_exist"></span><code class="sig-prename descclassname"><span class="pre">asserts/library_exists.cmake.</span></code><code class="sig-name descname"><span class="pre">ct_assert_library_does_not_exist</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_aldne_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asserts-library_exists.cmake.ct_assert_library_does_not_exist" title="Permalink to this definition">¶</a></dt>
-<dd><p>Asserts that a library does not exist.</p>
-<p>Asserts that the target does not exist or is not a library.</p>
+<dt class="sig sig-object py" id="asserts-library_exists.cmake.ct_assert_library_does_not_exist">
+<span id="asserts/library_exists.cmake.ct_assert_library_does_not_exist"></span><span class="sig-prename descclassname"><span class="pre">asserts/library_exists.cmake.</span></span><span class="sig-name descname"><span class="pre">ct_assert_library_does_not_exist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_aldne_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asserts-library_exists.cmake.ct_assert_library_does_not_exist" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Asserts</span> <span class="pre">that</span> <span class="pre">a</span> <span class="pre">library</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">exist.</span></span></dt>
+<dd><p>Asserts that the target does not exist or is not a library.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>_aldne_name</strong> (<em>string</em>) – The name of the library</p>
@@ -221,12 +192,13 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="asserts-library_exists.cmake.ct_library_target_exists">
-<span id="asserts/library_exists.cmake.ct_library_target_exists"></span><code class="sig-prename descclassname"><span class="pre">asserts/library_exists.cmake.</span></code><code class="sig-name descname"><span class="pre">ct_library_target_exists</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">_lte_result</span> <span class="pre">_lte_name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#asserts-library_exists.cmake.ct_library_target_exists" title="Permalink to this definition">¶</a></dt>
-<dd><p>Determines if a target exists and if it is a library.</p>
-<p>This function checks whether a target exists and then checks whether that</p>
-<p>target is of type <code class="docutils literal notranslate"><span class="pre">STATIC_LIBRARY</span></code>, <code class="docutils literal notranslate"><span class="pre">MODULE_LIBRARY</span></code>, or</p>
-<p><code class="docutils literal notranslate"><span class="pre">SHARED_LIBRARY</span></code> and then returns an integer indicating what it found.</p>
+<dt class="sig sig-object py" id="asserts-library_exists.cmake.ct_library_target_exists">
+<span id="asserts/library_exists.cmake.ct_library_target_exists"></span><span class="sig-prename descclassname"><span class="pre">asserts/library_exists.cmake.</span></span><span class="sig-name descname"><span class="pre">ct_library_target_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">_lte_result</span> <span class="pre">_lte_name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#asserts-library_exists.cmake.ct_library_target_exists" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Determines</span> <span class="pre">if</span> <span class="pre">a</span> <span class="pre">target</span> <span class="pre">exists</span> <span class="pre">and</span> <span class="pre">if</span> <span class="pre">it</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">library.</span></span></dt>
+<dd><p>This function checks whether a target exists and then checks whether that
+target is of type <code class="docutils literal notranslate"><span class="pre">STATIC_LIBRARY</span></code>, <code class="docutils literal notranslate"><span class="pre">MODULE_LIBRARY</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">SHARED_LIBRARY</span></code> and then returns an integer indicating what it found.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -235,10 +207,9 @@
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><p><code class="docutils literal notranslate"><span class="pre">_lte_result</span></code> will be set to <code class="docutils literal notranslate"><span class="pre">0</span></code> if the target is a library,</p>
-<p><code class="docutils literal notranslate"><span class="pre">1</span></code> if the target is not a library, and <code class="docutils literal notranslate"><span class="pre">2</span></code> if target does not</p>
-<p>exist.</p>
-</p>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">_lte_result</span></code> will be set to <code class="docutils literal notranslate"><span class="pre">0</span></code> if the target is a library,
+<code class="docutils literal notranslate"><span class="pre">1</span></code> if the target is not a library, and <code class="docutils literal notranslate"><span class="pre">2</span></code> if target does not
+exist.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>int</p>
@@ -253,10 +224,6 @@
            
           </div>
           <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="prints.html" class="btn btn-neutral float-right" title="asserts/prints.cmake" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="asserts.html" class="btn btn-neutral float-left" title="asserts/asserts.cmake" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-    </div>
 
   <hr/>
 

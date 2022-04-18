@@ -6,7 +6,7 @@ expectfail_subprocess.cmake
 .. module:: expectfail_subprocess.cmake
 
 
-.. function:: ct_expectfail_subprocess(_es_curr_exec_unit _es_curr_section)
+.. function:: ct_expectfail_subprocess(_es_curr_section_instance)
    
    Constructs the files needed for a test to be executed in a subprocess and then executes the subprocess.
    

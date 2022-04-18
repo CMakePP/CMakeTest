@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
@@ -38,8 +41,7 @@
     
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="prev" title="detail_/utilities/input_check.cmake" href="input_check.html" /> 
+    <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,38 +90,12 @@
               
             
             
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../about.html">About CMakeTest</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../faqs.html">Frequently Asked Questions (FAQs)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../writing_tests/index.html">Writing Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Developer</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../../add_dir.html">add_dir.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../register_exception_handler.html">register_exception_handler.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../overrides.html">overrides.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../exec_tests.html">exec_tests.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../cmake_test.html">cmake_test.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../add_test.html">add_test.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../colors.html">colors.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../add_section.html">add_section.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../expectfail_subprocess.html">expectfail_subprocess.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../asserts/index.html">asserts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../templates/index.html">templates</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html">detail</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="index.html">detail_/utilities</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="sanitize_name.html">detail_/utilities/sanitize_name.cmake</a></li>
-<li class="toctree-l4"><a class="reference internal" href="lc_find.html">detail_/utilities/lc_find.cmake</a></li>
-<li class="toctree-l4"><a class="reference internal" href="repeat_string.html">detail_/utilities/repeat_string.cmake</a></li>
-<li class="toctree-l4"><a class="reference internal" href="print_result.html">detail_/utilities/print_result.cmake</a></li>
-<li class="toctree-l4"><a class="reference internal" href="utilities.html">detail_/utilities/utilities.cmake</a></li>
-<li class="toctree-l4"><a class="reference internal" href="input_check.html">detail_/utilities/input_check.cmake</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">detail_/utilities/return.cmake</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">#</a></li>
 </ul>
 
             
@@ -168,12 +144,6 @@
     
       <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="../../index.html">Developer</a> &raquo;</li>
-        
-          <li><a href="../index.html">detail</a> &raquo;</li>
-        
-          <li><a href="index.html">detail_/utilities</a> &raquo;</li>
-        
       <li>detail_/utilities/return.cmake</li>
     
     
@@ -196,40 +166,34 @@
   <div class="section" id="module-detail_-utilities-return.cmake">
 <span id="module-detail_/utilities/return.cmake"></span><span id="detail-utilities-return-cmake"></span><h1><a href="#id1"><span class="problematic" id="id2">detail_</span></a>/utilities/return.cmake<a class="headerlink" href="#module-detail_-utilities-return.cmake" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="detail_-utilities-return.cmake._ct_return">
-<span id="detail_/utilities/return.cmake._ct_return"></span><code class="sig-prename descclassname"><span class="pre">detail_/utilities/return.cmake.</span></code><code class="sig-name descname"><span class="pre">_ct_return</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_r_var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#detail_-utilities-return.cmake._ct_return" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="detail_-utilities-return.cmake._ct_return">
+<span id="detail_/utilities/return.cmake._ct_return"></span><span class="sig-prename descclassname"><span class="pre">detail_/utilities/return.cmake.</span></span><span class="sig-name descname"><span class="pre">_ct_return</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_r_var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#detail_-utilities-return.cmake._ct_return" title="Permalink to this definition">¶</a></dt>
 <dd><div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This is a macro, and so does not introduce a new scope.</p>
 </div>
 <p>Syntactic sugar for returning a value from a function</p>
-<p>CMake allows you to return variables by adding them to the parent namespace.</p>
-<p>The best way to do this is to have the callee provide the function with an</p>
-<p>identifier to save the result to. This function wraps the common case where</p>
-<p>internally the function saves the result to a local variable with the same</p>
-<p>name as the callee provided for the result. Without the <code class="docutils literal notranslate"><span class="pre">_ct_return</span></code></p>
-<p>function this pattern looks something like:</p>
+<p>CMake allows you to return variables by adding them to the parent namespace.
+The best way to do this is to have the callee provide the function with an
+identifier to save the result to. This function wraps the common case where
+internally the function saves the result to a local variable with the same
+name as the callee provided for the result. Without the <code class="docutils literal notranslate"><span class="pre">_ct_return</span></code>
+function this pattern looks something like:</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">function</span><span class="p">(</span><span class="s">fxn_name</span> <span class="s">return_identifier</span><span class="p">)</span>
-
     <span class="nb">set</span><span class="p">(</span><span class="o">${</span><span class="nv">return_identifier</span><span class="o">}</span> <span class="s2">&quot;the value&quot;</span><span class="p">)</span>
-
     <span class="nb">set</span><span class="p">(</span><span class="o">${</span><span class="nv">return_identifier</span><span class="o">}</span> <span class="o">${</span><span class="nv">${return_identifier</span><span class="o">}</span><span class="s">}</span> <span class="s">PARENT_SCOPE</span>
-
 <span class="s">endfunction(</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>With the <code class="docutils literal notranslate"><span class="pre">_ct_return</span></code> function the above becomes:</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">function</span><span class="p">(</span><span class="s">fxn_name</span> <span class="s">return_identifier</span><span class="p">)</span>
-
     <span class="nb">set</span><span class="p">(</span><span class="o">${</span><span class="nv">return_identifier</span><span class="o">}</span> <span class="s2">&quot;the value&quot;</span><span class="p">)</span>
-
     <span class="nb">_ct_return</span><span class="p">(</span><span class="o">${</span><span class="nv">return_identifier</span><span class="o">}</span><span class="p">)</span>
-
 <span class="nb">endfunction</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>While the new code still has the same number of lines, it is our opinion that</p>
-<p>the new code is easier to read and the intent is more clear.</p>
+<p>While the new code still has the same number of lines, it is our opinion that
+the new code is easier to read and the intent is more clear.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>_r_var</strong> (<em>Identifier</em>) – The identifier which needs to be set in the parent namespace.</p>
@@ -237,11 +201,8 @@
 </dl>
 <p>..note:</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span>This function is a macro to avoid creating another scope. If ``function``
-
 is used the identifier will be set in the scope of the function that
-
 called ``_ct_return`` and NOT in the scope of the function that called the
-
 callee of ``_ct_return``.
 </pre></div>
 </div>
@@ -254,9 +215,6 @@ callee of ``_ct_return``.
            
           </div>
           <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="input_check.html" class="btn btn-neutral float-left" title="detail_/utilities/input_check.cmake" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-    </div>
 
   <hr/>
 

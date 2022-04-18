@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
@@ -38,9 +41,7 @@
     
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="detail_/utilities/return.cmake" href="return.html" />
-    <link rel="prev" title="detail_/utilities/utilities.cmake" href="utilities.html" /> 
+    <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -89,38 +90,12 @@
               
             
             
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../about.html">About CMakeTest</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../faqs.html">Frequently Asked Questions (FAQs)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../writing_tests/index.html">Writing Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Developer</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../../add_dir.html">add_dir.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../register_exception_handler.html">register_exception_handler.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../overrides.html">overrides.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../exec_tests.html">exec_tests.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../cmake_test.html">cmake_test.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../add_test.html">add_test.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../colors.html">colors.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../add_section.html">add_section.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../expectfail_subprocess.html">expectfail_subprocess.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../asserts/index.html">asserts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../templates/index.html">templates</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html">detail</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="index.html">detail_/utilities</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="sanitize_name.html">detail_/utilities/sanitize_name.cmake</a></li>
-<li class="toctree-l4"><a class="reference internal" href="lc_find.html">detail_/utilities/lc_find.cmake</a></li>
-<li class="toctree-l4"><a class="reference internal" href="repeat_string.html">detail_/utilities/repeat_string.cmake</a></li>
-<li class="toctree-l4"><a class="reference internal" href="print_result.html">detail_/utilities/print_result.cmake</a></li>
-<li class="toctree-l4"><a class="reference internal" href="utilities.html">detail_/utilities/utilities.cmake</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">detail_/utilities/input_check.cmake</a></li>
-<li class="toctree-l4"><a class="reference internal" href="return.html">detail_/utilities/return.cmake</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">#</a></li>
 </ul>
 
             
@@ -169,12 +144,6 @@
     
       <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="../../index.html">Developer</a> &raquo;</li>
-        
-          <li><a href="../index.html">detail</a> &raquo;</li>
-        
-          <li><a href="index.html">detail_/utilities</a> &raquo;</li>
-        
       <li>detail_/utilities/input_check.cmake</li>
     
     
@@ -197,16 +166,16 @@
   <div class="section" id="module-detail_-utilities-input_check.cmake">
 <span id="module-detail_/utilities/input_check.cmake"></span><span id="detail-utilities-input-check-cmake"></span><h1><a href="#id1"><span class="problematic" id="id2">detail_</span></a>/utilities/input_check.cmake<a class="headerlink" href="#module-detail_-utilities-input_check.cmake" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="detail_-utilities-input_check.cmake._ct_nonempty">
-<span id="detail_/utilities/input_check.cmake._ct_nonempty"></span><code class="sig-prename descclassname"><span class="pre">detail_/utilities/input_check.cmake.</span></code><code class="sig-name descname"><span class="pre">_ct_nonempty</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_n_var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#detail_-utilities-input_check.cmake._ct_nonempty" title="Permalink to this definition">¶</a></dt>
-<dd><p>Asserts that the provided identifier is set to a value other than the empty</p>
-<blockquote>
-<div><blockquote>
-<div><p>string.</p>
-</div></blockquote>
-<p>This function can be used to assert that an identifier is set to a value. In</p>
-<p>the event that the input to this function is not an identifier, or if that</p>
-<p>identifier is not set to a value, this function will raise a fatal error.</p>
+<dt class="sig sig-object py" id="detail_-utilities-input_check.cmake._ct_nonempty">
+<span id="detail_/utilities/input_check.cmake._ct_nonempty"></span><span class="sig-prename descclassname"><span class="pre">detail_/utilities/input_check.cmake.</span></span><span class="sig-name descname"><span class="pre">_ct_nonempty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_n_var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#detail_-utilities-input_check.cmake._ct_nonempty" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Asserts</span> <span class="pre">that</span> <span class="pre">the</span> <span class="pre">provided</span> <span class="pre">identifier</span> <span class="pre">is</span> <span class="pre">set</span> <span class="pre">to</span> <span class="pre">a</span> <span class="pre">value</span> <span class="pre">other</span> <span class="pre">than</span> <span class="pre">the</span> <span class="pre">empty</span></span></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">string.</span></span></dt>
+<dd><blockquote>
+<div><p>This function can be used to assert that an identifier is set to a value. In
+the event that the input to this function is not an identifier, or if that
+identifier is not set to a value, this function will raise a fatal error.</p>
 <dl class="field-list simple">
 <dt class="field-odd">param _n_var</dt>
 <dd class="field-odd"><p>The identifier to check for defined-ness.</p>
@@ -219,14 +188,15 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="detail_-utilities-input_check.cmake._ct_nonempty_string">
-<span id="detail_/utilities/input_check.cmake._ct_nonempty_string"></span><code class="sig-prename descclassname"><span class="pre">detail_/utilities/input_check.cmake.</span></code><code class="sig-name descname"><span class="pre">_ct_nonempty_string</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_ns_var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#detail_-utilities-input_check.cmake._ct_nonempty_string" title="Permalink to this definition">¶</a></dt>
-<dd><p>Asserts that the identifier contains a non-empty string.</p>
-<blockquote>
-<div><p>This function will ensure that the provided identifier is set to a value and</p>
-<p>that that value is not the empty string. If the identifier contains a list,</p>
-<p>or if the identifier is set to an empty string this function will raise a</p>
-<p>fatal error.</p>
+<dt class="sig sig-object py" id="detail_-utilities-input_check.cmake._ct_nonempty_string">
+<span id="detail_/utilities/input_check.cmake._ct_nonempty_string"></span><span class="sig-prename descclassname"><span class="pre">detail_/utilities/input_check.cmake.</span></span><span class="sig-name descname"><span class="pre">_ct_nonempty_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_ns_var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#detail_-utilities-input_check.cmake._ct_nonempty_string" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Asserts</span> <span class="pre">that</span> <span class="pre">the</span> <span class="pre">identifier</span> <span class="pre">contains</span> <span class="pre">a</span> <span class="pre">non-empty</span> <span class="pre">string.</span></span></dt>
+<dd><blockquote>
+<div><p>This function will ensure that the provided identifier is set to a value and
+that that value is not the empty string. If the identifier contains a list,
+or if the identifier is set to an empty string this function will raise a
+fatal error.</p>
 <dl class="field-list simple">
 <dt class="field-odd">param _ns_var</dt>
 <dd class="field-odd"><p>The identifier whose contents is being examined.</p>
@@ -245,10 +215,6 @@
            
           </div>
           <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="return.html" class="btn btn-neutral float-right" title="detail_/utilities/return.cmake" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="utilities.html" class="btn btn-neutral float-left" title="detail_/utilities/utilities.cmake" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-    </div>
 
   <hr/>
 
