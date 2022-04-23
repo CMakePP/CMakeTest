@@ -33,11 +33,11 @@ include_guard()
 #
 #]]
 macro(ct_add_test)
-    cpp_get_global(_at_exec_unit "CT_CURRENT_EXECUTION_UNIT")
+    cpp_get_global(_at_exec_unit_instance "CT_CURRENT_EXECUTION_UNIT_INSTANCE")
     cpp_get_global(_at_exec_expectfail "CT_EXEC_EXPECTFAIL") #Unset in main interpreter, TRUE in subprocess
 
-    if(NOT ("${_at_exec_unit}" STREQUAL "") AND NOT _at_exec_expectfail)
-        cpp_get_global(_at_exec_unit_friendly_name "CMAKETEST_TEST_${_at_exec_unit}_FRIENDLY_NAME")
+    if(NOT ("${_at_exec_unit_instance}" STREQUAL "") AND NOT _at_exec_expectfail)
+        CTExecutionUnit(GET "${_at_exec_unit_instance}" _at_exec_unit_friendly_name friendly_name)
         ct_exit("ct_add_test() encountered while executing a CMakeTest test or section named \"${_at_exec_unit_friendly_name}\"")
     endif()
 
@@ -60,16 +60,15 @@ macro(ct_add_test)
     endif()
 
     if("${${CT_ADD_TEST_NAME}}" STREQUAL "")
-         cpp_unique_id("${CT_ADD_TEST_NAME}") #Randomized identifier, only alphabetical characters so it generates a valid identifier.
+         cpp_unique_id("${CT_ADD_TEST_NAME}")
     endif()
 
-    cpp_append_global("CMAKETEST_TESTS" "${${CT_ADD_TEST_NAME}}")
+    CTExecutionUnit(CTOR test_instance "${${CT_ADD_TEST_NAME}}" "${CT_ADD_TEST_NAME}" "${CT_ADD_TEST_EXPECTFAIL}")
+    CTExecutionUnit(SET "${test_instance}" print_length "${_at_print_length}")
+    CTExecutionUnit(SET "${test_instance}" print_length_forced "${_at_print_length_forced}")
+    CTExecutionUnit(SET "${test_instance}" test_file "${CMAKE_CURRENT_LIST_FILE}")
 
-    cpp_set_global("CMAKETEST_TEST_${${CT_ADD_TEST_NAME}}_PRINT_LENGTH_FORCED" "${_at_print_length_forced}") #Set whether the PRINT_LENGTH option was used
-    cpp_set_global("CMAKETEST_TEST_${${CT_ADD_TEST_NAME}}_PRINT_LENGTH" "${_at_print_length}") #Set print length to be used for this test
-    cpp_set_global("CMAKETEST_TEST_${${CT_ADD_TEST_NAME}}_EXPECTFAIL" "${CT_ADD_TEST_EXPECTFAIL}") #Mark the test as expecting to fail or not
-    cpp_set_global("CMAKETEST_TEST_${${CT_ADD_TEST_NAME}}_FRIENDLY_NAME" "${CT_ADD_TEST_NAME}") #Store the friendly name for the test
-    cpp_set_global("CMAKETEST_TEST_${${CT_ADD_TEST_NAME}}_FILE" "${CMAKE_CURRENT_LIST_FILE}") #Store the file location for when we need to re-execute in subprocess
+    cpp_append_global("CMAKETEST_TEST_INSTANCES" "${test_instance}")
 
     message("Test w/ friendly name \"${CT_ADD_TEST_NAME}\" has ID \"${${CT_ADD_TEST_NAME}}\" and file \"${CMAKE_CURRENT_LIST_FILE}\"")
 endmacro()
