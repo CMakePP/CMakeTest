@@ -98,8 +98,18 @@ cpp_class(CTExecutionUnit)
         #]]
         cpp_attr(CTExecutionUnit exceptions)
 
-
+        #[[[
+        # Whether this unit has been executed already or not.
+        # Useful for determining whether to re-execute
+        # after a failed test is detected.
+        #]]
         cpp_attr(CTExecutionUnit has_executed FALSE)
+
+        #[[[
+        # Whether the pass/fail status of this unit has been
+        # printed yet. This ensures that parent units of
+        # a failed unit are not printed multiple times.
+        #]]
         cpp_attr(CTExecutionUnit has_printed FALSE)
 
 	cpp_constructor(CTOR CTExecutionUnit str str bool)
