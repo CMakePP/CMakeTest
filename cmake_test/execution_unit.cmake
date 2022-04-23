@@ -100,6 +100,7 @@ cpp_class(CTExecutionUnit)
 
 
         cpp_attr(CTExecutionUnit has_executed FALSE)
+        cpp_attr(CTExecutionUnit has_printed FALSE)
 
 	cpp_constructor(CTOR CTExecutionUnit str str bool)
 	function("${CTOR}" self id test_id expect_fail)

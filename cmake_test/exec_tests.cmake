@@ -21,7 +21,7 @@ function(ct_exec_tests)
 
 
 
-    message(STATUS "Executing tests")
+    #message(STATUS "Executing tests")
 
     #Default to true and set to false once one does not pass
     cpp_set_global(CMAKETEST_TESTS_DID_PASS "TRUE")
@@ -82,13 +82,18 @@ function(ct_exec_tests)
             endif()
         endif()
 
+        CTExecutionUnit(GET "${_et_curr_instance}" _et_has_printed has_printed)
 
         if(_et_test_fail)
-            _ct_print_fail("${_et_friendly_name}" 0 "${_et_print_length}")
+            if(NOT _et_has_printed)
+                _ct_print_fail("${_et_friendly_name}" 0 "${_et_print_length}")
+            endif()
             ct_exit()
-        else()
+        elseif(NOT _et_has_printed)
             _ct_print_pass("${_et_friendly_name}" 0 "${_et_print_length}")
         endif()
+
+        CTExecutionUnit(SET "${_et_curr_instance}" has_printed TRUE)
 
         #Only execute second time if sections detected
         CTExecutionUnit(GET "${_et_curr_instance}" _et_section_map children)

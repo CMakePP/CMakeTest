@@ -94,12 +94,21 @@ function(ct_add_section)
 
     #Get whether we should execute section now
     CTExecutionUnit(GET "${_as_curr_instance}" _as_exec_section execute_sections)
-    CTExecutionUnit(GET "${_as_curr_instance}" _as_has_executed has_executed)
+
 
     if(_as_exec_section AND NOT _as_has_executed) #Time to execute our section
         #Factor back out into exec_section()
         CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_children children)
         cpp_map(GET "${_as_parent_children}" _as_curr_section_instance "${_as_curr_section_id}")
+        CTExecutionUnit(GET "${_as_curr_section_instance}" _as_has_executed has_executed)
+        #message("Has executed: ${_as_has_executed}")
+
+
+
+        if(_as_has_executed)
+            #We've already executed so nothing to do
+            return()
+        endif()
 
         cpp_get_global(_as_old_section_depth "CMAKETEST_SECTION_DEPTH")
         math(EXPR _as_new_section_depth "${_as_old_section_depth} + 1")
@@ -145,16 +154,22 @@ function(ct_add_section)
                 set(_as_section_fail "TRUE")
            endif()
        endif()
+
+       CTExecutionUnit(GET "${_as_curr_section_instance}" _as_has_printed has_printed)
+
        if(_as_section_fail)
-           _ct_print_fail("${_as_friendly_name}" "${_as_new_section_depth}" "${_as_print_length}")
+           if(NOT _as_has_printed)
+               _ct_print_fail("${_as_friendly_name}" "${_as_new_section_depth}" "${_as_print_length}")
+           endif()
 
            #At least one test failed, so we will inform the caller that not all tests passed.
            cpp_set_global(CMAKETEST_TESTS_DID_PASS "FALSE")
            ct_exit()
-       else()
+       elseif(NOT _as_has_printed)
            _ct_print_pass("${_as_friendly_name}" "${_as_new_section_depth}" "${_as_print_length}")
        endif()
 
+       CTExecutionUnit(SET "${_as_curr_section_instance}" has_printed TRUE)
 
        # Get whether this section has subsections, only run again if subsections detected
        CTExecutionUnit(GET "${_as_curr_section_instance}" _as_children_map children)
