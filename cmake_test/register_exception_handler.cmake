@@ -19,6 +19,7 @@ function(ct_register_exception_handler)
         CTExecutionUnit(GET "${_ae_curr_exec_instance}" _ae_friendly_name friendly_name)
         CTExecutionUnit(GET "${_ae_curr_exec_instance}" _as_parent_print_length print_length)
 
+        cpp_append_global(CMAKETEST_FAILED_TESTS "${_ae_curr_exec_instance}")
 
         #cpp_get_global(_ae_friendly_name "CMAKETEST_TEST_${_ae_curr_exec}_FRIENDLY_NAME")
         cpp_get_global(_ae_section_depth "CMAKETEST_SECTION_DEPTH")
@@ -34,7 +35,19 @@ function(ct_register_exception_handler)
         ct_exec_tests()
 
 
-        ct_exit("Unexpected exception caught while executing test \"${_ae_curr_exec_friendly_name}\". Type: ${exce_type}, Details: ${message}")
+        #All tests have been executed now
+        cpp_get_global(_ae_failed_tests CMAKETEST_FAILED_TESTS)
+        foreach(_ae_failed_test_instance IN LISTS _ae_failed_tests)
+            CTExecutionUnit(GET "${_ae_failed_test_instance}" _ae_failed_test_name friendly_name)
+            CTExecutionUnit(GET "${_ae_failed_test_instance}" _ae_failed_test_exceptions exceptions)
+            set(_ae_failed_exception_messages "")
+            foreach(_ae_exception_message IN LISTS _ae_failed_test_exceptions)
+                set(_ae_failed_exception_messages "${_ae_failed_exception_messages}\n${_ae_exception_message}")
+            endforeach()
+            set(_ae_failure_message "${_ae_failure_message}\nUnexpected exceptions caught while executing test \"${_ae_curr_exec_friendly_name}\". ${_ae_failed_exception_messages}")
+        endforeach()
+
+        ct_exit("${_ae_failure_message}")
 
     endfunction()
 
