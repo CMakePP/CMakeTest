@@ -235,7 +235,11 @@ cpp_class(CTExecutionUnit)
 		endif()
 		cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${old_instance}")
 
+                CTExecutionUnit(print_pass_or_fail "${self}")
                 
+                CTExecutionUnit(exec_sections "${self}")
+                
+                CTExecutionUnit(SET "${self}" has_executed TRUE)
 
 	endfunction()
 

@@ -18,11 +18,6 @@ include_guard()
 # .. seealso:: :func:`add_section.cmake.ct_add_section` for details on section execution.
 #]]
 function(ct_exec_tests)
-
-
-
-    #message(STATUS "Executing tests")
-
     #Default to true and set to false once one does not pass
     cpp_set_global(CMAKETEST_TESTS_DID_PASS "TRUE")
 
@@ -31,37 +26,8 @@ function(ct_exec_tests)
 
     cpp_get_global(_et_instances "CMAKETEST_TEST_INSTANCES")
 
-
     foreach(_et_curr_instance IN LISTS _et_instances)
-        CTExecutionUnit(GET "${_et_curr_instance}" _et_curr_test_id test_id)
-
-        #TODO Remove once all logic is within class
-        CTExecutionUnit(GET "${_et_curr_instance}" _et_curr_instance_executed has_executed)
-        if (_et_curr_instance_executed)
-            continue()
-        endif()
-        #Test has not yet been executed
-
-
-        CTExecutionUnit(GET "${_et_curr_instance}" _et_friendly_name friendly_name)
-        CTExecutionUnit(GET "${_et_curr_instance}" _et_expect_fail expect_fail)
-        CTExecutionUnit(GET "${_et_curr_instance}" _et_print_length print_length)
-
-
         #Execute test
         CTExecutionUnit(execute "${_et_curr_instance}")
-        CTExecutionUnit(print_pass_or_fail "${_et_curr_instance}")
-
-
-        #Only execute second time if sections detected
-        CTExecutionUnit(GET "${_et_curr_instance}" _et_section_map children)
-        cpp_map(KEYS "${_et_section_map}" _et_has_sections)
-	if(NOT _et_has_sections STREQUAL "")
-            CTExecutionUnit(exec_sections "${_et_curr_instance}")
-        endif()
-
-        #All execution has completed
-        CTExecutionUnit(SET "${_et_curr_instance}" has_executed TRUE)
-
     endforeach()
 endfunction()

@@ -88,38 +88,14 @@ function(ct_add_section)
          set("${CT_ADD_SECTION_NAME}" "${_as_section_name}" PARENT_SCOPE)
     endif()
 
-
-
-    set(_as_original_unit_instance "${_as_curr_instance}")
-
     #Get whether we should execute section now
     CTExecutionUnit(GET "${_as_curr_instance}" _as_exec_section execute_sections)
 
-
     if(_as_exec_section) #Time to execute our section
-        #Factor back out into exec_section()
         CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_children children)
         cpp_map(GET "${_as_parent_children}" _as_curr_section_instance "${_as_curr_section_id}")
-        CTExecutionUnit(GET "${_as_curr_section_instance}" _as_has_executed has_executed)
-
-
-
-        if(_as_has_executed)
-            #We've already executed so nothing to do
-            return()
-        endif()
-
-        CTExecutionUnit(GET "${_as_curr_section_instance}" _as_friendly_name friendly_name)
 
         CTExecutionUnit(execute "${_as_curr_section_instance}")
-
-        CTExecutionUnit(print_pass_or_fail "${_as_curr_section_instance}")
-
-        CTExecutionUnit(exec_sections "${_as_curr_section_instance}")
-
-        CTExecutionUnit(SET "${_as_curr_section_instance}" has_executed TRUE)
-
-
     else()
         #First time run, set the ID so we don't lose it on the second run.
         #This will only cause conflicts if two sections in the same test
