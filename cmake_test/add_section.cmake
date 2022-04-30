@@ -109,10 +109,6 @@ function(ct_add_section)
             return()
         endif()
 
-        cpp_get_global(_as_old_section_depth "CMAKETEST_SECTION_DEPTH")
-        math(EXPR _as_new_section_depth "${_as_old_section_depth} + 1")
-        cpp_set_global("CMAKETEST_SECTION_DEPTH" "${_as_new_section_depth}")
-
         CTExecutionUnit(GET "${_as_curr_section_instance}" _as_friendly_name friendly_name)
 
         CTExecutionUnit(execute "${_as_curr_section_instance}")
@@ -123,7 +119,6 @@ function(ct_add_section)
 
         CTExecutionUnit(SET "${_as_curr_section_instance}" has_executed TRUE)
 
-        cpp_set_global("CMAKETEST_SECTION_DEPTH" "${_as_old_section_depth}")
 
     else()
         #First time run, set the ID so we don't lose it on the second run.
@@ -131,12 +126,16 @@ function(ct_add_section)
         #use the same friendly name (the variable used to store the ID and used in the function definition), which no sane programmer would do
 
         CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_file test_file)
+        CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_section_depth section_depth)
+        
+        math(EXPR _as_new_section_depth "${_as_parent_section_depth} + 1")
 
         CTExecutionUnit(CTOR _as_new_section "${${CT_ADD_SECTION_NAME}}" "${CT_ADD_SECTION_NAME}" "${CT_ADD_SECTION_EXPECTFAIL}")
         CTExecutionUnit(SET "${_as_new_section}" parent "${_as_curr_instance}")
         CTExecutionUnit(SET "${_as_new_section}" print_length_forced "${_as_print_length_forced}")
         CTExecutionUnit(SET "${_as_new_section}" print_length "${_as_print_length}")
         CTExecutionUnit(SET "${_as_new_section}" test_file "${_as_parent_file}")
+        CTExecutionUnit(SET "${_as_new_section}" section_depth "${_as_new_section_depth}")
         CTExecutionUnit(append_child "${_as_curr_instance}" "${${CT_ADD_SECTION_NAME}}" "${_as_new_section}")
         CTExecutionUnit(GET "${_as_curr_instance}" _as_siblings section_names_to_ids)
         cpp_map(SET "${_as_siblings}" "${CT_ADD_SECTION_NAME}" "${${CT_ADD_SECTION_NAME}}")

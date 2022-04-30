@@ -21,16 +21,12 @@ function(ct_register_exception_handler)
 
         cpp_append_global(CMAKETEST_FAILED_TESTS "${_ae_curr_exec_instance}")
 
-        #cpp_get_global(_ae_friendly_name "CMAKETEST_TEST_${_ae_curr_exec}_FRIENDLY_NAME")
-        cpp_get_global(_ae_section_depth "CMAKETEST_SECTION_DEPTH")
-        #cpp_get_global(_as_parent_print_length "CMAKETEST_TEST_${_ae_curr_exec}_PRINT_LENGTH")
+	CTExecutionUnit(GET "${_ae_curr_exec_instance}" _ae_section_depth section_depth)
 
         _ct_print_fail("${_ae_friendly_name}" "${_ae_section_depth}" "${_ae_print_length}")
 
         CTExecutionUnit(SET "${_ae_curr_exec_instance}" has_printed TRUE)
-        #message("Unexpected exception caught while executing test \"${_ae_curr_exec_friendly_name}\". Type: ${exce_type}, Details: ${message}")
 
-        #cpp_append_global("CMAKETEST_TESTS_EXECUTED" "${_ae_curr_exec}")
         CTExecutionUnit(SET "${_ae_curr_exec_instance}" has_executed TRUE)
         ct_exec_tests()
 

@@ -48,8 +48,6 @@ function(ct_exec_tests)
         CTExecutionUnit(GET "${_et_curr_instance}" _et_print_length print_length)
 
 
-        cpp_set_global("CMAKETEST_SECTION_DEPTH" 0)
-
         #Execute test
         CTExecutionUnit(execute "${_et_curr_instance}")
         CTExecutionUnit(print_pass_or_fail "${_et_curr_instance}")

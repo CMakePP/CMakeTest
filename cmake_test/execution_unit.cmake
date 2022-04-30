@@ -111,6 +111,13 @@ cpp_class(CTExecutionUnit)
         # a failed unit are not printed multiple times.
         #]]
         cpp_attr(CTExecutionUnit has_printed FALSE)
+        
+        #[[[
+        # Stores how many sections deep this execution unit is.
+        # This is used to determine how many tabs to place in front
+        # of the pass/fail print line.
+        #]]
+        cpp_attr(CTExecutionUnit section_depth 0)
 
 	cpp_constructor(CTOR CTExecutionUnit str str bool)
 	function("${CTOR}" self id test_id expect_fail)
@@ -213,18 +220,20 @@ cpp_class(CTExecutionUnit)
 		endif()
 		#Test has not yet been executed
 
+		cpp_get_global(old_instance "CT_CURRENT_EXECUTION_UNIT_INSTANCE")
+		cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${self}")
+
 		if(_ex_expect_fail AND NOT _ex_exec_expectfail) #If this section expects to fail
 
            		#We're in main interpreter so we need to configure and execute the subprocess
 			ct_expectfail_subprocess("${self}")
 
 		else()
-			cpp_get_global(old_instance "CT_CURRENT_EXECUTION_UNIT_INSTANCE")
-			cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${self}")
+			
 			CTExecutionUnit(GET "${self}" id test_id)
         	        cpp_call_fxn("${id}")
-			cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${old_instance}")
 		endif()
+		cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${old_instance}")
 
                 
 
@@ -265,8 +274,9 @@ cpp_class(CTExecutionUnit)
 		CTExecutionUnit(GET "${self}" _ppof_exceptions exceptions)
 		CTExecutionUnit(GET "${self}" _ppof_has_printed has_printed)
 		CTExecutionUnit(GET "${self}" _ppof_print_length print_length)
+		CTExecutionUnit(GET "${self}" _ppof_section_depth section_depth)
 		
-		cpp_get_global(_ppof_section_depth "CMAKETEST_SECTION_DEPTH")
+		#cpp_get_global(_ppof_section_depth "CMAKETEST_SECTION_DEPTH")
 		cpp_get_global(_ppof_exec_expectfail "CT_EXEC_EXPECTFAIL")
 
 		set(_ppof_test_fail "FALSE")
