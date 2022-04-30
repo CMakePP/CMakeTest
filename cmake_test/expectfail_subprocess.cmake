@@ -61,14 +61,12 @@ function(ct_expectfail_subprocess _es_curr_section_instance)
                 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/sections/${_es_section_id}_EXPECTFAIL/build")
                 execute_process(COMMAND "${CMAKE_COMMAND}" -S "${CMAKE_CURRENT_BINARY_DIR}/sections/${_es_section_id}_EXPECTFAIL/" -B "${CMAKE_CURRENT_BINARY_DIR}/sections/${_es_section_id}_EXPECTFAIL/build/" RESULT_VARIABLE _es_expectfail_result_code OUTPUT_VARIABLE _es_expectfail_output ERROR_VARIABLE _es_expectfail_stderr)
 
-                #Check exit code and crash if did not fail when expected
+                #Check exit code and raise exception if did not fail when expected
                 if (NOT _es_expectfail_result_code)
-                     #TODO provide details once CMakePPLang#52 is resolved
-                     #cpp_raise(EXPECTFAIL_NO_FAILURE_EXCEPTION "Section ${_es_section_friendly_name} was expected to fail but instead returned ${_es_expectfail_result_code}.\n"
-                     #    "Subprocess output: ${_es_expectfail_output}\n"
-                     #    "Subprocess error: ${_es_expectfail_stderr}"
-                     #)
-                     cpp_raise(EXPECTFAIL_NO_FAILURE_EXCEPTION "Section ${_es_section_friendly_name} was expected to fail but instead returned ${_es_expectfail_result_code}.")
+                     cpp_raise(EXPECTFAIL_NO_FAILURE_EXCEPTION "Section ${_es_section_friendly_name} was expected to fail but instead returned ${_es_expectfail_result_code}.\n\
+                         Subprocess output: ${_es_expectfail_output}\n\
+                         Subprocess error: ${_es_expectfail_stderr}"
+                     )
                 endif()
 
 endfunction()
