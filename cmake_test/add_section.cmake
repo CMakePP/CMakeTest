@@ -96,12 +96,11 @@ function(ct_add_section)
     CTExecutionUnit(GET "${_as_curr_instance}" _as_exec_section execute_sections)
 
 
-    if(_as_exec_section AND NOT _as_has_executed) #Time to execute our section
+    if(_as_exec_section) #Time to execute our section
         #Factor back out into exec_section()
         CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_children children)
         cpp_map(GET "${_as_parent_children}" _as_curr_section_instance "${_as_curr_section_id}")
         CTExecutionUnit(GET "${_as_curr_section_instance}" _as_has_executed has_executed)
-        #message("Has executed: ${_as_has_executed}")
 
 
 
@@ -113,40 +112,17 @@ function(ct_add_section)
         cpp_get_global(_as_old_section_depth "CMAKETEST_SECTION_DEPTH")
         math(EXPR _as_new_section_depth "${_as_old_section_depth} + 1")
         cpp_set_global("CMAKETEST_SECTION_DEPTH" "${_as_new_section_depth}")
-        #Set the new execution unit so that the exceptions can be tracked and new subsections executed properly
-        cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${_as_curr_section_instance}")
 
         CTExecutionUnit(GET "${_as_curr_section_instance}" _as_friendly_name friendly_name)
 
+        CTExecutionUnit(execute "${_as_curr_section_instance}")
 
-        CTExecutionUnit(GET "${_as_curr_section_instance}" _as_expect_fail expect_fail)
-        CTExecutionUnit(GET "${_as_curr_section_instance}" _as_print_length print_length)
-
-
-        if(_as_expect_fail AND NOT _as_exec_expectfail) #If this section expects to fail
-
-            #We're in main interpreter so we need to configure and execute the subprocess
-            ct_expectfail_subprocess("${_as_curr_section_instance}")
-
-        else()
-            CTExecutionUnit(execute "${_as_curr_section_instance}")
-        endif()
         CTExecutionUnit(print_pass_or_fail "${_as_curr_section_instance}")
 
         CTExecutionUnit(exec_sections "${_as_curr_section_instance}")
 
-#        # Get whether this section has subsections, only run again if subsections detected
-#        CTExecutionUnit(GET "${_as_curr_section_instance}" _as_children_map children)
-#        cpp_map(KEYS "${_as_children_map}" _as_has_subsections)
-#        if((NOT _as_has_subsections STREQUAL "") AND ((NOT _as_expect_fail AND NOT _as_exec_expectfail) OR (_as_exec_expectfail))) #If in main interpreter and not expecting to fail OR in subprocess
-#            #Execute the section again, this time executing subsections. Only do when not executing expectfail
-#            CTExecutionUnit(exec_sections "${_as_curr_section_instance}")
-
-#        endif()
-
         CTExecutionUnit(SET "${_as_curr_section_instance}" has_executed TRUE)
 
-        cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${_as_original_unit_instance}")
         cpp_set_global("CMAKETEST_SECTION_DEPTH" "${_as_old_section_depth}")
 
     else()

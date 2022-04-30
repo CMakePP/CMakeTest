@@ -205,20 +205,28 @@ cpp_class(CTExecutionUnit)
 
 	cpp_member(execute CTExecutionUnit)
         function("${execute}" self)
-
+		CTExecutionUnit(GET "${self}" _ex_expect_fail expect_fail)
+        	cpp_get_global(_ex_exec_expectfail "CT_EXEC_EXPECTFAIL")
 		CTExecutionUnit(GET "${self}" _self_has_executed has_executed)
 		if (_self_has_executed)
 			return()
 		endif()
 		#Test has not yet been executed
 
+		if(_ex_expect_fail AND NOT _ex_exec_expectfail) #If this section expects to fail
 
+           		#We're in main interpreter so we need to configure and execute the subprocess
+			ct_expectfail_subprocess("${self}")
 
-                cpp_get_global(old_instance "CT_CURRENT_EXECUTION_UNIT_INSTANCE")
-		cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${self}")
-		CTExecutionUnit(GET "${self}" id test_id)
-                cpp_call_fxn("${id}")
-		cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${old_instance}")
+		else()
+			cpp_get_global(old_instance "CT_CURRENT_EXECUTION_UNIT_INSTANCE")
+			cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${self}")
+			CTExecutionUnit(GET "${self}" id test_id)
+        	        cpp_call_fxn("${id}")
+			cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${old_instance}")
+		endif()
+
+                
 
 	endfunction()
 
@@ -233,12 +241,18 @@ cpp_class(CTExecutionUnit)
 		
 		#If in main interpreter and not expecting to fail OR in subprocess
 		if((NOT _es_has_subsections STREQUAL "") AND ((NOT _es_expect_fail AND NOT _es_exec_expectfail) OR (_es_exec_expectfail)))
+#			cpp_get_global(_es_old_section_depth "CMAKETEST_SECTION_DEPTH")
+#			math(EXPR _es_new_section_depth "${_es_old_section_depth} + 1")
+#		        cpp_set_global("CMAKETEST_SECTION_DEPTH" "${_es_new_section_depth}")
+		
 			cpp_get_global(old_instance "CT_CURRENT_EXECUTION_UNIT_INSTANCE")
         	        cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${self}")
         	        CTExecutionUnit(SET "${self}" execute_sections TRUE)
         	        CTExecutionUnit(GET "${self}" id test_id)
         	        cpp_call_fxn("${id}")
 	                cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${old_instance}")
+	                
+#	                cpp_set_global("CMAKETEST_SECTION_DEPTH" "${_es_old_section_depth}")
 		endif()
 
 	endfunction()
