@@ -123,68 +123,31 @@ function(ct_add_section)
         CTExecutionUnit(GET "${_as_curr_section_instance}" _as_print_length print_length)
 
 
-        if(_as_expect_fail) #If this section expects to fail
+        if(_as_expect_fail AND NOT _as_exec_expectfail) #If this section expects to fail
 
-            if(NOT _as_exec_expectfail) #We're in main interpreter so we need to configure and execute the subprocess
-                ct_expectfail_subprocess("${_as_curr_section_instance}")
-            else() #We're in subprocess
-                file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section_id}.cmake" "${_as_curr_section_id}()")
-                include("${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section_id}.cmake")
-                CTExecutionUnit(GET "${_as_curr_section_instance}" _as_exceptions exceptions)
-
-                if(NOT "${_as_exceptions}" STREQUAL "")
-                    foreach(_as_exc IN LISTS _as_exceptions)
-                        message("${CT_BoldRed}Section named \"${_as_friendly_name}\" raised exception:")
-                        message("${_as_exc}${CT_ColorReset}")
-                    endforeach()
-                    set(_as_section_fail "TRUE")
-               endif()
-           endif()
+            #We're in main interpreter so we need to configure and execute the subprocess
+            ct_expectfail_subprocess("${_as_curr_section_instance}")
 
         else()
-            file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section_id}.cmake" "${_as_curr_section_id}()")
-            include("${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section_id}.cmake")
-            CTExecutionUnit(GET "${_as_curr_section_instance}" _as_exceptions exceptions)
+            CTExecutionUnit(execute "${_as_curr_section_instance}")
+        endif()
+        CTExecutionUnit(print_pass_or_fail "${_as_curr_section_instance}")
 
-            if(NOT "${_as_exceptions}" STREQUAL "")
-                foreach(_as_exc IN LISTS _as_exceptions)
-                    message("${CT_BoldRed}Section named \"${_as_friendly_name}\" raised exception:")
-                    message("${_as_exc}${CT_ColorReset}")
-                endforeach()
-                set(_as_section_fail "TRUE")
-           endif()
-       endif()
+        CTExecutionUnit(exec_sections "${_as_curr_section_instance}")
 
-       CTExecutionUnit(GET "${_as_curr_section_instance}" _as_has_printed has_printed)
+#        # Get whether this section has subsections, only run again if subsections detected
+#        CTExecutionUnit(GET "${_as_curr_section_instance}" _as_children_map children)
+#        cpp_map(KEYS "${_as_children_map}" _as_has_subsections)
+#        if((NOT _as_has_subsections STREQUAL "") AND ((NOT _as_expect_fail AND NOT _as_exec_expectfail) OR (_as_exec_expectfail))) #If in main interpreter and not expecting to fail OR in subprocess
+#            #Execute the section again, this time executing subsections. Only do when not executing expectfail
+#            CTExecutionUnit(exec_sections "${_as_curr_section_instance}")
 
-       if(_as_section_fail)
-           if(NOT _as_has_printed)
-               _ct_print_fail("${_as_friendly_name}" "${_as_new_section_depth}" "${_as_print_length}")
-           endif()
+#        endif()
 
-           #At least one test failed, so we will inform the caller that not all tests passed.
-           cpp_set_global(CMAKETEST_TESTS_DID_PASS "FALSE")
-           ct_exit()
-       elseif(NOT _as_has_printed)
-           _ct_print_pass("${_as_friendly_name}" "${_as_new_section_depth}" "${_as_print_length}")
-       endif()
+        CTExecutionUnit(SET "${_as_curr_section_instance}" has_executed TRUE)
 
-       CTExecutionUnit(SET "${_as_curr_section_instance}" has_printed TRUE)
-
-       # Get whether this section has subsections, only run again if subsections detected
-       CTExecutionUnit(GET "${_as_curr_section_instance}" _as_children_map children)
-       cpp_map(KEYS "${_as_children_map}" _as_has_subsections)
-       if((NOT _as_has_subsections STREQUAL "") AND ((NOT _as_expect_fail AND NOT _as_exec_expectfail) OR (_as_exec_expectfail))) #If in main interpreter and not expecting to fail OR in subprocess
-           #Execute the section again, this time executing subsections. Only do when not executing expectfail
-           CTExecutionUnit(SET "${_as_curr_section_instance}" execute_sections TRUE)
-           include("${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section_id}.cmake")
-
-      endif()
-
-      CTExecutionUnit(SET "${_as_curr_section_instance}" has_executed TRUE)
-
-      cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${_as_original_unit_instance}")
-      cpp_set_global("CMAKETEST_SECTION_DEPTH" "${_as_old_section_depth}")
+        cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${_as_original_unit_instance}")
+        cpp_set_global("CMAKETEST_SECTION_DEPTH" "${_as_old_section_depth}")
 
     else()
         #First time run, set the ID so we don't lose it on the second run.

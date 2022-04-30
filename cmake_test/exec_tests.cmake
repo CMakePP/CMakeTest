@@ -35,15 +35,13 @@ function(ct_exec_tests)
     foreach(_et_curr_instance IN LISTS _et_instances)
         CTExecutionUnit(GET "${_et_curr_instance}" _et_curr_test_id test_id)
 
-
+        #TODO Remove once all logic is within class
         CTExecutionUnit(GET "${_et_curr_instance}" _et_curr_instance_executed has_executed)
         if (_et_curr_instance_executed)
             continue()
         endif()
         #Test has not yet been executed
 
-        #Set the fully qualified identifier for this test, used later for exception tracking and section/subsection execution
-        cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${_et_curr_instance}")
 
         CTExecutionUnit(GET "${_et_curr_instance}" _et_friendly_name friendly_name)
         CTExecutionUnit(GET "${_et_curr_instance}" _et_expect_fail expect_fail)
@@ -53,54 +51,15 @@ function(ct_exec_tests)
         cpp_set_global("CMAKETEST_SECTION_DEPTH" 0)
 
         #Execute test
-        file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/${_et_curr_test_id}/${_et_curr_test_id}.cmake" "${_et_curr_test_id}()")
-        include("${CMAKE_CURRENT_BINARY_DIR}/${_et_curr_test_id}/${_et_curr_test_id}.cmake")
+        CTExecutionUnit(execute "${_et_curr_instance}")
+        CTExecutionUnit(print_pass_or_fail "${_et_curr_instance}")
 
-
-
-        CTExecutionUnit(GET "${_et_curr_instance}" _et_exceptions exceptions)
-
-        if(_et_expect_fail)
-            if("${_et_exceptions}" STREQUAL "")
-                message("${CT_BoldRed}Test named \"${_et_friendly_name}\" was expected to fail but did not throw any exceptions or errors.${CT_ColorReset}")
-
-                #At least one test failed, so we will inform the caller that not all tests passed.
-                cpp_set_global(CMAKETEST_TESTS_DID_PASS "FALSE")
-                set(_et_test_fail "TRUE")
-            endif()
-        else()
-            if(NOT ("${_et_exceptions}" STREQUAL ""))
-
-                foreach(_et_exc IN LISTS _et_exceptions)
-                    message("${CT_BoldRed}Test named \"${_et_friendly_name}\" raised exception:")
-                    message("${_et_exc}${CT_ColorReset}")
-                endforeach()
-
-                #At least one test failed, so we will inform the caller that not all tests passed.
-                cpp_set_global(CMAKETEST_TESTS_DID_PASS "FALSE")
-                set(_et_test_fail "TRUE")
-            endif()
-        endif()
-
-        CTExecutionUnit(GET "${_et_curr_instance}" _et_has_printed has_printed)
-
-        if(_et_test_fail)
-            if(NOT _et_has_printed)
-                _ct_print_fail("${_et_friendly_name}" 0 "${_et_print_length}")
-            endif()
-            ct_exit()
-        elseif(NOT _et_has_printed)
-            _ct_print_pass("${_et_friendly_name}" 0 "${_et_print_length}")
-        endif()
-
-        CTExecutionUnit(SET "${_et_curr_instance}" has_printed TRUE)
 
         #Only execute second time if sections detected
         CTExecutionUnit(GET "${_et_curr_instance}" _et_section_map children)
         cpp_map(KEYS "${_et_section_map}" _et_has_sections)
 	if(NOT _et_has_sections STREQUAL "")
-            CTExecutionUnit(SET "${_et_curr_instance}" execute_sections TRUE)
-            include("${CMAKE_CURRENT_BINARY_DIR}/${_et_curr_test_id}/${_et_curr_test_id}.cmake")
+            CTExecutionUnit(exec_sections "${_et_curr_instance}")
         endif()
 
         #All execution has completed

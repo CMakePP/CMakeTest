@@ -203,5 +203,94 @@ cpp_class(CTExecutionUnit)
 		#cpp_return("${ret}")
 	endfunction()
 
+	cpp_member(execute CTExecutionUnit)
+        function("${execute}" self)
+
+		CTExecutionUnit(GET "${self}" _self_has_executed has_executed)
+		if (_self_has_executed)
+			return()
+		endif()
+		#Test has not yet been executed
+
+
+
+                cpp_get_global(old_instance "CT_CURRENT_EXECUTION_UNIT_INSTANCE")
+		cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${self}")
+		CTExecutionUnit(GET "${self}" id test_id)
+                cpp_call_fxn("${id}")
+		cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${old_instance}")
+
+	endfunction()
+
+	cpp_member(exec_sections CTExecutionUnit)
+        function("${exec_sections}" self)
+        	CTExecutionUnit(GET "${self}" _es_expect_fail expect_fail)
+        	cpp_get_global(_es_exec_expectfail "CT_EXEC_EXPECTFAIL")
+        
+        	# Get whether this section has subsections, only run again if subsections detected
+		CTExecutionUnit(GET "${self}" _es_children_map children)
+		cpp_map(KEYS "${_es_children_map}" _es_has_subsections)
+		
+		#If in main interpreter and not expecting to fail OR in subprocess
+		if((NOT _es_has_subsections STREQUAL "") AND ((NOT _es_expect_fail AND NOT _es_exec_expectfail) OR (_es_exec_expectfail)))
+			cpp_get_global(old_instance "CT_CURRENT_EXECUTION_UNIT_INSTANCE")
+        	        cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${self}")
+        	        CTExecutionUnit(SET "${self}" execute_sections TRUE)
+        	        CTExecutionUnit(GET "${self}" id test_id)
+        	        cpp_call_fxn("${id}")
+	                cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${old_instance}")
+		endif()
+
+	endfunction()
+
+
+	cpp_member(print_pass_or_fail CTExecutionUnit)
+	function("${print_pass_or_fail}" self)
+		CTExecutionUnit(GET "${self}" _ppof_expect_fail expect_fail)
+		CTExecutionUnit(GET "${self}" _ppof_friendly_name friendly_name)
+		CTExecutionUnit(GET "${self}" _ppof_exceptions exceptions)
+		CTExecutionUnit(GET "${self}" _ppof_has_printed has_printed)
+		CTExecutionUnit(GET "${self}" _ppof_print_length print_length)
+		
+		cpp_get_global(_ppof_section_depth "CMAKETEST_SECTION_DEPTH")
+		cpp_get_global(_ppof_exec_expectfail "CT_EXEC_EXPECTFAIL")
+
+		set(_ppof_test_fail "FALSE")
+
+		if(_ppof_expect_fail AND _ppof_exec_expectfail)
+			if(NOT "${_as_exceptions}" STREQUAL "")
+	                    foreach(_as_exc IN LISTS _as_exceptions)
+				message("${CT_BoldRed}Test named \"${_as_friendly_name}\" raised exception:")
+				message("${_as_exc}${CT_ColorReset}")
+                	    endforeach()
+                	    set(_as_section_fail "TRUE")
+	               endif()
+		else()
+			if(NOT ("${_ppof_exceptions}" STREQUAL ""))
+
+				foreach(_ppof_exc IN LISTS _ppof_exceptions)
+					message("${CT_BoldRed}Test named \"${_ppof_friendly_name}\" raised exception:")
+					message("${_ppof_exc}${CT_ColorReset}")
+				endforeach()
+
+				#At least one test failed, so we will inform the caller that not all tests passed.
+				cpp_set_global(CMAKETEST_TESTS_DID_PASS "FALSE")
+				set(_ppof_test_fail "TRUE")
+			endif()
+		endif()
+
+
+		if(_ppof_test_fail)
+			if(NOT _ppof_has_printed)
+				_ct_print_fail("${_ppof_friendly_name}" "${_ppof_section_depth}" "${_ppof_print_length}")
+			endif()
+			#ct_exit()
+		elseif(NOT _ppof_has_printed)
+			_ct_print_pass("${_ppof_friendly_name}" "${_ppof_section_depth}" "${_ppof_print_length}")
+		endif()
+
+		CTExecutionUnit(SET "${self}" has_printed TRUE)
+
+	endfunction()
 
 cpp_end_class()
