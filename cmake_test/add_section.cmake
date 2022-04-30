@@ -13,17 +13,17 @@ include_guard()
 #        message(STATUS "This code will run in a test section")
 #    endfunction()
 #
-# Upon being executed, this function will check if the CMAKETEST_TEST_${current_exec_unit}_EXECUTE_SECTIONS CMakePP global is set.
+# Upon being executed, this function will check if the section should be executed.
 # If it is not, ct_add_section() will generate an ID for the section function and sets the variable pointed to by the NAME parameter to it.
+# It will also construct a new CTExecutionUnit instance to represent the section.
 #
-# If the flag is set, ct_add_section() will increment the CMAKETEST_SECTION_DEPTH CMakePP global, write a file to the build directory with a line calling the section function,
-# and include the file to execute the function. Exceptions will be tracked while the function is being executed. After completion of the test, the test status will be output
-# to the screen. The CMAKETEST_TEST_${current_exec_unit}_${section_id}_EXECUTE_SECTIONS flag will then be set. The section function will then be executed again, and
-# any subsections will then execute as well, following this same flow until there are no more subsections. Section depth is tracked by the CMAKETEST_SECTION_DEPTH CMakePP global.
+# If the section is supposed to be executed, ct_add_section() will call the ``execute`` member function of the CTExecutionUnit representing this section.
+# Exceptions will be tracked while the function is being executed. After completion of the test, the test status will be output
+# to the screen. The section subsections will then be executed, following this same flow until there are no more subsections.
 #
-# If a section raises an exception when it is not expected to, testing will halt immediately. To keep parity between different types of tests, EXPECTFAIL sections that do not raise
-# exceptions will also halt all testing.
-#
+# If a section raises an exception when it is not expected to, it will be marked as a failing section and its subsections
+# will not be executed, due to limitations in how CMake handles failures. However, sibling sections as well as 
+# other tests will continue to execute, and the failures will be aggregated and printed after all tests have been ran.
 #
 # Print length of pass/fail lines can be adjusted with the `PRINT_LENGTH` option.
 #
@@ -97,9 +97,9 @@ function(ct_add_section)
 
         CTExecutionUnit(execute "${_as_curr_section_instance}")
     else()
-        #First time run, set the ID so we don't lose it on the second run.
-        #This will only cause conflicts if two sections in the same test
-        #use the same friendly name (the variable used to store the ID and used in the function definition), which no sane programmer would do
+        #First time run, construct and configure
+        #the new section unit, as well as add it
+        #to its parent
 
         CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_file test_file)
         CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_section_depth section_depth)

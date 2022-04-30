@@ -210,6 +210,14 @@ cpp_class(CTExecutionUnit)
 		#cpp_return("${ret}")
 	endfunction()
 
+
+	#[[[
+	# Executes the test or section that this unit represents.
+	# This function handles printing the pass/failure state
+	# as well as executing subsections. However, if this unit
+	# has already been executed, this function does nothing.
+	#
+	#]]
 	cpp_member(execute CTExecutionUnit)
         function("${execute}" self)
 		CTExecutionUnit(GET "${self}" _ex_expect_fail expect_fail)
@@ -243,6 +251,13 @@ cpp_class(CTExecutionUnit)
 
 	endfunction()
 
+
+	#[[[
+	# Executes all subsections of this unit.
+	# If this unit has no subsections, this
+	# function does nothing.
+	#
+	#]]
 	cpp_member(exec_sections CTExecutionUnit)
         function("${exec_sections}" self)
         	CTExecutionUnit(GET "${self}" _es_expect_fail expect_fail)
@@ -253,24 +268,25 @@ cpp_class(CTExecutionUnit)
 		cpp_map(KEYS "${_es_children_map}" _es_has_subsections)
 		
 		#If in main interpreter and not expecting to fail OR in subprocess
-		if((NOT _es_has_subsections STREQUAL "") AND ((NOT _es_expect_fail AND NOT _es_exec_expectfail) OR (_es_exec_expectfail)))
-#			cpp_get_global(_es_old_section_depth "CMAKETEST_SECTION_DEPTH")
-#			math(EXPR _es_new_section_depth "${_es_old_section_depth} + 1")
-#		        cpp_set_global("CMAKETEST_SECTION_DEPTH" "${_es_new_section_depth}")
-		
+		if((NOT _es_has_subsections STREQUAL "") AND ((NOT _es_expect_fail AND NOT _es_exec_expectfail) OR (_es_exec_expectfail)))		
 			cpp_get_global(old_instance "CT_CURRENT_EXECUTION_UNIT_INSTANCE")
         	        cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${self}")
         	        CTExecutionUnit(SET "${self}" execute_sections TRUE)
         	        CTExecutionUnit(GET "${self}" id test_id)
         	        cpp_call_fxn("${id}")
 	                cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${old_instance}")
-	                
-#	                cpp_set_global("CMAKETEST_SECTION_DEPTH" "${_es_old_section_depth}")
+
 		endif()
 
 	endfunction()
 
 
+	#[[[
+	# Determines whether the unit passed or failed
+	# and prints it, obeying the section depth,
+	# print length, and whether colors are enabled.
+	#
+	#]]
 	cpp_member(print_pass_or_fail CTExecutionUnit)
 	function("${print_pass_or_fail}" self)
 		CTExecutionUnit(GET "${self}" _ppof_expect_fail expect_fail)
@@ -280,7 +296,6 @@ cpp_class(CTExecutionUnit)
 		CTExecutionUnit(GET "${self}" _ppof_print_length print_length)
 		CTExecutionUnit(GET "${self}" _ppof_section_depth section_depth)
 		
-		#cpp_get_global(_ppof_section_depth "CMAKETEST_SECTION_DEPTH")
 		cpp_get_global(_ppof_exec_expectfail "CT_EXEC_EXPECTFAIL")
 
 		set(_ppof_test_fail "FALSE")
@@ -312,7 +327,6 @@ cpp_class(CTExecutionUnit)
 			if(NOT _ppof_has_printed)
 				_ct_print_fail("${_ppof_friendly_name}" "${_ppof_section_depth}" "${_ppof_print_length}")
 			endif()
-			#ct_exit()
 		elseif(NOT _ppof_has_printed)
 			_ct_print_pass("${_ppof_friendly_name}" "${_ppof_section_depth}" "${_ppof_print_length}")
 		endif()
