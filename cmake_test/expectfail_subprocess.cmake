@@ -55,16 +55,33 @@ function(ct_expectfail_subprocess _es_curr_section_instance)
                 string (REGEX REPLACE "(^|[^\\\\]);" "\\1\(\)\n" _es_section_parent_tree "${_es_section_parent_tree}")
 
                 #Write subprocess file
-                configure_file("${_CT_TEMPLATES_DIR}/expectfail.txt" "${CMAKE_CURRENT_BINARY_DIR}/sections/${_es_section_id}_EXPECTFAIL/CMakeLists.txt" @ONLY) #Fill in boilerplate, copy to build dir
+                #Fill in boilerplate, copy to build dir
+                configure_file(
+                	"${_CT_TEMPLATES_DIR}/expectfail.txt"
+                	"${CMAKE_CURRENT_BINARY_DIR}/sections/${_es_section_id}_EXPECTFAIL/CMakeLists.txt"
+                	@ONLY
+                )
 
                 #Exec subprocess
                 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/sections/${_es_section_id}_EXPECTFAIL/build")
-                execute_process(COMMAND "${CMAKE_COMMAND}" -S "${CMAKE_CURRENT_BINARY_DIR}/sections/${_es_section_id}_EXPECTFAIL/" -B "${CMAKE_CURRENT_BINARY_DIR}/sections/${_es_section_id}_EXPECTFAIL/build/" RESULT_VARIABLE _es_expectfail_result_code OUTPUT_VARIABLE _es_expectfail_output ERROR_VARIABLE _es_expectfail_stderr)
+                execute_process(
+                	COMMAND 
+                		"${CMAKE_COMMAND}"
+	                	-S "${CMAKE_CURRENT_BINARY_DIR}/sections/${_es_section_id}_EXPECTFAIL/"
+	                	-B "${CMAKE_CURRENT_BINARY_DIR}/sections/${_es_section_id}_EXPECTFAIL/build/"
+	                RESULT_VARIABLE _es_expectfail_result_code
+	                OUTPUT_VARIABLE _es_expectfail_output
+	                ERROR_VARIABLE _es_expectfail_stderr
+	        )
 
-                #Check exit code and crash if did not fail when expected
-                #TODO: throw exception instead
+                #Check exit code and raise exception if did not fail when expected
                 if (NOT _es_expectfail_result_code)
-                     ct_exit("Section ${_es_section_friendly_name} was expected to fail but instead returned ${_es_expectfail_result_code}. Subprocess output: ${_es_expectfail_output}\nSubprocess error: ${_es_expectfail_stderr}")
+                     cpp_raise(
+                     	EXPECTFAIL_NO_FAILURE_EXCEPTION
+                     	"Section ${_es_section_friendly_name} was expected to fail but instead returned ${_es_expectfail_result_code}.
+                         Subprocess output: ${_es_expectfail_output}
+                         Subprocess error: ${_es_expectfail_stderr}"
+                     )
                 endif()
 
 endfunction()

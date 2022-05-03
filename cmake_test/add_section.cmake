@@ -13,17 +13,17 @@ include_guard()
 #        message(STATUS "This code will run in a test section")
 #    endfunction()
 #
-# Upon being executed, this function will check if the CMAKETEST_TEST_${current_exec_unit}_EXECUTE_SECTIONS CMakePP global is set.
+# Upon being executed, this function will check if the section should be executed.
 # If it is not, ct_add_section() will generate an ID for the section function and sets the variable pointed to by the NAME parameter to it.
+# It will also construct a new CTExecutionUnit instance to represent the section.
 #
-# If the flag is set, ct_add_section() will increment the CMAKETEST_SECTION_DEPTH CMakePP global, write a file to the build directory with a line calling the section function,
-# and include the file to execute the function. Exceptions will be tracked while the function is being executed. After completion of the test, the test status will be output
-# to the screen. The CMAKETEST_TEST_${current_exec_unit}_${section_id}_EXECUTE_SECTIONS flag will then be set. The section function will then be executed again, and
-# any subsections will then execute as well, following this same flow until there are no more subsections. Section depth is tracked by the CMAKETEST_SECTION_DEPTH CMakePP global.
+# If the section is supposed to be executed, ct_add_section() will call the ``execute`` member function of the CTExecutionUnit representing this section.
+# Exceptions will be tracked while the function is being executed. After completion of the test, the test status will be output
+# to the screen. The section subsections will then be executed, following this same flow until there are no more subsections.
 #
-# If a section raises an exception when it is not expected to, testing will halt immediately. To keep parity between different types of tests, EXPECTFAIL sections that do not raise
-# exceptions will also halt all testing.
-#
+# If a section raises an exception when it is not expected to, it will be marked as a failing section and its subsections
+# will not be executed, due to limitations in how CMake handles failures. However, sibling sections as well as 
+# other tests will continue to execute, and the failures will be aggregated and printed after all tests have been ran.
 #
 # Print length of pass/fail lines can be adjusted with the `PRINT_LENGTH` option.
 #
@@ -88,10 +88,6 @@ function(ct_add_section)
          set("${CT_ADD_SECTION_NAME}" "${_as_section_name}" PARENT_SCOPE)
     endif()
 
-
-
-    set(_as_original_unit_instance "${_as_curr_instance}")
-
     #Get whether we should execute section now
     CTExecutionUnit(GET "${_as_curr_instance}" _as_exec_section execute_sections)
 
@@ -99,86 +95,23 @@ function(ct_add_section)
         CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_children children)
         cpp_map(GET "${_as_parent_children}" _as_curr_section_instance "${_as_curr_section_id}")
 
-        cpp_get_global(_as_old_section_depth "CMAKETEST_SECTION_DEPTH")
-        math(EXPR _as_new_section_depth "${_as_old_section_depth} + 1")
-        cpp_set_global("CMAKETEST_SECTION_DEPTH" "${_as_new_section_depth}")
-        #Set the new execution unit so that the exceptions can be tracked and new subsections executed properly
-        cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${_as_curr_section_instance}")
-
-        CTExecutionUnit(GET "${_as_curr_section_instance}" _as_friendly_name friendly_name)
-
-
-        CTExecutionUnit(GET "${_as_curr_section_instance}" _as_expect_fail expect_fail)
-        CTExecutionUnit(GET "${_as_curr_section_instance}" _as_print_length print_length)
-
-
-        if(_as_expect_fail) #If this section expects to fail
-
-            if(NOT _as_exec_expectfail) #We're in main interpreter so we need to configure and execute the subprocess
-                ct_expectfail_subprocess("${_as_curr_section_instance}")
-            else() #We're in subprocess
-                file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section_id}.cmake" "${_as_curr_section_id}()")
-                include("${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section_id}.cmake")
-                CTExecutionUnit(GET "${_as_curr_section_instance}" _as_exceptions exceptions)
-
-                if(NOT "${_as_exceptions}" STREQUAL "")
-                    foreach(_as_exc IN LISTS _as_exceptions)
-                        message("${CT_BoldRed}Section named \"${_as_friendly_name}\" raised exception:")
-                        message("${_as_exc}${CT_ColorReset}")
-                    endforeach()
-                    set(_as_section_fail "TRUE")
-               endif()
-           endif()
-
-        else()
-            file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section_id}.cmake" "${_as_curr_section_id}()")
-            include("${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section_id}.cmake")
-            CTExecutionUnit(GET "${_as_curr_section_instance}" _as_exceptions exceptions)
-
-            if(NOT "${_as_exceptions}" STREQUAL "")
-                foreach(_as_exc IN LISTS _as_exceptions)
-                    message("${CT_BoldRed}Section named \"${_as_friendly_name}\" raised exception:")
-                    message("${_as_exc}${CT_ColorReset}")
-                endforeach()
-                set(_as_section_fail "TRUE")
-           endif()
-       endif()
-       if(_as_section_fail)
-           _ct_print_fail("${_as_friendly_name}" "${_as_new_section_depth}" "${_as_print_length}")
-
-           #At least one test failed, so we will inform the caller that not all tests passed.
-           cpp_set_global(CMAKETEST_TESTS_DID_PASS "FALSE")
-           ct_exit()
-       else()
-           _ct_print_pass("${_as_friendly_name}" "${_as_new_section_depth}" "${_as_print_length}")
-       endif()
-
-
-       # Get whether this section has subsections, only run again if subsections detected
-       CTExecutionUnit(GET "${_as_curr_section_instance}" _as_children_map children)
-       cpp_map(KEYS "${_as_children_map}" _as_has_subsections)
-       if((NOT _as_has_subsections STREQUAL "") AND ((NOT _as_expect_fail AND NOT _as_exec_expectfail) OR (_as_exec_expectfail))) #If in main interpreter and not expecting to fail OR in subprocess
-           #Execute the section again, this time executing subsections. Only do when not executing expectfail
-           CTExecutionUnit(SET "${_as_curr_section_instance}" execute_sections TRUE)
-           include("${CMAKE_CURRENT_BINARY_DIR}/sections/${_as_curr_section_id}.cmake")
-
-      endif()
-
-      cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${_as_original_unit_instance}")
-      cpp_set_global("CMAKETEST_SECTION_DEPTH" "${_as_old_section_depth}")
-
+        CTExecutionUnit(execute "${_as_curr_section_instance}")
     else()
-        #First time run, set the ID so we don't lose it on the second run.
-        #This will only cause conflicts if two sections in the same test
-        #use the same friendly name (the variable used to store the ID and used in the function definition), which no sane programmer would do
+        #First time run, construct and configure
+        #the new section unit, as well as add it
+        #to its parent
 
         CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_file test_file)
+        CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_section_depth section_depth)
+        
+        math(EXPR _as_new_section_depth "${_as_parent_section_depth} + 1")
 
         CTExecutionUnit(CTOR _as_new_section "${${CT_ADD_SECTION_NAME}}" "${CT_ADD_SECTION_NAME}" "${CT_ADD_SECTION_EXPECTFAIL}")
         CTExecutionUnit(SET "${_as_new_section}" parent "${_as_curr_instance}")
         CTExecutionUnit(SET "${_as_new_section}" print_length_forced "${_as_print_length_forced}")
         CTExecutionUnit(SET "${_as_new_section}" print_length "${_as_print_length}")
         CTExecutionUnit(SET "${_as_new_section}" test_file "${_as_parent_file}")
+        CTExecutionUnit(SET "${_as_new_section}" section_depth "${_as_new_section_depth}")
         CTExecutionUnit(append_child "${_as_curr_instance}" "${${CT_ADD_SECTION_NAME}}" "${_as_new_section}")
         CTExecutionUnit(GET "${_as_curr_instance}" _as_siblings section_names_to_ids)
         cpp_map(SET "${_as_siblings}" "${CT_ADD_SECTION_NAME}" "${${CT_ADD_SECTION_NAME}}")
