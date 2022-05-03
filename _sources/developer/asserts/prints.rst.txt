@@ -7,6 +7,7 @@ asserts/prints.cmake
 
 
 .. function:: ct_assert_prints(_ap_msg)
+
    Asserts that a specified message was printed.
    
    This function is used to assert that a string was printed immediately

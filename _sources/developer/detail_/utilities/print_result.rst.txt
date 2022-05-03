@@ -7,6 +7,7 @@ detail_/utilities/print_result.cmake
 
 
 .. function:: _ct_print_result(_pr_name _pr_result _pr_depth _pr_print_length)
+
    Wraps the process of printing a test's result
    
     This function largely serves as code factorization for ``_ct_print_pass`` and
@@ -25,6 +26,7 @@ detail_/utilities/print_result.cmake
 
 
 .. function:: _ct_print_fail(_pf_name _pf_depth _pf_print_length)
+
    Wraps the process of printing that a test failed.
    
    This function is called after one or more asserts on a test have failed. When

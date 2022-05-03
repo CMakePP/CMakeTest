@@ -7,6 +7,7 @@ asserts/target_exists.cmake
 
 
 .. function:: ct_assert_target_exists(_ate_name)
+
    Assert that a target exists.
    
    :param _ate_name: The name of the target
@@ -15,6 +16,7 @@ asserts/target_exists.cmake
 
 
 .. function:: ct_assert_target_does_not_exist(_atdne_name)
+
    Assert that a target does not exist.
    
    :param _ate_name: The name of the target

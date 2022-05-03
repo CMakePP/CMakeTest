@@ -41,7 +41,9 @@
     
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="asserts/library_exists.cmake" href="library_exists.html" />
+    <link rel="prev" title="asserts/asserts.cmake" href="asserts.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -90,12 +92,42 @@
               
             
             
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../about.html">About CMakeTest</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faqs.html">Frequently Asked Questions (FAQs)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../writing_tests/index.html">Writing Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">#</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">#</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../add_dir.html">add_dir.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../add_test.html">add_test.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../execution_unit.html">execution_unit.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../colors.html">colors.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cmake_test.html">cmake_test.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../add_section.html">add_section.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../register_exception_handler.html">register_exception_handler.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exec_tests.html">exec_tests.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../set_print_length.html">set_print_length.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overrides.html">overrides.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../expectfail_subprocess.html">expectfail_subprocess.cmake</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">asserts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="equal.html">asserts/equal.cmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="true_false.html">asserts/true_false.cmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_contains.html">asserts/file_contains.cmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list.html">asserts/list.cmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_exists.html">asserts/file_exists.cmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="defined.html">asserts/defined.cmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="target_exists.html">asserts/target_exists.cmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prints.html">asserts/prints.cmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="target_has_property.html">asserts/target_has_property.cmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asserts.html">asserts/asserts.cmake</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">asserts/string.cmake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library_exists.html">asserts/library_exists.cmake</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../detail_/index.html">detail</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../templates/index.html">templates</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -144,6 +176,10 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
+          <li><a href="../index.html">#</a> &raquo;</li>
+        
+          <li><a href="index.html">asserts</a> &raquo;</li>
+        
       <li>asserts/string.cmake</li>
     
     
@@ -168,9 +204,8 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="asserts-string.cmake.ct_assert_string">
 <span id="asserts/string.cmake.ct_assert_string"></span><span class="sig-prename descclassname"><span class="pre">asserts/string.cmake.</span></span><span class="sig-name descname"><span class="pre">ct_assert_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_as_var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asserts-string.cmake.ct_assert_string" title="Permalink to this definition">¶</a></dt>
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Asserts</span> <span class="pre">that</span> <span class="pre">an</span> <span class="pre">identifier</span> <span class="pre">contains</span> <span class="pre">a</span> <span class="pre">string</span></span></dt>
-<dd><p>For our purposes a string is anything that is not a list (a list being a
+<dd><p>Asserts that an identifier contains a string</p>
+<p>For our purposes a string is anything that is not a list (a list being a
 string that contains at least one unescaped semicolon). This function will
 raise an error if the provided identifier is not a string. Consequentially,
 this function is more-or-less equivalent to ct_assert_not_list.</p>
@@ -184,9 +219,8 @@ this function is more-or-less equivalent to ct_assert_not_list.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="asserts-string.cmake.ct_assert_not_string">
 <span id="asserts/string.cmake.ct_assert_not_string"></span><span class="sig-prename descclassname"><span class="pre">asserts/string.cmake.</span></span><span class="sig-name descname"><span class="pre">ct_assert_not_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_ans_var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asserts-string.cmake.ct_assert_not_string" title="Permalink to this definition">¶</a></dt>
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">Asserts</span> <span class="pre">that</span> <span class="pre">an</span> <span class="pre">identifier</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">contain</span> <span class="pre">a</span> <span class="pre">string</span></span></dt>
-<dd><p>For our purposes a string is anything that is not a list (a list being a
+<dd><p>Asserts that an identifier does not contain a string</p>
+<p>For our purposes a string is anything that is not a list (a list being a
 string that contains at least one unescaped semicolon). This function will
 raise an error if the provided identifier is a string. Consequentially, this
 function is more-or-less equivalent to ct_assert_list.</p>
@@ -204,6 +238,10 @@ function is more-or-less equivalent to ct_assert_list.</p>
            
           </div>
           <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="library_exists.html" class="btn btn-neutral float-right" title="asserts/library_exists.cmake" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="asserts.html" class="btn btn-neutral float-left" title="asserts/asserts.cmake" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 

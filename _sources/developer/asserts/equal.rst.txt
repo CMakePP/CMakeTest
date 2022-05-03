@@ -7,6 +7,7 @@ asserts/equal.cmake
 
 
 .. function:: ct_assert_equal(_ae_var _ae_contents)
+
    Asserts that an identifier contains the specified contents.
    
     This function is used to assert that a given identifier is set to the
@@ -21,6 +22,7 @@ asserts/equal.cmake
 
 
 .. function:: ct_assert_not_equal(_ane_var _ane_contents)
+
    Asserts that an identifier does not contain the specified contents.
    
    This function is used to assert that a given identifier is set to something

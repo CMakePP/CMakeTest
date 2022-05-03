@@ -7,6 +7,7 @@ detail_/utilities/input_check.cmake
 
 
 .. function:: _ct_nonempty(_n_var)
+
    Asserts that the provided identifier is set to a value other than the empty
       string.
    
@@ -20,6 +21,7 @@ detail_/utilities/input_check.cmake
 
 
 .. function:: _ct_nonempty_string(_ns_var)
+
    Asserts that the identifier contains a non-empty string.
    
     This function will ensure that the provided identifier is set to a value and

@@ -7,6 +7,7 @@ asserts/true_false.cmake
 
 
 .. function:: ct_assert_true(_at_var)
+
    Asserts that the provided variable is true.
    
    :param _at_var: The identifier to check for trueness.
@@ -15,6 +16,7 @@ asserts/true_false.cmake
 
 
 .. function:: ct_assert_false(_af_var)
+
    Asserts that the provided variable is false.
    
    :param _af_var: The identifier to check for falseness.

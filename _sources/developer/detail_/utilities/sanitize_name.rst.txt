@@ -7,6 +7,7 @@ detail_/utilities/sanitize_name.cmake
 
 
 .. function:: _ct_sanitize_name(_sn_new_name _sn_old_name)
+
    Makes the provided name more filesystem friendly
    
    CMakeTest will need to turn test names into file names in a few places. This

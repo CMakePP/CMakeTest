@@ -8,6 +8,7 @@ detail_/utilities/return.cmake
 
 .. function:: _ct_return(_r_var)
 
+
    .. warning:: This is a macro, and so does not introduce a new scope.
 
    Syntactic sugar for returning a value from a function

@@ -7,6 +7,7 @@ asserts/file_contains.cmake
 
 
 .. function:: ct_assert_file_contains(_afc_file _afc_text)
+
    Assert a file contains the specified text.
    
    Asserts that the file at the specified path contains the specified text.
@@ -20,6 +21,7 @@ asserts/file_contains.cmake
 
 
 .. function:: ct_assert_file_does_not_contain(_afdnc_file _afdnc_text)
+
    Assert a file does not contain the specified text.
    
    Asserts that the file at the specified path does not contain the specified
@@ -35,6 +37,7 @@ asserts/file_contains.cmake
 
 
 .. function:: ct_file_contains(_fc_result _fc_file _fc_text)
+
    Determines if a file contains some text.
    
    This function checks whether a file contains some text and returns a boolean

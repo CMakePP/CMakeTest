@@ -7,6 +7,7 @@ asserts/string.cmake
 
 
 .. function:: ct_assert_string(_as_var)
+
    Asserts that an identifier contains a string
    
    For our purposes a string is anything that is not a list (a list being a
@@ -20,6 +21,7 @@ asserts/string.cmake
 
 
 .. function:: ct_assert_not_string(_ans_var)
+
    Asserts that an identifier does not contain a string
    
    For our purposes a string is anything that is not a list (a list being a

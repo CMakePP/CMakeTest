@@ -7,6 +7,7 @@ asserts/defined.cmake
 
 
 .. function:: ct_assert_defined(_ad_var)
+
    Asserts that the provided variable is defined.
    
    This function can be used to assert that a variable is defined. It does not
@@ -19,6 +20,7 @@ asserts/defined.cmake
 
 
 .. function:: ct_assert_not_defined(_and_var)
+
    Asserts that the provided variable is not defined.
    
    This function can be used to assert that a variable is not defined. If the

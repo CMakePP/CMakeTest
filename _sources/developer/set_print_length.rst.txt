@@ -8,9 +8,9 @@ set_print_length.cmake
 
 .. function:: ct_set_print_length(_spl_length)
 
+
    .. warning:: This is a macro, and so does not introduce a new scope.
 
-   
    Wrapper macro to set CT_PRINT_LENGTH variable in current scope.
    This length can be overriden by setting `PRINT_LENGTH`
    in `ct_add_test()` or `ct_add_section()`

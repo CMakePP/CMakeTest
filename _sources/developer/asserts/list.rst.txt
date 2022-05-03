@@ -7,6 +7,7 @@ asserts/list.cmake
 
 
 .. function:: ct_assert_list(_al_var)
+
    Asserts that an identifier contains a list.
    
    For our purposes a list is defined as a string that contains one or more,
@@ -21,6 +22,7 @@ asserts/list.cmake
 
 
 .. function:: ct_assert_not_list(_anl_var)
+
    Asserts that an identifier does not contain a list.
    
    For our purposes a list is defined as a string that contains one or more,

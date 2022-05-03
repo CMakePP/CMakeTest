@@ -41,7 +41,9 @@
     
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="colors.cmake" href="colors.html" />
+    <link rel="prev" title="add_test.cmake" href="add_test.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -90,12 +92,28 @@
               
             
             
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About CMakeTest</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faqs.html">Frequently Asked Questions (FAQs)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../writing_tests/index.html">Writing Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">#</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">#</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="add_dir.html">add_dir.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="add_test.html">add_test.cmake</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">execution_unit.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="colors.html">colors.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmake_test.html">cmake_test.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="add_section.html">add_section.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="register_exception_handler.html">register_exception_handler.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec_tests.html">exec_tests.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="set_print_length.html">set_print_length.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overrides.html">overrides.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expectfail_subprocess.html">expectfail_subprocess.cmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asserts/index.html">asserts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="detail_/index.html">detail</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templates/index.html">templates</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -143,6 +161,8 @@
   <ul class="wy-breadcrumbs">
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">#</a> &raquo;</li>
         
       <li>execution_unit.cmake</li>
     
@@ -318,6 +338,42 @@ that occurred during the execution of this unit.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="id10">
+<span class="sig-prename descclassname"><span class="pre">execution_unit.cmake.</span></span><span class="sig-name descname"><span class="pre">cpp_attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">CTExecutionUnit</span> <span class="pre">has_executed</span> <span class="pre">FALSE</span></em><span class="sig-paren">)</span><a class="headerlink" href="#id10" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is a generic command invocation. It is not a function or macro definition.</p>
+</div>
+<p>Whether this unit has been executed already or not.
+Useful for determining whether to re-execute
+after a failed test is detected.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id11">
+<span class="sig-prename descclassname"><span class="pre">execution_unit.cmake.</span></span><span class="sig-name descname"><span class="pre">cpp_attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">CTExecutionUnit</span> <span class="pre">has_printed</span> <span class="pre">FALSE</span></em><span class="sig-paren">)</span><a class="headerlink" href="#id11" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is a generic command invocation. It is not a function or macro definition.</p>
+</div>
+<p>Whether the pass/fail status of this unit has been
+printed yet. This ensures that parent units of
+a failed unit are not printed multiple times.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id12">
+<span class="sig-prename descclassname"><span class="pre">execution_unit.cmake.</span></span><span class="sig-name descname"><span class="pre">cpp_attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">CTExecutionUnit</span> <span class="pre">section_depth</span> <span class="pre">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#id12" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is a generic command invocation. It is not a function or macro definition.</p>
+</div>
+<p>Stores how many sections deep this execution unit is.
+This is used to determine how many tabs to place in front
+of the pass/fail print line.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="execution_unit.cmake.cpp_member">
 <span class="sig-prename descclassname"><span class="pre">execution_unit.cmake.</span></span><span class="sig-name descname"><span class="pre">cpp_member</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">append_child</span> <span class="pre">CTExecutionUnit</span> <span class="pre">str</span> <span class="pre">CTExecutionUnit</span></em><span class="sig-paren">)</span><a class="headerlink" href="#execution_unit.cmake.cpp_member" title="Permalink to this definition">¶</a></dt>
 <dd><div class="admonition warning">
@@ -339,8 +395,8 @@ pointing to the subsection.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="id10">
-<span class="sig-prename descclassname"><span class="pre">execution_unit.cmake.</span></span><span class="sig-name descname"><span class="pre">cpp_member</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">get_parent_list</span> <span class="pre">CTExecutionUnit</span> <span class="pre">desc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#id10" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="id13">
+<span class="sig-prename descclassname"><span class="pre">execution_unit.cmake.</span></span><span class="sig-name descname"><span class="pre">cpp_member</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">get_parent_list</span> <span class="pre">CTExecutionUnit</span> <span class="pre">desc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#id13" title="Permalink to this definition">¶</a></dt>
 <dd><div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This is a generic command invocation. It is not a function or macro definition.</p>
@@ -357,6 +413,43 @@ constructed list.</p>
 </dl>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="id14">
+<span class="sig-prename descclassname"><span class="pre">execution_unit.cmake.</span></span><span class="sig-name descname"><span class="pre">cpp_member</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">execute</span> <span class="pre">CTExecutionUnit</span></em><span class="sig-paren">)</span><a class="headerlink" href="#id14" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is a generic command invocation. It is not a function or macro definition.</p>
+</div>
+<p>Executes the test or section that this unit represents.
+This function handles printing the pass/failure state
+as well as executing subsections. However, if this unit
+has already been executed, this function does nothing.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id15">
+<span class="sig-prename descclassname"><span class="pre">execution_unit.cmake.</span></span><span class="sig-name descname"><span class="pre">cpp_member</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">exec_sections</span> <span class="pre">CTExecutionUnit</span></em><span class="sig-paren">)</span><a class="headerlink" href="#id15" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is a generic command invocation. It is not a function or macro definition.</p>
+</div>
+<p>Executes all subsections of this unit.
+If this unit has no subsections, this
+function does nothing.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id16">
+<span class="sig-prename descclassname"><span class="pre">execution_unit.cmake.</span></span><span class="sig-name descname"><span class="pre">cpp_member</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">print_pass_or_fail</span> <span class="pre">CTExecutionUnit</span></em><span class="sig-paren">)</span><a class="headerlink" href="#id16" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is a generic command invocation. It is not a function or macro definition.</p>
+</div>
+<p>Determines whether the unit passed or failed
+and prints it, obeying the section depth,
+print length, and whether colors are enabled.</p>
+</dd></dl>
+
 </div>
 
 
@@ -364,6 +457,10 @@ constructed list.</p>
            
           </div>
           <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="colors.html" class="btn btn-neutral float-right" title="colors.cmake" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="add_test.html" class="btn btn-neutral float-left" title="add_test.cmake" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 

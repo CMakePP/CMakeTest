@@ -5,11 +5,12 @@ detail_/utilities
 
 .. toctree:: 
    :maxdepth: 2
+
    return
-   lc_find
-   print_result
-   input_check
    utilities
+   print_result
    sanitize_name
    repeat_string
+   lc_find
+   input_check
 

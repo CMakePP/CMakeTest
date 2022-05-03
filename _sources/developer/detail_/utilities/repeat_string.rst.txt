@@ -7,6 +7,7 @@ detail_/utilities/repeat_string.cmake
 
 
 .. function:: _ct_repeat_string(_rs_result _rs_str _rs_n)
+
    Creates a string by repeating a substring
    
    This function is used to create a new string by repeating a substring a

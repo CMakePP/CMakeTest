@@ -5,16 +5,17 @@ asserts
 
 .. toctree:: 
    :maxdepth: 2
-   file_exists
-   true_false
+
    equal
-   defined
-   asserts
-   target_exists
-   target_has_property
-   prints
-   library_exists
+   true_false
    file_contains
-   string
    list
+   file_exists
+   defined
+   target_exists
+   prints
+   target_has_property
+   asserts
+   string
+   library_exists
 

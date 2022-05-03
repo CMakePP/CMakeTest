@@ -7,18 +7,22 @@ exec_tests.cmake
 
 
 .. function:: ct_exec_tests()
-   
+
    Execute all declared tests in a file. This function will be ran after ``include()``ing the test file.
-   This function will first write a file into the build directory containing a line calling the test function.
-   This file will then be included, which causes said test function to be executed. All exceptions are tracked while the test is ran.
-   Once the test has been executed, a flag will be set to execute the subsections, and the function executed once more.
-   This will result in the subsections being executed, and their exceptions will also be tracked.
+   This function will loop over all the CTExecutionUnit instances stored in the CMAKETEST_TEST_INSTANCES
+   global, executing each one. All exceptions are tracked while the test is ran, including during
+   subsection execution.
+   
    Pass/fail output will be printed to the screen after each test or section has been executed, results are not aggregated at the end
    to prevent a faulty test from causing the interpeter to fail before results are printed.
    
-   A test that is not expected to fail that raises an exception or a fatal error will result in the immediate termination of the interpreter
-   due to unknown state and therefore leading to undefined behavior. To keep parity between different types of tests, EXPECTFAIL sections that do not raise
-   exceptions will also halt all testing.
+   A test that is not expected to fail that raises an exception or a fatal error will result in it
+   be marked as failing and no subsections will be executed. However, sibling tests will continue
+   to be executed. All of the failures are aggregated and printed after all tests have executed.
+   
+   Normally, this would not be possible due to limitations in CMake. However, using the general
+   exception handler, this function is re-executed whenever there is a failure, and it will
+   then continue running tests that have not yet been ran.
    
    .. seealso:: :func:`add_test.cmake.ct_add_test` for details on EXPECTFAIL.
    

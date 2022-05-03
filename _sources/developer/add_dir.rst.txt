@@ -7,7 +7,7 @@ add_dir.cmake
 
 
 .. function:: ct_add_dir(_ad_dir)
-   
+
    This function will find all *.cmake files in the specified directory as well as recursively through all subdirectories.
    It will then configure the boilerplate template to include() each cmake file and register each configured boilerplate
    with CTest. The configured templates will be executed seperately via CTest during the Test phase, and each *.cmake
