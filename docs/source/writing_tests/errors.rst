@@ -6,7 +6,8 @@ Testing Error-Checking
 
    include(cmake_test/cmake_test)
 
-   ct_add_test("Making sure my function fails")
+   ct_add_test(NAME "make_sure_function_fails" EXPECTFAIL)
+   function("${make_sure_function_fails}")
 
        function(failing_fxn)
            message(FATAL_ERROR "I have erred.")
@@ -14,6 +15,4 @@ Testing Error-Checking
 
        failing_fxn()
 
-       ct_assert_fails_as("I have erred")
-
-   ct_end_test()
+   endfunction()
