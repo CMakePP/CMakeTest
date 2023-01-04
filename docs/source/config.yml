@@ -1,0 +1,68 @@
+# Copyright 2022 CMakePP
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#######################################
+# This file contains configurations   #
+# for CMinx to generate documentation #
+# for CMakeTest's developer APIs.     #
+#######################################
+
+input:
+  # Whether undocumented functions should have documentation
+  # auto-generated.
+  include_undocumented_function: true
+
+  # Whether undocumented macros should have documentation
+  # auto-generated.
+  include_undocumented_macro: true
+
+  # Whether undocumented classes should have documentation
+  # auto-generated.
+  include_undocumented_cpp_class: true
+
+  # Whether undocumented attributes within CMakePP classes should have documentation
+  # auto-generated.
+  include_undocumented_cpp_attr: true
+
+  # Whether undocumented members within CMakePP classes should have documentation
+  # auto-generated.
+  include_undocumented_cpp_member: true
+
+  # Whether undocumented constructors within CMakePP classes should have documentation
+  # auto-generated.
+  include_undocumented_cpp_constructor: true
+
+  # Whether directories should be documented recursively
+  recursive: true
+
+
+output:
+  # The directory to write generated RST files to. If not set,
+  # will output to STDOUT instead.
+  # Relative paths will be resolved with regard to the relative_to_config setting
+  directory: developer/cmake_test
+
+  # If false, relative output paths are resolved with regard to the current working directory.
+  # If true, they are instead resolved with regard to the directory where the highest priority
+  # output.directory property is specified. If the highest priority config source does not have
+  # a file, the current working directory is instead used.
+  relative_to_config: true
+
+rst:
+  # Character to use as a separator between CMake directories and modules
+  module_path_separator: '/'
+
+  # A prefix to use for RST headers and modules
+  # If not set, the path to the file relative to the input path will be used instead
+  prefix: cmake_test
