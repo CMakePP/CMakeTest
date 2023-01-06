@@ -1,5 +1,7 @@
 include_guard()
 
+# This ensures the _message() command is valid no matter when this file is included
+include(cmake_test/overrides)
 
 #[[[
 # Defines the exception handler and registers it with CMakePP.
@@ -14,6 +16,11 @@ function(ct_register_exception_handler)
     cpp_catch(ALL_EXCEPTIONS)
     function("${ALL_EXCEPTIONS}" exce_type message)
         cpp_get_global(_ae_curr_exec_instance "CT_CURRENT_EXECUTION_UNIT_INSTANCE")
+        if(_ae_curr_exec_instance STREQUAL "")
+            # Bypass the overridden message(). Doesn't use ct_exit() because we want a custom message
+            _message(FATAL_ERROR "Uncaught exception ${exce_type} detected while outside of test cycle: ${message}")
+        endif()
+
         CTExecutionUnit(GET "${_ae_curr_exec_instance}" _ae_curr_exec_friendly_name friendly_name)
         CTExecutionUnit(GET "${_ae_curr_exec_instance}" _ae_curr_exec_exceptions exceptions)
         list(APPEND _ae_curr_exec_exceptions "Type: ${exce_type}, Details: ${message}")
