@@ -5,9 +5,9 @@ include_guard()
 # Defines the exception handler and registers it with CMakePP.
 #
 # The exception handler stores exception information about the currently
-# running test, then re-executes ``ct_exec_tests()`` so that all tests are ran.
-# Once all tests are ran, all exceptions are looped over and printed
-# before the interpreter is forceably shutdown.
+# running test, then re-executes :code:`ct_exec_tests()` so that all remaining
+# tests are ran. Once all tests are ran, all exceptions are looped over and
+# printed before the interpreter is forceably shutdown.
 #
 #]]
 function(ct_register_exception_handler)

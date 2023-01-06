@@ -1,3 +1,11 @@
+# FIXME make into a doccumment when CMinx with module support is released
+
+#[[ @module
+# This module serves as the main entry point into CMinx,
+# it automatically includes all modules that are required to use it
+# as well as setting extremely important path-related constants.
+#]]
+
 include_guard()
 
 include("cpp/cpp")
