@@ -2,14 +2,24 @@
 Basic Unit Test
 ***************
 
-.. code-block:: cmake
+Below is a basic unit test that simply asserts that
+a particular string is printed.
 
-   include(cmake_test/cmake_test)
+.. literalinclude:: ../../../tests/tutorials/1_hello_world.cmake
+   :language: cmake
+   :lines: 23-27
 
-   ct_add_test(NAME "my_first_test")
-   function("${my_fist_test}")
 
-       set(foo bar)
-       ct_assert_equal(foo "bar")
+The :code:`ct_add_test()` call tells CMakeTest that there is a test
+with the name :code:`hello_world`. The function definition below it
+defines the test. Note the odd :code:`${hello_world}` used as the
+function name. This is required to link the function definition with
+the :code:`ct_add_test()` call. :code:`ct_add_test()` takes the test name
+and assigns a unique identifier to it to keep track of the accompanying
+definition. Thus, if you use the same name for multiple tests in the same
+scope they will conflict.
 
-   endfunction()
+Inside the function one will notice a call to :code:`ct_assert_prints()`.
+This is one of the included assertion functions. If an assertion fails,
+the test is stopped and labeled as failing in the output.
+Subsequent tests will still be ran.
