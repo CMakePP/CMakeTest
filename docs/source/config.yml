@@ -21,11 +21,15 @@
 input:
   # Whether undocumented functions should have documentation
   # auto-generated.
-  include_undocumented_function: true
+  #
+  # CMakeTest uses inner functions in certain circumstances that should be hidden.
+  include_undocumented_function: false
 
   # Whether undocumented macros should have documentation
   # auto-generated.
-  include_undocumented_macro: true
+  #
+  # CMakeTest uses inner functions in certain circumstances that should be hidden.
+  include_undocumented_macro: false
 
   # Whether undocumented classes should have documentation
   # auto-generated.
@@ -42,6 +46,16 @@ input:
   # Whether undocumented constructors within CMakePP classes should have documentation
   # auto-generated.
   include_undocumented_cpp_constructor: true
+
+  # Whether undocumented CTest tests should have documentation
+  # auto-generated. This controls whether all vanilla
+  # CMake add_test() commands should be documented,
+  # it has no relation to CMakeTest tests.
+  #
+  # CMakeTest uses this function for generating
+  # tests so we do not want to document it.
+  include_undocumented_add_test: false
+
 
   # Whether directories should be documented recursively
   recursive: true
