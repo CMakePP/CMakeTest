@@ -1,3 +1,11 @@
+# FIXME convert to doccomment when CMinx w/ module support is released
+
+#[[ @module
+#
+# .. warning::
+#    Including this module will override the default :code:`message()` implementation.
+#]]
+
 include_guard()
 
 
