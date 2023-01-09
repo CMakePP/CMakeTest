@@ -1,44 +1,23 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Testing Error-Checking &mdash; CMakeTest 1.0.0alpha documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -46,33 +25,16 @@
     <link rel="prev" title="Sections (Sub-Tests)" href="sections.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> CMakeTest
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 1.0.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -80,163 +42,116 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About CMakeTest</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faqs.html">Frequently Asked Questions (FAQs)</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Writing Tests</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="basic_test.html">Basic Unit Test</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sections.html">Sections (Sub-Tests)</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Testing Error-Checking</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Testing Error-Checking</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#implementation-details">Implementation Details</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developer/index.html">#</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/index.html">Developer Documentation</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">CMakeTest</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="index.html">Writing Tests</a> &raquo;</li>
-        
-      <li>Testing Error-Checking</li>
-    
-    
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Writing Tests</a></li>
+      <li class="breadcrumb-item active">Testing Error-Checking</li>
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/writing_tests/errors.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="testing-error-checking">
-<h1>Testing Error-Checking<a class="headerlink" href="#testing-error-checking" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="testing-error-checking">
+<h1>Testing Error-Checking<a class="headerlink" href="#testing-error-checking" title="Permalink to this heading"></a></h1>
+<p>Sometimes one may want to ensure that an exception (or <code class="code docutils literal notranslate"><span class="pre">FATAL_ERROR</span></code>)
+is thrown, but normally doing so would cause a test to fail. However, there
+exists an option to invert the test so that it will only pass if an
+exception or <code class="code docutils literal notranslate"><span class="pre">FATAL_ERROR</span></code> is thrown. This option is called
+<code class="code docutils literal notranslate"><span class="pre">EXPECTFAIL</span></code> and the test maker must pass this option
+to the <code class="code docutils literal notranslate"><span class="pre">ct_add_test()</span></code> or <code class="code docutils literal notranslate"><span class="pre">ct_add_section()</span></code> calls
+that define the test. An example is below:</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">include</span><span class="p">(</span><span class="s">cmake_test/cmake_test</span><span class="p">)</span>
 
-<span class="nb">ct_add_test</span><span class="p">(</span><span class="s2">&quot;Making sure my function fails&quot;</span><span class="p">)</span>
+<span class="c">#[[[</span>
+<span class="c"># This test just ensures that throwing a FATAL_ERROR</span>
+<span class="c"># in an EXPECTFAIL test will allow the test to succeed.</span>
+<span class="c">#]]</span>
+<span class="nb">ct_add_test</span><span class="p">(</span><span class="s">NAME</span><span class="w"> </span><span class="s2">&quot;make_sure_function_fails&quot;</span><span class="w"> </span><span class="s">EXPECTFAIL</span><span class="p">)</span>
+<span class="nb">function</span><span class="p">(</span><span class="s2">&quot;${make_sure_function_fails}&quot;</span><span class="p">)</span>
 
-    <span class="nb">function</span><span class="p">(</span><span class="s">failing_fxn</span><span class="p">)</span>
-        <span class="nb">message</span><span class="p">(</span><span class="s">FATAL_ERROR</span> <span class="s2">&quot;I have erred.&quot;</span><span class="p">)</span>
-    <span class="nb">endfunction</span><span class="p">()</span>
+<span class="w">    </span><span class="nb">function</span><span class="p">(</span><span class="s">failing_fxn</span><span class="p">)</span>
+<span class="w">        </span><span class="nb">message</span><span class="p">(</span><span class="s">FATAL_ERROR</span><span class="w"> </span><span class="s2">&quot;I have erred.&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">endfunction</span><span class="p">()</span>
 
-    <span class="nb">failing_fxn</span><span class="p">()</span>
+<span class="w">    </span><span class="nb">failing_fxn</span><span class="p">()</span>
 
-    <span class="nb">ct_assert_fails_as</span><span class="p">(</span><span class="s2">&quot;I have erred&quot;</span><span class="p">)</span>
-
-<span class="nb">ct_end_test</span><span class="p">()</span>
+<span class="nb">endfunction</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
+<p>When using CMinx to document a test, the <code class="code docutils literal notranslate"><span class="pre">EXPECTFAIL</span></code>
+option will be listed in the test definition.</p>
+<section id="implementation-details">
+<h2>Implementation Details<a class="headerlink" href="#implementation-details" title="Permalink to this heading"></a></h2>
+<p>Due to limitations in the CMake language, CMakeTest must run
+<code class="code docutils literal notranslate"><span class="pre">EXPECTFAIL</span></code> tests in a subprocess. This introduces significant
+latency in executing such tests. If performance becomes a problem try
+splitting some tests into different files and use CTest’s <code class="code docutils literal notranslate"><span class="pre">-j</span></code>
+option to run more processes at once.</p>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../tutorials/index.html" class="btn btn-neutral float-right" title="Tutorials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="sections.html" class="btn btn-neutral float-left" title="Sections (Sub-Tests)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../tutorials/index.html" class="btn btn-neutral float-right" title="Tutorials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2020, CMakePP Organization.
-
-    </p>
+    <p>&#169; Copyright 2020, CMakePP Organization.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

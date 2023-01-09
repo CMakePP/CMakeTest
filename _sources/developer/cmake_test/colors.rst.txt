@@ -1,0 +1,176 @@
+
+#################
+cmake_test/colors
+#################
+
+.. module:: cmake_test/colors
+
+
+.. function:: string(ASCII 27 Esc)
+
+
+   .. warning:: This is a generic command invocation. It is not a function or macro definition.
+
+   The character used to start the ANSI control code.
+   
+
+
+.. data:: CT_ColorReset
+
+   Resets the color to the terminal default.
+   
+
+   :Default value: ${Esc}[m
+
+   :type: str
+
+
+.. data:: CT_ColorBold
+
+   Sets the text that follows to be bold.
+   
+
+   :Default value: ${Esc}[1m
+
+   :type: str
+
+
+.. data:: CT_Red
+
+   Sets the text color to red.
+   
+
+   :Default value: ${Esc}[31m
+
+   :type: str
+
+
+.. data:: CT_Green
+
+   Sets the text color to green.
+   
+
+   :Default value: ${Esc}[32m
+
+   :type: str
+
+
+.. data:: CT_Yellow
+
+   Sets the text color to yellow.
+   
+
+   :Default value: ${Esc}[33m
+
+   :type: str
+
+
+.. data:: CT_Blue
+
+   Sets the text color to blue.
+   
+
+   :Default value: ${Esc}[34m
+
+   :type: str
+
+
+.. data:: CT_Magenta
+
+   Sets the text color to magenta.
+   
+
+   :Default value: ${Esc}[35m
+
+   :type: str
+
+
+.. data:: CT_Cyan
+
+   Sets the text color to cyan.
+   
+
+   :Default value: ${Esc}[36m
+
+   :type: str
+
+
+.. data:: CT_White
+
+   Sets the text color to white.
+   
+
+   :Default value: ${Esc}[37m
+
+   :type: str
+
+
+.. data:: CT_BoldRed
+
+   Sets the text color to bold red.
+   
+
+   :Default value: ${Esc}[1;31m
+
+   :type: str
+
+
+.. data:: CT_BoldGreen
+
+   Sets the text color to bold green.
+   
+
+   :Default value: ${Esc}[1;32m
+
+   :type: str
+
+
+.. data:: CT_BoldYellow
+
+   Sets the text color to bold yellow.
+   
+
+   :Default value: ${Esc}[1;33m
+
+   :type: str
+
+
+.. data:: CT_BoldBlue
+
+   Sets the text color to bold blue.
+   
+
+   :Default value: ${Esc}[1;34m
+
+   :type: str
+
+
+.. data:: CT_BoldMagenta
+
+   Sets the text color to bold magenta.
+   
+
+   :Default value: ${Esc}[1;35m
+
+   :type: str
+
+
+.. data:: CT_BoldCyan
+
+   Sets the text color to bold cyan.
+   
+
+   :Default value: ${Esc}[1;36m
+
+   :type: str
+
+
+.. data:: CT_BoldWhite
+
+   Sets the text color to bold white.
+   
+
+   :Default value: ${Esc}[1;37m
+
+   :type: str
+

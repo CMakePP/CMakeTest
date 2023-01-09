@@ -1,23 +1,12 @@
+#######################
+Developer Documentation
+#######################
 
-#
-.
-#
+--------
+Packages
+--------
 
-.. toctree:: 
+.. toctree::
    :maxdepth: 2
 
-   add_dir
-   add_test
-   execution_unit
-   colors
-   cmake_test
-   add_section
-   register_exception_handler
-   exec_tests
-   set_print_length
-   overrides
-   expectfail_subprocess
-   asserts/index.rst
-   detail_/index.rst
-   templates/index.rst
-
+   cmake_test/index

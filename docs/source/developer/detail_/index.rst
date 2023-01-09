@@ -1,9 +1,0 @@
-
-#######
-detail_
-#######
-
-.. toctree:: 
-   :maxdepth: 2
-   utilities/index.rst
-

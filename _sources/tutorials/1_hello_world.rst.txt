@@ -39,3 +39,14 @@ contain the text "Hello World". CMakeTest ships with a number of asserts that
 you can use in unit testing your code, which will be introduced in the
 subsequent tutorials.
 
+Once you have your tests written, we need to generate CTest bootstrap files.
+This should be done by adding a :code:`ct_add_dir()` call to your ``CMakeLists.txt``.
+This call should only be executed when tests are supposed to be built, by convention
+this means checking for the :code:`BUILD_TESTING` option. It's often a good idea to separate test
+configuration from your main ``CMakeLists.txt`` by making a secondary file in your tests directory
+and using :code:`include()` to run it.
+
+When you have your bootstrap files generated a simple :code:`ctest` command should execute them all.
+By default only the pass/fail status of the entire test file is shown, if you wish to view the pass/fail
+status of any test as well as any messages printed use the :code:`-VV` option for ctest.
+

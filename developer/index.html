@@ -1,78 +1,40 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title># &mdash; CMakeTest 1.0.0alpha documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>Developer Documentation &mdash; CMakeTest 1.0.0alpha documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="add_dir.cmake" href="add_dir.html" />
+    <link rel="next" title="cmake_test/." href="cmake_test/index.html" />
     <link rel="prev" title="2 Sections" href="../tutorials/2_sections.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> CMakeTest
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 1.0.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -80,195 +42,99 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About CMakeTest</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faqs.html">Frequently Asked Questions (FAQs)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../writing_tests/index.html">Writing Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">#</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="add_dir.html">add_dir.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add_test.html">add_test.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="execution_unit.html">execution_unit.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="colors.html">colors.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cmake_test.html">cmake_test.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="add_section.html">add_section.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="register_exception_handler.html">register_exception_handler.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exec_tests.html">exec_tests.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="set_print_length.html">set_print_length.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overrides.html">overrides.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="expectfail_subprocess.html">expectfail_subprocess.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="asserts/index.html">asserts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="detail_/index.html">detail</a></li>
-<li class="toctree-l2"><a class="reference internal" href="templates/index.html">templates</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Developer Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#packages">Packages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cmake_test/index.html">cmake_test/.</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">CMakeTest</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-      <li>#</li>
-    
-    
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Developer Documentation</li>
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/developer/index.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="id1">
-<h1>#<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
-<p>#</p>
+             
+  <section id="developer-documentation">
+<h1>Developer Documentation<a class="headerlink" href="#developer-documentation" title="Permalink to this heading"></a></h1>
+<section id="packages">
+<h2>Packages<a class="headerlink" href="#packages" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="add_dir.html">add_dir.cmake</a></li>
-<li class="toctree-l1"><a class="reference internal" href="add_test.html">add_test.cmake</a></li>
-<li class="toctree-l1"><a class="reference internal" href="execution_unit.html">execution_unit.cmake</a></li>
-<li class="toctree-l1"><a class="reference internal" href="colors.html">colors.cmake</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cmake_test.html">cmake_test.cmake</a></li>
-<li class="toctree-l1"><a class="reference internal" href="add_section.html">add_section.cmake</a></li>
-<li class="toctree-l1"><a class="reference internal" href="register_exception_handler.html">register_exception_handler.cmake</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exec_tests.html">exec_tests.cmake</a></li>
-<li class="toctree-l1"><a class="reference internal" href="set_print_length.html">set_print_length.cmake</a></li>
-<li class="toctree-l1"><a class="reference internal" href="overrides.html">overrides.cmake</a></li>
-<li class="toctree-l1"><a class="reference internal" href="expectfail_subprocess.html">expectfail_subprocess.cmake</a></li>
-<li class="toctree-l1"><a class="reference internal" href="asserts/index.html">asserts</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="asserts/equal.html">asserts/equal.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="asserts/true_false.html">asserts/true_false.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="asserts/file_contains.html">asserts/file_contains.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="asserts/list.html">asserts/list.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="asserts/file_exists.html">asserts/file_exists.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="asserts/defined.html">asserts/defined.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="asserts/target_exists.html">asserts/target_exists.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="asserts/prints.html">asserts/prints.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="asserts/target_has_property.html">asserts/target_has_property.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="asserts/asserts.html">asserts/asserts.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="asserts/string.html">asserts/string.cmake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="asserts/library_exists.html">asserts/library_exists.cmake</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="detail_/index.html">detail</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="detail_/utilities/index.html">detail_/utilities</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="templates/index.html">templates</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="cmake_test/index.html">cmake_test/.</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmake_test/add_dir.html">cmake_test/add_dir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmake_test/add_section.html">cmake_test/add_section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmake_test/add_test.html">cmake_test/add_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmake_test/cmake_test.html">cmake_test/cmake_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmake_test/colors.html">cmake_test/colors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmake_test/exec_tests.html">cmake_test/exec_tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmake_test/execution_unit.html">cmake_test/execution_unit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmake_test/expectfail_subprocess.html">cmake_test/expectfail_subprocess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmake_test/overrides.html">cmake_test/overrides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmake_test/register_exception_handler.html">cmake_test/register_exception_handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmake_test/set_print_length.html">cmake_test/set_print_length</a></li>
 </ul>
 </li>
 </ul>
 </div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="add_dir.html" class="btn btn-neutral float-right" title="add_dir.cmake" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../tutorials/2_sections.html" class="btn btn-neutral float-left" title="2 Sections" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cmake_test/index.html" class="btn btn-neutral float-right" title="cmake_test/." accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2020, CMakePP Organization.
-
-    </p>
+    <p>&#169; Copyright 2020, CMakePP Organization.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

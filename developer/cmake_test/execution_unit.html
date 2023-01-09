@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cmake_test/execution_unit &mdash; CMakeTest 1.0.0alpha documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="cmake_test/expectfail_subprocess" href="expectfail_subprocess.html" />
+    <link rel="prev" title="cmake_test/exec_tests" href="exec_tests.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> CMakeTest
+          </a>
+              <div class="version">
+                1.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About CMakeTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faqs.html">Frequently Asked Questions (FAQs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing_tests/index.html">Writing Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Developer Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#packages">Packages</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">cmake_test/.</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="add_dir.html">cmake_test/add_dir</a></li>
+<li class="toctree-l4"><a class="reference internal" href="add_section.html">cmake_test/add_section</a></li>
+<li class="toctree-l4"><a class="reference internal" href="add_test.html">cmake_test/add_test</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cmake_test.html">cmake_test/cmake_test</a></li>
+<li class="toctree-l4"><a class="reference internal" href="colors.html">cmake_test/colors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="exec_tests.html">cmake_test/exec_tests</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">cmake_test/execution_unit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expectfail_subprocess.html">cmake_test/expectfail_subprocess</a></li>
+<li class="toctree-l4"><a class="reference internal" href="overrides.html">cmake_test/overrides</a></li>
+<li class="toctree-l4"><a class="reference internal" href="register_exception_handler.html">cmake_test/register_exception_handler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="set_print_length.html">cmake_test/set_print_length</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CMakeTest</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Developer Documentation</a></li>
+          <li class="breadcrumb-item"><a href="index.html">cmake_test/.</a></li>
+      <li class="breadcrumb-item active">cmake_test/execution_unit</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/developer/cmake_test/execution_unit.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-cmake_test-execution_unit">
+<span id="cmake-test-execution-unit"></span><h1>cmake_test/execution_unit<a class="headerlink" href="#module-cmake_test-execution_unit" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cmake_test/execution_unit.</span></span><span class="sig-name descname"><span class="pre">CTExecutionUnit</span></span><a class="headerlink" href="#cmake_test-execution_unit.CTExecutionUnit" title="Permalink to this definition"></a></dt>
+<dd><p>CTExecutionUnit represents the basic atomic unit of tests.
+Units can be either tests or test sections.
+The unit stores and tracks all state information
+related to the unit, such as the test ID, its friendly
+name, the file that contains it, etc.</p>
+<p>This class also contains useful instance methods
+for generating or modifying required information.</p>
+<p>An execution unit must be linked to an accompanying
+function that will be executed when this unit is tested.</p>
+<p><strong>Additional Constructors</strong></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit.CTOR">
+<span class="sig-name descname"><span class="pre">CTOR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expect_fail</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-execution_unit.CTExecutionUnit.CTOR" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<em>str</em>) – </p></li>
+<li><p><strong>test_id</strong> (<em>str</em>) – </p></li>
+<li><p><strong>expect_fail</strong> (<em>bool</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p><strong>Methods</strong></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit.append_child">
+<span class="sig-name descname"><span class="pre">append_child</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">child</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-execution_unit.CTExecutionUnit.append_child" title="Permalink to this definition"></a></dt>
+<dd><p>Add a new subsection to this unit.
+The key must be the ID of the subsection
+and the value must be a dereferenced pointer
+pointing to the subsection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<em>str</em>) – ID of the new subsection</p></li>
+<li><p><strong>child</strong> (<a class="reference internal" href="#cmake_test-execution_unit.CTExecutionUnit" title="cmake_test/execution_unit.CTExecutionUnit"><em>CTExecutionUnit</em></a>) – Reference to the new subsection.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit.get_parent_list">
+<span class="sig-name descname"><span class="pre">get_parent_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ret</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-execution_unit.CTExecutionUnit.get_parent_list" title="Permalink to this definition"></a></dt>
+<dd><p>Construct the list of all parents of this unit
+from the root down to the immediate parent of this unit.
+The returned list contains pointers to each of the
+parents, ordered with the root as the last element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ret</strong> (<em>desc</em>) – A return variable that will be set to the
+constructed list.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit.to_string">
+<span class="sig-name descname"><span class="pre">to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ret</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-execution_unit.CTExecutionUnit.to_string" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ret</strong> (<em>desc</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-execution_unit.CTExecutionUnit.execute" title="Permalink to this definition"></a></dt>
+<dd><p>Executes the test or section that this unit represents.
+This function handles printing the pass/failure state
+as well as executing subsections. However, if this unit
+has already been executed, this function does nothing.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit.exec_sections">
+<span class="sig-name descname"><span class="pre">exec_sections</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-execution_unit.CTExecutionUnit.exec_sections" title="Permalink to this definition"></a></dt>
+<dd><p>Executes all subsections of this unit.
+If this unit has no subsections, this
+function does nothing.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit.print_pass_or_fail">
+<span class="sig-name descname"><span class="pre">print_pass_or_fail</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-execution_unit.CTExecutionUnit.print_pass_or_fail" title="Permalink to this definition"></a></dt>
+<dd><p>Determines whether the unit passed or failed
+and prints it, obeying the section depth,
+print length, and whether colors are enabled.</p>
+</dd></dl>
+
+<p><strong>Attributes</strong></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit.test_id">
+<span class="sig-name descname"><span class="pre">test_id</span></span><a class="headerlink" href="#cmake_test-execution_unit.CTExecutionUnit.test_id" title="Permalink to this definition"></a></dt>
+<dd><p>Stores the unique ID of the unit.
+This value is autogenerated and
+is used to name the function
+this unit is linked to.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit.friendly_name">
+<span class="sig-name descname"><span class="pre">friendly_name</span></span><a class="headerlink" href="#cmake_test-execution_unit.CTExecutionUnit.friendly_name" title="Permalink to this definition"></a></dt>
+<dd><p>The “friendly name” of the execution unit.
+This is equivalent to the NAME parameter
+when calling ct_add_test() or ct_add_section().
+Dereferencing the value of this field
+will yield the ID of this unit while in the
+scope of the unit.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit.test_file">
+<span class="sig-name descname"><span class="pre">test_file</span></span><a class="headerlink" href="#cmake_test-execution_unit.CTExecutionUnit.test_file" title="Permalink to this definition"></a></dt>
+<dd><p>The full path that points to the file containing
+this unit’s declaration. This value is propagated
+down from the root test to all sections and subsections.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit.expect_fail">
+<span class="sig-name descname"><span class="pre">expect_fail</span></span><a class="headerlink" href="#cmake_test-execution_unit.CTExecutionUnit.expect_fail" title="Permalink to this definition"></a></dt>
+<dd><p>A boolean describing whether this unit is intended
+to fail or not. Directly related to the parameter
+of the same name in ct_add_test() and ct_add_section().</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit.parent">
+<span class="sig-name descname"><span class="pre">parent</span></span><a class="headerlink" href="#cmake_test-execution_unit.CTExecutionUnit.parent" title="Permalink to this definition"></a></dt>
+<dd><p>A reference pointing to the parent execution unit
+of this unit. This will be empty for the root test
+and filled for all subsections.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit.children">
+<span class="sig-name descname"><span class="pre">children</span></span><a class="headerlink" href="#cmake_test-execution_unit.CTExecutionUnit.children" title="Permalink to this definition"></a></dt>
+<dd><p>A map between IDs and references to unit instances
+used to represent the subsections of this unit.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit.print_length">
+<span class="sig-name descname"><span class="pre">print_length</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&quot;${CT_PRINT_LENGTH}&quot;</span></em><a class="headerlink" href="#cmake_test-execution_unit.CTExecutionUnit.print_length" title="Permalink to this definition"></a></dt>
+<dd><p>The length to use for printing in the context of this
+unit and any subsections that do not override it.
+This value can be set by the parameter of the same name
+in ct_add_test() and ct_add_section(). It can also be set
+via an overriding cache variable.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit.print_length_forced">
+<span class="sig-name descname"><span class="pre">print_length_forced</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">FALSE</span></em><a class="headerlink" href="#cmake_test-execution_unit.CTExecutionUnit.print_length_forced" title="Permalink to this definition"></a></dt>
+<dd><p>Describes whether the print length was forced via the call
+to ct_add_test() or ct_add_section() that constructed
+this unit.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit.execute_sections">
+<span class="sig-name descname"><span class="pre">execute_sections</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">FALSE</span></em><a class="headerlink" href="#cmake_test-execution_unit.CTExecutionUnit.execute_sections" title="Permalink to this definition"></a></dt>
+<dd><p>A boolean describing whether or not this unit
+should loop over and execute all of its subsections.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit.section_names_to_ids">
+<span class="sig-name descname"><span class="pre">section_names_to_ids</span></span><a class="headerlink" href="#cmake_test-execution_unit.CTExecutionUnit.section_names_to_ids" title="Permalink to this definition"></a></dt>
+<dd><p>A map linking section friendly names to Ids so the
+id isn’t lost between the first and second invocation passes.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit.exceptions">
+<span class="sig-name descname"><span class="pre">exceptions</span></span><a class="headerlink" href="#cmake_test-execution_unit.CTExecutionUnit.exceptions" title="Permalink to this definition"></a></dt>
+<dd><p>A list containing messages representing any exceptions
+that occurred during the execution of this unit.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit.has_executed">
+<span class="sig-name descname"><span class="pre">has_executed</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">FALSE</span></em><a class="headerlink" href="#cmake_test-execution_unit.CTExecutionUnit.has_executed" title="Permalink to this definition"></a></dt>
+<dd><p>Whether this unit has been executed already or not.
+Useful for determining whether to re-execute
+after a failed test is detected.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit.has_printed">
+<span class="sig-name descname"><span class="pre">has_printed</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">FALSE</span></em><a class="headerlink" href="#cmake_test-execution_unit.CTExecutionUnit.has_printed" title="Permalink to this definition"></a></dt>
+<dd><p>Whether the pass/fail status of this unit has been
+printed yet. This ensures that parent units of
+a failed unit are not printed multiple times.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit.section_depth">
+<span class="sig-name descname"><span class="pre">section_depth</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#cmake_test-execution_unit.CTExecutionUnit.section_depth" title="Permalink to this definition"></a></dt>
+<dd><p>Stores how many sections deep this execution unit is.
+This is used to determine how many tabs to place in front
+of the pass/fail print line.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="exec_tests.html" class="btn btn-neutral float-left" title="cmake_test/exec_tests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="expectfail_subprocess.html" class="btn btn-neutral float-right" title="cmake_test/expectfail_subprocess" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, CMakePP Organization.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
