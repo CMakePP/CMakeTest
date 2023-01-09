@@ -1,7 +1,7 @@
 include_guard()
 
 #[[[
-# Execute all declared tests in a file. This function will be ran after ``include()``ing the test file.
+# Execute all declared tests in a file. This function will be ran after ``include()``-ing the test file.
 # This function will loop over all the CTExecutionUnit instances stored in the CMAKETEST_TEST_INSTANCES
 # global, executing each one. All exceptions are tracked while the test is ran, including during
 # subsection execution.

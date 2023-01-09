@@ -24,12 +24,15 @@ include_guard()
 #  3. Length set by ct_set_print_length()
 #  4. Built-in default of 80.
 #
-# :param **kwargs: See below
 #
-# :Keyword Arguments:
-#    * *NAME* (``pointer``) -- Required argument specifying the name variable of the section. Will set a variable with specified name containing the generated function ID to use.
-#    * *EXPECTFAIL* (``option``) -- Option indicating whether the section is expected to fail or not, if specified will cause test failure when no exceptions were caught and success upon catching any exceptions.
-#    * *PRINT_LENGTH* (``int``) -- Optional argument specifying the desired print length of pass/fail output lines.
+# **Keyword Arguments**
+#
+# :keyword NAME: Required argument specifying the name variable of the section. Will set a variable with specified name containing the generated function ID to use.
+# :type NAME: pointer
+# :keyword EXPECTFAIL: Option indicating whether the section is expected to fail or not, if specified will cause test failure when no exceptions were caught and success upon catching any exceptions.
+# :type EXPECTFAIL: option
+# :keyword PRINT_LENGTH: Optional argument specifying the desired print length of pass/fail output lines.
+# :type PRINT_LENGTH: int
 #
 #]]
 macro(ct_add_test)

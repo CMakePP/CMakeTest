@@ -12,8 +12,6 @@ if(NOT CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
         set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" PARENT_SCOPE) #For projects including CMakeTest
 endif()
 
-
-option(BUILD_DOCS "Whether documentation targets should be added" OFF)
 include("${PROJECT_SOURCE_DIR}/cmake/get_cpp.cmake")
 include(cmake_test/cmake_test)
 
@@ -25,18 +23,6 @@ if("${BUILD_TESTING}")
 
 endif()
 
-if(BUILD_DOCS)
-    ct_register_exception_handler() #Catch any exceptions while building docs
-
-    include("${PROJECT_SOURCE_DIR}/cmake/get_cminx.cmake")
-    include(cminx)
-
-
-
-    cminx_gen_rst("${CMAKE_CURRENT_SOURCE_DIR}/cmake_test/" "${CMAKE_CURRENT_SOURCE_DIR}/docs/source/developer/")
-
-    cminx_add_docs_target("${CMAKE_CURRENT_SOURCE_DIR}/docs" "${CMAKE_CURRENT_BINARY_DIR}/docs" html)
-endif()
 
 #----------------------------------#
 # Example on how to execute a test #

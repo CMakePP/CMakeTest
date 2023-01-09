@@ -8,11 +8,11 @@ include_guard()
 #
 # :param _ad_dir: The directory to search for *.cmake files. Subdirectories will be recursively searched.
 # :type _ad_dir: path
-# :param **kwargs: See below
 #
-# :Keyword Arguments:
-# * *CMAKE_OPTIONS* (``list``) -- List of additional CMake options to be passed to all test invocations. Options should follow the syntax: `-D<variable_name>=<value>`
+# **Keyword Arguments**
 #
+# :keyword CMAKE_OPTIONS: List of additional CMake options to be passed to all test invocations. Options should follow the syntax: :code:`-D<variable_name>=<value>`
+# :type CMAKE_OPTIONS: list
 #
 #
 #]]

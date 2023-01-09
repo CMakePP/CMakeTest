@@ -8,18 +8,15 @@ include_guard()
 # interpreter shutdown is required to prevent code from proceeding from the exception point as if nothing
 # had happened.
 #
-# This function first pulls data about the current execution unit and the current section from globals,
-# then builds a tree describing the section's parents. This tree is then converted to a list of variable
+# This function first pulls all required information from the given CTExecutionUnit instance,
+# most importantly the unit's parent tree. This tree is then converted to a list of variable
 # declarations and inserted into a template CMakeLists.txt. These declarations ensure only the section and
 # its direct parents are executed to prevent a different section or test from running. Finally, the template
 # is executed in a subprocess, resulting in the section and its parents being executed. The subprocess result
 # code is stored, and if the code is reported as succeeding testing is halted since we expect it to fail.
 #
-# :param _es_curr_exec_unit: The current execution unit, used to pull information from the globals.
-# :type _es_curr_exec_unit: string
-# :param _es_curr_section: The current section, used to pull information from the globals and to calculate the parent tree.
-# :type _es_curr_section: string
-#
+# :param _es_curr_section_instance: The section execution unit object that will be executed as a subprocess.
+# :type _es_curr_section_instance: CTExecutionUnit
 #]]
 function(ct_expectfail_subprocess _es_curr_section_instance)
 
