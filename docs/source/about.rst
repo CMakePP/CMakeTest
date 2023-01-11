@@ -15,5 +15,4 @@ Features
 --------
 
 - 100% CMake (non-CMake files in this repo are for generating documentation)
-   - No external dependencies
    - Integrates naturally into existing CMake scripts
