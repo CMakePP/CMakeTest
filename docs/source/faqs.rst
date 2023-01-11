@@ -10,6 +10,9 @@ Frequently Asked Questions (FAQs)
      breaks in them. It is highly recommended that you search for a key phrase
      rather than the entire print-out.
 
-2. Why does ``ct_assert_fails_as`` fail to find a string that is present?
+2. Why do my tests not run when I execute :code:`ctest`?
 
-   - See previous question.
+   - Ensure that you've built your tests with CMake and your
+     ``CMakeLists.txt`` is calling :code:`ct_add_dir()` with
+     the correct directory. When you build your tests you should
+     see a message "Building tests".
