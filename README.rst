@@ -24,7 +24,11 @@ provided by CMakeTest to ensure that the program has the expected state. For
 example we can ensure that a CMake code sets a particular variable using
 ``ct_assert_equal``. This looks like:
 
-.. literalinclude:: tests/basic_example_test.cmake
-   :language: cmake
+.. code-block:: .cmake
 
-
+   include(cmake_test/cmake_test)
+   ct_add_test(NAME "_first_test")
+   function(${_first_test})
+       set(hello_world "Hello World!!!")
+       ct_assert_equal(hello_world "Hello World!!!")
+   endfunction()
