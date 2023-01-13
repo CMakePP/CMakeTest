@@ -79,3 +79,6 @@ The following CMake code allows one to install CMakeTest via FetchContent:
    # Include CMakeTest
    include(cmake_test/cmake_test)
 
+Documentation and Tutorials
+---------------------------
+Documentation can be found `here <https://cmakepp.github.io/CMakeTest/>`_
