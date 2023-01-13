@@ -32,10 +32,10 @@ endfunction()
 #The contents of the unit test are two commands: ``message("Hello World")`` and
 #``ct_assert_prints("Hello World")``. ``message("Hello World")`` simply runs the
 #normal, CMake-native ``message`` command. :obj:`~cmake_test/asserts/prints.ct_assert_prints` is defined by
-#CMakeTest and asserts that after running the unit test the log file must
-#contain the text "Hello World". CMakeTest ships with a number of asserts that
-#you can use in unit testing your code, which will be introduced in the
-#subsequent tutorials.
+#CMakeTest and asserts that a :code:`message()` command was executed with
+#the given expected text. CMakeTest ships with a number of asserts that
+#you can use in unit testing your code. The reference for such asserts can be found here:
+#:ref:`Assertions <Assertions>`
 
 #TUTORIAL
 #Once you have your tests written, we need to generate CTest bootstrap files.
