@@ -45,11 +45,13 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About CMakeTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faqs.html">Frequently Asked Questions (FAQs)</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Writing Tests</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Basic Unit Test</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sections.html">Sections (Sub-Tests)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="errors.html">Testing Error-Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html">Assertions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
@@ -85,14 +87,15 @@
 <h1>Basic Unit Test<a class="headerlink" href="#basic-unit-test" title="Permalink to this heading"></a></h1>
 <p>Below is a basic unit test that simply asserts that
 a particular string is printed.</p>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">ct_add_test</span><span class="p">(</span><span class="s">NAME</span><span class="w"> </span><span class="s">hello_world</span><span class="p">)</span>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c">#&quot;Hello World&quot; and asserts that &quot;Hello World&quot; was indeed printed.</span>
+<span class="nb">ct_add_test</span><span class="p">(</span><span class="s">NAME</span><span class="w"> </span><span class="s">hello_world</span><span class="p">)</span>
 <span class="nb">function</span><span class="p">(</span><span class="o">${</span><span class="nv">hello_world</span><span class="o">}</span><span class="p">)</span>
 <span class="w">    </span><span class="nb">message</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="nb">ct_assert_prints</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">)</span>
 <span class="nb">endfunction</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>The <code class="code docutils literal notranslate"><span class="pre">ct_add_test()</span></code> call tells CMakeTest that there is a test
+<p>The <a class="reference internal" href="../developer/cmake_test/add_test.html#cmake_test-add_test.ct_add_test" title="cmake_test/add_test.ct_add_test"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ct_add_test</span></code></a> call tells CMakeTest that there is a test
 with the name <code class="code docutils literal notranslate"><span class="pre">hello_world</span></code>. The function definition below it
 defines the test. Note the odd <code class="code docutils literal notranslate"><span class="pre">${hello_world}</span></code> used as the
 function name. This is required to link the function definition with
@@ -100,7 +103,8 @@ the <code class="code docutils literal notranslate"><span class="pre">ct_add_tes
 and assigns a unique identifier to it to keep track of the accompanying
 definition. Thus, if you use the same name for multiple tests in the same
 scope they will conflict.</p>
-<p>Inside the function one will notice a call to <code class="code docutils literal notranslate"><span class="pre">ct_assert_prints()</span></code>.
+<p>Inside the function one will notice a call to
+<a class="reference internal" href="../developer/cmake_test/asserts/prints.html#cmake_test-asserts-prints.ct_assert_prints" title="cmake_test/asserts/prints.ct_assert_prints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ct_assert_prints</span></code></a>.
 This is one of the included assertion functions. If an assertion fails,
 the test is stopped and labeled as failing in the output.
 Subsequent tests will still be ran.</p>

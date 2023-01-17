@@ -21,7 +21,7 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cmake_test/." href="cmake_test/index.html" />
+    <link rel="next" title="Architecture and Execution Flow" href="architecture.html" />
     <link rel="prev" title="2 Sections" href="../tutorials/2_sections.html" /> 
 </head>
 
@@ -45,11 +45,17 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About CMakeTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faqs.html">Frequently Asked Questions (FAQs)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../writing_tests/index.html">Writing Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Developer Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#packages">Packages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#system-design">System Design</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html">Architecture and Execution Flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="templates.html">Bootstrap Templates</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cmake-reference">CMake Reference</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="cmake_test/index.html">cmake_test/.</a></li>
 </ul>
 </li>
@@ -83,8 +89,23 @@
              
   <section id="developer-documentation">
 <h1>Developer Documentation<a class="headerlink" href="#developer-documentation" title="Permalink to this heading"></a></h1>
-<section id="packages">
-<h2>Packages<a class="headerlink" href="#packages" title="Permalink to this heading"></a></h2>
+<section id="system-design">
+<h2>System Design<a class="headerlink" href="#system-design" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture and Execution Flow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#execution-stages">Execution Stages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#test-discovery">Test Discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#test-execution">Test Execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#error-catching-and-recovery">Error Catching and Recovery</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Bootstrap Templates</a></li>
+</ul>
+</div>
+</section>
+<section id="cmake-reference">
+<h2>CMake Reference<a class="headerlink" href="#cmake-reference" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="cmake_test/index.html">cmake_test/.</a><ul>
@@ -99,6 +120,7 @@
 <li class="toctree-l2"><a class="reference internal" href="cmake_test/overrides.html">cmake_test/overrides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cmake_test/register_exception_handler.html">cmake_test/register_exception_handler</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cmake_test/set_print_length.html">cmake_test/set_print_length</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmake_test/asserts/index.html">cmake_test/asserts</a></li>
 </ul>
 </li>
 </ul>
@@ -111,7 +133,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../tutorials/2_sections.html" class="btn btn-neutral float-left" title="2 Sections" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="cmake_test/index.html" class="btn btn-neutral float-right" title="cmake_test/." accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="architecture.html" class="btn btn-neutral float-right" title="Architecture and Execution Flow" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

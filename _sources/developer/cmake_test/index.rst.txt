@@ -17,4 +17,5 @@ cmake_test/.
    overrides
    register_exception_handler
    set_print_length
+   asserts/index.rst
 

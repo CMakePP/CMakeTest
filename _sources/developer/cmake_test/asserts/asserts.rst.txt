@@ -1,0 +1,7 @@
+
+##########################
+cmake_test/asserts/asserts
+##########################
+
+.. module:: cmake_test/asserts/asserts
+

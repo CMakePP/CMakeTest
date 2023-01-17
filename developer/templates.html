@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bootstrap Templates &mdash; CMakeTest 1.0.0alpha documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cmake_test/." href="cmake_test/index.html" />
+    <link rel="prev" title="Architecture and Execution Flow" href="architecture.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> CMakeTest
+          </a>
+              <div class="version">
+                1.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About CMakeTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faqs.html">Frequently Asked Questions (FAQs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing_tests/index.html">Writing Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#system-design">System Design</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="architecture.html">Architecture and Execution Flow</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Bootstrap Templates</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#cmake-reference">CMake Reference</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CMakeTest</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Developer Documentation</a></li>
+      <li class="breadcrumb-item active">Bootstrap Templates</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/developer/templates.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bootstrap-templates">
+<span id="id1"></span><h1>Bootstrap Templates<a class="headerlink" href="#bootstrap-templates" title="Permalink to this heading"></a></h1>
+<p>CMakeTest tests cannot be executed directly
+by CTest but instead require a bootstrap file to setup
+the CMakeTest runtime. These bootstrap files are configured
+at build time. The template these files are configured from is
+<code class="docutils literal notranslate"><span class="pre">cmake_test/templates/lists.txt</span></code>. The file is listed below for
+convenience.</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c">#This file is a template intended to be configured via CMakeTest.</span>
+<span class="c">#The configured file will be used as the CTest entrypoint and will</span>
+<span class="c">#include() the intended test file before executing the tests found.</span>
+
+
+<span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">@_ct_min_cmake_version@</span><span class="p">)</span><span class="w"> </span><span class="c">#Required for FetchContent_MakeAvailable()</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">_ct_min_cmake_version</span><span class="w"> </span><span class="s">@_ct_min_cmake_version@</span><span class="p">)</span><span class="w"> </span><span class="c">#Propagate min version down</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">@_ad_test_file@</span><span class="w"> </span><span class="s">LANGUAGES</span><span class="w"> </span><span class="s">C</span><span class="p">)</span><span class="w"> </span><span class="c">#Needed so dummy libraries don&#39;t complain about not having a linkage language</span>
+
+
+<span class="c">#Enable colors in Unix environments, ignored on Windows. Will not work with pipes</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKETEST_USE_COLORS</span><span class="w"> </span><span class="s2">&quot;@CMAKETEST_USE_COLORS@&quot;</span><span class="p">)</span>
+
+<span class="c">#Propagate CT_PRINT_LENGTH if not already set</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">NOT</span><span class="w"> </span><span class="s">CT_PRINT_LENGTH</span><span class="w"> </span><span class="s">GREATER</span><span class="w"> </span><span class="s">0</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">set</span><span class="p">(</span><span class="s">CT_PRINT_LENGTH</span><span class="w"> </span><span class="s2">&quot;@CT_PRINT_LENGTH@&quot;</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_MODULE_PATH</span><span class="w"> </span><span class="s2">&quot;@CMAKE_MODULE_PATH@&quot;</span><span class="w"> </span><span class="s">CACHE</span><span class="w"> </span><span class="s">STRING</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="s">FORCE</span><span class="p">)</span>
+
+<span class="nb">include</span><span class="p">(</span><span class="s2">&quot;cmake_test/cmake_test&quot;</span><span class="p">)</span>
+
+<span class="nb">include</span><span class="p">(</span><span class="s2">&quot;@_ad_test_file@&quot;</span><span class="p">)</span>
+<span class="nb">ct_exec_tests</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The variables that are inserted into the template are as follows:</p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">_ct_min_cmake_version</span></code>: The minimum version of CMake required
+by CMakeTest. This variable is generally set by CMakeTest’s
+<code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">_ad_test_file</span></code>: The file that contains the tests that
+this template bootstraps. This variable is generally set by
+<a class="reference internal" href="cmake_test/add_dir.html#cmake_test-add_dir.ct_add_dir" title="cmake_test/add_dir.ct_add_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ct_add_dir</span></code></a>.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">CMAKETEST_USE_COLORS</span></code>: The option for whether to use colors
+that is propagated to the test. This variable is an option initially
+set by the <a class="reference internal" href="cmake_test/colors.html#module-cmake_test-colors" title="cmake_test/colors"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cmake_test/colors</span></code></a> module but can be changed at configure
+time by the user.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">CT_PRINT_LENGTH</span></code>: The variable for the print length
+of pass/fail lines when not overridden by the test. This variable
+is only set if the user overrides the default of 80 via the
+<a class="reference internal" href="cmake_test/set_print_length.html#cmake_test-set_print_length.ct_set_print_length" title="cmake_test/set_print_length.ct_set_print_length"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ct_set_print_length</span></code></a> function
+or if the <code class="code docutils literal notranslate"><span class="pre">PRINT_LENGTH</span></code> option is passed to
+<a class="reference internal" href="cmake_test/add_test.html#cmake_test-add_test.ct_add_test" title="cmake_test/add_test.ct_add_test"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ct_add_test</span></code></a> or
+<a class="reference internal" href="cmake_test/add_section.html#cmake_test-add_section.ct_add_section" title="cmake_test/add_section.ct_add_section"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ct_add_section</span></code></a> functions.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">CMAKE_MODULE_PATH</span></code>: This is the same module path list
+as used in normal CMake code, it is propagated down to prevent
+any module not found errors.</p></li>
+</ul>
+<p>CMakeTest uses a second bootstrap file specifically
+for executing <code class="code docutils literal notranslate"><span class="pre">EXPECTFAIL</span></code> tests in a subprocess. These files
+are configured at test time from the <code class="docutils literal notranslate"><span class="pre">cmake_test/templates/expectfail.txt</span></code>
+template. The file is listed below for convenience.</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span>#This file is a template intended to be configured via CMakeTest.
+#The configured file will be used as the CTest entrypoint and will
+#include() the intended test file before executing the tests found.
+
+
+cmake_minimum_required(VERSION @_ct_min_cmake_version@) #Required for FetchContent_MakeAvailable()
+
+project(@_es_section_file@ LANGUAGES C) #Needed so dummy libraries don&#39;t complain about not having a linkage language
+
+
+#Enable colors in Unix environments, ignored on Windows. Will not work with pipes
+set(CMAKETEST_USE_COLORS &quot;@CMAKETEST_USE_COLORS@&quot;)
+
+#Propagate CT_PRINT_LENGTH
+set(CT_PRINT_LENGTH &quot;@CT_PRINT_LENGTH@&quot;)
+
+set(CMAKE_MODULE_PATH &quot;@CMAKE_MODULE_PATH@&quot; CACHE STRING &quot;&quot; FORCE)
+
+include(&quot;cmake_test/cmake_test&quot;)
+
+cpp_set_global(&quot;CT_EXEC_EXPECTFAIL&quot; TRUE)
+
+
+#Register handler so we know when a test fails
+ct_register_exception_handler()
+
+#Set test and section ID definitions
+@_es_section_id_defines@
+
+#Include root file
+include(&quot;@_es_section_file@&quot;)
+
+#Execute the only test there is, ignoring subsections that do not comprise the call tree
+ct_exec_tests()
+</pre></div>
+</div>
+<p>The variables that are inserted into the template are as follows:</p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">_ct_min_cmake_version</span></code>: The minimum version of CMake required
+by CMakeTest. This variable is generally set by CMakeTest’s
+<code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">CMAKETEST_USE_COLORS</span></code>: The option for whether to use colors
+that is propagated to the test. This variable is an option initially
+set by the <a class="reference internal" href="cmake_test/colors.html#module-cmake_test-colors" title="cmake_test/colors"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cmake_test/colors</span></code></a> module but can be changed at configure
+time by the user.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">CT_PRINT_LENGTH</span></code>: The variable for the print length
+of pass/fail lines when not overridden by the test. This variable
+is only set if the user overrides the default of 80 via the
+<a class="reference internal" href="cmake_test/set_print_length.html#cmake_test-set_print_length.ct_set_print_length" title="cmake_test/set_print_length.ct_set_print_length"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ct_set_print_length</span></code></a> function
+or if the <code class="code docutils literal notranslate"><span class="pre">PRINT_LENGTH</span></code> option is passed to
+<a class="reference internal" href="cmake_test/add_test.html#cmake_test-add_test.ct_add_test" title="cmake_test/add_test.ct_add_test"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ct_add_test</span></code></a> or
+<a class="reference internal" href="cmake_test/add_section.html#cmake_test-add_section.ct_add_section" title="cmake_test/add_section.ct_add_section"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ct_add_section</span></code></a> functions.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">CMAKE_MODULE_PATH</span></code>: This is the same module path list
+as used in normal CMake code, it is propagated down to prevent
+any module not found errors.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">_es_section_file</span></code>: The containing file of the section.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">_es_section_id_defines</span></code>: A string containing CMake code that
+sets variables for test and section names to their current IDs. This
+determines which tests and sections are executed, as only units with a defined
+ID are executed when <code class="code docutils literal notranslate"><span class="pre">CT_EXEC_EXPECTFAIL</span></code> is true.</p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="architecture.html" class="btn btn-neutral float-left" title="Architecture and Execution Flow" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cmake_test/index.html" class="btn btn-neutral float-right" title="cmake_test/." accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, CMakePP Organization.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

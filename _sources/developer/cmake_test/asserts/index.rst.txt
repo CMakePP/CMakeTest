@@ -1,0 +1,21 @@
+
+##################
+cmake_test/asserts
+##################
+
+.. toctree:: 
+   :maxdepth: 2
+
+   asserts
+   defined
+   equal
+   file_contains
+   file_exists
+   library_exists
+   list
+   prints
+   string
+   target_exists
+   target_has_property
+   true_false
+

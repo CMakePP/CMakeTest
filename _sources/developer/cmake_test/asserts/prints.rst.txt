@@ -1,0 +1,24 @@
+
+#########################
+cmake_test/asserts/prints
+#########################
+
+.. module:: cmake_test/asserts/prints
+
+
+.. function:: ct_assert_prints(_ap_msg)
+
+   Asserts that a specified message was printed.
+   
+   This function is used to assert that a string was printed immediately
+   prior to this function call. This function only compares the expected
+   message with whatever was printed last, it does not compare with
+   any printed messages further back.
+   
+   If the previously printed message does not exactly match the expected message,
+   this function will treat the expected message as a regex to check if it matches.
+   
+   :param _ap_msg: The message expected to have been printed, either exact match or regex.
+   :type _ap_msg: String
+   
+

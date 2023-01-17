@@ -1,0 +1,25 @@
+
+#############################
+cmake_test/asserts/true_false
+#############################
+
+.. module:: cmake_test/asserts/true_false
+
+
+.. function:: ct_assert_true(_at_var)
+
+   Asserts that the provided variable is true.
+   
+   :param _at_var: The identifier to check for trueness.
+   :type _at_var: Identifier
+   
+
+
+.. function:: ct_assert_false(_af_var)
+
+   Asserts that the provided variable is false.
+   
+   :param _af_var: The identifier to check for falseness.
+   :type _af_var: Identifier
+   
+
