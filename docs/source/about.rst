@@ -15,5 +15,10 @@ Features
 --------
 
 - 100% CMake (non-CMake files in this repo are for generating documentation)
-   - No external dependencies
    - Integrates naturally into existing CMake scripts
+- Integrates with CTest
+   - Run build system tests alongside your built project tests
+- Scoped subtests
+   - Add subsections to your top-level tests to contain related tests together
+- Test and section definitions supported in `CMinx <https://github.com/CMakePP/CMinx>`_
+   - Document your tests just like you do functions
