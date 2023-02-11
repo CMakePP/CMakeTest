@@ -26,7 +26,7 @@ function(ct_register_exception_handler)
         list(APPEND _ae_curr_exec_exceptions "Type: ${exce_type}, Details: ${message}")
         CTExecutionUnit(SET "${_ae_curr_exec_instance}" exceptions "${_ae_curr_exec_exceptions}")
         CTExecutionUnit(GET "${_ae_curr_exec_instance}" _ae_friendly_name friendly_name)
-        CTExecutionUnit(GET "${_ae_curr_exec_instance}" _as_parent_print_length print_length)
+        CTExecutionUnit(GET "${_ae_curr_exec_instance}" _ae_print_length print_length)
 
         cpp_append_global(CMAKETEST_FAILED_TESTS "${_ae_curr_exec_instance}")
 

@@ -153,7 +153,7 @@ cpp_class(CTExecutionUnit)
                 cpp_get_global(_as_curr_instance "CT_CURRENT_EXECUTION_UNIT_INSTANCE")
                 CTExecutionUnit(GET "${_as_curr_instance}" parent_name test_id)
                 CTExecutionUnit(GET "${self}" test_id test_id)
-		CTExecutionUnit(GET "${self}" children children)
+                CTExecutionUnit(GET "${self}" children children)
                 cpp_map(SET "${children}" "${key}" "${child}")
         endfunction()
 
@@ -219,9 +219,9 @@ cpp_class(CTExecutionUnit)
 	#
 	#]]
 	cpp_member(execute CTExecutionUnit)
-        function("${execute}" self)
+    function("${execute}" self)
 		CTExecutionUnit(GET "${self}" _ex_expect_fail expect_fail)
-        	cpp_get_global(_ex_exec_expectfail "CT_EXEC_EXPECTFAIL")
+        cpp_get_global(_ex_exec_expectfail "CT_EXEC_EXPECTFAIL")
 		CTExecutionUnit(GET "${self}" _self_has_executed has_executed)
 		if (_self_has_executed)
 			return()
@@ -233,21 +233,21 @@ cpp_class(CTExecutionUnit)
 
 		if(_ex_expect_fail AND NOT _ex_exec_expectfail) #If this section expects to fail
 
-           		#We're in main interpreter so we need to configure and execute the subprocess
+            #We're in main interpreter so we need to configure and execute the subprocess
 			ct_expectfail_subprocess("${self}")
 
 		else()
 			
 			CTExecutionUnit(GET "${self}" id test_id)
-        	        cpp_call_fxn("${id}")
+			cpp_call_fxn("${id}")
 		endif()
 		cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${old_instance}")
 
-                CTExecutionUnit(print_pass_or_fail "${self}")
+        CTExecutionUnit(print_pass_or_fail "${self}")
+
+        CTExecutionUnit(exec_sections "${self}")
                 
-                CTExecutionUnit(exec_sections "${self}")
-                
-                CTExecutionUnit(SET "${self}" has_executed TRUE)
+        CTExecutionUnit(SET "${self}" has_executed TRUE)
 
 	endfunction()
 

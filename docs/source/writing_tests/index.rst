@@ -8,3 +8,4 @@ Writing Tests
    basic_test
    sections
    errors
+   assertions
