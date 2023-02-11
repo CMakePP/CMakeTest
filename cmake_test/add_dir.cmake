@@ -26,7 +26,7 @@ function(ct_add_dir _ad_dir)
     foreach(_ad_test_file ${_ad_files})
         #Find rel path so we don't end up with insanely long paths under test folders
         file(RELATIVE_PATH _ad_rel_path "${_ad_abs_test_dir}" "${_ad_test_file}")
-        cmake_path(CONVERT "${_ad_abs_test_dir}" TO_CMAKE_PATH_LIST _ad_normalized_dir NORMALIZE)
+        file(TO_CMAKE_PATH "${_ad_abs_test_dir}" _ad_normalized_dir)
         string(REPLACE "/" "_" _ad_dir_prefix "${_ad_normalized_dir}")
 
         #Fill in boilerplate, copy to build dir
