@@ -24,16 +24,24 @@ function(ct_add_dir _ad_dir)
     file(GLOB_RECURSE _ad_files LIST_DIRECTORIES FALSE FOLLOW_SYMLINKS "${_ad_abs_test_dir}/*.cmake") #Recurse over target dir to find all cmake files
 
     foreach(_ad_test_file ${_ad_files})
-        file(RELATIVE_PATH _ad_rel_path "${_ad_abs_test_dir}" "${_ad_test_file}") #Find rel path so we don't end up with insanely long paths under test folders
+        #Find rel path so we don't end up with insanely long paths under test folders
+        file(RELATIVE_PATH _ad_rel_path "${_ad_abs_test_dir}" "${_ad_test_file}")
+        file(TO_CMAKE_PATH "${_ad_abs_test_dir}" _ad_normalized_dir)
+        string(REPLACE "/" "_" _ad_dir_prefix "${_ad_normalized_dir}")
 
-        configure_file("${_CT_TEMPLATES_DIR}/lists.txt" "${CMAKE_CURRENT_BINARY_DIR}/tests/${_ad_rel_path}/src/CMakeLists.txt" @ONLY) #Fill in boilerplate, copy to build dir
+        #Fill in boilerplate, copy to build dir
+        configure_file(
+            "${_CT_TEMPLATES_DIR}/lists.txt"
+            "${CMAKE_CURRENT_BINARY_DIR}/tests/${_ad_dir_prefix}/${_ad_rel_path}/src/CMakeLists.txt"
+            @ONLY
+        )
         add_test(
         NAME
-            ${_ad_rel_path}
+            "${_ad_dir_prefix}_${_ad_rel_path}"
         COMMAND
             "${CMAKE_COMMAND}"
-               -S "${CMAKE_CURRENT_BINARY_DIR}/tests/${_ad_rel_path}/src"
-               -B "${CMAKE_CURRENT_BINARY_DIR}/tests/${_ad_rel_path}"
+               -S "${CMAKE_CURRENT_BINARY_DIR}/tests/${_ad_dir_prefix}/${_ad_rel_path}/src"
+               -B "${CMAKE_CURRENT_BINARY_DIR}/tests/${_ad_dir_prefix}/${_ad_rel_path}"
                ${ADD_DIR_CMAKE_OPTIONS}
         )
 
