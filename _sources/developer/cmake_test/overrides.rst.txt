@@ -5,6 +5,11 @@ cmake_test/overrides
 
 .. module:: cmake_test/overrides
 
+   
+   .. warning::
+      Including this module will override the default :code:`message()` implementation.
+   
+
 
 .. function:: message()
 

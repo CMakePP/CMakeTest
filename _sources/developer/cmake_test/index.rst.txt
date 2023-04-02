@@ -6,6 +6,7 @@ cmake_test/.
 .. toctree:: 
    :maxdepth: 2
 
+   asserts/index.rst
    add_dir
    add_section
    add_test
@@ -17,5 +18,4 @@ cmake_test/.
    overrides
    register_exception_handler
    set_print_length
-   asserts/index.rst
 

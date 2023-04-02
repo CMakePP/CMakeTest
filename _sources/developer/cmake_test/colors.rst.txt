@@ -5,6 +5,19 @@ cmake_test/colors
 
 .. module:: cmake_test/colors
 
+   This module provides an option called :code:`CMAKETEST_USE_COLORS`
+   and a set of global variables to use to color terminal output.
+   These global constants are just one-to-one constants of specific ANSI
+   control codes. If :code:`CMAKETEST_USE_COLORS` is not set to true or
+   if the OS is Windows (cmd doesn't support ANSI control codes),
+   these constants will not be defined and should resolve to an empty string.
+   
+   Example:
+   
+   .. code:: cmake
+      set(example "${CT_Red}This will be red if the option is set${CT_ColorReset}")
+   
+
 
 .. function:: string(ASCII 27 Esc)
 

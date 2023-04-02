@@ -5,6 +5,12 @@ cmake_test/register_exception_handler
 
 .. module:: cmake_test/register_exception_handler
 
+   
+   .. warning::
+      This module requires :obj:`cmake_test/overrides`, and so will override
+      the :code:`message()` command upon inclusion.
+   
+
 
 .. function:: ct_register_exception_handler()
 

@@ -11,7 +11,6 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
@@ -55,6 +54,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../index.html#system-design">System Design</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html#cmake-reference">CMake Reference</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="index.html">cmake_test/.</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="asserts/index.html">cmake_test/asserts</a></li>
 <li class="toctree-l4"><a class="reference internal" href="add_dir.html">cmake_test/add_dir</a></li>
 <li class="toctree-l4"><a class="reference internal" href="add_section.html">cmake_test/add_section</a></li>
 <li class="toctree-l4"><a class="reference internal" href="add_test.html">cmake_test/add_test</a></li>
@@ -66,7 +66,6 @@
 <li class="toctree-l4"><a class="reference internal" href="overrides.html">cmake_test/overrides</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">cmake_test/register_exception_handler</a></li>
 <li class="toctree-l4"><a class="reference internal" href="set_print_length.html">cmake_test/set_print_length</a></li>
-<li class="toctree-l4"><a class="reference internal" href="asserts/index.html">cmake_test/asserts</a></li>
 </ul>
 </li>
 </ul>
@@ -103,6 +102,11 @@
              
   <section id="module-cmake_test-register_exception_handler">
 <span id="cmake-test-register-exception-handler"></span><h1>cmake_test/register_exception_handler<a class="headerlink" href="#module-cmake_test-register_exception_handler" title="Permalink to this heading"></a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This module requires <a class="reference internal" href="overrides.html#module-cmake_test-overrides" title="cmake_test/overrides"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cmake_test/overrides</span></code></a>, and so will override
+the <code class="code docutils literal notranslate"><span class="pre">message()</span></code> command upon inclusion.</p>
+</div>
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-register_exception_handler.ct_register_exception_handler">
 <span class="sig-prename descclassname"><span class="pre">cmake_test/register_exception_handler.</span></span><span class="sig-name descname"><span class="pre">ct_register_exception_handler</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-register_exception_handler.ct_register_exception_handler" title="Permalink to this definition"></a></dt>
