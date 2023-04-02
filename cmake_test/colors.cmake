@@ -1,6 +1,4 @@
-# FIXME make into doccomment when CMinx w/ module support is released
-
-#[[ @module
+#[[[ @module
 # This module provides an option called :code:`CMAKETEST_USE_COLORS`
 # and a set of global variables to use to color terminal output.
 # These global constants are just one-to-one constants of specific ANSI

@@ -1,3 +1,10 @@
+#[[[ @module
+#
+# .. warning::
+#    This module requires :obj:`cmake_test/overrides`, and so will override
+#    the :code:`message()` command upon inclusion.
+#]]
+
 include_guard()
 
 # This ensures the _message() command is valid no matter when this file is included
