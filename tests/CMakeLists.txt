@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION "${_ct_min_cmake_version}") #Required for FetchContent_MakeAvailable()
 
 include(cmake_test/cmake_test)
-include("${PROJECT_SOURCE_DIR}/cmake/get_cpp.cmake")
+include("${PROJECT_SOURCE_DIR}/cmake/get_cmaize.cmake")
 
 #Sets print length to cached variable. This value is propagated
 #to all tests but can be overriden with subsequent calls or

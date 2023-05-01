@@ -9,10 +9,10 @@ endif()
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" CACHE STRING "" FORCE)
 if(NOT CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-        set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" PARENT_SCOPE) #For projects including CMakeTest
+    set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" PARENT_SCOPE) #For projects including CMakeTest
 endif()
 
-include("${PROJECT_SOURCE_DIR}/cmake/get_cpp.cmake")
+include("${PROJECT_SOURCE_DIR}/cmake/get_cmaize.cmake")
 include(cmake_test/cmake_test)
 
 if("${BUILD_TESTING}")
