@@ -19,6 +19,26 @@ cmake_test/colors
    
 
 
+.. data:: CMAKETEST_USE_COLORS
+
+
+   .. note:: 
+
+      
+                  This variable is a user-editable option,
+                  meaning it appears within the cache and can be
+                  edited on the command line by the :code:`-D` flag.
+                  
+
+   
+
+   :Help text: "This option enables coloration in CMakeTest output. If enabled will mangle log files or pipes that do not support coloration. This option is ignored on Windows."
+
+   :Default value: "FALSE"
+
+   :type: bool
+
+
 .. function:: string(ASCII 27 Esc)
 
 

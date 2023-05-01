@@ -109,6 +109,28 @@ control codes. If <code class="code docutils literal notranslate"><span class="p
 if the OS is Windows (cmd doesn’t support ANSI control codes),
 these constants will not be defined and should resolve to an empty string.</p>
 <p>Example:</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="cmake_test-colors.CMAKETEST_USE_COLORS">
+<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CMAKETEST_USE_COLORS</span></span><a class="headerlink" href="#cmake_test-colors.CMAKETEST_USE_COLORS" title="Permalink to this definition"></a></dt>
+<dd><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This variable is a user-editable option,
+meaning it appears within the cache and can be
+edited on the command line by the <code class="code docutils literal notranslate"><span class="pre">-D</span></code> flag.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Help text<span class="colon">:</span></dt>
+<dd class="field-odd"><p>“This option enables coloration in CMakeTest output. If enabled will mangle log files or pipes that do not support coloration. This option is ignored on Windows.”</p>
+</dd>
+<dt class="field-even">Default value<span class="colon">:</span></dt>
+<dd class="field-even"><p>“FALSE”</p>
+</dd>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-colors.string">
 <span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ASCII</span> <span class="pre">27</span> <span class="pre">Esc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-colors.string" title="Permalink to this definition"></a></dt>
