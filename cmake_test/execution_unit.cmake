@@ -1,6 +1,6 @@
 include_guard()
 
-include(cpp/cpp)
+include(cmakepp_lang/cmakepp_lang)
 
 #[[[
 #
