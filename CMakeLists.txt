@@ -1,4 +1,4 @@
-set(_ct_min_cmake_version "3.14")
+set(_ct_min_cmake_version "3.14" CACHE STRING "" FORCE)
 cmake_minimum_required(VERSION "${_ct_min_cmake_version}") #Required for FetchContent_MakeAvailable()
 project(CMakeTest VERSION 1.0.0 LANGUAGES NONE)
 
