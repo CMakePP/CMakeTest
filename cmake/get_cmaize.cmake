@@ -21,6 +21,11 @@ function(get_cmaize)
         )
         FetchContent_MakeAvailable(cmaize)
 
+        set(
+            CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" "${cmake_test_SOURCE_DIR}/cmake"
+            PARENT_SCOPE
+        )
+
         # Restore the previous value
         set(BUILD_TESTING "${build_testing_old}" CACHE BOOL "" FORCE)
     endif()

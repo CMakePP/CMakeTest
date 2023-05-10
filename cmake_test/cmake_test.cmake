@@ -6,7 +6,7 @@
 
 include_guard()
 
-include("cpp/cpp")
+include(cmakepp_lang/cmakepp_lang)
 
 # Allows us to capture the root directory of the CMakeTest module
 set(_CT_CMAKE_TEST_ROOT ${CMAKE_CURRENT_LIST_DIR})
