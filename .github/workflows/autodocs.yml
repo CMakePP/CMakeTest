@@ -6,10 +6,25 @@ on:
     branches:
       - master
 jobs:
-  autodoc:
-    runs-on: ubuntu-18.04
-    name: autodoc-gen
+  autodocs:
+    runs-on: ubuntu-latest
     steps:
-      - uses: CMakePP/cminx-auto-update-action@main
+      - uses: actions/checkout@v2
         with:
-          push: true
+          fetch-depth: 0
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Build Docs
+        run: |
+          python3 -m venv virt_env
+          source virt_env/bin/activate
+          pip3 install wheel
+          cd docs
+          pip3 install -r requirements.txt
+          make html
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/build/html

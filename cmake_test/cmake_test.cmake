@@ -1,3 +1,9 @@
+#[[[ @module
+# This module serves as the main entry point into CMakeTest,
+# it automatically includes all modules that are required to use it
+# as well as setting extremely important path-related constants.
+#]]
+
 include_guard()
 
 include("cpp/cpp")

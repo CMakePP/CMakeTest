@@ -24,10 +24,24 @@ if not os.path.exists("make_tutorial.py"):
     urllib.request.urlretrieve(make_tutorial_url, "make_tutorials.py")
 
 from make_tutorials import make_tutorials
+import cminx
 
+src_dir  = os.path.abspath(os.path.dirname(__file__))
 doc_path = os.path.dirname(dir_path)
 root_path = os.path.dirname(doc_path)
 build_path = os.path.join(doc_path, "build")
+
+########################################
+#  Run CMinx on our CMake source code  #
+########################################
+
+cminx_out_dir = os.path.join(src_dir, "developer", "cmake_test")
+cminx_in_dir = os.path.join(root_path, "cmake_test")
+#args = ["-p", "cmake_test", "-r", "-o", cminx_out_dir, cminx_in_dir]
+args = ["-s", "config.yml", "-r", cminx_in_dir]
+cminx.main(args)
+
+
 
 # -- General configuration ---------------------------------------------------
 highlight_language = 'cmake'
