@@ -27,7 +27,8 @@ jobs:
     if: github.event.pull_request.merged == true
     uses: CMakePP/.github/.github/workflows/deploy_docs_master.yaml@main
     with:
-      # api_docs_module: 'cmake_test'  # Needs 'cmake_test/' to be in 'cmake/' at the moment
+      api_docs_module: 'cmake_test'
+      cmake_source_dir: '.'
       docs_dir: 'docs'
       python_version: '3.10'
     secrets:
