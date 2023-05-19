@@ -1,0 +1,44 @@
+name: CMakeTest Unit Tests
+on:
+  pull_request:
+    branches:
+      - master
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        cmake: [3.14.7, latest, latestrc]
+    env:
+      cmake_version: ${{ matrix.cmake }}
+      os: Linux-x86_64
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Get latest CMake and Ninja
+        uses: lukka/get-cmake@latest
+        with:
+          cmakeVersion: ${{ env.cmake_version }}
+
+      - name: Check CMake and CTest Versions
+        run: |
+          cmake --version
+          ctest --version
+
+      - name: Configure Project
+        run: |
+          cmake -H. -Bbuild -DBUILD_TESTING=ON
+      
+      - name: Run Unit Tests
+        run: |
+          cd build
+          ctest -j 2 --output-on-failure
+
+  docs_test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: ammaraskar/sphinx-action@master
+      with:
+        docs-folder: "docs/"
+        repo-token: "${{ secrets.GITHUB_TOKEN }}"
