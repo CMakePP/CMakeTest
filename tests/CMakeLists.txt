@@ -10,5 +10,5 @@ include("${PROJECT_SOURCE_DIR}/cmake/get_cmaize.cmake")
 set(CT_DEFAULT_PRINT_LENGTH 80 CACHE STRING "The default print length for pass/fail lines. Can be overriden by individual tests.")
 ct_set_print_length("${CT_DEFAULT_PRINT_LENGTH}")
 
-ct_add_dir(".")
-ct_add_dir("../test_directory_2")
+ct_add_dir("./cmake_test")
+ct_add_dir("./test_directory_2")
