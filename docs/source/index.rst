@@ -24,5 +24,4 @@ CMakeTest
    faqs
    writing_tests/index
    tutorials/index
-   api/index
    developer/index
