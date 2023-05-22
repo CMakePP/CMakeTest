@@ -22,8 +22,8 @@ include_guard()
 # function will not consider such strings lists. If the identifier is not a list
 # an error will be raised.
 #
-# :param _anl_var: The identifier we want to know the list-ness of.
-# :type _anl_var: Identifier
+# :param var: The identifier we want to know the list-ness of.
+# :type var: Identifier
 #]]
 function(ct_assert_list _al_var)
     list(LENGTH ${_al_var} _al_length)
@@ -40,8 +40,8 @@ endfunction()
 # function will not consider such strings lists. If the provided string is a
 # list this function will raise an error.
 #
-# :param _anl_var: The identifier we want to know the list-ness of.
-# :type _anl_var: Identifier
+# :param var: The identifier we want to know the list-ness of.
+# :type var: Identifier
 #]]
 function(ct_assert_not_list _anl_var)
     list(LENGTH ${_anl_var} _anl_length)

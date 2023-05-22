@@ -23,8 +23,8 @@
 #  3. Length set by ct_set_print_length()
 #  4. Built-in default of 80.
 #
-# :param _spl_length: Length for pass/fail print lines.
-# :type _spl_length: int
+# :param length: Length for pass/fail print lines.
+# :type length: int
 #]]
 macro(ct_set_print_length _spl_length)
    set(CT_PRINT_LENGTH "${_spl_length}")

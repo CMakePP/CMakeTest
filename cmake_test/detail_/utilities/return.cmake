@@ -42,8 +42,8 @@ include_guard()
 # While the new code still has the same number of lines, it is our opinion that
 # the new code is easier to read and the intent is more clear.
 #
-# :param _r_var: The identifier which needs to be set in the parent namespace.
-# :type _r_var: Identifier
+# :param var: The identifier which needs to be set in the parent namespace.
+# :type var: Identifier
 #
 # ..note::
 #

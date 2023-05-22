@@ -56,6 +56,29 @@ input:
   # tests so we do not want to document it.
   include_undocumented_add_test: false
 
+  # Strips out any string matching this regex
+  # for parameter names. This is useful for when
+  # parameter names have a prefix/postfix to prevent
+  # name collisions. This affects function definitions.
+  #
+  # An example regex that strips the prefix "_abc_"
+  # from parameter names where "abc" is any combination of letters
+  # is below:
+  # function_parameter_name_strip_regex: "^_[a-zA-Z]*_"
+  function_parameter_name_strip_regex: "^_[a-zA-Z]+_"
+
+  # Strips out any string matching this regex
+  # for parameter names. This is useful for when
+  # parameter names have a prefix/postfix to prevent
+  # name collisions. This affects macro definitions
+  macro_parameter_name_strip_regex: "^_[a-zA-Z]+_"
+
+  # Strips out any string matching this regex
+  # for parameter names. This is useful for when
+  # parameter names have a prefix/postfix to prevent
+  # name collisions. This affects CMakePP
+  # class member definitions.
+  member_parameter_name_strip_regex: "^_[a-zA-Z]+_"
 
   # Whether directories should be documented recursively
   recursive: true

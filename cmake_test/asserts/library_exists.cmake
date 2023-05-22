@@ -18,8 +18,8 @@ include_guard()
 #
 # Asserts that the target exists and is a library.
 #
-# :param _ale_name: The name of the library
-# :type _afe_path: string
+# :param name: The name of the library
+# :type path: string
 #]]
 function(ct_assert_library_target_exists _ale_name)
     # Check that the target exists and it is a library
@@ -35,8 +35,8 @@ endfunction()
 #
 # Asserts that the target does not exist or is not a library.
 #
-# :param _aldne_name: The name of the library
-# :type _aldne_name: string
+# :param name: The name of the library
+# :type name: string
 #]]
 function(ct_assert_library_does_not_exist _aldne_name)
     # Check that the target does not exist or is not a library
@@ -52,11 +52,11 @@ endfunction()
 # target is of type ``STATIC_LIBRARY``, ``MODULE_LIBRARY``, or
 # ``SHARED_LIBRARY`` and then returns an integer indicating what it found.
 #
-# :param _lte_result: Name to use for the variable which will hold the result.
-# :type _lte_result: int
-# :param _lte_name: The target name to check.
-# :type _lte_name: string
-# :returns: ``_lte_result`` will be set to ``0`` if the target is a library,
+# :param result: Name to use for the variable which will hold the result.
+# :type result: int
+# :param name: The target name to check.
+# :type name: string
+# :returns: ``result`` will be set to ``0`` if the target is a library,
             ``1`` if the target is not a library, and ``2`` if target does not
             exist.
 # :rtype: int

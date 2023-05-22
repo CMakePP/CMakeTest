@@ -22,8 +22,8 @@ include(cmake_test/asserts/list)
 #  the event that the input to this function is not an identifier, or if that
 #  identifier is not set to a value, this function will raise a fatal error.
 #
-#  :param _n_var: The identifier to check for defined-ness.
-#  :type _n_var: Identifier
+#  :param var: The identifier to check for defined-ness.
+#  :type var: Identifier
 #]]
 function(_ct_nonempty _n_var)
     cmake_policy(SET CMP0054 NEW)
@@ -39,8 +39,8 @@ endfunction()
 #  or if the identifier is set to an empty string this function will raise a
 #  fatal error.
 #
-#  :param _ns_var: The identifier whose contents is being examined.
-#  :type _ns_var: Identifier
+#  :param var: The identifier whose contents is being examined.
+#  :type var: Identifier
 #]]
 function(_ct_nonempty_string _ns_var)
     _ct_nonempty("${_ns_var}")

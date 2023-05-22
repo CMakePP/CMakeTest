@@ -21,14 +21,14 @@ include(cmake_test/detail_/utilities/repeat_string)
 #  ``_ct_print_fail``. This function will print an indent appropriate for the
 #  current nesting, and then enough dots to right align the result.
 #
-#  :param _pr_name: The name of the test we are printing the result of.
-#  :type _pr_name: str
-#  :param _pr_result: What to print as the result (usually "PASSED" or "FAILED")
-#  :type _pr_result: str
-#  :param _pr_depth: How many sections is this test nested?
-#  :type _pr_depth: str
-#  :param _pr_print_length: The total length of the line to be printed, including dots and whitespace
-#  :type _pr_print_length: int
+#  :param name: The name of the test we are printing the result of.
+#  :type name: str
+#  :param result: What to print as the result (usually "PASSED" or "FAILED")
+#  :type result: str
+#  :param depth: How many sections is this test nested?
+#  :type depth: str
+#  :param print_length: The total length of the line to be printed, including dots and whitespace
+#  :type print_length: int
 #]]
 function(_ct_print_result _pr_name _pr_result _pr_depth _pr_print_length)
     #message("Print length is: ${_pr_print_length}")
@@ -73,12 +73,12 @@ endfunction()
 # called this function will print to the standard output that the test ran
 # successfully.
 #
-# :param _pp_name: The test we are printing the result of.
-# :type _pp_name: str
-# :param _pp_depth: How many sections is this test nested?
-# :type _pp_depth: str
-#  :param _pp_print_length: The total length of the line to be printed, including dots and whitespace
-#  :type _pp_print_length: int
+# :param name: The test we are printing the result of.
+# :type name: str
+# :param depth: How many sections is this test nested?
+# :type depth: str
+#  :param print_length: The total length of the line to be printed, including dots and whitespace
+#  :type print_length: int
 #]]
 function(_ct_print_pass _pp_name _pp_depth _pp_print_length)
     _ct_print_result(${_pp_name} "${CT_BoldGreen}PASSED${CT_ColorReset}" ${_pp_depth} "${_pp_print_length}")
@@ -92,12 +92,12 @@ endfunction()
 # the reason why the test failed. Finally, this function will issue a fatal
 # error stopping the test.
 #
-# :param _pf_name: The name of the test that just failed.
-# :type _pf_name: str
-# :param _pf_depth: How many sections is this test nested?
-# :type _pf_depth: str
-#  :param _pf_print_length: The total length of the line to be printed, including dots and whitespace
-#  :type _pf_print_length: int
+# :param name: The name of the test that just failed.
+# :type name: str
+# :param depth: How many sections is this test nested?
+# :type depth: str
+#  :param print_length: The total length of the line to be printed, including dots and whitespace
+#  :type print_length: int
 #]]
 function(_ct_print_fail _pf_name _pf_depth _pf_print_length)
     _ct_print_result(${_pf_name} "${CT_BoldRed}FAILED${CT_ColorReset}" ${_pf_depth} "${_pf_print_length}")

@@ -24,8 +24,8 @@ include_guard()
 # If the previously printed message does not exactly match the expected message,
 # this function will treat the expected message as a regex to check if it matches.
 #
-# :param _ap_msg: The message expected to have been printed, either exact match or regex.
-# :type _ap_msg: String
+# :param msg: The message expected to have been printed, either exact match or regex.
+# :type msg: String
 #]]
 function(ct_assert_prints _ap_msg)
     cpp_get_global(_ap_last_msg CT_LAST_MESSAGE)
