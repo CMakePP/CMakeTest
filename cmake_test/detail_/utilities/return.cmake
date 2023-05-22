@@ -20,7 +20,7 @@ include_guard()
 # The best way to do this is to have the callee provide the function with an
 # identifier to save the result to. This function wraps the common case where
 # internally the function saves the result to a local variable with the same
-# name as the callee provided for the result. Without the ``return``
+# name as the callee provided for the result. Without the ``_ct_return``
 # function this pattern looks something like:
 #
 # .. code-block:: cmake
@@ -30,7 +30,7 @@ include_guard()
 #        set(${return_identifier} ${${return_identifier}} PARENT_SCOPE
 #    endfunction()
 #
-# With the ``return`` function the above becomes:
+# With the ``_ct_return`` function the above becomes:
 #
 # .. code-block:: cmake
 #
@@ -49,8 +49,8 @@ include_guard()
 #
 #   This function is a macro to avoid creating another scope. If ``function``
 #   is used the identifier will be set in the scope of the function that
-#   called ``return`` and NOT in the scope of the function that called the
-#   callee of ``return``.
+#   called ``_ct_return`` and NOT in the scope of the function that called the
+#   callee of ``_ct_return``.
 #]]
 macro(_ct_return _r_var)
     set(${_r_var} "${${_r_var}}" PARENT_SCOPE)

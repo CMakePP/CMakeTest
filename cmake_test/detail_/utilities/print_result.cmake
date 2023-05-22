@@ -17,8 +17,8 @@ include(cmake_test/detail_/utilities/repeat_string)
 
 #[[[ Wraps the process of printing a test's result
 #
-#  This function largely serves as code factorization for ``print_pass`` and
-#  ``print_fail``. This function will print an indent appropriate for the
+#  This function largely serves as code factorization for ``_ct_print_pass`` and
+#  ``_ct_print_fail``. This function will print an indent appropriate for the
 #  current nesting, and then enough dots to right align the result.
 #
 #  :param name: The name of the test we are printing the result of.

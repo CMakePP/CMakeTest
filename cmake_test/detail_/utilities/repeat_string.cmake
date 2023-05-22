@@ -25,7 +25,7 @@ include(cmake_test/detail_/utilities/return)
 # :type result: Identifier
 # :param str: The substring to repeat.
 # :type str: str
-# :param  _rs_n: The number of times to repeat ``${_rs_str}``.
+# :param n: The number of times to repeat ``${str}``.
 # :type n: str
 # :returns: A string containing the created string. The result is accessible to
 #           the caller via ``result``.
