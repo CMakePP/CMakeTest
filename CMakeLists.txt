@@ -1,4 +1,4 @@
-set(_ct_min_cmake_version "3.14")
+set(_ct_min_cmake_version "3.14" CACHE INTERNAL "")
 cmake_minimum_required(VERSION "${_ct_min_cmake_version}") #Required for FetchContent_MakeAvailable()
 project(CMakeTest VERSION 1.0.0 LANGUAGES NONE)
 
@@ -22,13 +22,3 @@ if("${BUILD_TESTING}")
     add_subdirectory("tests/")
 
 endif()
-
-
-#----------------------------------#
-# Example on how to execute a test #
-#----------------------------------#
-
-# get_filename_component(CMAKETEST_CURRENT_FILE "${PROJECT_SOURCE_DIR}/examples/CMakeTest.cmake" ABSOLUTE)
-# include("${CMAKETEST_CURRENT_FILE}")
-# ct_exec_tests()
-
