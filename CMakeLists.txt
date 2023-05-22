@@ -22,13 +22,3 @@ if("${BUILD_TESTING}")
     add_subdirectory("tests")
 
 endif()
-
-
-#----------------------------------#
-# Example on how to execute a test #
-#----------------------------------#
-
-# get_filename_component(CMAKETEST_CURRENT_FILE "${PROJECT_SOURCE_DIR}/examples/CMakeTest.cmake" ABSOLUTE)
-# include("${CMAKETEST_CURRENT_FILE}")
-# ct_exec_tests()
-
