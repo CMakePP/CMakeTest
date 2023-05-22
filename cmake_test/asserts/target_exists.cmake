@@ -16,8 +16,8 @@ include_guard()
 
 #[[[ Assert that a target exists.
 #
-# :param _ate_name: The name of the target
-# :type _ate_name: String
+# :param name: The name of the target
+# :type name: String
 #]]
 function(ct_assert_target_exists _ate_name)
     # Check if the target exists, if not throw an error
@@ -28,8 +28,8 @@ endfunction()
 
 #[[[ Assert that a target does not exist.
 #
-# :param _ate_name: The name of the target
-# :type _ate_name: String
+# :param name: The name of the target
+# :type name: String
 #]]
 function(ct_assert_target_does_not_exist _atdne_name)
     # Check if the target exists, if it does, throw an error

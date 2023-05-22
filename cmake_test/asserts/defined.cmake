@@ -20,8 +20,8 @@ include_guard()
 # assert that the variable is set to any particular value. If the variable is
 # not defined it will raise an error.
 #
-# :param _ad_var: The identifier to check for defined-ness.
-# :type _ad_var: Identifier
+# :param var: The identifier to check for defined-ness.
+# :type var: Identifier
 #]]
 function(ct_assert_defined _ad_var)
     if(NOT DEFINED ${_ad_var})
@@ -34,8 +34,8 @@ endfunction()
 # This function can be used to assert that a variable is not defined. If the
 # variable is actually defined this function will raise an error.
 #
-# :param _and_var: The identifier to check for defined-ness.
-# :type _and_var: Identifier
+# :param var: The identifier to check for defined-ness.
+# :type var: Identifier
 #]]
 function(ct_assert_not_defined _and_var)
     if(DEFINED ${_and_var})
