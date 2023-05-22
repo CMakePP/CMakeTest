@@ -107,23 +107,23 @@
 <span id="cmake-test-asserts-equal"></span><h1>cmake_test/asserts/equal<a class="headerlink" href="#module-cmake_test-asserts-equal" title="Permalink to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-asserts-equal.ct_assert_equal">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/equal.</span></span><span class="sig-name descname"><span class="pre">ct_assert_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_ae_var</span> <span class="pre">_ae_contents</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-equal.ct_assert_equal" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/equal.</span></span><span class="sig-name descname"><span class="pre">ct_assert_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span> <span class="pre">contents</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-equal.ct_assert_equal" title="Permalink to this definition"></a></dt>
 <dd><p>Asserts that an identifier contains the specified contents.</p>
 <blockquote>
 <div><p>This function is used to assert that a given identifier is set to the
 specific contents. If the identifier is not set to the specified contents a
 fatal error will be raised.</p>
 <dl class="field-list simple">
-<dt class="field-odd">param _ae_var<span class="colon">:</span></dt>
+<dt class="field-odd">param var<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The identifier whose contents are in question.</p>
 </dd>
-<dt class="field-even">type _ae_var<span class="colon">:</span></dt>
+<dt class="field-even">type var<span class="colon">:</span></dt>
 <dd class="field-even"><p>Identifier</p>
 </dd>
-<dt class="field-odd">param _ae_contents<span class="colon">:</span></dt>
+<dt class="field-odd">param contents<span class="colon">:</span></dt>
 <dd class="field-odd"><p>What the identifier should be set to.</p>
 </dd>
-<dt class="field-even">type _ae_contents<span class="colon">:</span></dt>
+<dt class="field-even">type contents<span class="colon">:</span></dt>
 <dd class="field-even"><p>String</p>
 </dd>
 </dl>
@@ -132,7 +132,7 @@ fatal error will be raised.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-asserts-equal.ct_assert_not_equal">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/equal.</span></span><span class="sig-name descname"><span class="pre">ct_assert_not_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_ane_var</span> <span class="pre">_ane_contents</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-equal.ct_assert_not_equal" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/equal.</span></span><span class="sig-name descname"><span class="pre">ct_assert_not_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span> <span class="pre">contents</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-equal.ct_assert_not_equal" title="Permalink to this definition"></a></dt>
 <dd><p>Asserts that an identifier does not contain the specified contents.</p>
 <p>This function is used to assert that a given identifier is set to something
 other than the specified contents. If the identifier is set to the specified
@@ -140,8 +140,8 @@ contents a fatal error will be raised.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>_ane_var</strong> (<em>Identifier</em>) – The identifier whose contents are in question.</p></li>
-<li><p><strong>_ane_contents</strong> (<em>String</em>) – What the identifier should not be set to.</p></li>
+<li><p><strong>var</strong> (<em>Identifier</em>) – The identifier whose contents are in question.</p></li>
+<li><p><strong>contents</strong> (<em>String</em>) – What the identifier should not be set to.</p></li>
 </ul>
 </dd>
 </dl>

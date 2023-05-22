@@ -6,7 +6,7 @@ cmake_test/set_print_length
 .. module:: cmake_test/set_print_length
 
 
-.. function:: ct_set_print_length(_spl_length)
+.. function:: ct_set_print_length(length)
 
 
    .. note:: This is a macro, and so does not introduce a new scope.
@@ -21,7 +21,7 @@ cmake_test/set_print_length
     3. Length set by ct_set_print_length()
     4. Built-in default of 80.
    
-   :param _spl_length: Length for pass/fail print lines.
-   :type _spl_length: int
+   :param length: Length for pass/fail print lines.
+   :type length: int
    
 

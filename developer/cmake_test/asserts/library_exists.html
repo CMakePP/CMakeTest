@@ -107,31 +107,31 @@
 <span id="cmake-test-asserts-library-exists"></span><h1>cmake_test/asserts/library_exists<a class="headerlink" href="#module-cmake_test-asserts-library_exists" title="Permalink to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-asserts-library_exists.ct_assert_library_target_exists">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/library_exists.</span></span><span class="sig-name descname"><span class="pre">ct_assert_library_target_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_ale_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-library_exists.ct_assert_library_target_exists" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/library_exists.</span></span><span class="sig-name descname"><span class="pre">ct_assert_library_target_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-library_exists.ct_assert_library_target_exists" title="Permalink to this definition"></a></dt>
 <dd><p>Asserts that a library exists.</p>
 <p>Asserts that the target exists and is a library.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>_ale_name</strong> – The name of the library</p>
+<dd class="field-odd"><p><strong>name</strong> – The name of the library</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-asserts-library_exists.ct_assert_library_does_not_exist">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/library_exists.</span></span><span class="sig-name descname"><span class="pre">ct_assert_library_does_not_exist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_aldne_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-library_exists.ct_assert_library_does_not_exist" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/library_exists.</span></span><span class="sig-name descname"><span class="pre">ct_assert_library_does_not_exist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-library_exists.ct_assert_library_does_not_exist" title="Permalink to this definition"></a></dt>
 <dd><p>Asserts that a library does not exist.</p>
 <p>Asserts that the target does not exist or is not a library.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>_aldne_name</strong> (<em>string</em>) – The name of the library</p>
+<dd class="field-odd"><p><strong>name</strong> (<em>string</em>) – The name of the library</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-asserts-library_exists.ct_library_target_exists">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/library_exists.</span></span><span class="sig-name descname"><span class="pre">ct_library_target_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_lte_result</span> <span class="pre">_lte_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-library_exists.ct_library_target_exists" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/library_exists.</span></span><span class="sig-name descname"><span class="pre">ct_library_target_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span> <span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-library_exists.ct_library_target_exists" title="Permalink to this definition"></a></dt>
 <dd><p>Determines if a target exists and if it is a library.</p>
 <p>This function checks whether a target exists and then checks whether that
 target is of type <code class="docutils literal notranslate"><span class="pre">STATIC_LIBRARY</span></code>, <code class="docutils literal notranslate"><span class="pre">MODULE_LIBRARY</span></code>, or
@@ -139,12 +139,12 @@ target is of type <code class="docutils literal notranslate"><span class="pre">S
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>_lte_result</strong> (<em>int</em>) – Name to use for the variable which will hold the result.</p></li>
-<li><p><strong>_lte_name</strong> (<em>string</em>) – The target name to check.</p></li>
+<li><p><strong>result</strong> (<em>int</em>) – Name to use for the variable which will hold the result.</p></li>
+<li><p><strong>name</strong> (<em>string</em>) – The target name to check.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">_lte_result</span></code> will be set to <code class="docutils literal notranslate"><span class="pre">0</span></code> if the target is a library,
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">result</span></code> will be set to <code class="docutils literal notranslate"><span class="pre">0</span></code> if the target is a library,
 <code class="docutils literal notranslate"><span class="pre">1</span></code> if the target is not a library, and <code class="docutils literal notranslate"><span class="pre">2</span></code> if target does not
 exist.</p>
 </dd>

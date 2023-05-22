@@ -6,20 +6,20 @@ cmake_test/asserts/file_exists
 .. module:: cmake_test/asserts/file_exists
 
 
-.. function:: ct_assert_file_exists(_afe_path)
+.. function:: ct_assert_file_exists(path)
 
    Assert that the file at the provided path exists.
    
-   :param _afe_path: The path to check
-   :type _afe_path: Path
+   :param path: The path to check
+   :type path: Path
    
 
 
-.. function:: ct_assert_file_does_not_exist(_afdne_path)
+.. function:: ct_assert_file_does_not_exist(path)
 
    Assert that a file does not exist at the provided path.
    
-   :param _afdne_path: The path to check
-   :type _afdne_path: Path
+   :param path: The path to check
+   :type path: Path
    
 

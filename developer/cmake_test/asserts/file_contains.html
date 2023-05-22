@@ -107,15 +107,15 @@
 <span id="cmake-test-asserts-file-contains"></span><h1>cmake_test/asserts/file_contains<a class="headerlink" href="#module-cmake_test-asserts-file_contains" title="Permalink to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-asserts-file_contains.ct_assert_file_contains">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/file_contains.</span></span><span class="sig-name descname"><span class="pre">ct_assert_file_contains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_afc_file</span> <span class="pre">_afc_text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-file_contains.ct_assert_file_contains" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/file_contains.</span></span><span class="sig-name descname"><span class="pre">ct_assert_file_contains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span> <span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-file_contains.ct_assert_file_contains" title="Permalink to this definition"></a></dt>
 <dd><p>Assert a file contains the specified text.</p>
 <p>Asserts that the file at the specified path contains the specified text.
 Will return if the file does not exist, the assertion failure will be logged as a fatal error.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>_afc_file</strong> (<em>path</em>) – The file to check</p></li>
-<li><p><strong>_afc_text</strong> (<em>string</em>) – The text to check for</p></li>
+<li><p><strong>file</strong> (<em>path</em>) – The file to check</p></li>
+<li><p><strong>text</strong> (<em>string</em>) – The text to check for</p></li>
 </ul>
 </dd>
 </dl>
@@ -123,7 +123,7 @@ Will return if the file does not exist, the assertion failure will be logged as 
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-asserts-file_contains.ct_assert_file_does_not_contain">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/file_contains.</span></span><span class="sig-name descname"><span class="pre">ct_assert_file_does_not_contain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_afdnc_file</span> <span class="pre">_afdnc_text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-file_contains.ct_assert_file_does_not_contain" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/file_contains.</span></span><span class="sig-name descname"><span class="pre">ct_assert_file_does_not_contain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span> <span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-file_contains.ct_assert_file_does_not_contain" title="Permalink to this definition"></a></dt>
 <dd><p>Assert a file does not contain the specified text.</p>
 <p>Asserts that the file at the specified path does not contain the specified
 text.</p>
@@ -131,8 +131,8 @@ text.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>_afdnc_file</strong> (<em>path</em>) – The file to check</p></li>
-<li><p><strong>_afdnc_text</strong> (<em>string</em>) – The text to check for</p></li>
+<li><p><strong>file</strong> (<em>path</em>) – The file to check</p></li>
+<li><p><strong>text</strong> (<em>string</em>) – The text to check for</p></li>
 </ul>
 </dd>
 </dl>
@@ -140,7 +140,7 @@ text.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-asserts-file_contains.ct_file_contains">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/file_contains.</span></span><span class="sig-name descname"><span class="pre">ct_file_contains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_fc_result</span> <span class="pre">_fc_file</span> <span class="pre">_fc_text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-file_contains.ct_file_contains" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/file_contains.</span></span><span class="sig-name descname"><span class="pre">ct_file_contains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span> <span class="pre">file</span> <span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-file_contains.ct_file_contains" title="Permalink to this definition"></a></dt>
 <dd><p>Determines if a file contains some text.</p>
 <p>This function checks whether a file contains some text and returns a boolean
 result.</p>
@@ -148,13 +148,13 @@ result.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>_fc_result</strong> (<em>bool</em>) – Name to use for the variable which will hold the result.</p></li>
-<li><p><strong>_fc_file</strong> (<em>string</em>) – The file to check.</p></li>
-<li><p><strong>_fc_text</strong> (<em>string</em>) – The text to check for.</p></li>
+<li><p><strong>result</strong> (<em>bool</em>) – Name to use for the variable which will hold the result.</p></li>
+<li><p><strong>file</strong> (<em>string</em>) – The file to check.</p></li>
+<li><p><strong>text</strong> (<em>string</em>) – The text to check for.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">_fc_result</span></code> will be set to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> if file contains the text
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">result</span></code> will be set to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> if file contains the text
 and <code class="docutils literal notranslate"><span class="pre">FALSE</span></code> if it does not.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>

@@ -107,7 +107,7 @@
 <span id="cmake-test-asserts-list"></span><h1>cmake_test/asserts/list<a class="headerlink" href="#module-cmake_test-asserts-list" title="Permalink to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-asserts-list.ct_assert_list">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/list.</span></span><span class="sig-name descname"><span class="pre">ct_assert_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_al_var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-list.ct_assert_list" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/list.</span></span><span class="sig-name descname"><span class="pre">ct_assert_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-list.ct_assert_list" title="Permalink to this definition"></a></dt>
 <dd><p>Asserts that an identifier contains a list.</p>
 <p>For our purposes a list is defined as a string that contains one or more,
 unescaped semicolons. While a string with no semicolons is usable as if it is
@@ -116,14 +116,14 @@ function will not consider such strings lists. If the identifier is not a list
 an error will be raised.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>_anl_var</strong> (<em>Identifier</em>) – The identifier we want to know the list-ness of.</p>
+<dd class="field-odd"><p><strong>var</strong> (<em>Identifier</em>) – The identifier we want to know the list-ness of.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-asserts-list.ct_assert_not_list">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/list.</span></span><span class="sig-name descname"><span class="pre">ct_assert_not_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_anl_var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-list.ct_assert_not_list" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/list.</span></span><span class="sig-name descname"><span class="pre">ct_assert_not_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-list.ct_assert_not_list" title="Permalink to this definition"></a></dt>
 <dd><p>Asserts that an identifier does not contain a list.</p>
 <p>For our purposes a list is defined as a string that contains one or more,
 unescaped semicolons. While a string with no semicolons is usable as if it is
@@ -132,7 +132,7 @@ function will not consider such strings lists. If the provided string is a
 list this function will raise an error.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>_anl_var</strong> (<em>Identifier</em>) – The identifier we want to know the list-ness of.</p>
+<dd class="field-odd"><p><strong>var</strong> (<em>Identifier</em>) – The identifier we want to know the list-ness of.</p>
 </dd>
 </dl>
 </dd></dl>
