@@ -109,7 +109,7 @@ epub_exclude_files = ['search.html']
 
 # -- Generate documentation -------------------------------------------------
 
-examples_dir = os.path.join(root_path, "tests", "tutorials")
+examples_dir = os.path.join(root_path, "tests/cmake_test", "tutorials")
 tutorial_dir = os.path.join(doc_path,  "source", "tutorials")
 make_tutorials(examples_dir, tutorial_dir)
 
