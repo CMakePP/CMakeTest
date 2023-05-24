@@ -1,3 +1,17 @@
+# Copyright 2023 CMakePP
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 include_guard()
 include(cmake_test/detail_/utilities/return)
 
@@ -7,14 +21,14 @@ include(cmake_test/detail_/utilities/return)
 # specified number of times. This is useful for creating the proper indents
 # for printing and for creating repeated characters like in banners.
 #
-# :param _rs_result: An identifier to save the result to.
-# :type _rs_result: Identifier
-# :param _rs_str: The substring to repeat.
-# :type _rs_str: str
-# :param  _rs_n: The number of times to repeat ``${_rs_str}``.
-# :type _rs_n: str
+# :param result: An identifier to save the result to.
+# :type result: Identifier
+# :param str: The substring to repeat.
+# :type str: str
+# :param n: The number of times to repeat ``${str}``.
+# :type n: str
 # :returns: A string containing the created string. The result is accessible to
-#           the caller via ``_rs_result``.
+#           the caller via ``result``.
 #]]
 function(_ct_repeat_string _rs_result _rs_str _rs_n)
     set(_rs_counter 0)

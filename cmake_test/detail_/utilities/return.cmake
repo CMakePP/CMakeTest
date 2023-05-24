@@ -1,3 +1,17 @@
+# Copyright 2023 CMakePP
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 include_guard()
 
 #[[[ Syntactic sugar for returning a value from a function
@@ -28,8 +42,8 @@ include_guard()
 # While the new code still has the same number of lines, it is our opinion that
 # the new code is easier to read and the intent is more clear.
 #
-# :param _r_var: The identifier which needs to be set in the parent namespace.
-# :type _r_var: Identifier
+# :param var: The identifier which needs to be set in the parent namespace.
+# :type var: Identifier
 #
 # ..note::
 #

@@ -1,3 +1,17 @@
+# Copyright 2023 CMakePP
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 include_guard()
 
 #[[[ Asserts that an identifier contains a string
@@ -7,8 +21,8 @@ include_guard()
 # raise an error if the provided identifier is not a string. Consequentially,
 # this function is more-or-less equivalent to ct_assert_not_list.
 #
-# :param _as_var: The identifier we want the stringy-ness of.
-# :type _as_var: Identifier
+# :param var: The identifier we want the stringy-ness of.
+# :type var: Identifier
 #]]
 function(ct_assert_string _as_var)
     list(LENGTH ${_as_var} _as_length)
@@ -24,8 +38,8 @@ endfunction()
 # raise an error if the provided identifier is a string. Consequentially, this
 # function is more-or-less equivalent to ct_assert_list.
 #
-# :param _ans_var: The identifier we want the stringy-ness of.
-# :type _ans_var: Identifier
+# :param var: The identifier we want the stringy-ness of.
+# :type var: Identifier
 #]]
 function(ct_assert_not_string _ans_var)
     list(LENGTH ${_ans_var} _ans_length)

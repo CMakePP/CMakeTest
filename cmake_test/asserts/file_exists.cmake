@@ -1,9 +1,23 @@
+# Copyright 2023 CMakePP
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 include_guard()
 
 #[[[ Assert that the file at the provided path exists.
 #
-# :param _afe_path: The path to check
-# :type _afe_path: Path
+# :param path: The path to check
+# :type path: Path
 #]]
 function(ct_assert_file_exists _afe_path)
     if(NOT EXISTS "${_afe_path}")
@@ -15,8 +29,8 @@ endfunction()
 
 #[[[ Assert that a file does not exist at the provided path.
 #
-# :param _afdne_path: The path to check
-# :type _afdne_path: Path
+# :param path: The path to check
+# :type path: Path
 #]]
 function(ct_assert_file_does_not_exist _afdne_path)
     if(EXISTS "${_afdne_path}" AND NOT IS_DIRECTORY "${_afdne_path}")
