@@ -16,8 +16,8 @@ include_guard()
 
 #[[[ Assert that the file at the provided path exists.
 #
-# :param _afe_path: The path to check
-# :type _afe_path: Path
+# :param path: The path to check
+# :type path: Path
 #]]
 function(ct_assert_file_exists _afe_path)
     if(NOT EXISTS "${_afe_path}")
@@ -29,8 +29,8 @@ endfunction()
 
 #[[[ Assert that a file does not exist at the provided path.
 #
-# :param _afdne_path: The path to check
-# :type _afdne_path: Path
+# :param path: The path to check
+# :type path: Path
 #]]
 function(ct_assert_file_does_not_exist _afdne_path)
     if(EXISTS "${_afdne_path}" AND NOT IS_DIRECTORY "${_afdne_path}")

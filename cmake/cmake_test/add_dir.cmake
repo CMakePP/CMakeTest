@@ -20,8 +20,8 @@ include_guard()
 # with CTest. The configured templates will be executed seperately via CTest during the Test phase, and each *.cmake
 # file found in the specified directory is assumed to contain CMakeTest tests.
 #
-# :param _ad_dir: The directory to search for *.cmake files. Subdirectories will be recursively searched.
-# :type _ad_dir: path
+# :param dir: The directory to search for *.cmake files. Subdirectories will be recursively searched.
+# :type dir: path
 #
 # **Keyword Arguments**
 #

@@ -29,8 +29,8 @@ include_guard()
 # is executed in a subprocess, resulting in the section and its parents being executed. The subprocess result
 # code is stored, and if the code is reported as succeeding testing is halted since we expect it to fail.
 #
-# :param _es_curr_section_instance: The section execution unit object that will be executed as a subprocess.
-# :type _es_curr_section_instance: CTExecutionUnit
+# :param curr_section_instance: The section execution unit object that will be executed as a subprocess.
+# :type curr_section_instance: CTExecutionUnit
 #]]
 function(ct_expectfail_subprocess _es_curr_section_instance)
 
