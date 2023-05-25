@@ -50,7 +50,7 @@ build_path = os.path.join(doc_path, "build")
 ########################################
 
 cminx_out_dir = os.path.join(src_dir, "developer", "cmake_test")
-cminx_in_dir = os.path.join(root_path, "cmake_test")
+cminx_in_dir = os.path.join(root_path, "cmake", "cmake_test")
 #args = ["-p", "cmake_test", "-r", "-o", cminx_out_dir, cminx_in_dir]
 args = ["-s", "config.yml", "-r", cminx_in_dir]
 cminx.main(args)
@@ -109,7 +109,7 @@ epub_exclude_files = ['search.html']
 
 # -- Generate documentation -------------------------------------------------
 
-examples_dir = os.path.join(root_path, "tests", "tutorials")
+examples_dir = os.path.join(root_path, "tests", "cmake_test", "tutorials")
 tutorial_dir = os.path.join(doc_path,  "source", "tutorials")
 make_tutorials(examples_dir, tutorial_dir)
 
