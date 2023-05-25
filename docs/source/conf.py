@@ -50,7 +50,7 @@ build_path = os.path.join(doc_path, "build")
 ########################################
 
 cminx_out_dir = os.path.join(src_dir, "developer", "cmake_test")
-cminx_in_dir = os.path.join(root_path, "cmake/cmake_test")
+cminx_in_dir = os.path.join(root_path, "cmake", "cmake_test")
 #args = ["-p", "cmake_test", "-r", "-o", cminx_out_dir, cminx_in_dir]
 args = ["-s", "config.yml", "-r", cminx_in_dir]
 cminx.main(args)
