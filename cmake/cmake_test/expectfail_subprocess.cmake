@@ -65,6 +65,8 @@ function(ct_expectfail_subprocess _es_curr_section_instance)
                 #Replace list-delimiters with newlines and parentheses, constructing a function call list
                 string (REGEX REPLACE "(^|[^\\\\]);" "\\1\(\)\n" _es_section_parent_tree "${_es_section_parent_tree}")
 
+                cpp_get_global(ct_debug_mode "CT_DEBUG_MODE")
+
                 #Write subprocess file
                 #Fill in boilerplate, copy to build dir
                 configure_file(

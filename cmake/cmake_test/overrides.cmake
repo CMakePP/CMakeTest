@@ -27,6 +27,10 @@ include_guard()
 # If the first argument is not FATAL_ERROR, this function will behave exactly as the original message().
 #]]
 function(message)
+    # Set debug mode to what it should be for cmaketest, in case the test changed it
+    set(_m_temp_debug_mode "${CMAKEPP_LANG_DEBUG_MODE}")
+    cpp_get_global(_m_ct_debug_mode "CT_DEBUG_MODE")
+    set(CMAKEPP_LANG_DEBUG_MODE "${_m_ct_debug_mode}")
     if(ARGC GREATER 1)
         set(_msg_message_with_level "${ARGV}")
         list(REMOVE_AT _msg_message_with_level 0)
@@ -42,6 +46,7 @@ function(message)
 
             else()
                 cpp_raise(GENERIC_ERROR "${ARGV1}")
+                set(CMAKEPP_LANG_DEBUG_MODE "${_m_temp_debug_mode}")
                 return()
             endif()
         endif()
@@ -55,6 +60,8 @@ function(message)
     else()
         _message(${ARGV})
     endif()
+
+    set(CMAKEPP_LANG_DEBUG_MODE "${_m_temp_debug_mode}")
 endfunction()
 
 
