@@ -18,6 +18,8 @@ set(CMAKE_MODULE_PATH "@CMAKE_MODULE_PATH@" CACHE STRING "" FORCE)
 
 include("cmake_test/cmake_test")
 
+cpp_set_global("CT_DEBUG_MODE" "@ct_debug_mode@")
+
 cpp_set_global("CT_EXEC_EXPECTFAIL" TRUE)
 
 

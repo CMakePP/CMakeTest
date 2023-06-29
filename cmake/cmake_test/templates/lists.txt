@@ -11,6 +11,8 @@ project(@_ad_test_file@ LANGUAGES C) #Needed so dummy libraries don't complain a
 #Enable colors in Unix environments, ignored on Windows. Will not work with pipes
 set(CMAKETEST_USE_COLORS "@CMAKETEST_USE_COLORS@")
 
+set(CMAKEPP_LANG_DEBUG_MODE "@CMAKEPP_LANG_DEBUG_MODE@")
+
 #Propagate CT_PRINT_LENGTH if not already set
 if(NOT CT_PRINT_LENGTH GREATER 0)
     set(CT_PRINT_LENGTH "@CT_PRINT_LENGTH@")

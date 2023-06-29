@@ -51,7 +51,7 @@ function(ct_register_exception_handler)
 
         cpp_append_global(CMAKETEST_FAILED_TESTS "${_ae_curr_exec_instance}")
 
-	CTExecutionUnit(GET "${_ae_curr_exec_instance}" _ae_section_depth section_depth)
+	    CTExecutionUnit(GET "${_ae_curr_exec_instance}" _ae_section_depth section_depth)
 
         _ct_print_fail("${_ae_friendly_name}" "${_ae_section_depth}" "${_ae_print_length}")
 

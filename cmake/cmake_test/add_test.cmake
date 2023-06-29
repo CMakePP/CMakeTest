@@ -50,6 +50,12 @@ include_guard()
 #
 #]]
 macro(ct_add_test)
+    # Set debug mode to what it should be for cmaketest, in case the test changed it
+    set(_at_temp_debug_mode "${CMAKEPP_LANG_DEBUG_MODE}")
+    cpp_get_global(_at_ct_debug_mode "CT_DEBUG_MODE")
+    set(CMAKEPP_LANG_DEBUG_MODE "${_at_ct_debug_mode}")
+    cpp_set_global("CT_CURR_TEST_DEBUG_MODE" "${_at_temp_debug_mode}")
+
     cpp_get_global(_at_exec_unit_instance "CT_CURRENT_EXECUTION_UNIT_INSTANCE")
     cpp_get_global(_at_exec_expectfail "CT_EXEC_EXPECTFAIL") #Unset in main interpreter, TRUE in subprocess
 
@@ -92,6 +98,9 @@ macro(ct_add_test)
 
         message("Test w/ friendly name \"${CT_ADD_TEST_NAME}\" has ID \"${${CT_ADD_TEST_NAME}}\" and file \"${CMAKE_CURRENT_LIST_FILE}\"")
     endif()
+
+    # Reset debug mode in case test changed it
+    set(CMAKEPP_LANG_DEBUG_MODE "${_at_temp_debug_mode}")
 endmacro()
 
 

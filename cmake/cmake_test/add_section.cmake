@@ -62,6 +62,13 @@ include_guard()
 #
 #]]
 function(ct_add_section)
+
+    # Set debug mode to what it should be for cmaketest, in case the test changed it
+    set(_as_temp_debug_mode "${CMAKEPP_LANG_DEBUG_MODE}")
+    cpp_get_global(_as_ct_debug_mode "CT_DEBUG_MODE")
+    set(CMAKEPP_LANG_DEBUG_MODE "${_as_ct_debug_mode}")
+    cpp_set_global("CT_CURR_TEST_DEBUG_MODE" "${_as_temp_debug_mode}")
+
     cpp_get_global(_as_curr_instance "CT_CURRENT_EXECUTION_UNIT_INSTANCE")
     CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_print_length print_length)
     CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_print_length_forced print_length_forced)
@@ -93,6 +100,8 @@ function(ct_add_section)
     if(_as_exec_expectfail)
         if("${${CT_ADD_SECTION_NAME}}" STREQUAL "" OR "${${CT_ADD_SECTION_NAME}}" STREQUAL "_")
             set("${CT_ADD_SECTION_NAME}" "_" PARENT_SCOPE)
+            # Reset debug mode in case test changed it
+            set(CMAKEPP_LANG_DEBUG_MODE "${_as_temp_debug_mode}")
             return() #If section is not part of the call tree, immediately return
         endif()
     endif()
@@ -109,7 +118,7 @@ function(ct_add_section)
     if(_as_exec_section) #Time to execute our section
         CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_children children)
         cpp_map(GET "${_as_parent_children}" _as_curr_section_instance "${_as_curr_section_id}")
-
+        # Debug mode reset in execute()
         CTExecutionUnit(execute "${_as_curr_section_instance}")
     else()
         #First time run, construct and configure
@@ -131,6 +140,8 @@ function(ct_add_section)
         CTExecutionUnit(GET "${_as_curr_instance}" _as_siblings section_names_to_ids)
         cpp_map(SET "${_as_siblings}" "${CT_ADD_SECTION_NAME}" "${${CT_ADD_SECTION_NAME}}")
 
+        # Reset debug mode in case test changed it
+        set(CMAKEPP_LANG_DEBUG_MODE "${_as_temp_debug_mode}")
     endif()
 
 endfunction()

@@ -251,9 +251,15 @@ cpp_class(CTExecutionUnit)
 			ct_expectfail_subprocess("${self}")
 
 		else()
-			
 			CTExecutionUnit(GET "${self}" id test_id)
+			# Defer setting the debug mode to as late as possible
+			# Disable in case test does not want debug mode
+			cpp_get_global(ct_debug_mode "CT_DEBUG_MODE")
+			cpp_get_global(test_debug_mode "CT_CURR_TEST_DEBUG_MODE")
+			set(CMAKEPP_LANG_DEBUG_MODE "${test_debug_mode}")
 			cpp_call_fxn("${id}")
+			# Reset the debug mode back to what it should be in case test modified it
+			set(CMAKEPP_LANG_DEBUG_MODE "${ct_debug_mode}")
 		endif()
 		cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${old_instance}")
 
@@ -273,22 +279,28 @@ cpp_class(CTExecutionUnit)
 	#
 	#]]
 	cpp_member(exec_sections CTExecutionUnit)
-        function("${exec_sections}" self)
-        	CTExecutionUnit(GET "${self}" _es_expect_fail expect_fail)
-        	cpp_get_global(_es_exec_expectfail "CT_EXEC_EXPECTFAIL")
+    function("${exec_sections}" self)
+        CTExecutionUnit(GET "${self}" _es_expect_fail expect_fail)
+        cpp_get_global(_es_exec_expectfail "CT_EXEC_EXPECTFAIL")
         
-        	# Get whether this section has subsections, only run again if subsections detected
+        # Get whether this section has subsections, only run again if subsections detected
 		CTExecutionUnit(GET "${self}" _es_children_map children)
 		cpp_map(KEYS "${_es_children_map}" _es_has_subsections)
 		
 		#If in main interpreter and not expecting to fail OR in subprocess
 		if((NOT _es_has_subsections STREQUAL "") AND ((NOT _es_expect_fail AND NOT _es_exec_expectfail) OR (_es_exec_expectfail)))		
 			cpp_get_global(old_instance "CT_CURRENT_EXECUTION_UNIT_INSTANCE")
-        	        cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${self}")
-        	        CTExecutionUnit(SET "${self}" execute_sections TRUE)
-        	        CTExecutionUnit(GET "${self}" id test_id)
-        	        cpp_call_fxn("${id}")
-	                cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${old_instance}")
+        	cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${self}")
+        	CTExecutionUnit(SET "${self}" execute_sections TRUE)
+        	CTExecutionUnit(GET "${self}" id test_id)
+        	# Defer setting the debug mode to as late as possible
+        	cpp_get_global(_es_ct_debug_mode "CT_DEBUG_MODE")
+        	cpp_get_global(test_debug_mode "CT_CURR_TEST_DEBUG_MODE")
+			set(CMAKEPP_LANG_DEBUG_MODE "${test_debug_mode}")
+        	cpp_call_fxn("${id}")
+        	# Reset the debug mode back to what it should be in case test modified it
+			set(CMAKEPP_LANG_DEBUG_MODE "${_es_ct_debug_mode}")
+	        cpp_set_global("CT_CURRENT_EXECUTION_UNIT_INSTANCE" "${old_instance}")
 
 		endif()
 
