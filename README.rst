@@ -19,8 +19,8 @@ CMakeTest
 .. image:: https://github.com/CMakePP/CMakeTest/workflows/CMakeTest%20Unit%20Tests/badge.svg
    :target: https://github.com/CMakePP/CMakeTest/workflows/CMakeTest%20Unit%20Tests/badge.svg
 
-.. image:: https://github.com/CMakePP/CMakeTest/workflows/deploy_docs.yml/badge.svg?branch=master
-   :target: https://github.com/CMakePP/CMakeTest/workflows/deploy_docs.yml/badge.svg?branch=master
+.. image:: https://github.com/CMakePP/CMakeTest/workflows/Build%20and%20Deploy%20Documentation/badge.svg?branch=master
+   :target: https://github.com/CMakePP/CMakeTest/workflows/Build%20and%20Deploy%20Documentation/badge.svg?branch=master
 
 CMake ships with CTest_ which helps integrate your project's tests into your
 project's build system. CTest is a powerful solution for managing your
