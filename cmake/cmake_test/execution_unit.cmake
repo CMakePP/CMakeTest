@@ -168,7 +168,7 @@ cpp_class(CTExecutionUnit)
     # :param expect_fail: Whether this unit is expected to fail.
     #
     #]]
-    cpp_constructor(CTOR CTExecutionUnit desc desc* bool)
+    cpp_constructor(CTOR CTExecutionUnit desc desc bool)
     function("${CTOR}" self test_id friendly_name expect_fail)
         # Name could be a description or a function because it
         # isn't considered invalid to do so, such as using
