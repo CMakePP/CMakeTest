@@ -12,6 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+#[[[ @module
+# This module defines the function to execute
+# EXPECTFAIL tests and sections. It is called
+# by :obj:`cmake_test/execution_unit.CTExecutionUnit.execute`
+#
+#
+# .. attention::
+#    This module is intended for internal
+#    use only.
+#
+#]]
+
 include_guard()
 
 #[[[
