@@ -17,6 +17,9 @@
 # .. warning::
 #    This module requires :obj:`cmake_test/overrides`, and so will override
 #    the :code:`message()` command upon inclusion.
+#
+# .. attention::
+#    This module is intended for internal use only.
 #]]
 
 include_guard()
