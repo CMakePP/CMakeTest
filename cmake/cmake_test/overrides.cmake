@@ -16,6 +16,9 @@
 #
 # .. warning::
 #    Including this module will override the default :code:`message()` implementation.
+#
+# .. attention::
+#    This module is intended for internal use only
 #]]
 
 include_guard()
