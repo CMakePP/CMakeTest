@@ -41,6 +41,10 @@ The variables that are inserted into the template are as follows:
   that is propagated to the test. This variable is an option initially
   set by the :mod:`cmake_test/colors` module but can be changed at configure
   time by the user.
+- :code:`CMAKEPP_LANG_DEBUG_MODE`: The option for whether CMakePPLang
+  should run in debug mode. This option is treated specially because
+  CMakeTest uses CMakePPLang internally, and enabling debug mode while
+  running tests significantly impacts performance.
 - :code:`CT_PRINT_LENGTH`: The variable for the print length
   of pass/fail lines when not overridden by the test. This variable
   is only set if the user overrides the default of 80 via the
@@ -67,6 +71,10 @@ The variables that are inserted into the template are as follows:
 - :code:`_ct_min_cmake_version`: The minimum version of CMake required
   by CMakeTest. This variable is generally set by CMakeTest's
   ``CMakeLists.txt``.
+- :code:`ct_debug_mode`: Whether CMakeTest itself should be debugged.
+  This variable is stored in a CMakePP global called ``CT_DEBUG_MODE`,
+  and is by default set to the value of ``CMAKEPP_LANG_DEBUG_MODE``
+  upon inclusion of :obj:`cmake_test/cmake_test` at configure time.
 - :code:`CMAKETEST_USE_COLORS`: The option for whether to use colors
   that is propagated to the test. This variable is an option initially
   set by the :mod:`cmake_test/colors` module but can be changed at configure

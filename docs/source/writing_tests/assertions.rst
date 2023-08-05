@@ -23,8 +23,15 @@ assertion commands to assist test makers.
 These assertions function similarly to assertions
 in other test frameworks, where the test calls
 an assertion function that checks its inputs against
-a condtion. If the assertion fails, the test is halted
+a condition. If the assertion fails, the test is halted
 and is labeled as failing.
+
+These assertions are only guaranteed to function inside
+of CMakeTest tests and sections. For more general purpose
+assertions, our sister project
+`CMakePPLang <https://github.com/CMakePP/CMakePPLang>`_ has
+assertions, which can be found
+`here. <https://cmakepp.github.io/CMakePPLang/developer/cmakepp_lang/asserts/index.html>`_
 
 The following assertions are available:
 

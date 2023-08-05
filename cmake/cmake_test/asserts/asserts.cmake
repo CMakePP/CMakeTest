@@ -12,6 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+#[[[ @module
+# This module simply includes all of the various
+# assert modules, so one only has to include
+# this file to have access to all CMakeTest asserts.
+#
+# Assert modules usually (but not always) contain
+# one assertion function and its inverse for convenience.
+#]]
+
 include_guard()
 include(cmake_test/asserts/defined)
 include(cmake_test/asserts/equal)
