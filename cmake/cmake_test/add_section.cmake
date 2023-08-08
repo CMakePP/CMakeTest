@@ -79,6 +79,8 @@ function(ct_add_section)
     cmake_parse_arguments(CT_ADD_SECTION "${_as_options}" "${_as_one_value_args}"
                           "${_as_multi_value_args}" ${ARGN} )
 
+
+
     set(_as_print_length_forced "NO")
 
     #Set default print length to CT_PRINT_LENGTH. Can be overriden with PRINT_LENGTH option to this function or parent execution unit

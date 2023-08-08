@@ -26,6 +26,8 @@
 
 include_guard()
 
+include(cmakepp_lang/asserts/signature)
+
 #[[[
 # Constructs the files needed for a test to be executed in a subprocess and then executes the subprocess.
 #
@@ -45,6 +47,7 @@ include_guard()
 # :type curr_section_instance: CTExecutionUnit
 #]]
 function(ct_expectfail_subprocess _es_curr_section_instance)
+                cpp_assert_signature("${ARGV}" CTExecutionUnit)
 
                 CTExecutionUnit(GET "${_es_curr_section_instance}" _es_print_length print_length)
                 CTExecutionUnit(get_parent_list "${_es_curr_section_instance}" _es_section_parent_tree)

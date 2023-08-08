@@ -168,7 +168,7 @@ cpp_class(CTExecutionUnit)
     # :param expect_fail: Whether this unit is expected to fail.
     #
     #]]
-    cpp_constructor(CTOR CTExecutionUnit desc desc bool)
+    cpp_constructor(CTOR CTExecutionUnit desc desc* bool)
     function("${CTOR}" self test_id friendly_name expect_fail)
         # Name could be a description or a function because it
         # isn't considered invalid to do so, such as using
@@ -198,9 +198,12 @@ cpp_class(CTExecutionUnit)
     # :param child: Reference to the new subsection.
     # :type child: CTExecutionUnit
     #]]
-    cpp_member(append_child CTExecutionUnit str CTExecutionUnit)
+    cpp_member(append_child CTExecutionUnit fxn* CTExecutionUnit)
     function("${append_child}" self key child)
-            #key could be desc or fxn
+            # key could be desc or fxn* depending on whether
+            # the function has been defined yet, but since
+            # desc is convertible to any pointer type we don't
+            # worry about it
             cpp_get_global(_as_curr_instance "CT_CURRENT_EXECUTION_UNIT_INSTANCE")
             CTExecutionUnit(GET "${_as_curr_instance}" parent_name test_id)
             CTExecutionUnit(GET "${self}" test_id test_id)
@@ -217,7 +220,7 @@ cpp_class(CTExecutionUnit)
     # :param ret: A return variable that will be set to the
     #             constructed list.
     #]]
-    cpp_member(get_parent_list CTExecutionUnit desc)
+    cpp_member(get_parent_list CTExecutionUnit list*)
     function("${get_parent_list}" self ret)
 
         CTExecutionUnit(GET "${self}" next_parent parent)
@@ -235,7 +238,7 @@ cpp_class(CTExecutionUnit)
     # Get a human-readable representation of this
     # unit.
     #]]
-    cpp_member(to_string CTExecutionUnit desc)
+    cpp_member(to_string CTExecutionUnit desc*)
     function("${to_string}" self ret)
         CTExecutionUnit(GET "${self}" name friendly_name)
         CTExecutionUnit(GET "${self}" id test_id)
