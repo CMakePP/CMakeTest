@@ -32,7 +32,11 @@ include_guard()
 #]]
 function(ct_add_dir _ad_dir)
     set(_ad_multi_value_args "CMAKE_OPTIONS")
-    cmake_parse_arguments(PARSE_ARGV 1 ADD_DIR "" "" "${_ad_multi_value_args}")
+    set(_ad_options CT_DEBUG_MODE_ON)
+    cmake_parse_arguments(PARSE_ARGV 1 ADD_DIR "${_ad_options}" "" "${_ad_multi_value_args}")
+
+    # This variable will be picked up by the template
+    set(ct_debug_mode "${ADD_DIR_CT_DEBUG_MODE_ON}")
 
     get_filename_component(_ad_abs_test_dir "${_ad_dir}" REALPATH)
     file(GLOB_RECURSE _ad_files LIST_DIRECTORIES FALSE FOLLOW_SYMLINKS "${_ad_abs_test_dir}/*.cmake") #Recurse over target dir to find all cmake files
