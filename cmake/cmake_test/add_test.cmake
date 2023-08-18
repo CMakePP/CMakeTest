@@ -72,35 +72,42 @@ macro(ct_add_test)
     cmake_parse_arguments(CT_ADD_TEST "${_at_options}" "${_at_one_value_args}"
                           "${_at_multi_value_args}" ${ARGN} )
 
+    if(_at_exec_expectfail AND ("${${CT_ADD_TEST_NAME}}" STREQUAL "" OR "${${CT_ADD_TEST_NAME}}" STREQUAL "_"))
+            set("${CT_ADD_TEST_NAME}" "_")
+            # Reset debug mode in case test changed it
+            set(CMAKEPP_LANG_DEBUG_MODE "${_at_temp_debug_mode}")
+    else()
 
-    set(_at_print_length_forced "NO")
+        set(_at_print_length_forced "NO")
 
-    #Default to ${CT_PRINT_LENGTH}, if PRINT_LENGTH option set to valid number then override
-    set(_at_print_length "${CT_PRINT_LENGTH}")
-    if(CT_ADD_TEST_PRINT_LENGTH GREATER 0)
-        set(_at_print_length_forced "YES")
-        set(_at_print_length "${CT_ADD_TEST_PRINT_LENGTH}")
+        #Default to ${CT_PRINT_LENGTH}, if PRINT_LENGTH option set to valid number then override
+        set(_at_print_length "${CT_PRINT_LENGTH}")
+        if(CT_ADD_TEST_PRINT_LENGTH GREATER 0)
+            set(_at_print_length_forced "YES")
+            set(_at_print_length "${CT_ADD_TEST_PRINT_LENGTH}")
+        endif()
+
+        set(_at_old_id "${${CT_ADD_TEST_NAME}}")
+
+        if(_at_old_id STREQUAL "")
+            cpp_unique_id("${CT_ADD_TEST_NAME}")
+        endif()
+
+        if(_at_exec_expectfail OR ("${_at_old_id}" STREQUAL ""))
+            CTExecutionUnit(CTOR test_instance "${${CT_ADD_TEST_NAME}}" "${CT_ADD_TEST_NAME}" "${CT_ADD_TEST_EXPECTFAIL}")
+            CTExecutionUnit(SET "${test_instance}" print_length "${_at_print_length}")
+            CTExecutionUnit(SET "${test_instance}" print_length_forced "${_at_print_length_forced}")
+            CTExecutionUnit(SET "${test_instance}" test_file "${CMAKE_CURRENT_LIST_FILE}")
+            CTExecutionUnit(SET "${test_instance}" debug_mode "${_at_temp_debug_mode}")
+
+            cpp_append_global("CMAKETEST_TEST_INSTANCES" "${test_instance}")
+
+            message("Test w/ friendly name \"${CT_ADD_TEST_NAME}\" has ID \"${${CT_ADD_TEST_NAME}}\" and file \"${CMAKE_CURRENT_LIST_FILE}\"")
+        endif()
+
+        # Reset debug mode in case test changed it
+        set(CMAKEPP_LANG_DEBUG_MODE "${_at_temp_debug_mode}")
     endif()
-
-    set(_at_old_id "${${CT_ADD_TEST_NAME}}")
-
-    if(_at_old_id STREQUAL "")
-        cpp_unique_id("${CT_ADD_TEST_NAME}")
-    endif()
-
-    if(NOT (_at_exec_expectfail AND ("${_at_old_id}" STREQUAL "")))
-        CTExecutionUnit(CTOR test_instance "${${CT_ADD_TEST_NAME}}" "${CT_ADD_TEST_NAME}" "${CT_ADD_TEST_EXPECTFAIL}")
-        CTExecutionUnit(SET "${test_instance}" print_length "${_at_print_length}")
-        CTExecutionUnit(SET "${test_instance}" print_length_forced "${_at_print_length_forced}")
-        CTExecutionUnit(SET "${test_instance}" test_file "${CMAKE_CURRENT_LIST_FILE}")
-
-        cpp_append_global("CMAKETEST_TEST_INSTANCES" "${test_instance}")
-
-        message("Test w/ friendly name \"${CT_ADD_TEST_NAME}\" has ID \"${${CT_ADD_TEST_NAME}}\" and file \"${CMAKE_CURRENT_LIST_FILE}\"")
-    endif()
-
-    # Reset debug mode in case test changed it
-    set(CMAKEPP_LANG_DEBUG_MODE "${_at_temp_debug_mode}")
 endmacro()
 
 
