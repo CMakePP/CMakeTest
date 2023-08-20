@@ -29,6 +29,8 @@ ct_register_exception_handler()
 #Set test and section ID definitions
 @_es_section_id_defines@
 
+set(CMAKEPP_LANG_DEBUG_MODE "@CMAKEPP_LANG_DEBUG_MODE@")
+
 #Include root file
 include("@_es_section_file@")
 
