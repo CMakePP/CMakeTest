@@ -13,19 +13,23 @@
 # limitations under the License.
 
 include_guard()
+include("cmakepp_lang/asserts/signature")
 
-#[[[ Asserts that an identifier contains the specified contents.
+#[[[
+# Asserts that an identifier contains the specified contents.
 #
-#  This function is used to assert that a given identifier is set to the
-#  specific contents. If the identifier is not set to the specified contents a
-#  fatal error will be raised.
+# This function is used to assert that a given pointer is set to the
+# specified contents. If the pointer does not dereference to the specified
+# contents, an :code:`ASSERTION_FAILED` exception is raised.
 #
-#  :param var: The identifier whose contents are in question.
-#  :type var: Identifier
-#  :param contents: What the identifier should be set to.
-#  :type contents: String
+# :param var: The identifier whose contents are in question.
+# :type var: str*
+# :param contents: What the pointer should dereference to
+# :type contents: str
 #]]
 function(ct_assert_equal _ae_var _ae_contents)
+    # Can't assert signature since could be used for lists and that
+    # breaks cpp_assert_signature
     if(NOT "${${_ae_var}}" STREQUAL "${_ae_contents}")
         cpp_raise(
             ASSERTION_FAILED
@@ -35,18 +39,21 @@ function(ct_assert_equal _ae_var _ae_contents)
     endif()
 endfunction()
 
-#[[[ Asserts that an identifier does not contain the specified contents.
+#[[[
+# Asserts that an identifier does not contain the specified contents.
 #
 # This function is used to assert that a given identifier is set to something
-# other than the specified contents. If the identifier is set to the specified
-# contents a fatal error will be raised.
+# other than the specified contents. If the pointer does dereference to the specified
+# contents, then an :code:`ASSERTION_FAILED` exception will be raised.
 #
 # :param var: The identifier whose contents are in question.
-# :type var: Identifier
-# :param contents: What the identifier should not be set to.
-# :type contents: String
+# :type var: str*
+# :param contents: What the pointer should not dereference to
+# :type contents: str
 #]]
 function(ct_assert_not_equal _ane_var _ane_contents)
+    # Can't assert signature since could be used for lists and that
+    # breaks cpp_assert_signature
     if("${${_ane_var}}" STREQUAL "${_ane_contents}")
         cpp_raise(
            ASSERTION_FAILED
