@@ -14,7 +14,9 @@
 
 #[[[ @module
 # .. warning::
-#    This module is only used when building CMakeTest.
+#    This module is only used when building CMakeTest,
+#    and including it automatically pulls in CMaize through
+#    FetchContent.
 #]]
 
 include_guard()

@@ -49,11 +49,15 @@ include_guard()
 #
 # **Keyword Arguments**
 #
-# :keyword NAME: Required argument specifying the name variable of the section. Will set a variable with specified name containing the generated function ID to use.
+# :keyword NAME: Required argument specifying the name variable of the section. Will set a variable with
+#                specified name containing the generated function ID to use.
 # :type NAME: pointer
-# :keyword EXPECTFAIL: Option indicating whether the section is expected to fail or not, if specified will cause test failure when no exceptions were caught and success upon catching any exceptions.
+# :keyword EXPECTFAIL: Option indicating whether the section is expected to fail or not, if
+#                      specified will cause test failure when no exceptions were caught and success
+#                      upon catching any exceptions.
 # :type EXPECTFAIL: option
-# :keyword PRINT_LENGTH: Optional argument specifying the desired print length of pass/fail output lines.
+# :keyword PRINT_LENGTH: Optional argument specifying the desired
+#                        print length of pass/fail output lines.
 # :type PRINT_LENGTH: int
 #
 # .. seealso:: :func:`add_test.cmake.ct_add_test` for details on EXPECTFAIL.
@@ -83,7 +87,8 @@ function(ct_add_section)
 
     set(_as_print_length_forced "NO")
 
-    #Set default print length to CT_PRINT_LENGTH. Can be overriden with PRINT_LENGTH option to this function or parent execution unit
+    # Set default print length to CT_PRINT_LENGTH. Can be overriden
+    # with PRINT_LENGTH option to this function or parent execution unit
     set(_as_print_length "${CT_PRINT_LENGTH}")
     if(CT_ADD_SECTION_PRINT_LENGTH GREATER 0)
         set(_as_print_length_forced "YES")
@@ -148,7 +153,13 @@ function(ct_add_section)
 
             math(EXPR _as_new_section_depth "${_as_parent_section_depth} + 1")
 
-            CTExecutionUnit(CTOR _as_new_section "${${CT_ADD_SECTION_NAME}}" "${CT_ADD_SECTION_NAME}" "${CT_ADD_SECTION_EXPECTFAIL}")
+            CTExecutionUnit(
+                CTOR
+                _as_new_section
+                "${${CT_ADD_SECTION_NAME}}"
+                "${CT_ADD_SECTION_NAME}"
+                "${CT_ADD_SECTION_EXPECTFAIL}"
+            )
             CTExecutionUnit(SET "${_as_new_section}" parent "${_as_curr_instance}")
             CTExecutionUnit(SET "${_as_new_section}" print_length_forced "${_as_print_length_forced}")
             CTExecutionUnit(SET "${_as_new_section}" print_length "${_as_print_length}")

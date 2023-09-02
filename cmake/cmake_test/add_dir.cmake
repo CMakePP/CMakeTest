@@ -15,7 +15,7 @@
 include_guard()
 
 #[[[
-# This function will find all *.cmake files in the specified directory as well as recursively through all subdirectories.
+# This function will find all :code:`*.cmake` files in the specified directory as well as recursively through all subdirectories.
 # It will then configure the boilerplate template to include() each cmake file and register each configured boilerplate
 # with CTest. The configured templates will be executed seperately via CTest during the Test phase, and each *.cmake
 # file found in the specified directory is assumed to contain CMakeTest tests.
@@ -25,7 +25,9 @@ include_guard()
 #
 # **Keyword Arguments**
 #
-# :keyword CMAKE_OPTIONS: List of additional CMake options to be passed to all test invocations. Options should follow the syntax: :code:`-D<variable_name>=<value>`
+# :keyword CMAKE_OPTIONS: List of additional CMake options to be
+#                         passed to all test invocations. Options
+#                         should follow the syntax: :code:`-D<variable_name>=<value>`
 # :type CMAKE_OPTIONS: list
 #
 #

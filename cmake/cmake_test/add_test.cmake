@@ -41,9 +41,12 @@ include_guard()
 #
 # **Keyword Arguments**
 #
-# :keyword NAME: Required argument specifying the name variable of the section. Will set a variable with specified name containing the generated function ID to use.
+# :keyword NAME: Required argument specifying the name variable of the section.
+#                Will set a variable with specified name containing the generated function ID to use.
 # :type NAME: pointer
-# :keyword EXPECTFAIL: Option indicating whether the section is expected to fail or not, if specified will cause test failure when no exceptions were caught and success upon catching any exceptions.
+# :keyword EXPECTFAIL: Option indicating whether the section is expected to fail or not,
+#                      if specified will cause test failure when no exceptions were caught and
+#                      success upon catching any exceptions.
 # :type EXPECTFAIL: option
 # :keyword PRINT_LENGTH: Optional argument specifying the desired print length of pass/fail output lines.
 # :type PRINT_LENGTH: int
@@ -61,7 +64,9 @@ macro(ct_add_test)
 
     if(NOT ("${_at_exec_unit_instance}" STREQUAL "") AND NOT _at_exec_expectfail)
         CTExecutionUnit(GET "${_at_exec_unit_instance}" _at_exec_unit_friendly_name friendly_name)
-        ct_exit("ct_add_test() encountered while executing a CMakeTest test or section named \"${_at_exec_unit_friendly_name}\"")
+        ct_exit(
+            "ct_add_test() encountered while executing a CMakeTest test or section named \"${_at_exec_unit_friendly_name}\""
+        )
     endif()
 
 
@@ -94,7 +99,13 @@ macro(ct_add_test)
         endif()
 
         if(_at_exec_expectfail OR ("${_at_old_id}" STREQUAL ""))
-            CTExecutionUnit(CTOR test_instance "${${CT_ADD_TEST_NAME}}" "${CT_ADD_TEST_NAME}" "${CT_ADD_TEST_EXPECTFAIL}")
+            CTExecutionUnit(
+                CTOR
+                test_instance
+                "${${CT_ADD_TEST_NAME}}"
+                "${CT_ADD_TEST_NAME}"
+                "${CT_ADD_TEST_EXPECTFAIL}"
+            )
             CTExecutionUnit(SET "${test_instance}" print_length "${_at_print_length}")
             CTExecutionUnit(SET "${test_instance}" print_length_forced "${_at_print_length_forced}")
             CTExecutionUnit(SET "${test_instance}" test_file "${CMAKE_CURRENT_LIST_FILE}")
@@ -102,7 +113,9 @@ macro(ct_add_test)
 
             cpp_append_global("CMAKETEST_TEST_INSTANCES" "${test_instance}")
 
-            message("Test w/ friendly name \"${CT_ADD_TEST_NAME}\" has ID \"${${CT_ADD_TEST_NAME}}\" and file \"${CMAKE_CURRENT_LIST_FILE}\"")
+            message(
+                "Test w/ friendly name \"${CT_ADD_TEST_NAME}\" has ID \"${${CT_ADD_TEST_NAME}}\" and file \"${CMAKE_CURRENT_LIST_FILE}\""
+            )
         endif()
 
         # Reset debug mode in case test changed it

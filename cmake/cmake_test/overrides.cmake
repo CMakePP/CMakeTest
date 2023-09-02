@@ -69,7 +69,8 @@ endfunction()
 
 
 #[[[
-# This function will cause the CMake interpreter to stop processing immediately and it will throw a stack trace. There is unfortunately no way to silence the stacktrace.
+# This function will cause the CMake interpreter to stop processing immediately and it will throw a stack trace.
+# There is unfortunately no way to silence the stacktrace.
 # Details of why the interpreter was exited may be entered as the first argument to this function.
 #
 # :param ARGV0: The first argument is optional. If specified, ARGV0 is used for the details of the exit message.

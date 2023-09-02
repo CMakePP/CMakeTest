@@ -34,7 +34,11 @@ include_guard()
 # file are not defined, so will resolve to
 # the empty string.
 #]]
-option(CMAKETEST_USE_COLORS "This option enables coloration in CMakeTest output. If enabled will mangle log files or pipes that do not support coloration. This option is ignored on Windows." "FALSE")
+option(
+    CMAKETEST_USE_COLORS
+    "This option enables coloration in CMakeTest output. If enabled will mangle log files or pipes that do not support coloration. This option is ignored on Windows."
+    "FALSE"
+)
 
 if(NOT WIN32 AND CMAKETEST_USE_COLORS)
   #[[[
