@@ -22,7 +22,7 @@ include("cmakepp_lang/asserts/signature")
 # if not then an :code:`ASSERTION_FAILED` exception is raised.
 #
 # :param name: The name of the library
-# :type name: target or desc
+# :type name: target
 #]]
 function(ct_assert_library_target_exists _ale_name)
     # Check that the target exists and it is a library
@@ -53,7 +53,7 @@ endfunction()
 # otherwise an :code:`ASSERTION_FAILED` exception is raised.
 #
 # :param name: The name of the library
-# :type name: target or desc
+# :type name: target
 #]]
 function(ct_assert_library_does_not_exist _aldne_name)
     # Check that the target does not exist or is not a library

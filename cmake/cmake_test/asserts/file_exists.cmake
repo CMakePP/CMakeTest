@@ -35,7 +35,7 @@ endfunction()
 
 #[[[
 # Assert that a file does not exist at the provided path.
-# If the path exists, even if it's a directory, an
+# If the path exists and is not a directory, an
 # :code:`ASSERTION_FAILED` exception is raised.
 #
 # :param path: The path to check

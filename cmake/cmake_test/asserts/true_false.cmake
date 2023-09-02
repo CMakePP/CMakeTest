@@ -14,24 +14,34 @@
 
 include_guard()
 
-#[[[ Asserts that the provided variable is true.
+#[[[
+# Asserts that the provided variable is true.
 #
-# :param var: The identifier to check for trueness.
-# :type var: Identifier
+# :param var: The boolean to check for truthiness.
+# :type var: bool*
 #]]
 function(ct_assert_true _at_var)
-    if(NOT ${_at_var})
-        message(FATAL_ERROR "${_at_var} is not true.")
+    cpp_assert_signature("${ARGV}" bool*)
+    if(NOT "${_at_var}")
+        cpp_raise(
+            ASSERTION_FAILED
+            "${_at_var} is not true."
+        )
     endif()
 endfunction()
 
-#[[[ Asserts that the provided variable is false.
+#[[[
+# Asserts that the provided variable is false.
 #
-# :param var: The identifier to check for falseness.
-# :type var: Identifier
+# :param var: The boolean variable to check for falseness.
+# :type var: bool*
 #]]
 function(ct_assert_false _af_var)
+    cpp_assert_signature("${ARGV}" bool*)
     if(${_af_var})
-        message(FATAL_ERROR "${_af_var} is not false.")
+        cpp_raise(
+            ASSERTION_FAILED
+            "${_af_var} is not false."
+        )
     endif()
 endfunction()

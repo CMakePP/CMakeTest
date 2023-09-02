@@ -17,8 +17,13 @@
 # assert modules, so one only has to include
 # this file to have access to all CMakeTest asserts.
 #
-# Assert modules usually (but not always) contain
-# one assertion function and its inverse for convenience.
+# Most (but not all) assertions come in two flavors:
+# an affirmative assert and a negative assert. For example:
+#
+# ```
+# ct_assert_defined(AN_IDENTIFIER)       # Fails if AN_IDENTIFIER is not defined
+# ct_assert_not_defined(AN_IDENTIFIER)   # Fails if AN_IDENTIFIER is defined
+# ```
 #]]
 
 include_guard()

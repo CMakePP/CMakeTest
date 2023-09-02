@@ -14,7 +14,8 @@
 
 include_guard()
 
-#[[[ Asserts that an identifier contains a list.
+#[[[
+# Asserts that an identifier contains a list.
 #
 # For our purposes a list is defined as a string that contains one or more,
 # unescaped semicolons. While a string with no semicolons is usable as if it is
@@ -23,16 +24,20 @@ include_guard()
 # an error will be raised.
 #
 # :param var: The identifier we want to know the list-ness of.
-# :type var: Identifier
+# :type var: list*
 #]]
 function(ct_assert_list _al_var)
     list(LENGTH ${_al_var} _al_length)
     if("${_al_length}" LESS 2)
-        cpp_raise(ASSERTION_FAILED "${_al_var} is not a list. Contents: ${${_al_var}}")
+        cpp_raise(
+            ASSERTION_FAILED
+            "${_al_var} is not a list. Contents: ${${_al_var}}"
+        )
     endif()
 endfunction()
 
-#[[[ Asserts that an identifier does not contain a list.
+#[[[
+# Asserts that an identifier does not contain a list.
 #
 # For our purposes a list is defined as a string that contains one or more,
 # unescaped semicolons. While a string with no semicolons is usable as if it is
@@ -41,7 +46,7 @@ endfunction()
 # list this function will raise an error.
 #
 # :param var: The identifier we want to know the list-ness of.
-# :type var: Identifier
+# :type var: list*
 #]]
 function(ct_assert_not_list _anl_var)
     list(LENGTH ${_anl_var} _anl_length)

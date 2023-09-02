@@ -14,7 +14,8 @@
 
 include_guard()
 
-#[[[ Asserts that a specified message was printed.
+#[[[
+# Asserts that a specified message was printed.
 #
 # This function is used to assert that a string was printed immediately
 # prior to this function call. This function only compares the expected
@@ -25,7 +26,7 @@ include_guard()
 # this function will treat the expected message as a regex to check if it matches.
 #
 # :param msg: The message expected to have been printed, either exact match or regex.
-# :type msg: String
+# :type msg: str
 #]]
 function(ct_assert_prints _ap_msg)
     cpp_get_global(_ap_last_msg CT_LAST_MESSAGE)

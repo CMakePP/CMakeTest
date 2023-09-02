@@ -27,12 +27,16 @@ include("cmakepp_lang/asserts/signature")
 #]]
 function(ct_assert_defined _ad_var)
     cpp_assert_signature("${ARGV}" str*)
-    if(NOT DEFINED ${_ad_var})
-        cpp_raise(ASSERTION_FAILED "${_ad_var} is not defined.")
+    if(NOT DEFINED "${_ad_var}")
+        cpp_raise(
+            ASSERTION_FAILED
+            "${_ad_var} is not defined."
+        )
     endif()
 endfunction()
 
-#[[[ Asserts that the provided variable is not defined.
+#[[[
+# Asserts that the provided variable is not defined.
 #
 # This function can be used to assert that a variable is not defined. If the
 # variable is actually defined this function will raise an error.
@@ -42,7 +46,10 @@ endfunction()
 #]]
 function(ct_assert_not_defined _and_var)
     cpp_assert_signature("${ARGV}" str*)
-    if(DEFINED ${_and_var})
-        cpp_raise(ASSERTION_FAILED "${_and_var} is defined.")
+    if(DEFINED "${_and_var}")
+        cpp_raise(
+            ASSERTION_FAILED
+            "${_and_var} is defined."
+        )
     endif()
 endfunction()
