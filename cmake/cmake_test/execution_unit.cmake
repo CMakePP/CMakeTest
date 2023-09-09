@@ -28,6 +28,7 @@
 include_guard()
 
 include(cmakepp_lang/cmakepp_lang)
+include(cmake_test/detail_/utilities/print_result)
 
 #[[[
 #

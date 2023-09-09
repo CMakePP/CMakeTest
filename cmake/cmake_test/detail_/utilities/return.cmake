@@ -14,7 +14,8 @@
 
 include_guard()
 
-#[[[ Syntactic sugar for returning a value from a function
+#[[[
+# Syntactic sugar for returning a value from a function
 #
 # CMake allows you to return variables by adding them to the parent namespace.
 # The best way to do this is to have the callee provide the function with an
@@ -51,6 +52,10 @@ include_guard()
 #   is used the identifier will be set in the scope of the function that
 #   called ``_ct_return`` and NOT in the scope of the function that called the
 #   callee of ``_ct_return``.
+#
+# :param var: A pointer to the return value, with the name of the pointer
+#             being used as the name of the resultant parent scope variable
+# :type var: str*
 #]]
 macro(_ct_return _r_var)
     set(${_r_var} "${${_r_var}}" PARENT_SCOPE)
