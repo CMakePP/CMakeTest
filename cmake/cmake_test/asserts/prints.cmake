@@ -26,9 +26,11 @@ include_guard()
 # this function will treat the expected message as a regex to check if it matches.
 #
 # :param msg: The message expected to have been printed, either exact match or regex.
-# :type msg: str
+# :type msg: desc
 #]]
 function(ct_assert_prints _ap_msg)
+    cpp_assert_signature("${ARGV}" desc)
+
     cpp_get_global(_ap_last_msg CT_LAST_MESSAGE)
     if(NOT ("${_ap_last_msg}" STREQUAL "${_ap_msg}"))
         #Have to have MATCHES in separate if()

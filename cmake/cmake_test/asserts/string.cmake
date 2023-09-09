@@ -32,6 +32,8 @@ include_guard()
 # :type var: desc*
 #]]
 function(ct_assert_string _as_var)
+    # Can't use cpp_assert_signature because of lists
+
     list(LENGTH ${_as_var} _as_length)
     if("${_as_length}" GREATER 1)
         cpp_raise(ASSERTION_FAILED "${_as_var} is list: ${${_as_var}}")
@@ -50,6 +52,8 @@ endfunction()
 # :type var: desc*
 #]]
 function(ct_assert_not_string _ans_var)
+    # Can't use cpp_assert_signature because of lists
+
     list(LENGTH ${_ans_var} _ans_length)
     if("${_ans_length}" LESS 2)
         cpp_raise(ASSERTION_FAILED "${_ans_var} is string: ${${_ans_var}}")
