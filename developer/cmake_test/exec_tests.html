@@ -11,9 +11,11 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=d4e7da7a"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -101,16 +103,17 @@
            <div itemprop="articleBody">
              
   <section id="module-cmake_test-exec_tests">
-<span id="cmake-test-exec-tests"></span><h1>cmake_test/exec_tests<a class="headerlink" href="#module-cmake_test-exec_tests" title="Permalink to this heading"></a></h1>
+<span id="cmake-test-exec-tests"></span><h1>cmake_test/exec_tests<a class="headerlink" href="#module-cmake_test-exec_tests" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-exec_tests.ct_exec_tests">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/exec_tests.</span></span><span class="sig-name descname"><span class="pre">ct_exec_tests</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-exec_tests.ct_exec_tests" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/exec_tests.</span></span><span class="sig-name descname"><span class="pre">ct_exec_tests</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-exec_tests.ct_exec_tests" title="Link to this definition"></a></dt>
 <dd><p>Execute all declared tests in a file. This function will be ran after <code class="docutils literal notranslate"><span class="pre">include()</span></code>-ing the test file.
 This function will loop over all the CTExecutionUnit instances stored in the CMAKETEST_TEST_INSTANCES
 global, executing each one. All exceptions are tracked while the test is ran, including during
 subsection execution.</p>
-<p>Pass/fail output will be printed to the screen after each test or section has been executed, results are not aggregated at the end
-to prevent a faulty test from causing the interpeter to fail before results are printed.</p>
+<p>Pass/fail output will be printed to the screen after each test or section has been executed,
+results are not aggregated at the end to prevent a faulty test from causing the interpeter
+to fail before results are printed.</p>
 <p>A test that is not expected to fail that raises an exception or a fatal error will result in it
 be marked as failing and no subsections will be executed. However, sibling tests will continue
 to be executed. All of the failures are aggregated and printed after all tests have executed.</p>

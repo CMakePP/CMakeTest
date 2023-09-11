@@ -11,9 +11,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d4e7da7a"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
@@ -77,7 +79,42 @@
            <div itemprop="articleBody">
              
   <section id="cmaketest">
-<h1>CMakeTest<a class="headerlink" href="#cmaketest" title="Permalink to this heading"></a></h1>
+<h1>CMakeTest<a class="headerlink" href="#cmaketest" title="Link to this heading"></a></h1>
+<a class="reference external image-reference" href="https://github.com/CMakePP/CMakeTest/workflows/CMakeTest%20Unit%20Tests/badge.svg"><img alt="https://github.com/CMakePP/CMakeTest/workflows/CMakeTest%20Unit%20Tests/badge.svg" src="https://github.com/CMakePP/CMakeTest/workflows/CMakeTest%20Unit%20Tests/badge.svg" /></a>
+<a class="reference external image-reference" href="https://github.com/CMakePP/CMakeTest/workflows/Build%20and%20Deploy%20Documentation/badge.svg"><img alt="https://github.com/CMakePP/CMakeTest/workflows/Build%20and%20Deploy%20Documentation/badge.svg" src="https://github.com/CMakePP/CMakeTest/workflows/Build%20and%20Deploy%20Documentation/badge.svg" /></a>
+<p>Unit tests are at the core of modern software development. As projects grow
+in size and scope, so do their needs for extensive testing. The same can be
+said for their build systems: as projects grow, their build processes become more
+complex, and as such, those processes become more prone to bugs and failures.
+Therefore, we believe that build system languages like CMake should have
+a robust testing framework, just like most application programming
+languages. CMakeTest is an implementation of such a framework
+for the CMake build system language.</p>
+<p>CMakeTest is modeled after the Catch2 testing framework for C++. CMakeTest is a
+CMake module, written 100% in CMake. Tests are executed by the <a class="reference external" href="https://cmake.org/cmake/help/latest/manual/ctest.1.html">CTest</a>
+infrastructure, minimizing friction for those already familiar with it.</p>
+<p>Unit testing with CMakeTest relies on the
+use of <code class="docutils literal notranslate"><span class="pre">ct_add_test</span></code> and <code class="docutils literal notranslate"><span class="pre">ct_add_section</span></code> special declarations, followed by
+<code class="docutils literal notranslate"><span class="pre">function</span></code> blocks. Within these blocks users write their unit tests in native
+CMake; no need for ugly escapes or workarounds. The user then relies on
+assertions provided by CMakeTest to ensure that the program has the expected
+state. For example we can ensure that a CMake code sets a particular variable
+using <code class="docutils literal notranslate"><span class="pre">ct_assert_equal</span></code>. This looks like:</p>
+<div class="highlight-.cmake notranslate"><div class="highlight"><pre><span></span>include(cmake_test/cmake_test)
+ct_add_test(NAME &quot;_first_test&quot;)
+function(${_first_test})
+    set(hello_world &quot;Hello World!!!&quot;)
+    ct_assert_equal(hello_world &quot;Hello World!!!&quot;)
+endfunction()
+</pre></div>
+</div>
+<p>More <a class="reference external" href="https://cmakepp.github.io/CMakeTest/writing_tests/index.html">examples</a> and <a class="reference external" href="https://cmakepp.github.io/CMakeTest/tutorials/index.html">tutorials</a> can be found in the documentation.</p>
+<p>New users are recommended to start by
+visiting <a class="reference internal" href="installation.html#ct-installation"><span class="std std-ref">Installation</span></a>, and then
+reading the <a class="reference internal" href="tutorials/index.html#ct-tutorials"><span class="std std-ref">Tutorials</span></a>. Once
+one has read the tutorials,</p>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About CMakeTest</a><ul>
@@ -105,6 +142,7 @@
 </li>
 </ul>
 </div>
+</section>
 </section>
 
 

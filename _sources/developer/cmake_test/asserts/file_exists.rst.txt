@@ -9,17 +9,21 @@ cmake_test/asserts/file_exists
 .. function:: ct_assert_file_exists(path)
 
    Assert that the file at the provided path exists.
+   If it does not exist or is a directory,
+   an :code:`ASSERTION_FAILED` exception is raised.
    
    :param path: The path to check
-   :type path: Path
+   :type path: path
    
 
 
 .. function:: ct_assert_file_does_not_exist(path)
 
    Assert that a file does not exist at the provided path.
+   If the path exists and is not a directory, an
+   :code:`ASSERTION_FAILED` exception is raised.
    
    :param path: The path to check
-   :type path: Path
+   :type path: path
    
 

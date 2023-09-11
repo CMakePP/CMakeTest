@@ -11,9 +11,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=d4e7da7a"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -104,25 +106,29 @@
            <div itemprop="articleBody">
              
   <section id="module-cmake_test-asserts-file_exists">
-<span id="cmake-test-asserts-file-exists"></span><h1>cmake_test/asserts/file_exists<a class="headerlink" href="#module-cmake_test-asserts-file_exists" title="Permalink to this heading"></a></h1>
+<span id="cmake-test-asserts-file-exists"></span><h1>cmake_test/asserts/file_exists<a class="headerlink" href="#module-cmake_test-asserts-file_exists" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-asserts-file_exists.ct_assert_file_exists">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/file_exists.</span></span><span class="sig-name descname"><span class="pre">ct_assert_file_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-file_exists.ct_assert_file_exists" title="Permalink to this definition"></a></dt>
-<dd><p>Assert that the file at the provided path exists.</p>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/file_exists.</span></span><span class="sig-name descname"><span class="pre">ct_assert_file_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-file_exists.ct_assert_file_exists" title="Link to this definition"></a></dt>
+<dd><p>Assert that the file at the provided path exists.
+If it does not exist or is a directory,
+an <code class="code docutils literal notranslate"><span class="pre">ASSERTION_FAILED</span></code> exception is raised.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>path</strong> (<em>Path</em>) – The path to check</p>
+<dd class="field-odd"><p><strong>path</strong> (<em>path</em>) – The path to check</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-asserts-file_exists.ct_assert_file_does_not_exist">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/file_exists.</span></span><span class="sig-name descname"><span class="pre">ct_assert_file_does_not_exist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-file_exists.ct_assert_file_does_not_exist" title="Permalink to this definition"></a></dt>
-<dd><p>Assert that a file does not exist at the provided path.</p>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/file_exists.</span></span><span class="sig-name descname"><span class="pre">ct_assert_file_does_not_exist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-file_exists.ct_assert_file_does_not_exist" title="Link to this definition"></a></dt>
+<dd><p>Assert that a file does not exist at the provided path.
+If the path exists and is not a directory, an
+<code class="code docutils literal notranslate"><span class="pre">ASSERTION_FAILED</span></code> exception is raised.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>path</strong> (<em>Path</em>) – The path to check</p>
+<dd class="field-odd"><p><strong>path</strong> (<em>path</em>) – The path to check</p>
 </dd>
 </dl>
 </dd></dl>

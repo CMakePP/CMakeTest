@@ -13,8 +13,9 @@ cmake_test/exec_tests
    global, executing each one. All exceptions are tracked while the test is ran, including during
    subsection execution.
    
-   Pass/fail output will be printed to the screen after each test or section has been executed, results are not aggregated at the end
-   to prevent a faulty test from causing the interpeter to fail before results are printed.
+   Pass/fail output will be printed to the screen after each test or section has been executed,
+   results are not aggregated at the end to prevent a faulty test from causing the interpeter
+   to fail before results are printed.
    
    A test that is not expected to fail that raises an exception or a fatal error will result in it
    be marked as failing and no subsections will be executed. However, sibling tests will continue

@@ -19,6 +19,6 @@ cmake_test/asserts/prints
    this function will treat the expected message as a regex to check if it matches.
    
    :param msg: The message expected to have been printed, either exact match or regex.
-   :type msg: String
+   :type msg: desc
    
 

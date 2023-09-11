@@ -10,3 +10,35 @@ cmake_test/cmake_test
    as well as setting extremely important path-related constants.
    
 
+
+.. data:: _CT_CMAKE_TEST_ROOT
+
+   Root of CMakeTest, used to
+   locate important files during runtime.
+   
+
+   :Default value: ${CMAKE_CURRENT_LIST_DIR}
+
+   :type: str
+
+
+.. data:: _CT_TEMPLATES_DIR
+
+   Directory where the template files are located.
+   
+
+   :Default value: ${CMAKE_CURRENT_LIST_DIR}/templates
+
+   :type: str
+
+
+.. function:: cpp_set_global("CT_DEBUG_MODE" "${CMAKEPP_LANG_DEBUG_MODE}")
+
+
+   .. warning:: This is a generic command invocation. It is not a function or macro definition.
+
+   Whether CMakeTest should run in debug mode,
+   used to separate debugging for CMakeTest from
+   debugging for the user-side test code.
+   
+

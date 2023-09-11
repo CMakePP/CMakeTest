@@ -11,9 +11,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=d4e7da7a"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -104,10 +106,10 @@
            <div itemprop="articleBody">
              
   <section id="module-cmake_test-asserts-list">
-<span id="cmake-test-asserts-list"></span><h1>cmake_test/asserts/list<a class="headerlink" href="#module-cmake_test-asserts-list" title="Permalink to this heading"></a></h1>
+<span id="cmake-test-asserts-list"></span><h1>cmake_test/asserts/list<a class="headerlink" href="#module-cmake_test-asserts-list" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-asserts-list.ct_assert_list">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/list.</span></span><span class="sig-name descname"><span class="pre">ct_assert_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-list.ct_assert_list" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/list.</span></span><span class="sig-name descname"><span class="pre">ct_assert_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-list.ct_assert_list" title="Link to this definition"></a></dt>
 <dd><p>Asserts that an identifier contains a list.</p>
 <p>For our purposes a list is defined as a string that contains one or more,
 unescaped semicolons. While a string with no semicolons is usable as if it is
@@ -116,14 +118,14 @@ function will not consider such strings lists. If the identifier is not a list
 an error will be raised.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>var</strong> (<em>Identifier</em>) – The identifier we want to know the list-ness of.</p>
+<dd class="field-odd"><p><strong>var</strong> (<em>list*</em>) – The identifier we want to know the list-ness of.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-asserts-list.ct_assert_not_list">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/list.</span></span><span class="sig-name descname"><span class="pre">ct_assert_not_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-list.ct_assert_not_list" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/list.</span></span><span class="sig-name descname"><span class="pre">ct_assert_not_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-list.ct_assert_not_list" title="Link to this definition"></a></dt>
 <dd><p>Asserts that an identifier does not contain a list.</p>
 <p>For our purposes a list is defined as a string that contains one or more,
 unescaped semicolons. While a string with no semicolons is usable as if it is
@@ -132,7 +134,7 @@ function will not consider such strings lists. If the provided string is a
 list this function will raise an error.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>var</strong> (<em>Identifier</em>) – The identifier we want to know the list-ness of.</p>
+<dd class="field-odd"><p><strong>var</strong> (<em>list*</em>) – The identifier we want to know the list-ness of.</p>
 </dd>
 </dl>
 </dd></dl>

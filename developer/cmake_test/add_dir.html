@@ -11,9 +11,11 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=d4e7da7a"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -101,23 +103,25 @@
            <div itemprop="articleBody">
              
   <section id="module-cmake_test-add_dir">
-<span id="cmake-test-add-dir"></span><h1>cmake_test/add_dir<a class="headerlink" href="#module-cmake_test-add_dir" title="Permalink to this heading"></a></h1>
+<span id="cmake-test-add-dir"></span><h1>cmake_test/add_dir<a class="headerlink" href="#module-cmake_test-add_dir" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-add_dir.ct_add_dir">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/add_dir.</span></span><span class="sig-name descname"><span class="pre">ct_add_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir</span> <span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-add_dir.ct_add_dir" title="Permalink to this definition"></a></dt>
-<dd><p>This function will find all <a href="#id1"><span class="problematic" id="id2">*</span></a>.cmake files in the specified directory as well as recursively through all subdirectories.
+<span class="sig-prename descclassname"><span class="pre">cmake_test/add_dir.</span></span><span class="sig-name descname"><span class="pre">ct_add_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir</span> <span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-add_dir.ct_add_dir" title="Link to this definition"></a></dt>
+<dd><p>This function will find all <code class="code docutils literal notranslate"><span class="pre">*.cmake</span></code> files in the specified directory as well as recursively through all subdirectories.
 It will then configure the boilerplate template to include() each cmake file and register each configured boilerplate
-with CTest. The configured templates will be executed seperately via CTest during the Test phase, and each <a href="#id3"><span class="problematic" id="id4">*</span></a>.cmake
+with CTest. The configured templates will be executed seperately via CTest during the Test phase, and each <a href="#id1"><span class="problematic" id="id2">*</span></a>.cmake
 file found in the specified directory is assumed to contain CMakeTest tests.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>dir</strong> (<em>path</em>) – The directory to search for <a href="#id5"><span class="problematic" id="id6">*</span></a>.cmake files. Subdirectories will be recursively searched.</p>
+<dd class="field-odd"><p><strong>dir</strong> (<em>path</em>) – The directory to search for <a href="#id3"><span class="problematic" id="id4">*</span></a>.cmake files. Subdirectories will be recursively searched.</p>
 </dd>
 </dl>
 <p><strong>Keyword Arguments</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>CMAKE_OPTIONS</strong> (<em>list</em>) – List of additional CMake options to be passed to all test invocations. Options should follow the syntax: <code class="code docutils literal notranslate"><span class="pre">-D&lt;variable_name&gt;=&lt;value&gt;</span></code></p>
+<dd class="field-odd"><p><strong>CMAKE_OPTIONS</strong> (<em>list</em>) – List of additional CMake options to be
+passed to all test invocations. Options
+should follow the syntax: <code class="code docutils literal notranslate"><span class="pre">-D&lt;variable_name&gt;=&lt;value&gt;</span></code></p>
 </dd>
 </dl>
 </dd></dl>

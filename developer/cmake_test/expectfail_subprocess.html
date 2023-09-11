@@ -11,9 +11,11 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=d4e7da7a"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -101,10 +103,18 @@
            <div itemprop="articleBody">
              
   <section id="module-cmake_test-expectfail_subprocess">
-<span id="cmake-test-expectfail-subprocess"></span><h1>cmake_test/expectfail_subprocess<a class="headerlink" href="#module-cmake_test-expectfail_subprocess" title="Permalink to this heading"></a></h1>
+<span id="cmake-test-expectfail-subprocess"></span><h1>cmake_test/expectfail_subprocess<a class="headerlink" href="#module-cmake_test-expectfail_subprocess" title="Link to this heading"></a></h1>
+<p>This module defines the function to execute
+EXPECTFAIL tests and sections. It is called
+by <a class="reference internal" href="execution_unit.html#cmake_test-execution_unit.CTExecutionUnit.execute" title="cmake_test/execution_unit.CTExecutionUnit.execute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cmake_test/execution_unit.CTExecutionUnit.execute</span></code></a></p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>This module is intended for internal
+use only.</p>
+</div>
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-expectfail_subprocess.ct_expectfail_subprocess">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/expectfail_subprocess.</span></span><span class="sig-name descname"><span class="pre">ct_expectfail_subprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">curr_section_instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-expectfail_subprocess.ct_expectfail_subprocess" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/expectfail_subprocess.</span></span><span class="sig-name descname"><span class="pre">ct_expectfail_subprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">curr_section_instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-expectfail_subprocess.ct_expectfail_subprocess" title="Link to this definition"></a></dt>
 <dd><p>Constructs the files needed for a test to be executed in a subprocess and then executes the subprocess.</p>
 <p>This function will only be called for sections marked with EXPECTFAIL. Subprocesses are required because
 there is no way to handle exceptions correctly and not leave a test in an indeterminate state. A full

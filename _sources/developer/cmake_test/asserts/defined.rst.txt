@@ -12,10 +12,10 @@ cmake_test/asserts/defined
    
    This function can be used to assert that a variable is defined. It does not
    assert that the variable is set to any particular value. If the variable is
-   not defined it will raise an error.
+   not defined it will raise an :code:`ASSERTION_FAILED` exception.
    
    :param var: The identifier to check for defined-ness.
-   :type var: Identifier
+   :type var: str*
    
 
 
@@ -27,6 +27,6 @@ cmake_test/asserts/defined
    variable is actually defined this function will raise an error.
    
    :param var: The identifier to check for defined-ness.
-   :type var: Identifier
+   :type var: str*
    
 

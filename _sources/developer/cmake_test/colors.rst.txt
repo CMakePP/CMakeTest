@@ -30,6 +30,10 @@ cmake_test/colors
       edited on the command line by the :code:`-D` flag.
       
 
+   Enable colors in Unix environments, ignored on Windows.
+   Will output garbage for pipes and text files. If false, all constants in this
+   file are not defined, so will resolve to
+   the empty string.
    
 
    :Help text: "This option enables coloration in CMakeTest output. If enabled will mangle log files or pipes that do not support coloration. This option is ignored on Windows."

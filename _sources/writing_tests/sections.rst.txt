@@ -21,7 +21,7 @@ of a larger test or section. When a test
 or section executes, all of its subsections
 are also executed. An example is shown below:
 
-.. literalinclude:: ../../../tests/basic_section.cmake
+.. literalinclude:: ../../../tests/cmake_test/basic_section.cmake
    :language: cmake
 
 

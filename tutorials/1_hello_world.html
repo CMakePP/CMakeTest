@@ -11,9 +11,11 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=d4e7da7a"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -83,7 +85,7 @@
            <div itemprop="articleBody">
              
   <section id="hello-world">
-<h1>1 Hello World<a class="headerlink" href="#hello-world" title="Permalink to this heading"></a></h1>
+<h1>1 Hello World<a class="headerlink" href="#hello-world" title="Link to this heading"></a></h1>
 <p>To use CMakeTest in your CMake project first ensure that the path to the
 directory containing <code class="docutils literal notranslate"><span class="pre">cmake_test/cmake_test.cmake</span></code> is part of your
 <code class="docutils literal notranslate"><span class="pre">CMAKE_MODULE_PATH</span></code>. Then include the following snipppet in your
@@ -101,6 +103,10 @@ to mitigate against collisions with similarly named functions from other
 modules). A function definition using the value of the test’s name must then
 immediately succeed the <code class="code docutils literal notranslate"><span class="pre">ct_add_test()</span></code> call. The CMake
 code in this function will serve as the contents of the unit test.</p>
+<p>CMakeTest uses the name of the test as a variable
+holding a unique identifier for the test’s function,
+so the name of the function is the value of the variable
+(<code class="docutils literal notranslate"><span class="pre">function(${some_test_name})</span></code>).</p>
 <p>As an introductory example we write a simple unit test that prints
 “Hello World” and asserts that “Hello World” was indeed printed.</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">ct_add_test</span><span class="p">(</span><span class="s">NAME</span><span class="w"> </span><span class="s">hello_world</span><span class="p">)</span>

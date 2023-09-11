@@ -11,9 +11,11 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=d4e7da7a"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -88,14 +90,20 @@
            <div itemprop="articleBody">
              
   <section id="assertions">
-<span id="id1"></span><h1>Assertions<a class="headerlink" href="#assertions" title="Permalink to this heading"></a></h1>
+<span id="id1"></span><h1>Assertions<a class="headerlink" href="#assertions" title="Link to this heading"></a></h1>
 <p>CMakeTest ships with a wide variety of
 assertion commands to assist test makers.
 These assertions function similarly to assertions
 in other test frameworks, where the test calls
 an assertion function that checks its inputs against
-a condtion. If the assertion fails, the test is halted
+a condition. If the assertion fails, the test is halted
 and is labeled as failing.</p>
+<p>These assertions are only guaranteed to function inside
+of CMakeTest tests and sections. For more general purpose
+assertions, our sister project
+<a class="reference external" href="https://github.com/CMakePP/CMakePPLang">CMakePPLang</a> has
+assertions, which can be found
+<a class="reference external" href="https://cmakepp.github.io/CMakePPLang/developer/cmakepp_lang/asserts/index.html">here.</a></p>
 <p>The following assertions are available:</p>
 <div class="toctree-wrapper compound">
 <ul>

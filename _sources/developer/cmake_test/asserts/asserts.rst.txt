@@ -5,3 +5,16 @@ cmake_test/asserts/asserts
 
 .. module:: cmake_test/asserts/asserts
 
+   This module simply includes all of the various
+   assert modules, so one only has to include
+   this file to have access to all CMakeTest asserts.
+   
+   Most (but not all) assertions come in two flavors:
+   an affirmative assert and a negative assert. For example:
+   
+   ```
+   ct_assert_defined(AN_IDENTIFIER)       # Fails if AN_IDENTIFIER is not defined
+   ct_assert_not_defined(AN_IDENTIFIER)   # Fails if AN_IDENTIFIER is defined
+   ```
+   
+

@@ -15,8 +15,14 @@ cmake_test/asserts/string
    raise an error if the provided identifier is not a string. Consequentially,
    this function is more-or-less equivalent to ct_assert_not_list.
    
+   .. note::
+      Be careful not to confuse this assertion with
+      testing for the :code:`str` CMakePPLang type.
+      This assertion only tests that the given variable
+      is not a list.
+   
    :param var: The identifier we want the stringy-ness of.
-   :type var: Identifier
+   :type var: desc*
    
 
 
@@ -30,6 +36,6 @@ cmake_test/asserts/string
    function is more-or-less equivalent to ct_assert_list.
    
    :param var: The identifier we want the stringy-ness of.
-   :type var: Identifier
+   :type var: desc*
    
 

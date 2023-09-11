@@ -11,9 +11,11 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=d4e7da7a"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -101,7 +103,7 @@
            <div itemprop="articleBody">
              
   <section id="module-cmake_test-colors">
-<span id="cmake-test-colors"></span><h1>cmake_test/colors<a class="headerlink" href="#module-cmake_test-colors" title="Permalink to this heading"></a></h1>
+<span id="cmake-test-colors"></span><h1>cmake_test/colors<a class="headerlink" href="#module-cmake_test-colors" title="Link to this heading"></a></h1>
 <p>This module provides an option called <code class="code docutils literal notranslate"><span class="pre">CMAKETEST_USE_COLORS</span></code>
 and a set of global variables to use to color terminal output.
 These global constants are just one-to-one constants of specific ANSI
@@ -111,13 +113,17 @@ these constants will not be defined and should resolve to an empty string.</p>
 <p>Example:</p>
 <dl class="py data">
 <dt class="sig sig-object py" id="cmake_test-colors.CMAKETEST_USE_COLORS">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CMAKETEST_USE_COLORS</span></span><a class="headerlink" href="#cmake_test-colors.CMAKETEST_USE_COLORS" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CMAKETEST_USE_COLORS</span></span><a class="headerlink" href="#cmake_test-colors.CMAKETEST_USE_COLORS" title="Link to this definition"></a></dt>
 <dd><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This variable is a user-editable option,
 meaning it appears within the cache and can be
 edited on the command line by the <code class="code docutils literal notranslate"><span class="pre">-D</span></code> flag.</p>
 </div>
+<p>Enable colors in Unix environments, ignored on Windows.
+Will output garbage for pipes and text files. If false, all constants in this
+file are not defined, so will resolve to
+the empty string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Help text<span class="colon">:</span></dt>
 <dd class="field-odd"><p>“This option enables coloration in CMakeTest output. If enabled will mangle log files or pipes that do not support coloration. This option is ignored on Windows.”</p>
@@ -133,7 +139,7 @@ edited on the command line by the <code class="code docutils literal notranslate
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-colors.string">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ASCII</span> <span class="pre">27</span> <span class="pre">Esc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-colors.string" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ASCII</span> <span class="pre">27</span> <span class="pre">Esc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-colors.string" title="Link to this definition"></a></dt>
 <dd><div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This is a generic command invocation. It is not a function or macro definition.</p>
@@ -143,7 +149,7 @@ edited on the command line by the <code class="code docutils literal notranslate
 
 <dl class="py data">
 <dt class="sig sig-object py" id="cmake_test-colors.CT_ColorReset">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_ColorReset</span></span><a class="headerlink" href="#cmake_test-colors.CT_ColorReset" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_ColorReset</span></span><a class="headerlink" href="#cmake_test-colors.CT_ColorReset" title="Link to this definition"></a></dt>
 <dd><p>Resets the color to the terminal default.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default value<span class="colon">:</span></dt>
@@ -157,7 +163,7 @@ edited on the command line by the <code class="code docutils literal notranslate
 
 <dl class="py data">
 <dt class="sig sig-object py" id="cmake_test-colors.CT_ColorBold">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_ColorBold</span></span><a class="headerlink" href="#cmake_test-colors.CT_ColorBold" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_ColorBold</span></span><a class="headerlink" href="#cmake_test-colors.CT_ColorBold" title="Link to this definition"></a></dt>
 <dd><p>Sets the text that follows to be bold.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default value<span class="colon">:</span></dt>
@@ -171,7 +177,7 @@ edited on the command line by the <code class="code docutils literal notranslate
 
 <dl class="py data">
 <dt class="sig sig-object py" id="cmake_test-colors.CT_Red">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_Red</span></span><a class="headerlink" href="#cmake_test-colors.CT_Red" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_Red</span></span><a class="headerlink" href="#cmake_test-colors.CT_Red" title="Link to this definition"></a></dt>
 <dd><p>Sets the text color to red.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default value<span class="colon">:</span></dt>
@@ -185,7 +191,7 @@ edited on the command line by the <code class="code docutils literal notranslate
 
 <dl class="py data">
 <dt class="sig sig-object py" id="cmake_test-colors.CT_Green">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_Green</span></span><a class="headerlink" href="#cmake_test-colors.CT_Green" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_Green</span></span><a class="headerlink" href="#cmake_test-colors.CT_Green" title="Link to this definition"></a></dt>
 <dd><p>Sets the text color to green.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default value<span class="colon">:</span></dt>
@@ -199,7 +205,7 @@ edited on the command line by the <code class="code docutils literal notranslate
 
 <dl class="py data">
 <dt class="sig sig-object py" id="cmake_test-colors.CT_Yellow">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_Yellow</span></span><a class="headerlink" href="#cmake_test-colors.CT_Yellow" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_Yellow</span></span><a class="headerlink" href="#cmake_test-colors.CT_Yellow" title="Link to this definition"></a></dt>
 <dd><p>Sets the text color to yellow.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default value<span class="colon">:</span></dt>
@@ -213,7 +219,7 @@ edited on the command line by the <code class="code docutils literal notranslate
 
 <dl class="py data">
 <dt class="sig sig-object py" id="cmake_test-colors.CT_Blue">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_Blue</span></span><a class="headerlink" href="#cmake_test-colors.CT_Blue" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_Blue</span></span><a class="headerlink" href="#cmake_test-colors.CT_Blue" title="Link to this definition"></a></dt>
 <dd><p>Sets the text color to blue.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default value<span class="colon">:</span></dt>
@@ -227,7 +233,7 @@ edited on the command line by the <code class="code docutils literal notranslate
 
 <dl class="py data">
 <dt class="sig sig-object py" id="cmake_test-colors.CT_Magenta">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_Magenta</span></span><a class="headerlink" href="#cmake_test-colors.CT_Magenta" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_Magenta</span></span><a class="headerlink" href="#cmake_test-colors.CT_Magenta" title="Link to this definition"></a></dt>
 <dd><p>Sets the text color to magenta.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default value<span class="colon">:</span></dt>
@@ -241,7 +247,7 @@ edited on the command line by the <code class="code docutils literal notranslate
 
 <dl class="py data">
 <dt class="sig sig-object py" id="cmake_test-colors.CT_Cyan">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_Cyan</span></span><a class="headerlink" href="#cmake_test-colors.CT_Cyan" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_Cyan</span></span><a class="headerlink" href="#cmake_test-colors.CT_Cyan" title="Link to this definition"></a></dt>
 <dd><p>Sets the text color to cyan.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default value<span class="colon">:</span></dt>
@@ -255,7 +261,7 @@ edited on the command line by the <code class="code docutils literal notranslate
 
 <dl class="py data">
 <dt class="sig sig-object py" id="cmake_test-colors.CT_White">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_White</span></span><a class="headerlink" href="#cmake_test-colors.CT_White" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_White</span></span><a class="headerlink" href="#cmake_test-colors.CT_White" title="Link to this definition"></a></dt>
 <dd><p>Sets the text color to white.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default value<span class="colon">:</span></dt>
@@ -269,7 +275,7 @@ edited on the command line by the <code class="code docutils literal notranslate
 
 <dl class="py data">
 <dt class="sig sig-object py" id="cmake_test-colors.CT_BoldRed">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_BoldRed</span></span><a class="headerlink" href="#cmake_test-colors.CT_BoldRed" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_BoldRed</span></span><a class="headerlink" href="#cmake_test-colors.CT_BoldRed" title="Link to this definition"></a></dt>
 <dd><p>Sets the text color to bold red.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default value<span class="colon">:</span></dt>
@@ -283,7 +289,7 @@ edited on the command line by the <code class="code docutils literal notranslate
 
 <dl class="py data">
 <dt class="sig sig-object py" id="cmake_test-colors.CT_BoldGreen">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_BoldGreen</span></span><a class="headerlink" href="#cmake_test-colors.CT_BoldGreen" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_BoldGreen</span></span><a class="headerlink" href="#cmake_test-colors.CT_BoldGreen" title="Link to this definition"></a></dt>
 <dd><p>Sets the text color to bold green.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default value<span class="colon">:</span></dt>
@@ -297,7 +303,7 @@ edited on the command line by the <code class="code docutils literal notranslate
 
 <dl class="py data">
 <dt class="sig sig-object py" id="cmake_test-colors.CT_BoldYellow">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_BoldYellow</span></span><a class="headerlink" href="#cmake_test-colors.CT_BoldYellow" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_BoldYellow</span></span><a class="headerlink" href="#cmake_test-colors.CT_BoldYellow" title="Link to this definition"></a></dt>
 <dd><p>Sets the text color to bold yellow.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default value<span class="colon">:</span></dt>
@@ -311,7 +317,7 @@ edited on the command line by the <code class="code docutils literal notranslate
 
 <dl class="py data">
 <dt class="sig sig-object py" id="cmake_test-colors.CT_BoldBlue">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_BoldBlue</span></span><a class="headerlink" href="#cmake_test-colors.CT_BoldBlue" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_BoldBlue</span></span><a class="headerlink" href="#cmake_test-colors.CT_BoldBlue" title="Link to this definition"></a></dt>
 <dd><p>Sets the text color to bold blue.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default value<span class="colon">:</span></dt>
@@ -325,7 +331,7 @@ edited on the command line by the <code class="code docutils literal notranslate
 
 <dl class="py data">
 <dt class="sig sig-object py" id="cmake_test-colors.CT_BoldMagenta">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_BoldMagenta</span></span><a class="headerlink" href="#cmake_test-colors.CT_BoldMagenta" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_BoldMagenta</span></span><a class="headerlink" href="#cmake_test-colors.CT_BoldMagenta" title="Link to this definition"></a></dt>
 <dd><p>Sets the text color to bold magenta.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default value<span class="colon">:</span></dt>
@@ -339,7 +345,7 @@ edited on the command line by the <code class="code docutils literal notranslate
 
 <dl class="py data">
 <dt class="sig sig-object py" id="cmake_test-colors.CT_BoldCyan">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_BoldCyan</span></span><a class="headerlink" href="#cmake_test-colors.CT_BoldCyan" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_BoldCyan</span></span><a class="headerlink" href="#cmake_test-colors.CT_BoldCyan" title="Link to this definition"></a></dt>
 <dd><p>Sets the text color to bold cyan.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default value<span class="colon">:</span></dt>
@@ -353,7 +359,7 @@ edited on the command line by the <code class="code docutils literal notranslate
 
 <dl class="py data">
 <dt class="sig sig-object py" id="cmake_test-colors.CT_BoldWhite">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_BoldWhite</span></span><a class="headerlink" href="#cmake_test-colors.CT_BoldWhite" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/colors.</span></span><span class="sig-name descname"><span class="pre">CT_BoldWhite</span></span><a class="headerlink" href="#cmake_test-colors.CT_BoldWhite" title="Link to this definition"></a></dt>
 <dd><p>Sets the text color to bold white.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default value<span class="colon">:</span></dt>

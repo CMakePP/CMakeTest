@@ -11,9 +11,11 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=d4e7da7a"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -101,15 +103,19 @@
            <div itemprop="articleBody">
              
   <section id="module-cmake_test-register_exception_handler">
-<span id="cmake-test-register-exception-handler"></span><h1>cmake_test/register_exception_handler<a class="headerlink" href="#module-cmake_test-register_exception_handler" title="Permalink to this heading"></a></h1>
+<span id="cmake-test-register-exception-handler"></span><h1>cmake_test/register_exception_handler<a class="headerlink" href="#module-cmake_test-register_exception_handler" title="Link to this heading"></a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This module requires <a class="reference internal" href="overrides.html#module-cmake_test-overrides" title="cmake_test/overrides"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cmake_test/overrides</span></code></a>, and so will override
 the <code class="code docutils literal notranslate"><span class="pre">message()</span></code> command upon inclusion.</p>
 </div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>This module is intended for internal use only.</p>
+</div>
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-register_exception_handler.ct_register_exception_handler">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/register_exception_handler.</span></span><span class="sig-name descname"><span class="pre">ct_register_exception_handler</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-register_exception_handler.ct_register_exception_handler" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/register_exception_handler.</span></span><span class="sig-name descname"><span class="pre">ct_register_exception_handler</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-register_exception_handler.ct_register_exception_handler" title="Link to this definition"></a></dt>
 <dd><p>Defines the exception handler and registers it with CMakePP.</p>
 <p>The exception handler stores exception information about the currently
 running test, then re-executes <code class="code docutils literal notranslate"><span class="pre">ct_exec_tests()</span></code> so that all remaining

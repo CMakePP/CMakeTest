@@ -17,7 +17,7 @@ cmake_test/asserts/list
    an error will be raised.
    
    :param var: The identifier we want to know the list-ness of.
-   :type var: Identifier
+   :type var: list*
    
 
 
@@ -32,6 +32,6 @@ cmake_test/asserts/list
    list this function will raise an error.
    
    :param var: The identifier we want to know the list-ness of.
-   :type var: Identifier
+   :type var: list*
    
 

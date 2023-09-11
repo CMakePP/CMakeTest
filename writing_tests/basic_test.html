@@ -11,9 +11,11 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=d4e7da7a"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -85,15 +87,14 @@
            <div itemprop="articleBody">
              
   <section id="basic-unit-test">
-<h1>Basic Unit Test<a class="headerlink" href="#basic-unit-test" title="Permalink to this heading"></a></h1>
+<h1>Basic Unit Test<a class="headerlink" href="#basic-unit-test" title="Link to this heading"></a></h1>
 <p>Below is a basic unit test that simply asserts that
 a particular string is printed.</p>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c">#&quot;Hello World&quot; and asserts that &quot;Hello World&quot; was indeed printed.</span>
-<span class="nb">ct_add_test</span><span class="p">(</span><span class="s">NAME</span><span class="w"> </span><span class="s">hello_world</span><span class="p">)</span>
-<span class="nb">function</span><span class="p">(</span><span class="o">${</span><span class="nv">hello_world</span><span class="o">}</span><span class="p">)</span>
-<span class="w">    </span><span class="nb">message</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="nb">ct_assert_prints</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">)</span>
-<span class="nb">endfunction</span><span class="p">()</span>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c">#so the name of the function is the value of the variable</span>
+<span class="c">#(``function(${some_test_name})``).</span>
+<span class="c">#</span>
+<span class="c">#As an introductory example we write a simple unit test that prints</span>
+<span class="c">#&quot;Hello World&quot; and asserts that &quot;Hello World&quot; was indeed printed.</span>
 </pre></div>
 </div>
 <p>The <a class="reference internal" href="../developer/cmake_test/add_test.html#cmake_test-add_test.ct_add_test" title="cmake_test/add_test.ct_add_test"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ct_add_test</span></code></a> call tells CMakeTest that there is a test

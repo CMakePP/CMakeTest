@@ -10,10 +10,11 @@ cmake_test/asserts/library_exists
 
    Asserts that a library exists.
    
-   Asserts that the target exists and is a library.
+   Asserts that the target exists and is a library,
+   if not then an :code:`ASSERTION_FAILED` exception is raised.
    
    :param name: The name of the library
-   :type path: string
+   :type name: target
    
 
 
@@ -21,10 +22,11 @@ cmake_test/asserts/library_exists
 
    Asserts that a library does not exist.
    
-   Asserts that the target does not exist or is not a library.
+   Asserts that the target does not exist or is not a library,
+   otherwise an :code:`ASSERTION_FAILED` exception is raised.
    
    :param name: The name of the library
-   :type name: string
+   :type name: target
    
 
 
@@ -37,9 +39,9 @@ cmake_test/asserts/library_exists
    ``SHARED_LIBRARY`` and then returns an integer indicating what it found.
    
    :param result: Name to use for the variable which will hold the result.
-   :type result: int
+   :type result: int*
    :param name: The target name to check.
-   :type name: string
+   :type name: str
    :returns: ``result`` will be set to ``0`` if the target is a library,
               ``1`` if the target is not a library, and ``2`` if target does not
               exist.

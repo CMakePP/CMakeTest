@@ -41,11 +41,15 @@ cmake_test/add_section
    
    **Keyword Arguments**
    
-   :keyword NAME: Required argument specifying the name variable of the section. Will set a variable with specified name containing the generated function ID to use.
+   :keyword NAME: Required argument specifying the name variable of the section. Will set a variable with
+                  specified name containing the generated function ID to use.
    :type NAME: pointer
-   :keyword EXPECTFAIL: Option indicating whether the section is expected to fail or not, if specified will cause test failure when no exceptions were caught and success upon catching any exceptions.
+   :keyword EXPECTFAIL: Option indicating whether the section is expected to fail or not, if
+                        specified will cause test failure when no exceptions were caught and success
+                        upon catching any exceptions.
    :type EXPECTFAIL: option
-   :keyword PRINT_LENGTH: Optional argument specifying the desired print length of pass/fail output lines.
+   :keyword PRINT_LENGTH: Optional argument specifying the desired
+                          print length of pass/fail output lines.
    :type PRINT_LENGTH: int
    
    .. seealso:: :func:`add_test.cmake.ct_add_test` for details on EXPECTFAIL.

@@ -12,6 +12,8 @@
 .. See the License for the specific language governing permissions and
 .. limitations under the License.
 
+.. _ct_installation:
+
 Installation
 ------------
 CMakeTest can be installed via :code:`FetchContent` or by manually placing the

@@ -9,9 +9,12 @@ cmake_test/asserts/true_false
 .. function:: ct_assert_true(var)
 
    Asserts that the provided variable is true.
+   :code:`var` must be a non-empty string,
+   otherwise an :code:`ASSERTION_FAILED`
+   exception is raised.
    
-   :param var: The identifier to check for trueness.
-   :type var: Identifier
+   :param var: The variable to check for truthiness.
+   :type var: str*
    
 
 
@@ -19,7 +22,7 @@ cmake_test/asserts/true_false
 
    Asserts that the provided variable is false.
    
-   :param var: The identifier to check for falseness.
-   :type var: Identifier
+   :param var: The variable to check for falseness.
+   :type var: str*
    
 

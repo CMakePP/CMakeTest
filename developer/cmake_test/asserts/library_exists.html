@@ -11,9 +11,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=d4e7da7a"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -104,34 +106,36 @@
            <div itemprop="articleBody">
              
   <section id="module-cmake_test-asserts-library_exists">
-<span id="cmake-test-asserts-library-exists"></span><h1>cmake_test/asserts/library_exists<a class="headerlink" href="#module-cmake_test-asserts-library_exists" title="Permalink to this heading"></a></h1>
+<span id="cmake-test-asserts-library-exists"></span><h1>cmake_test/asserts/library_exists<a class="headerlink" href="#module-cmake_test-asserts-library_exists" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-asserts-library_exists.ct_assert_library_target_exists">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/library_exists.</span></span><span class="sig-name descname"><span class="pre">ct_assert_library_target_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-library_exists.ct_assert_library_target_exists" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/library_exists.</span></span><span class="sig-name descname"><span class="pre">ct_assert_library_target_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-library_exists.ct_assert_library_target_exists" title="Link to this definition"></a></dt>
 <dd><p>Asserts that a library exists.</p>
-<p>Asserts that the target exists and is a library.</p>
+<p>Asserts that the target exists and is a library,
+if not then an <code class="code docutils literal notranslate"><span class="pre">ASSERTION_FAILED</span></code> exception is raised.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> – The name of the library</p>
+<dd class="field-odd"><p><strong>name</strong> (<em>target</em>) – The name of the library</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-asserts-library_exists.ct_assert_library_does_not_exist">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/library_exists.</span></span><span class="sig-name descname"><span class="pre">ct_assert_library_does_not_exist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-library_exists.ct_assert_library_does_not_exist" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/library_exists.</span></span><span class="sig-name descname"><span class="pre">ct_assert_library_does_not_exist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-library_exists.ct_assert_library_does_not_exist" title="Link to this definition"></a></dt>
 <dd><p>Asserts that a library does not exist.</p>
-<p>Asserts that the target does not exist or is not a library.</p>
+<p>Asserts that the target does not exist or is not a library,
+otherwise an <code class="code docutils literal notranslate"><span class="pre">ASSERTION_FAILED</span></code> exception is raised.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>string</em>) – The name of the library</p>
+<dd class="field-odd"><p><strong>name</strong> (<em>target</em>) – The name of the library</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-asserts-library_exists.ct_library_target_exists">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/library_exists.</span></span><span class="sig-name descname"><span class="pre">ct_library_target_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span> <span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-library_exists.ct_library_target_exists" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/library_exists.</span></span><span class="sig-name descname"><span class="pre">ct_library_target_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span> <span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-library_exists.ct_library_target_exists" title="Link to this definition"></a></dt>
 <dd><p>Determines if a target exists and if it is a library.</p>
 <p>This function checks whether a target exists and then checks whether that
 target is of type <code class="docutils literal notranslate"><span class="pre">STATIC_LIBRARY</span></code>, <code class="docutils literal notranslate"><span class="pre">MODULE_LIBRARY</span></code>, or
@@ -139,8 +143,8 @@ target is of type <code class="docutils literal notranslate"><span class="pre">S
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>result</strong> (<em>int</em>) – Name to use for the variable which will hold the result.</p></li>
-<li><p><strong>name</strong> (<em>string</em>) – The target name to check.</p></li>
+<li><p><strong>result</strong> (<em>int*</em>) – Name to use for the variable which will hold the result.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – The target name to check.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

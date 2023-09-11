@@ -10,14 +10,14 @@ cmake_test/asserts/equal
 
    Asserts that an identifier contains the specified contents.
    
-    This function is used to assert that a given identifier is set to the
-    specific contents. If the identifier is not set to the specified contents a
-    fatal error will be raised.
+   This function is used to assert that a given pointer is set to the
+   specified contents. If the pointer does not dereference to the specified
+   contents, an :code:`ASSERTION_FAILED` exception is raised.
    
-    :param var: The identifier whose contents are in question.
-    :type var: Identifier
-    :param contents: What the identifier should be set to.
-    :type contents: String
+   :param var: The identifier whose contents are in question.
+   :type var: str*
+   :param contents: What the pointer should dereference to
+   :type contents: str
    
 
 
@@ -26,12 +26,12 @@ cmake_test/asserts/equal
    Asserts that an identifier does not contain the specified contents.
    
    This function is used to assert that a given identifier is set to something
-   other than the specified contents. If the identifier is set to the specified
-   contents a fatal error will be raised.
+   other than the specified contents. If the pointer does dereference to the specified
+   contents, then an :code:`ASSERTION_FAILED` exception will be raised.
    
    :param var: The identifier whose contents are in question.
-   :type var: Identifier
-   :param contents: What the identifier should not be set to.
-   :type contents: String
+   :type var: str*
+   :param contents: What the pointer should not dereference to
+   :type contents: str
    
 

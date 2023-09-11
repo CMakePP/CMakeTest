@@ -11,9 +11,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=d4e7da7a"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -104,25 +106,32 @@
            <div itemprop="articleBody">
              
   <section id="module-cmake_test-asserts-string">
-<span id="cmake-test-asserts-string"></span><h1>cmake_test/asserts/string<a class="headerlink" href="#module-cmake_test-asserts-string" title="Permalink to this heading"></a></h1>
+<span id="cmake-test-asserts-string"></span><h1>cmake_test/asserts/string<a class="headerlink" href="#module-cmake_test-asserts-string" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-asserts-string.ct_assert_string">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/string.</span></span><span class="sig-name descname"><span class="pre">ct_assert_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-string.ct_assert_string" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/string.</span></span><span class="sig-name descname"><span class="pre">ct_assert_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-string.ct_assert_string" title="Link to this definition"></a></dt>
 <dd><p>Asserts that an identifier contains a string</p>
 <p>For our purposes a string is anything that is not a list (a list being a
 string that contains at least one unescaped semicolon). This function will
 raise an error if the provided identifier is not a string. Consequentially,
 this function is more-or-less equivalent to ct_assert_not_list.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Be careful not to confuse this assertion with
+testing for the <code class="code docutils literal notranslate"><span class="pre">str</span></code> CMakePPLang type.
+This assertion only tests that the given variable
+is not a list.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>var</strong> (<em>Identifier</em>) – The identifier we want the stringy-ness of.</p>
+<dd class="field-odd"><p><strong>var</strong> (<em>desc*</em>) – The identifier we want the stringy-ness of.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-asserts-string.ct_assert_not_string">
-<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/string.</span></span><span class="sig-name descname"><span class="pre">ct_assert_not_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-string.ct_assert_not_string" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cmake_test/asserts/string.</span></span><span class="sig-name descname"><span class="pre">ct_assert_not_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-asserts-string.ct_assert_not_string" title="Link to this definition"></a></dt>
 <dd><p>Asserts that an identifier does not contain a string</p>
 <p>For our purposes a string is anything that is not a list (a list being a
 string that contains at least one unescaped semicolon). This function will
@@ -130,7 +139,7 @@ raise an error if the provided identifier is a string. Consequentially, this
 function is more-or-less equivalent to ct_assert_list.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>var</strong> (<em>Identifier</em>) – The identifier we want the stringy-ness of.</p>
+<dd class="field-odd"><p><strong>var</strong> (<em>desc*</em>) – The identifier we want the stringy-ness of.</p>
 </dd>
 </dl>
 </dd></dl>

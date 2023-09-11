@@ -24,7 +24,7 @@ exception or :code:`FATAL_ERROR` is thrown. This option is called
 to the :code:`ct_add_test()` or :code:`ct_add_section()` calls
 that define the test. An example is below:
 
-.. literalinclude:: ../../../tests/expectfail.cmake
+.. literalinclude:: ../../../tests/cmake_test/expectfail.cmake
    :language: cmake
 
 

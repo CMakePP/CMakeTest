@@ -5,6 +5,17 @@ cmake_test/expectfail_subprocess
 
 .. module:: cmake_test/expectfail_subprocess
 
+   This module defines the function to execute
+   EXPECTFAIL tests and sections. It is called
+   by :obj:`cmake_test/execution_unit.CTExecutionUnit.execute`
+   
+   
+   .. attention::
+      This module is intended for internal
+      use only.
+   
+   
+
 
 .. function:: ct_expectfail_subprocess(curr_section_instance)
 
