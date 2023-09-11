@@ -52,7 +52,7 @@ using ``ct_assert_equal``. This looks like:
        ct_assert_equal(hello_world "Hello World!!!")
    endfunction()
 
-More examples and tutorials can be found in the documentation.
+More `examples <https://cmakepp.github.io/CMakeTest/writing_tests/index.html>`__ and `tutorials <https://cmakepp.github.io/CMakeTest/tutorials/index.html>`__ can be found in the documentation.
 
 Installation
 ------------
