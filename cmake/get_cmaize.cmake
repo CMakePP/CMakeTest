@@ -12,6 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+#[[[ @module
+# .. warning::
+#    This module is only used when building CMakeTest,
+#    and including it automatically pulls in CMaize through
+#    FetchContent.
+#]]
+
 include_guard()
 
 #[[

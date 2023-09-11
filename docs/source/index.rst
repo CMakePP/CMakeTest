@@ -12,9 +12,18 @@
 .. See the License for the specific language governing permissions and
 .. limitations under the License.
 
-#########
-CMakeTest
-#########
+.. include:: ../../README.rst
+   :end-before: Installation
+
+New users are recommended to start by
+visiting :ref:`ct_installation`, and then
+reading the :ref:`ct_tutorials`. Once
+one has read the tutorials,
+
+
+#################
+Table of Contents
+#################
 
 .. toctree::
    :maxdepth: 2
@@ -25,3 +34,6 @@ CMakeTest
    writing_tests/index
    tutorials/index
    developer/index
+
+.. include:: ../../README.rst
+   :start-after: References

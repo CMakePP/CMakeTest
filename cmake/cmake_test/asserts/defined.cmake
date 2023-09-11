@@ -13,32 +13,43 @@
 # limitations under the License.
 
 include_guard()
+include("cmakepp_lang/asserts/signature")
 
-#[[[ Asserts that the provided variable is defined.
+#[[[
+# Asserts that the provided variable is defined.
 #
 # This function can be used to assert that a variable is defined. It does not
 # assert that the variable is set to any particular value. If the variable is
-# not defined it will raise an error.
+# not defined it will raise an :code:`ASSERTION_FAILED` exception.
 #
 # :param var: The identifier to check for defined-ness.
-# :type var: Identifier
+# :type var: str*
 #]]
 function(ct_assert_defined _ad_var)
-    if(NOT DEFINED ${_ad_var})
-        cpp_raise(ASSERTION_FAILED "${_ad_var} is not defined.")
+    cpp_assert_signature("${ARGV}" str*)
+    if(NOT DEFINED "${_ad_var}")
+        cpp_raise(
+            ASSERTION_FAILED
+            "${_ad_var} is not defined."
+        )
     endif()
 endfunction()
 
-#[[[ Asserts that the provided variable is not defined.
+#[[[
+# Asserts that the provided variable is not defined.
 #
 # This function can be used to assert that a variable is not defined. If the
 # variable is actually defined this function will raise an error.
 #
 # :param var: The identifier to check for defined-ness.
-# :type var: Identifier
+# :type var: str*
 #]]
 function(ct_assert_not_defined _and_var)
-    if(DEFINED ${_and_var})
-        cpp_raise(ASSERTION_FAILED "${_and_var} is defined.")
+    cpp_assert_signature("${ARGV}" str*)
+    if(DEFINED "${_and_var}")
+        cpp_raise(
+            ASSERTION_FAILED
+            "${_and_var} is defined."
+        )
     endif()
 endfunction()

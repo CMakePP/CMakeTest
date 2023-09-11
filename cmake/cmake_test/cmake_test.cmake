@@ -22,13 +22,22 @@ include_guard()
 
 include(cmakepp_lang/cmakepp_lang)
 
-# Allows us to capture the root directory of the CMakeTest module
+#[[[
+# Root of CMakeTest, used to
+# locate important files during runtime.
+#]]
 set(_CT_CMAKE_TEST_ROOT ${CMAKE_CURRENT_LIST_DIR})
 
-#Capture the templates directory and expose as constant
+#[[[
+# Directory where the template files are located.
+#]]
 set(_CT_TEMPLATES_DIR "${CMAKE_CURRENT_LIST_DIR}/templates")
 
-# Capture whether we want to debug CMakeTest itself
+#[[[
+# Whether CMakeTest should run in debug mode,
+# used to separate debugging for CMakeTest from
+# debugging for the user-side test code.
+#]]
 cpp_set_global("CT_DEBUG_MODE" "${CMAKEPP_LANG_DEBUG_MODE}")
 
 # Despite the way a unit test looks to the user, this is the only module the

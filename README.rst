@@ -22,15 +22,20 @@ CMakeTest
 .. image:: https://github.com/CMakePP/CMakeTest/workflows/Build%20and%20Deploy%20Documentation/badge.svg
    :target: https://github.com/CMakePP/CMakeTest/workflows/Build%20and%20Deploy%20Documentation/badge.svg
 
-CMake ships with CTest_ which helps integrate your project's tests into your
-project's build system. CTest is a powerful solution for managing your
-project's tests, but it is designed to be decoupled from the framework used to
-actually test the code. Thus, for CMake development purposes we still need a
-testing framework to ensure our CMake modules behave correctly. That is where
-CMakeTest comes in.
+Unit tests are at the core of modern software development. As projects grow
+in size and scope, so do their needs for extensive testing. The same can be
+said for their build systems: as projects grow, their build processes become more
+complex, and as such, those processes become more prone to bugs and failures.
+Therefore, we believe that build system languages like CMake should have
+a robust testing framework, just like most application programming
+languages. CMakeTest is an implementation of such a framework
+for the CMake build system language.
 
 CMakeTest is modeled after the Catch2 testing framework for C++. CMakeTest is a
-CMake module, written 100% in CMake. Unit testing with CMakeTest relies on the
+CMake module, written 100% in CMake. Tests are executed by the CTest_
+infrastructure, minimizing friction for those already familiar with it.
+
+Unit testing with CMakeTest relies on the
 use of ``ct_add_test`` and ``ct_add_section`` special declarations, followed by
 ``function`` blocks. Within these blocks users write their unit tests in native
 CMake; no need for ugly escapes or workarounds. The user then relies on
@@ -46,6 +51,8 @@ using ``ct_assert_equal``. This looks like:
        set(hello_world "Hello World!!!")
        ct_assert_equal(hello_world "Hello World!!!")
    endfunction()
+
+More `examples <https://cmakepp.github.io/CMakeTest/writing_tests/index.html>`__ and `tutorials <https://cmakepp.github.io/CMakeTest/tutorials/index.html>`__ can be found in the documentation.
 
 Installation
 ------------

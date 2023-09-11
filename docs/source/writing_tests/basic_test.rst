@@ -19,9 +19,9 @@ Basic Unit Test
 Below is a basic unit test that simply asserts that
 a particular string is printed.
 
-.. literalinclude:: ../../../tests/tutorials/1_hello_world.cmake
+.. literalinclude:: ../../../tests/cmake_test/tutorials/1_hello_world.cmake
    :language: cmake
-   :lines: 23-28
+   :lines: 24-28
 
 
 The :obj:`~cmake_test/add_test.ct_add_test` call tells CMakeTest that there is a test

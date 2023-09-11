@@ -17,6 +17,9 @@
 # .. warning::
 #    This module requires :obj:`cmake_test/overrides`, and so will override
 #    the :code:`message()` command upon inclusion.
+#
+# .. attention::
+#    This module is intended for internal use only.
 #]]
 
 include_guard()
@@ -70,7 +73,10 @@ function(ct_register_exception_handler)
             foreach(_ae_exception_message IN LISTS _ae_failed_test_exceptions)
                 set(_ae_failed_exception_messages "${_ae_failed_exception_messages}\n${_ae_exception_message}")
             endforeach()
-            set(_ae_failure_message "${_ae_failure_message}\nUnexpected exceptions caught while executing test \"${_ae_curr_exec_friendly_name}\". ${_ae_failed_exception_messages}")
+            set(
+                _ae_failure_message
+                "${_ae_failure_message}\nUnexpected exceptions caught while executing test \"${_ae_failed_test_name}\". ${_ae_failed_exception_messages}"
+            )
         endforeach()
 
         ct_exit("${_ae_failure_message}")

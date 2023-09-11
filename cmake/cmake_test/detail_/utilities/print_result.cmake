@@ -12,26 +12,47 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+#[[[ @module
+# This module contains all of the printing functions for CMakeTest
+# to report the pass or fail status of a test or section.
+#
+# .. attention::
+#    This module is intended for internal
+#    use only.
+#
+#]]
+
 include_guard()
 include(cmake_test/detail_/utilities/repeat_string)
 
-#[[[ Wraps the process of printing a test's result
+#[[[
+# The print length used for the pass or fail lines, in characters.
+#]]
+set(CT_PRINT_LENGTH 80 CACHE STRING
+    "The print length used for the CMakeTest pass or fail status lines. Must be an integer."
+)
+
+
+#[[[
+# Wraps the process of printing a test's result
 #
-#  This function largely serves as code factorization for ``_ct_print_pass`` and
-#  ``_ct_print_fail``. This function will print an indent appropriate for the
-#  current nesting, and then enough dots to right align the result.
+# This function largely serves as code factorization for ``_ct_print_pass`` and
+# ``_ct_print_fail``. This function will print an indent appropriate for the
+# current nesting, and then enough dots to right align the result.
 #
-#  :param name: The name of the test we are printing the result of.
-#  :type name: str
-#  :param result: What to print as the result (usually "PASSED" or "FAILED")
-#  :type result: str
-#  :param depth: How many sections is this test nested?
-#  :type depth: str
-#  :param print_length: The total length of the line to be printed, including dots and whitespace
-#  :type print_length: int
+# :param name: The name of the test we are printing the result of.
+# :type name: desc
+# :param result: What to print as the result (usually "PASSED" or "FAILED")
+# :type result: desc
+# :param depth: How many sections is this test nested?
+# :type depth: int
+# :param print_length: The total length of the line to be printed, including dots and whitespace
+# :type print_length: int
 #]]
 function(_ct_print_result _pr_name _pr_result _pr_depth _pr_print_length)
-    #message("Print length is: ${_pr_print_length}")
+    # Can't use assert_signature because the _pr_result may include
+    # color codes, which can have semicolons in them and the signature assertion
+    # interprets those as list delimiters
 
     if(NOT _pr_print_length GREATER 0)
         set(_pr_print_length 80)
@@ -56,7 +77,7 @@ function(_ct_print_result _pr_name _pr_result _pr_depth _pr_print_length)
     # Get the number of dots to print
     set(_pr_width "${_pr_print_length}")
     set(_pr_n_dot 0)
-    if("${_pr_n}" LESS ${_pr_width})
+    if(_pr_n LESS _pr_width)
         math(EXPR _pr_n_dot "${_pr_width} - ${_pr_n}")
     endif()
 
@@ -67,24 +88,27 @@ function(_ct_print_result _pr_name _pr_result _pr_depth _pr_print_length)
     message("${_pr_prefix}${_pr_dots}${_pr_result}")
 endfunction()
 
-##[[[ Wraps the process of printing that a test passed.
+##[[[
+# Wraps the process of printing that a test passed.
 #
 # This function is called after all asserts on a test have been run. When
 # called this function will print to the standard output that the test ran
 # successfully.
 #
 # :param name: The test we are printing the result of.
-# :type name: str
+# :type name: desc
 # :param depth: How many sections is this test nested?
-# :type depth: str
-#  :param print_length: The total length of the line to be printed, including dots and whitespace
-#  :type print_length: int
+# :type depth: int
+# :param print_length: The total length of the line to be printed, including dots and whitespace
+# :type print_length: int
 #]]
 function(_ct_print_pass _pp_name _pp_depth _pp_print_length)
-    _ct_print_result(${_pp_name} "${CT_BoldGreen}PASSED${CT_ColorReset}" ${_pp_depth} "${_pp_print_length}")
+    cpp_assert_signature("${ARGV}" desc int int)
+    _ct_print_result("${_pp_name}" "${CT_BoldGreen}PASSED${CT_ColorReset}" "${_pp_depth}" "${_pp_print_length}")
 endfunction()
 
-#[[[ Wraps the process of printing that a test failed.
+#[[[
+# Wraps the process of printing that a test failed.
 #
 # This function is called after one or more asserts on a test have failed. When
 # called this function will print to the standard output that the test failed.
@@ -93,13 +117,13 @@ endfunction()
 # error stopping the test.
 #
 # :param name: The name of the test that just failed.
-# :type name: str
+# :type name: desc
 # :param depth: How many sections is this test nested?
-# :type depth: str
-#  :param print_length: The total length of the line to be printed, including dots and whitespace
-#  :type print_length: int
+# :type depth: int
+# :param print_length: The total length of the line to be printed, including dots and whitespace
+# :type print_length: int
 #]]
 function(_ct_print_fail _pf_name _pf_depth _pf_print_length)
-    _ct_print_result(${_pf_name} "${CT_BoldRed}FAILED${CT_ColorReset}" ${_pf_depth} "${_pf_print_length}")
-    #message(FATAL_ERROR "Reason:\n\n${ARGN}")
+    cpp_assert_signature("${ARGV}" desc int int)
+    _ct_print_result("${_pf_name}" "${CT_BoldRed}FAILED${CT_ColorReset}" "${_pf_depth}" "${_pf_print_length}")
 endfunction()

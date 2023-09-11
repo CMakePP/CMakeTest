@@ -12,6 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+#[[[ @module
+# This module simply includes all of the various
+# assert modules, so one only has to include
+# this file to have access to all CMakeTest asserts.
+#
+# Most (but not all) assertions come in two flavors:
+# an affirmative assert and a negative assert. For example:
+#
+# ```
+# ct_assert_defined(AN_IDENTIFIER)       # Fails if AN_IDENTIFIER is not defined
+# ct_assert_not_defined(AN_IDENTIFIER)   # Fails if AN_IDENTIFIER is defined
+# ```
+#]]
+
 include_guard()
 include(cmake_test/asserts/defined)
 include(cmake_test/asserts/equal)

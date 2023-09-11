@@ -49,11 +49,15 @@ include_guard()
 #
 # **Keyword Arguments**
 #
-# :keyword NAME: Required argument specifying the name variable of the section. Will set a variable with specified name containing the generated function ID to use.
+# :keyword NAME: Required argument specifying the name variable of the section. Will set a variable with
+#                specified name containing the generated function ID to use.
 # :type NAME: pointer
-# :keyword EXPECTFAIL: Option indicating whether the section is expected to fail or not, if specified will cause test failure when no exceptions were caught and success upon catching any exceptions.
+# :keyword EXPECTFAIL: Option indicating whether the section is expected to fail or not, if
+#                      specified will cause test failure when no exceptions were caught and success
+#                      upon catching any exceptions.
 # :type EXPECTFAIL: option
-# :keyword PRINT_LENGTH: Optional argument specifying the desired print length of pass/fail output lines.
+# :keyword PRINT_LENGTH: Optional argument specifying the desired
+#                        print length of pass/fail output lines.
 # :type PRINT_LENGTH: int
 #
 # .. seealso:: :func:`add_test.cmake.ct_add_test` for details on EXPECTFAIL.
@@ -79,9 +83,12 @@ function(ct_add_section)
     cmake_parse_arguments(CT_ADD_SECTION "${_as_options}" "${_as_one_value_args}"
                           "${_as_multi_value_args}" ${ARGN} )
 
+
+
     set(_as_print_length_forced "NO")
 
-    #Set default print length to CT_PRINT_LENGTH. Can be overriden with PRINT_LENGTH option to this function or parent execution unit
+    # Set default print length to CT_PRINT_LENGTH. Can be overriden
+    # with PRINT_LENGTH option to this function or parent execution unit
     set(_as_print_length "${CT_PRINT_LENGTH}")
     if(CT_ADD_SECTION_PRINT_LENGTH GREATER 0)
         set(_as_print_length_forced "YES")
@@ -106,9 +113,18 @@ function(ct_add_section)
         endif()
     endif()
 
-    if("${${CT_ADD_SECTION_NAME}}" STREQUAL "")
+    CTExecutionUnit(GET "${_as_curr_instance}" _as_siblings section_names_to_ids)
+    cpp_map(HAS_KEY "${_as_siblings}" _as_unit_created "${CT_ADD_SECTION_NAME}")
+    if(NOT _as_unit_created)
          cpp_unique_id(_as_section_name) #Generate random section ID
-         set("${CT_ADD_SECTION_NAME}" "${_as_section_name}") #Need to duplicate because CMake scoping rules are inconsistent. Setting in parent scope does not set in current scope
+
+         # Need to duplicate because CMake scoping rules are inconsistent.
+         # Setting in parent scope does not set in current scope
+         set("${CT_ADD_SECTION_NAME}" "${_as_section_name}")
+         set("${CT_ADD_SECTION_NAME}" "${_as_section_name}" PARENT_SCOPE)
+    else()
+         cpp_map(GET "${_as_siblings}" _as_section_name "${CT_ADD_SECTION_NAME}")
+         set("${CT_ADD_SECTION_NAME}" "${_as_section_name}")
          set("${CT_ADD_SECTION_NAME}" "${_as_section_name}" PARENT_SCOPE)
     endif()
 
@@ -121,25 +137,40 @@ function(ct_add_section)
         # Debug mode reset in execute()
         CTExecutionUnit(execute "${_as_curr_section_instance}")
     else()
-        #First time run, construct and configure
-        #the new section unit, as well as add it
-        #to its parent
-
-        CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_file test_file)
-        CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_section_depth section_depth)
-        
-        math(EXPR _as_new_section_depth "${_as_parent_section_depth} + 1")
-
-        CTExecutionUnit(CTOR _as_new_section "${${CT_ADD_SECTION_NAME}}" "${CT_ADD_SECTION_NAME}" "${CT_ADD_SECTION_EXPECTFAIL}")
-        CTExecutionUnit(SET "${_as_new_section}" parent "${_as_curr_instance}")
-        CTExecutionUnit(SET "${_as_new_section}" print_length_forced "${_as_print_length_forced}")
-        CTExecutionUnit(SET "${_as_new_section}" print_length "${_as_print_length}")
-        CTExecutionUnit(SET "${_as_new_section}" test_file "${_as_parent_file}")
-        CTExecutionUnit(SET "${_as_new_section}" section_depth "${_as_new_section_depth}")
-        CTExecutionUnit(append_child "${_as_curr_instance}" "${${CT_ADD_SECTION_NAME}}" "${_as_new_section}")
+        # Not time to execute, but we only want to define if our parent
+        # doesn't already have an entry for us
         CTExecutionUnit(GET "${_as_curr_instance}" _as_siblings section_names_to_ids)
-        cpp_map(SET "${_as_siblings}" "${CT_ADD_SECTION_NAME}" "${${CT_ADD_SECTION_NAME}}")
+        cpp_map(HAS_KEY "${_as_siblings}" _as_unit_created "${CT_ADD_SECTION_NAME}")
+        if(NOT _as_unit_created)
+            #First time run, construct and configure
+            #the new section unit, as well as add it
+            #to its parent
 
+
+
+            CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_file test_file)
+            CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_section_depth section_depth)
+
+            math(EXPR _as_new_section_depth "${_as_parent_section_depth} + 1")
+
+            CTExecutionUnit(
+                CTOR
+                _as_new_section
+                "${${CT_ADD_SECTION_NAME}}"
+                "${CT_ADD_SECTION_NAME}"
+                "${CT_ADD_SECTION_EXPECTFAIL}"
+            )
+            CTExecutionUnit(SET "${_as_new_section}" parent "${_as_curr_instance}")
+            CTExecutionUnit(SET "${_as_new_section}" print_length_forced "${_as_print_length_forced}")
+            CTExecutionUnit(SET "${_as_new_section}" print_length "${_as_print_length}")
+            CTExecutionUnit(SET "${_as_new_section}" test_file "${_as_parent_file}")
+            CTExecutionUnit(SET "${_as_new_section}" section_depth "${_as_new_section_depth}")
+            CTExecutionUnit(SET "${_as_new_section}" debug_mode "${_as_temp_debug_mode}")
+            CTExecutionUnit(append_child "${_as_curr_instance}" "${${CT_ADD_SECTION_NAME}}" "${_as_new_section}")
+            CTExecutionUnit(GET "${_as_curr_instance}" _as_siblings section_names_to_ids)
+            cpp_map(SET "${_as_siblings}" "${CT_ADD_SECTION_NAME}" "${${CT_ADD_SECTION_NAME}}")
+
+        endif()
         # Reset debug mode in case test changed it
         set(CMAKEPP_LANG_DEBUG_MODE "${_as_temp_debug_mode}")
     endif()

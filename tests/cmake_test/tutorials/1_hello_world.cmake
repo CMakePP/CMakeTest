@@ -19,6 +19,11 @@ include(cmake_test/cmake_test)
 #immediately succeed the :code:`ct_add_test()` call. The CMake
 #code in this function will serve as the contents of the unit test.
 #
+#CMakeTest uses the name of the test as a variable
+#holding a unique identifier for the test's function,
+#so the name of the function is the value of the variable
+#(``function(${some_test_name})``).
+#
 #As an introductory example we write a simple unit test that prints
 #"Hello World" and asserts that "Hello World" was indeed printed.
 ct_add_test(NAME hello_world)
