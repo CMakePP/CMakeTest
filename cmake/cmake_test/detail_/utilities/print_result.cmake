@@ -103,7 +103,7 @@ endfunction()
 # :type print_length: int
 #]]
 function(_ct_print_pass _pp_name _pp_depth _pp_print_length)
-    cpp_assert_signature("${ARGV}" desc int int)
+    cpp_assert_signature("${ARGV}" str int int)
     _ct_print_result("${_pp_name}" "${CT_BoldGreen}PASSED${CT_ColorReset}" "${_pp_depth}" "${_pp_print_length}")
 endfunction()
 
@@ -124,6 +124,6 @@ endfunction()
 # :type print_length: int
 #]]
 function(_ct_print_fail _pf_name _pf_depth _pf_print_length)
-    cpp_assert_signature("${ARGV}" desc int int)
+    cpp_assert_signature("${ARGV}" str int int)
     _ct_print_result("${_pf_name}" "${CT_BoldRed}FAILED${CT_ColorReset}" "${_pf_depth}" "${_pf_print_length}")
 endfunction()

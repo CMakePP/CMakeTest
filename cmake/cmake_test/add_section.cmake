@@ -83,7 +83,16 @@ function(ct_add_section)
     cmake_parse_arguments(CT_ADD_SECTION "${_as_options}" "${_as_one_value_args}"
                           "${_as_multi_value_args}" ${ARGN} )
 
+    # This is to set a default value for the print length
+    # argument to prevent any weird empty strings from getting through
+    if(NOT DEFINED CT_ADD_SECTION_PRINT_LENGTH)
+        set(CT_ADD_SECTION_PRINT_LENGTH 0)
+    endif()
 
+    # Assert sig doesn't work too well with the position agnostic kwargs,
+    # so first we parse the arguments and then we check their types.
+    # Right now, allow any type for the name
+    cpp_assert_signature("${CT_ADD_SECTION_NAME};${CT_ADD_SECTION_PRINT_LENGTH}" str int)
 
     set(_as_print_length_forced "NO")
 
