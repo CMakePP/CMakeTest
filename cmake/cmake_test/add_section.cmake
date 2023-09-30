@@ -16,8 +16,25 @@ include_guard()
 
 
 #[[[
-# Adds a test section, should be called inside of a declared test function directly before declaring the section function.
-# The NAME parameter will be populated as by set() with the generated section function name. Declare the section function using this generated name. Ex:
+# Adds a test section, should be called inside of a
+# declared test function directly before declaring the section function.
+#
+# A variable named :code:`CMAKETEST_SECTION` will be set in the
+# calling scope that holds the section function ID. Use this variable
+# to define the CMake function holding the section code. Ex:
+#
+# .. code-block:: cmake
+#
+#    #This is inside of a declared test function
+#    ct_add_section(NAME this_section)
+#    function(${CMAKETEST_SECTION})
+#        message(STATUS "This code will run in a test section")
+#    endfunction()
+#
+#
+# Additionally, the NAME parameter will be populated as by set() with the
+# generated section function name. This is for backwards-compatibility
+# purposes. Ex:
 #
 # .. code-block:: cmake
 #
@@ -27,17 +44,8 @@ include_guard()
 #        message(STATUS "This code will run in a test section")
 #    endfunction()
 #
-# Upon being executed, this function will check if the section should be executed.
-# If it is not, ct_add_section() will generate an ID for the section function and sets the variable pointed to by the NAME parameter to it.
-# It will also construct a new CTExecutionUnit instance to represent the section.
-#
-# If the section is supposed to be executed, ct_add_section() will call the ``execute`` member function of the CTExecutionUnit representing this section.
-# Exceptions will be tracked while the function is being executed. After completion of the test, the test status will be output
-# to the screen. The section subsections will then be executed, following this same flow until there are no more subsections.
-#
-# If a section raises an exception when it is not expected to, it will be marked as a failing section and its subsections
-# will not be executed, due to limitations in how CMake handles failures. However, sibling sections as well as 
-# other tests will continue to execute, and the failures will be aggregated and printed after all tests have been ran.
+# This behavior is considered deprecated, use the first form
+# for new sections.
 #
 # Print length of pass/fail lines can be adjusted with the `PRINT_LENGTH` option.
 #
@@ -47,11 +55,18 @@ include_guard()
 #  3. Length set by ct_set_print_length()
 #  4. Built-in default of 80.
 #
+# If a section raises an exception when it is not expected to,
+# it will be marked as a failing section and its subsections
+# will not be executed, due to limitations in how CMake handles failures.
+# However, sibling sections as well as other tests
+# will continue to execute, and the failures will be aggregated
+# and printed after all tests have been ran.
+#
 # **Keyword Arguments**
 #
 # :keyword NAME: Required argument specifying the name variable of the section. Will set a variable with
 #                specified name containing the generated function ID to use.
-# :type NAME: pointer
+# :type NAME: str*
 # :keyword EXPECTFAIL: Option indicating whether the section is expected to fail or not, if
 #                      specified will cause test failure when no exceptions were caught and success
 #                      upon catching any exceptions.
@@ -60,12 +75,35 @@ include_guard()
 #                        print length of pass/fail output lines.
 # :type PRINT_LENGTH: int
 #
-# .. seealso:: :func:`add_test.cmake.ct_add_test` for details on EXPECTFAIL.
+# .. seealso:: :func:`~cmake_test/add_test.ct_add_test` for details on EXPECTFAIL.
 #
-# .. seealso:: :func:`exec_test.cmake.ct_exec_test` for details on halting tests on exceptions.
+# .. seealso:: :func:`~cmake_test/exec_tests.ct_exec_tests` for details on halting tests on exceptions.
+#
+# Implementation Details
+# ----------------------
+#
+# Upon being executed, this function will check if the section should be executed.
+# If it is not, this function will generate an ID for the section
+# function and sets the variable pointed to by the NAME parameter to it.
+# It will also construct a new :class:`~cmake_test/execution_unit.CTExecutionUnit`
+# instance to represent the section.
+#
+# If the section is supposed to be executed, this function
+# will call the :meth:`~cmake_test/execution_unit.CTExecutionUnit.execute`
+# method of the unit representing this section.
+# Exceptions will be tracked while the function is being executed.
+# After completion of the test, the test status will be output
+# using :meth:`~cmake_test/execution_unit.CTExecutionUnit.print_pass_or_fail`.
+# The section's subsections will then be executed recursively, following
+# this same flow until there are no more subsections.
+#
 #
 #]]
 function(ct_add_section)
+
+    #####################################
+    #   Context switch and arg parsing  #
+    #####################################
 
     # Set debug mode to what it should be for cmaketest, in case the test changed it
     set(_as_temp_debug_mode "${CMAKEPP_LANG_DEBUG_MODE}")
@@ -73,6 +111,7 @@ function(ct_add_section)
     set(CMAKEPP_LANG_DEBUG_MODE "${_as_ct_debug_mode}")
     cpp_set_global("CT_CURR_TEST_DEBUG_MODE" "${_as_temp_debug_mode}")
 
+    # Parse the arguments
     cpp_get_global(_as_curr_instance "CT_CURRENT_EXECUTION_UNIT_INSTANCE")
     CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_print_length print_length)
     CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_print_length_forced print_length_forced)
@@ -89,10 +128,15 @@ function(ct_add_section)
         set(CT_ADD_SECTION_PRINT_LENGTH 0)
     endif()
 
+
     # Assert sig doesn't work too well with the position agnostic kwargs,
     # so first we parse the arguments and then we check their types.
     # Right now, allow any type for the name
     cpp_assert_signature("${CT_ADD_SECTION_NAME};${CT_ADD_SECTION_PRINT_LENGTH}" str int)
+
+    #####################################
+    #      Print length detection       #
+    #####################################
 
     set(_as_print_length_forced "NO")
 
@@ -106,38 +150,57 @@ function(ct_add_section)
         set(_as_print_length "${_as_parent_print_length}")
     endif()
 
+
+    #####################################
+    #   Name retrieval and generation   #
+    #####################################
+
     CTExecutionUnit(GET "${_as_curr_instance}" _as_sibling_sections_map section_names_to_ids)
     cpp_map(GET "${_as_sibling_sections_map}" _as_curr_section_id "${CT_ADD_SECTION_NAME}")
 
     #Unset in main interpreter, TRUE in subprocess
     cpp_get_global(_as_exec_expectfail "CT_EXEC_EXPECTFAIL")
 
+    # The name is set to "_" in the expectfail subprocess
+    # if the test is not intended to be ran
 
     if(_as_exec_expectfail)
         if("${${CT_ADD_SECTION_NAME}}" STREQUAL "" OR "${${CT_ADD_SECTION_NAME}}" STREQUAL "_")
             set("${CT_ADD_SECTION_NAME}" "_" PARENT_SCOPE)
+            set(CMAKETEST_SECTION "_" PARENT_SCOPE)
             # Reset debug mode in case test changed it
             set(CMAKEPP_LANG_DEBUG_MODE "${_as_temp_debug_mode}")
             return() #If section is not part of the call tree, immediately return
         endif()
     endif()
 
+    # Check if the name for this section is set,
+    # if so then retrieve it, else generation
+
     CTExecutionUnit(GET "${_as_curr_instance}" _as_siblings section_names_to_ids)
     cpp_map(HAS_KEY "${_as_siblings}" _as_unit_created "${CT_ADD_SECTION_NAME}")
     if(NOT _as_unit_created)
          cpp_unique_id(_as_section_name) #Generate random section ID
-
-         # Need to duplicate because CMake scoping rules are inconsistent.
-         # Setting in parent scope does not set in current scope
-         set("${CT_ADD_SECTION_NAME}" "${_as_section_name}")
-         set("${CT_ADD_SECTION_NAME}" "${_as_section_name}" PARENT_SCOPE)
     else()
          cpp_map(GET "${_as_siblings}" _as_section_name "${CT_ADD_SECTION_NAME}")
-         set("${CT_ADD_SECTION_NAME}" "${_as_section_name}")
-         set("${CT_ADD_SECTION_NAME}" "${_as_section_name}" PARENT_SCOPE)
     endif()
 
-    #Get whether we should execute section now
+
+    # Set the output variables
+
+    # Need to duplicate because CMake scoping rules are inconsistent.
+    # Setting in parent scope does not set in current scope
+    set("${CT_ADD_SECTION_NAME}" "${_as_section_name}")
+    set("${CT_ADD_SECTION_NAME}" "${_as_section_name}" PARENT_SCOPE)
+
+    set("CMAKETEST_SECTION" "${_as_section_name}")
+    set("CMAKETEST_SECTION" "${_as_section_name}" PARENT_SCOPE)
+
+    #####################################
+    #  Execution and unit construction  #
+    #####################################
+
+    # Get whether we should execute section now
     CTExecutionUnit(GET "${_as_curr_instance}" _as_exec_section execute_sections)
 
     if(_as_exec_section) #Time to execute our section
@@ -151,9 +214,9 @@ function(ct_add_section)
         CTExecutionUnit(GET "${_as_curr_instance}" _as_siblings section_names_to_ids)
         cpp_map(HAS_KEY "${_as_siblings}" _as_unit_created "${CT_ADD_SECTION_NAME}")
         if(NOT _as_unit_created)
-            #First time run, construct and configure
-            #the new section unit, as well as add it
-            #to its parent
+            # First time run, construct and configure
+            # the new section unit, as well as add it
+            # to its parent
 
 
 
@@ -165,7 +228,7 @@ function(ct_add_section)
             CTExecutionUnit(
                 CTOR
                 _as_new_section
-                "${${CT_ADD_SECTION_NAME}}"
+                "${CMAKETEST_SECTION}"
                 "${CT_ADD_SECTION_NAME}"
                 "${CT_ADD_SECTION_EXPECTFAIL}"
             )
@@ -175,9 +238,9 @@ function(ct_add_section)
             CTExecutionUnit(SET "${_as_new_section}" test_file "${_as_parent_file}")
             CTExecutionUnit(SET "${_as_new_section}" section_depth "${_as_new_section_depth}")
             CTExecutionUnit(SET "${_as_new_section}" debug_mode "${_as_temp_debug_mode}")
-            CTExecutionUnit(append_child "${_as_curr_instance}" "${${CT_ADD_SECTION_NAME}}" "${_as_new_section}")
+            CTExecutionUnit(append_child "${_as_curr_instance}" "${CMAKETEST_SECTION}" "${_as_new_section}")
             CTExecutionUnit(GET "${_as_curr_instance}" _as_siblings section_names_to_ids)
-            cpp_map(SET "${_as_siblings}" "${CT_ADD_SECTION_NAME}" "${${CT_ADD_SECTION_NAME}}")
+            cpp_map(SET "${_as_siblings}" "${CT_ADD_SECTION_NAME}" "${CMAKETEST_SECTION}")
 
         endif()
         # Reset debug mode in case test changed it

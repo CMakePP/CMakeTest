@@ -53,6 +53,11 @@ include_guard()
 #
 #]]
 macro(ct_add_test)
+
+    #####################################
+    #   Context switch and arg parsing  #
+    #####################################
+
     # Set debug mode to what it should be for cmaketest, in case the test changed it
     set(_at_temp_debug_mode "${CMAKEPP_LANG_DEBUG_MODE}")
     cpp_get_global(_at_ct_debug_mode "CT_DEBUG_MODE")
@@ -79,6 +84,7 @@ macro(ct_add_test)
 
     if(_at_exec_expectfail AND ("${${CT_ADD_TEST_NAME}}" STREQUAL "" OR "${${CT_ADD_TEST_NAME}}" STREQUAL "_"))
             set("${CT_ADD_TEST_NAME}" "_")
+            set(CMAKETEST_TEST "_" PARENT_SCOPE)
             # Reset debug mode in case test changed it
             set(CMAKEPP_LANG_DEBUG_MODE "${_at_temp_debug_mode}")
     else()
@@ -96,6 +102,7 @@ macro(ct_add_test)
 
         if(_at_old_id STREQUAL "")
             cpp_unique_id("${CT_ADD_TEST_NAME}")
+            set(CMAKETEST_TEST "${${CT_ADD_TEST_NAME}}")
         endif()
 
         if(_at_exec_expectfail OR ("${_at_old_id}" STREQUAL ""))
