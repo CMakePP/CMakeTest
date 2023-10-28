@@ -20,7 +20,7 @@
 #think it does.
 include(cmake_test/cmake_test)
 ct_add_test(NAME "_test_sections")
-function(${_test_sections})
+function(${CMAKETEST_TEST})
     set(common "This variable is available to all tests")
     ct_assert_equal(common "This variable is available to all tests")
 
@@ -51,7 +51,7 @@ function(${_test_sections})
     #``ct_end_test``, whereas all inner scopes (even scopes within sections) are
     #started with ``ct_add_section`` and ended with ``endfunction``.
     ct_add_section(NAME "_scoped_variable")
-    function(${_scoped_variable})
+    function(${CMAKETEST_SECTION})
 
         #TUTORIAL
         #
@@ -78,7 +78,7 @@ function(${_test_sections})
         # 3. Length set by ct_set_print_length()
         # 4. Built-in default of 80.
         ct_add_section(NAME "_nested_section" PRINT_LENGTH 180)
-        function(${_nested_section})
+        function(${CMAKETEST_SECTION})
             set(not_common "This change only matters here")
             ct_assert_equal(common "This variable is available to all tests")
             ct_assert_equal(not_common "This change only matters here")
@@ -93,7 +93,7 @@ function(${_test_sections})
         set(not_common "Only visible from here forward")
 
         ct_add_section(NAME "_another_nested_section")
-        function(${_another_nested_section})
+        function(${CMAKETEST_SECTION})
             ct_assert_equal(not_common "Only visible from here forward")
         endfunction()
     endfunction()
