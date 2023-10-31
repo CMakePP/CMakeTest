@@ -27,7 +27,7 @@ include(cmake_test/cmake_test)
 #As an introductory example we write a simple unit test that prints
 #"Hello World" and asserts that "Hello World" was indeed printed.
 ct_add_test(NAME hello_world)
-function(${hello_world})
+function(${CMAKETEST_TEST})
     message("Hello World")
     ct_assert_prints("Hello World")
 endfunction()

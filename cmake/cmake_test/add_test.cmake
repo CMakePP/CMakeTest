@@ -18,17 +18,33 @@ include_guard()
 #
 # Unit testing in CMakeTest works by `include()`ing each unit test, determining which ones
 # need to be ran, and then executing them sequentially in-process. This macro defines which functions
-# are to be interpretted as actual unit tests. It does so by setting a variable in the calling scope
-# that is to be used as the function identifier. For example:
+# are to be interpretted as actual unit tests.
+#
+# A variable named :code:`CMAKETEST_TEST` will be set in the
+# calling scope that holds the test function ID. Use this variable
+# to define the CMake function holding the section code. Ex:
+#
+# .. code-block:: cmake
+#
+#    ct_add_test(NAME [=[Any test name here]=])
+#    function(${CMAKETEST_TEST})
+#        message(STATUS "This code will run in a test")
+#    endfunction()
+#
+#
+# Additionally, the NAME parameter will be populated as by set() with the
+# generated section function name. This is for backwards-compatibility
+# purposes. Ex:
 #
 # .. code-block:: cmake
 #
 #    ct_add_test(NAME this_test)
 #    function(${this_test})
-#        message(STATUS "This code will run in a unit test")
+#        message(STATUS "This code will run in a test")
 #    endfunction()
 #
-# This helps tests avoid name collisions and also allows the testing framework to keep track of them.
+# This behavior is considered deprecated, use the first form
+# for new tests.
 #
 # Print length of pass/fail lines can be adjusted with the `PRINT_LENGTH` option.
 #
@@ -53,6 +69,11 @@ include_guard()
 #
 #]]
 macro(ct_add_test)
+
+    #####################################
+    #   Context switch and arg parsing  #
+    #####################################
+
     # Set debug mode to what it should be for cmaketest, in case the test changed it
     set(_at_temp_debug_mode "${CMAKEPP_LANG_DEBUG_MODE}")
     cpp_get_global(_at_ct_debug_mode "CT_DEBUG_MODE")
@@ -79,6 +100,7 @@ macro(ct_add_test)
 
     if(_at_exec_expectfail AND ("${${CT_ADD_TEST_NAME}}" STREQUAL "" OR "${${CT_ADD_TEST_NAME}}" STREQUAL "_"))
             set("${CT_ADD_TEST_NAME}" "_")
+            set(CMAKETEST_TEST "_" PARENT_SCOPE)
             # Reset debug mode in case test changed it
             set(CMAKEPP_LANG_DEBUG_MODE "${_at_temp_debug_mode}")
     else()
@@ -96,6 +118,7 @@ macro(ct_add_test)
 
         if(_at_old_id STREQUAL "")
             cpp_unique_id("${CT_ADD_TEST_NAME}")
+            set(CMAKETEST_TEST "${${CT_ADD_TEST_NAME}}")
         endif()
 
         if(_at_exec_expectfail OR ("${_at_old_id}" STREQUAL ""))

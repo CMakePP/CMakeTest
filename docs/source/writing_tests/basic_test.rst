@@ -26,12 +26,21 @@ a particular string is printed.
 
 The :obj:`~cmake_test/add_test.ct_add_test` call tells CMakeTest that there is a test
 with the name :code:`hello_world`. The function definition below it
-defines the test. Note the odd :code:`${hello_world}` used as the
-function name. This is required to link the function definition with
-the :code:`ct_add_test()` call. :code:`ct_add_test()` takes the test name
-and assigns a unique identifier to it to keep track of the accompanying
-definition. Thus, if you use the same name for multiple tests in the same
-scope they will conflict.
+defines the test. Note the odd :code:`${CMAKETEST_TEST}` as the function name.
+This is required to link the function definition with the test. The
+value of the implicitly set :code:`CMAKETEST_TEST` variable is a unique
+identifier for the test, it's only used internally.
+
+The name of the test may be any string and can include special characters.
+If the name has such special characters, pass it as a bracket argument
+instead of as a quoted argument.
+
+.. note::
+   There is a secondary, deprecated form of naming tests and sections.
+   This secondary form has restrictions on the name given such that it
+   is a valid CMake variable identifier. New tests and sections should
+   use the above form instead. See :obj:`~cmake_test/add_test.ct_add_test`
+   for information on the deprecated form.
 
 Inside the function one will notice a call to
 :obj:`~cmake_test/asserts/prints.ct_assert_prints`.
