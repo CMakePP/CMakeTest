@@ -106,7 +106,7 @@ to all inner scopes, and an assert to prove that the variable has the state we
 think it does.</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">include</span><span class="p">(</span><span class="s">cmake_test/cmake_test</span><span class="p">)</span>
 <span class="nb">ct_add_test</span><span class="p">(</span><span class="s">NAME</span><span class="w"> </span><span class="s2">&quot;_test_sections&quot;</span><span class="p">)</span>
-<span class="nb">function</span><span class="p">(</span><span class="o">${</span><span class="nv">_test_sections</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">function</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKETEST_TEST</span><span class="o">}</span><span class="p">)</span>
 <span class="w">    </span><span class="nb">set</span><span class="p">(</span><span class="s">common</span><span class="w"> </span><span class="s2">&quot;This variable is available to all tests&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="nb">ct_assert_equal</span><span class="p">(</span><span class="s">common</span><span class="w"> </span><span class="s2">&quot;This variable is available to all tests&quot;</span><span class="p">)</span>
 </pre></div>
@@ -133,7 +133,7 @@ outermost scope must always be created with <code class="docutils literal notran
 <code class="docutils literal notranslate"><span class="pre">ct_end_test</span></code>, whereas all inner scopes (even scopes within sections) are
 started with <code class="docutils literal notranslate"><span class="pre">ct_add_section</span></code> and ended with <code class="docutils literal notranslate"><span class="pre">endfunction</span></code>.</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">ct_add_section</span><span class="p">(</span><span class="s">NAME</span><span class="w"> </span><span class="s2">&quot;_scoped_variable&quot;</span><span class="p">)</span>
-<span class="nb">function</span><span class="p">(</span><span class="o">${</span><span class="nv">_scoped_variable</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">function</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKETEST_SECTION</span><span class="o">}</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>You can override the default print length for tests and subsections
@@ -162,7 +162,7 @@ Priority for print length is as follows (first most important):</p>
 </ol>
 </div></blockquote>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">ct_add_section</span><span class="p">(</span><span class="s">NAME</span><span class="w"> </span><span class="s2">&quot;_nested_section&quot;</span><span class="w"> </span><span class="s">PRINT_LENGTH</span><span class="w"> </span><span class="s">180</span><span class="p">)</span>
-<span class="nb">function</span><span class="p">(</span><span class="o">${</span><span class="nv">_nested_section</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">function</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKETEST_SECTION</span><span class="o">}</span><span class="p">)</span>
 <span class="w">    </span><span class="nb">set</span><span class="p">(</span><span class="s">not_common</span><span class="w"> </span><span class="s2">&quot;This change only matters here&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="nb">ct_assert_equal</span><span class="p">(</span><span class="s">common</span><span class="w"> </span><span class="s2">&quot;This variable is available to all tests&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="nb">ct_assert_equal</span><span class="p">(</span><span class="s">not_common</span><span class="w"> </span><span class="s2">&quot;This change only matters here&quot;</span><span class="p">)</span>
@@ -176,7 +176,7 @@ to the following subsection.</p>
 <span class="w">    </span><span class="nb">set</span><span class="p">(</span><span class="s">not_common</span><span class="w"> </span><span class="s2">&quot;Only visible from here forward&quot;</span><span class="p">)</span>
 
 <span class="w">    </span><span class="nb">ct_add_section</span><span class="p">(</span><span class="s">NAME</span><span class="w"> </span><span class="s2">&quot;_another_nested_section&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="nb">function</span><span class="p">(</span><span class="o">${</span><span class="nv">_another_nested_section</span><span class="o">}</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">function</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKETEST_SECTION</span><span class="o">}</span><span class="p">)</span>
 <span class="w">        </span><span class="nb">ct_assert_equal</span><span class="p">(</span><span class="s">not_common</span><span class="w"> </span><span class="s2">&quot;Only visible from here forward&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="nb">endfunction</span><span class="p">()</span>
 <span class="nb">endfunction</span><span class="p">()</span>

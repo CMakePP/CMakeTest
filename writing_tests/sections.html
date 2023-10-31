@@ -96,10 +96,10 @@ are also executed. An example is shown below:</p>
 <span class="c"># This file just shows how to write a basic test section.</span>
 <span class="c">#]]</span>
 <span class="nb">ct_add_test</span><span class="p">(</span><span class="s">NAME</span><span class="w"> </span><span class="s">basic_test</span><span class="p">)</span>
-<span class="nb">function</span><span class="p">(</span><span class="o">${</span><span class="nv">basic_test</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">function</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKETEST_TEST</span><span class="o">}</span><span class="p">)</span>
 
 <span class="w">    </span><span class="nb">ct_add_section</span><span class="p">(</span><span class="s">NAME</span><span class="w"> </span><span class="s">basic_section</span><span class="p">)</span>
-<span class="w">    </span><span class="nb">function</span><span class="p">(</span><span class="o">${</span><span class="nv">basic_section</span><span class="o">}</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">function</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKETEST_SECTION</span><span class="o">}</span><span class="p">)</span>
 
 <span class="w">        </span><span class="nb">message</span><span class="p">(</span><span class="s2">&quot;Basic Section&quot;</span><span class="p">)</span>
 <span class="w">        </span><span class="nb">ct_assert_prints</span><span class="p">(</span><span class="s2">&quot;Basic Section&quot;</span><span class="p">)</span>

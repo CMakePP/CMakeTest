@@ -105,7 +105,7 @@ that define the test. An example is below:</p>
 <span class="c"># in an EXPECTFAIL test will allow the test to succeed.</span>
 <span class="c">#]]</span>
 <span class="nb">ct_add_test</span><span class="p">(</span><span class="s">NAME</span><span class="w"> </span><span class="s2">&quot;make_sure_function_fails&quot;</span><span class="w"> </span><span class="s">EXPECTFAIL</span><span class="p">)</span>
-<span class="nb">function</span><span class="p">(</span><span class="s2">&quot;${make_sure_function_fails}&quot;</span><span class="p">)</span>
+<span class="nb">function</span><span class="p">(</span><span class="s2">&quot;${CMAKETEST_TEST}&quot;</span><span class="p">)</span>
 
 <span class="w">    </span><span class="nb">function</span><span class="p">(</span><span class="s">failing_fxn</span><span class="p">)</span>
 <span class="w">        </span><span class="nb">message</span><span class="p">(</span><span class="s">FATAL_ERROR</span><span class="w"> </span><span class="s2">&quot;I have erred.&quot;</span><span class="p">)</span>

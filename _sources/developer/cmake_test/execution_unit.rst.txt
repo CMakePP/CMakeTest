@@ -62,7 +62,7 @@ cmake_test/execution_unit
 
       :type test_id: str
 
-      :type friendly_name: desc*
+      :type friendly_name: str
 
       :type expect_fail: bool
 

@@ -24,7 +24,7 @@ think it does.
 
     include(cmake_test/cmake_test)
     ct_add_test(NAME "_test_sections")
-    function(${_test_sections})
+    function(${CMAKETEST_TEST})
         set(common "This variable is available to all tests")
         ct_assert_equal(common "This variable is available to all tests")
 
@@ -56,7 +56,7 @@ started with ``ct_add_section`` and ended with ``endfunction``.
 .. code:: cmake
 
         ct_add_section(NAME "_scoped_variable")
-        function(${_scoped_variable})
+        function(${CMAKETEST_SECTION})
 
 You can override the default print length for tests and subsections
 by calling this function. It will be propagated down, so if it's
@@ -85,7 +85,7 @@ Priority for print length is as follows (first most important):
 .. code:: cmake
 
             ct_add_section(NAME "_nested_section" PRINT_LENGTH 180)
-            function(${_nested_section})
+            function(${CMAKETEST_SECTION})
                 set(not_common "This change only matters here")
                 ct_assert_equal(common "This variable is available to all tests")
                 ct_assert_equal(not_common "This change only matters here")
@@ -101,7 +101,7 @@ to the following subsection.
             set(not_common "Only visible from here forward")
     
             ct_add_section(NAME "_another_nested_section")
-            function(${_another_nested_section})
+            function(${CMAKETEST_SECTION})
                 ct_assert_equal(not_common "Only visible from here forward")
             endfunction()
         endfunction()

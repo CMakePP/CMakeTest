@@ -114,15 +114,27 @@
 <p>Defines a unit test for the CMakeTest framework.</p>
 <p>Unit testing in CMakeTest works by <a href="#id1"><span class="problematic" id="id2">`</span></a>include()`ing each unit test, determining which ones
 need to be ran, and then executing them sequentially in-process. This macro defines which functions
-are to be interpretted as actual unit tests. It does so by setting a variable in the calling scope
-that is to be used as the function identifier. For example:</p>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">ct_add_test</span><span class="p">(</span><span class="s">NAME</span><span class="w"> </span><span class="s">this_test</span><span class="p">)</span>
-<span class="nb">function</span><span class="p">(</span><span class="o">${</span><span class="nv">this_test</span><span class="o">}</span><span class="p">)</span>
-<span class="w">    </span><span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span><span class="w"> </span><span class="s2">&quot;This code will run in a unit test&quot;</span><span class="p">)</span>
+are to be interpretted as actual unit tests.</p>
+<p>A variable named <code class="code docutils literal notranslate"><span class="pre">CMAKETEST_TEST</span></code> will be set in the
+calling scope that holds the test function ID. Use this variable
+to define the CMake function holding the section code. Ex:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">ct_add_test</span><span class="p">(</span><span class="s">NAME</span><span class="w"> </span><span class="s">[=[Any</span><span class="w"> </span><span class="s">test</span><span class="w"> </span><span class="s">name</span><span class="w"> </span><span class="s">here]=]</span><span class="p">)</span>
+<span class="nb">function</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKETEST_TEST</span><span class="o">}</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span><span class="w"> </span><span class="s2">&quot;This code will run in a test&quot;</span><span class="p">)</span>
 <span class="nb">endfunction</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>This helps tests avoid name collisions and also allows the testing framework to keep track of them.</p>
+<p>Additionally, the NAME parameter will be populated as by set() with the
+generated section function name. This is for backwards-compatibility
+purposes. Ex:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">ct_add_test</span><span class="p">(</span><span class="s">NAME</span><span class="w"> </span><span class="s">this_test</span><span class="p">)</span>
+<span class="nb">function</span><span class="p">(</span><span class="o">${</span><span class="nv">this_test</span><span class="o">}</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span><span class="w"> </span><span class="s2">&quot;This code will run in a test&quot;</span><span class="p">)</span>
+<span class="nb">endfunction</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This behavior is considered deprecated, use the first form
+for new tests.</p>
 <p>Print length of pass/fail lines can be adjusted with the <cite>PRINT_LENGTH</cite> option.</p>
 <dl class="simple">
 <dt>Priority for print length is as follows (first most important):</dt><dd><ol class="arabic simple">

@@ -107,8 +107,21 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="cmake_test-add_section.ct_add_section">
 <span class="sig-prename descclassname"><span class="pre">cmake_test/add_section.</span></span><span class="sig-name descname"><span class="pre">ct_add_section</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-add_section.ct_add_section" title="Link to this definition"></a></dt>
-<dd><p>Adds a test section, should be called inside of a declared test function directly before declaring the section function.
-The NAME parameter will be populated as by set() with the generated section function name. Declare the section function using this generated name. Ex:</p>
+<dd><p>Adds a test section, should be called inside of a
+declared test function directly before declaring the section function.</p>
+<p>A variable named <code class="code docutils literal notranslate"><span class="pre">CMAKETEST_SECTION</span></code> will be set in the
+calling scope that holds the section function ID. Use this variable
+to define the CMake function holding the section code. Ex:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c">#This is inside of a declared test function</span>
+<span class="nb">ct_add_section</span><span class="p">(</span><span class="s">NAME</span><span class="w"> </span><span class="s">this_section</span><span class="p">)</span>
+<span class="nb">function</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKETEST_SECTION</span><span class="o">}</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span><span class="w"> </span><span class="s2">&quot;This code will run in a test section&quot;</span><span class="p">)</span>
+<span class="nb">endfunction</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Additionally, the NAME parameter will be populated as by set() with the
+generated section function name. This is for backwards-compatibility
+purposes. Ex:</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c">#This is inside of a declared test function</span>
 <span class="nb">ct_add_section</span><span class="p">(</span><span class="s">NAME</span><span class="w"> </span><span class="s">this_section</span><span class="p">)</span>
 <span class="nb">function</span><span class="p">(</span><span class="o">${</span><span class="nv">this_section</span><span class="o">}</span><span class="p">)</span>
@@ -116,15 +129,8 @@ The NAME parameter will be populated as by set() with the generated section func
 <span class="nb">endfunction</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Upon being executed, this function will check if the section should be executed.
-If it is not, ct_add_section() will generate an ID for the section function and sets the variable pointed to by the NAME parameter to it.
-It will also construct a new CTExecutionUnit instance to represent the section.</p>
-<p>If the section is supposed to be executed, ct_add_section() will call the <code class="docutils literal notranslate"><span class="pre">execute</span></code> member function of the CTExecutionUnit representing this section.
-Exceptions will be tracked while the function is being executed. After completion of the test, the test status will be output
-to the screen. The section subsections will then be executed, following this same flow until there are no more subsections.</p>
-<p>If a section raises an exception when it is not expected to, it will be marked as a failing section and its subsections
-will not be executed, due to limitations in how CMake handles failures. However, sibling sections as well as
-other tests will continue to execute, and the failures will be aggregated and printed after all tests have been ran.</p>
+<p>This behavior is considered deprecated, use the first form
+for new sections.</p>
 <p>Print length of pass/fail lines can be adjusted with the <cite>PRINT_LENGTH</cite> option.</p>
 <dl class="simple">
 <dt>Priority for print length is as follows (first most important):</dt><dd><ol class="arabic simple">
@@ -135,11 +141,17 @@ other tests will continue to execute, and the failures will be aggregated and pr
 </ol>
 </dd>
 </dl>
+<p>If a section raises an exception when it is not expected to,
+it will be marked as a failing section and its subsections
+will not be executed, due to limitations in how CMake handles failures.
+However, sibling sections as well as other tests
+will continue to execute, and the failures will be aggregated
+and printed after all tests have been ran.</p>
 <p><strong>Keyword Arguments</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>NAME</strong> (<em>pointer</em>) – Required argument specifying the name variable of the section. Will set a variable with
+<li><p><strong>NAME</strong> (<em>str*</em>) – Required argument specifying the name variable of the section. Will set a variable with
 specified name containing the generated function ID to use.</p></li>
 <li><p><strong>EXPECTFAIL</strong> (<em>option</em>) – Option indicating whether the section is expected to fail or not, if
 specified will cause test failure when no exceptions were caught and success
@@ -151,12 +163,28 @@ print length of pass/fail output lines.</p></li>
 </dl>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><code class="xref py py-func docutils literal notranslate"><span class="pre">add_test.cmake.ct_add_test()</span></code> for details on EXPECTFAIL.</p>
+<p><a class="reference internal" href="add_test.html#cmake_test-add_test.ct_add_test" title="cmake_test/add_test.ct_add_test"><code class="xref py py-func docutils literal notranslate"><span class="pre">ct_add_test()</span></code></a> for details on EXPECTFAIL.</p>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><code class="xref py py-func docutils literal notranslate"><span class="pre">exec_test.cmake.ct_exec_test()</span></code> for details on halting tests on exceptions.</p>
+<p><a class="reference internal" href="exec_tests.html#cmake_test-exec_tests.ct_exec_tests" title="cmake_test/exec_tests.ct_exec_tests"><code class="xref py py-func docutils literal notranslate"><span class="pre">ct_exec_tests()</span></code></a> for details on halting tests on exceptions.</p>
 </div>
+<section id="implementation-details">
+<h2>Implementation Details<a class="headerlink" href="#implementation-details" title="Link to this heading"></a></h2>
+<p>Upon being executed, this function will check if the section should be executed.
+If it is not, this function will generate an ID for the section
+function and sets the variable pointed to by the NAME parameter to it.
+It will also construct a new <a class="reference internal" href="execution_unit.html#cmake_test-execution_unit.CTExecutionUnit" title="cmake_test/execution_unit.CTExecutionUnit"><code class="xref py py-class docutils literal notranslate"><span class="pre">CTExecutionUnit</span></code></a>
+instance to represent the section.</p>
+<p>If the section is supposed to be executed, this function
+will call the <a class="reference internal" href="execution_unit.html#cmake_test-execution_unit.CTExecutionUnit.execute" title="cmake_test/execution_unit.CTExecutionUnit.execute"><code class="xref py py-meth docutils literal notranslate"><span class="pre">execute()</span></code></a>
+method of the unit representing this section.
+Exceptions will be tracked while the function is being executed.
+After completion of the test, the test status will be output
+using <a class="reference internal" href="execution_unit.html#cmake_test-execution_unit.CTExecutionUnit.print_pass_or_fail" title="cmake_test/execution_unit.CTExecutionUnit.print_pass_or_fail"><code class="xref py py-meth docutils literal notranslate"><span class="pre">print_pass_or_fail()</span></code></a>.
+The section’s subsections will then be executed recursively, following
+this same flow until there are no more subsections.</p>
+</section>
 </dd></dl>
 
 </section>

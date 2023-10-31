@@ -99,12 +99,21 @@ a particular string is printed.</p>
 </div>
 <p>The <a class="reference internal" href="../developer/cmake_test/add_test.html#cmake_test-add_test.ct_add_test" title="cmake_test/add_test.ct_add_test"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ct_add_test</span></code></a> call tells CMakeTest that there is a test
 with the name <code class="code docutils literal notranslate"><span class="pre">hello_world</span></code>. The function definition below it
-defines the test. Note the odd <code class="code docutils literal notranslate"><span class="pre">${hello_world}</span></code> used as the
-function name. This is required to link the function definition with
-the <code class="code docutils literal notranslate"><span class="pre">ct_add_test()</span></code> call. <code class="code docutils literal notranslate"><span class="pre">ct_add_test()</span></code> takes the test name
-and assigns a unique identifier to it to keep track of the accompanying
-definition. Thus, if you use the same name for multiple tests in the same
-scope they will conflict.</p>
+defines the test. Note the odd <code class="code docutils literal notranslate"><span class="pre">${CMAKETEST_TEST}</span></code> as the function name.
+This is required to link the function definition with the test. The
+value of the implicitly set <code class="code docutils literal notranslate"><span class="pre">CMAKETEST_TEST</span></code> variable is a unique
+identifier for the test, it’s only used internally.</p>
+<p>The name of the test may be any string and can include special characters.
+If the name has such special characters, pass it as a bracket argument
+instead of as a quoted argument.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There is a secondary, deprecated form of naming tests and sections.
+This secondary form has restrictions on the name given such that it
+is a valid CMake variable identifier. New tests and sections should
+use the above form instead. See <a class="reference internal" href="../developer/cmake_test/add_test.html#cmake_test-add_test.ct_add_test" title="cmake_test/add_test.ct_add_test"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ct_add_test</span></code></a>
+for information on the deprecated form.</p>
+</div>
 <p>Inside the function one will notice a call to
 <a class="reference internal" href="../developer/cmake_test/asserts/prints.html#cmake_test-asserts-prints.ct_assert_prints" title="cmake_test/asserts/prints.ct_assert_prints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ct_assert_prints</span></code></a>.
 This is one of the included assertion functions. If an assertion fails,

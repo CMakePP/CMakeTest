@@ -110,7 +110,7 @@ so the name of the function is the value of the variable
 <p>As an introductory example we write a simple unit test that prints
 “Hello World” and asserts that “Hello World” was indeed printed.</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">ct_add_test</span><span class="p">(</span><span class="s">NAME</span><span class="w"> </span><span class="s">hello_world</span><span class="p">)</span>
-<span class="nb">function</span><span class="p">(</span><span class="o">${</span><span class="nv">hello_world</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">function</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKETEST_TEST</span><span class="o">}</span><span class="p">)</span>
 <span class="w">    </span><span class="nb">message</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="nb">ct_assert_prints</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">)</span>
 <span class="nb">endfunction</span><span class="p">()</span>

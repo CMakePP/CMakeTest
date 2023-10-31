@@ -32,7 +32,7 @@ As an introductory example we write a simple unit test that prints
 .. code:: cmake
 
     ct_add_test(NAME hello_world)
-    function(${hello_world})
+    function(${CMAKETEST_TEST})
         message("Hello World")
         ct_assert_prints("Hello World")
     endfunction()
