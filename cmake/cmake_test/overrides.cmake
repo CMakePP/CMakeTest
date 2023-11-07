@@ -21,7 +21,7 @@
 #    This module is intended for internal use only
 #]]
 
-include_guard()
+include_guard(GLOBAL)
 
 
 #[[[
