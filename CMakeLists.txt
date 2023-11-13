@@ -6,7 +6,7 @@ if(NOT CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 	set(_ct_min_cmake_version "${_ct_min_cmake_version}" PARENT_SCOPE) #Make sure projects using CMakeTest have this variable
 endif()
 
-list(FIND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}" path_has_cmake)
+list(FIND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" path_has_cmake)
 if(${path_has_cmake} STREQUAL "-1")
     list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 endif()
