@@ -1,21 +1,23 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Architecture and Execution Flow &mdash; CMakeTest 1.0.0alpha documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=d4e7da7a"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=418f8411"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -95,7 +97,7 @@
            <div itemprop="articleBody">
              
   <section id="architecture-and-execution-flow">
-<h1>Architecture and Execution Flow<a class="headerlink" href="#architecture-and-execution-flow" title="Link to this heading"></a></h1>
+<h1>Architecture and Execution Flow<a class="headerlink" href="#architecture-and-execution-flow" title="Permalink to this heading"></a></h1>
 <p>CMakeTest is built around the concept of an <code class="docutils literal notranslate"><span class="pre">Execution</span> <span class="pre">Unit</span></code>.
 A unit is an object representing a test or test section
 and may contain other subunits that represent subsections.
@@ -106,19 +108,19 @@ The object system is provided by <code class="docutils literal notranslate"><spa
 that represents execution units is
 <a class="reference internal" href="cmake_test/execution_unit.html#cmake_test-execution_unit.CTExecutionUnit" title="cmake_test/execution_unit.CTExecutionUnit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CTExecutionUnit</span></code></a>.</p>
 <section id="execution-stages">
-<h2>Execution Stages<a class="headerlink" href="#execution-stages" title="Link to this heading"></a></h2>
+<h2>Execution Stages<a class="headerlink" href="#execution-stages" title="Permalink to this heading"></a></h2>
 <p>CMakeTest runs in two stages: the configure stage and the test stage.
 The test stage is executed by a <code class="code docutils literal notranslate"><span class="pre">ctest</span></code> command in the directory
 that tests are built in.</p>
 <section id="configure-stage">
-<h3>Configure Stage<a class="headerlink" href="#configure-stage" title="Link to this heading"></a></h3>
+<h3>Configure Stage<a class="headerlink" href="#configure-stage" title="Permalink to this heading"></a></h3>
 <p>During the configure stage, CMakeTest scans directories that were added via
 <a class="reference internal" href="cmake_test/add_dir.html#cmake_test-add_dir.ct_add_dir" title="cmake_test/add_dir.ct_add_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ct_add_dir</span></code></a> and generates a bootstrap CTest test file
 for each CMake file in each directory. The bootstrap file is generated from a
 template, which is explained in <a class="reference internal" href="templates.html#bootstrap-templates"><span class="std std-ref">Bootstrap Templates</span></a>.</p>
 </section>
 <section id="test-stage">
-<h3>Test Stage<a class="headerlink" href="#test-stage" title="Link to this heading"></a></h3>
+<h3>Test Stage<a class="headerlink" href="#test-stage" title="Permalink to this heading"></a></h3>
 <p>The test stage is the phase in which the majority of CMakeTest
 code is executed. The generated bootstrap files handle the setup of the CMakeTest
 runtime. From there the bootstrap sequence begins the test discovery and execution
@@ -126,7 +128,7 @@ procedure.</p>
 </section>
 </section>
 <section id="test-discovery">
-<h2>Test Discovery<a class="headerlink" href="#test-discovery" title="Link to this heading"></a></h2>
+<h2>Test Discovery<a class="headerlink" href="#test-discovery" title="Permalink to this heading"></a></h2>
 <p>Tests are discovered by <code class="code docutils literal notranslate"><span class="pre">include()</span></code>-ing the file under test,
 which will execute all top-level <a class="reference internal" href="cmake_test/add_test.html#cmake_test-add_test.ct_add_test" title="cmake_test/add_test.ct_add_test"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ct_add_test</span></code></a> calls.
 These calls instantiate one <a class="reference internal" href="cmake_test/execution_unit.html#cmake_test-execution_unit.CTExecutionUnit" title="cmake_test/execution_unit.CTExecutionUnit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CTExecutionUnit</span></code></a>
@@ -134,7 +136,7 @@ object each and add it to a <code class="code docutils literal notranslate"><spa
 This initial discovery procedure does not discover subsections of tests.</p>
 </section>
 <section id="test-execution">
-<h2>Test Execution<a class="headerlink" href="#test-execution" title="Link to this heading"></a></h2>
+<h2>Test Execution<a class="headerlink" href="#test-execution" title="Permalink to this heading"></a></h2>
 <p>Once all tests are discovered, they are then executed via
 <a class="reference internal" href="cmake_test/exec_tests.html#cmake_test-exec_tests.ct_exec_tests" title="cmake_test/exec_tests.ct_exec_tests"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ct_exec_tests</span></code></a>. This function first
 registers the global exception handler using
@@ -158,7 +160,7 @@ detected. The test’s subsections are then executed via the unit’s
 <a class="reference internal" href="cmake_test/execution_unit.html#cmake_test-execution_unit.CTExecutionUnit.exec_sections" title="cmake_test/execution_unit.CTExecutionUnit.exec_sections"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exec_sections</span></code></a> method.</p>
 </section>
 <section id="error-catching-and-recovery">
-<h2>Error Catching and Recovery<a class="headerlink" href="#error-catching-and-recovery" title="Link to this heading"></a></h2>
+<h2>Error Catching and Recovery<a class="headerlink" href="#error-catching-and-recovery" title="Permalink to this heading"></a></h2>
 <p>CMake does not have any concept of error recovery,
 any <code class="code docutils literal notranslate"><span class="pre">message(FATAL_ERROR</span> <span class="pre">...)</span></code> call will immediately terminate
 the interpreter. CMakeTest must be able to catch these errors,

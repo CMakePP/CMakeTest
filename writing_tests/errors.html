@@ -1,21 +1,23 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Testing Error-Checking &mdash; CMakeTest 1.0.0alpha documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=d4e7da7a"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=418f8411"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -90,7 +92,7 @@
            <div itemprop="articleBody">
              
   <section id="testing-error-checking">
-<h1>Testing Error-Checking<a class="headerlink" href="#testing-error-checking" title="Link to this heading"></a></h1>
+<h1>Testing Error-Checking<a class="headerlink" href="#testing-error-checking" title="Permalink to this heading"></a></h1>
 <p>Sometimes one may want to ensure that an exception (or <code class="code docutils literal notranslate"><span class="pre">FATAL_ERROR</span></code>)
 is thrown, but normally doing so would cause a test to fail. However, there
 exists an option to invert the test so that it will only pass if an
@@ -119,7 +121,7 @@ that define the test. An example is below:</p>
 <p>When using CMinx to document a test, the <code class="code docutils literal notranslate"><span class="pre">EXPECTFAIL</span></code>
 option will be listed in the test definition.</p>
 <section id="implementation-details">
-<h2>Implementation Details<a class="headerlink" href="#implementation-details" title="Link to this heading"></a></h2>
+<h2>Implementation Details<a class="headerlink" href="#implementation-details" title="Permalink to this heading"></a></h2>
 <p>Due to limitations in the CMake language, CMakeTest must run
 <code class="code docutils literal notranslate"><span class="pre">EXPECTFAIL</span></code> tests in a subprocess. This introduces significant
 latency in executing such tests. If performance becomes a problem try
