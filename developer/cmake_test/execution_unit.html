@@ -228,6 +228,21 @@ and prints it, obeying the section depth,
 print length, and whether colors are enabled.</p>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit.is_in_expect_fail_tgt">
+<span class="sig-name descname"><span class="pre">is_in_expect_fail_tgt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ret</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmake_test-execution_unit.CTExecutionUnit.is_in_expect_fail_tgt" title="Permalink to this definition"></a></dt>
+<dd><p>Determines whether the unit has a parent
+that is the target of the <code class="code docutils literal notranslate"><span class="pre">EXPECTFAIL</span></code> invocation.
+If true and if in the subprocess, then <code class="xref py py-obj docutils literal notranslate"><span class="pre">cmake_test/add_section.add_section</span></code>
+will create the unit even if no name is set, since it was only discovered
+in the subprocess.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ret</strong> (<em>bool*</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
 <p><strong>Attributes</strong></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cmake_test-execution_unit.CTExecutionUnit.test_id">

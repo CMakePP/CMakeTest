@@ -138,6 +138,20 @@ cmake_test/execution_unit
       
       
 
+
+   .. py:method:: is_in_expect_fail_tgt(ret)
+
+      Determines whether the unit has a parent
+      that is the target of the :code:`EXPECTFAIL` invocation.
+      If true and if in the subprocess, then :obj:`cmake_test/add_section.add_section`
+      will create the unit even if no name is set, since it was only discovered
+      in the subprocess.
+      
+
+      :param ret: 
+
+      :type ret: bool*
+
    **Attributes**
 
    .. py:attribute:: test_id
