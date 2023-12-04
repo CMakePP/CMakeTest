@@ -55,42 +55,42 @@ function(ct_expectfail_subprocess _es_curr_section_instance)
     CTExecutionUnit(GET "${_es_curr_section_instance}" _es_section_friendly_name friendly_name)
     CTExecutionUnit(GET "${_es_curr_section_instance}" _es_section_file test_file)
 
-    list(REMOVE_ITEM _es_section_parent_tree "") #Remove empty list items
+    list(REMOVE_ITEM _es_section_parent_tree "") # Remove empty list items
 
 
 
-    #Traverse the parent list and construct the section ID definitions
+    # Traverse the parent list and construct the section ID definitions
     set(_es_section_id_defines "") #Set a blank ID list in case one is already defined
     foreach(_es_parent_tree_instance IN LISTS _es_section_parent_tree)
         CTExecutionUnit(GET "${_es_parent_tree_instance}" _es_parent_tree_id test_id)
-        set(_es_parent_friendly_name "") #Clear
+        set(_es_parent_friendly_name "") # Clear
         CTExecutionUnit(GET "${_es_parent_tree_instance}" _es_parent_friendly_name friendly_name)
         list(APPEND _es_section_id_defines "set(${_es_parent_friendly_name} \"${_es_parent_tree_id}\")")
     endforeach()
 
-    #Append this section's ID definition so it is executed
+    # Append this section's ID definition so it is executed
     list(APPEND _es_section_id_defines "set(${_es_section_friendly_name} \"${_es_section_id}\")")
 
-    #Replace list delimiters with newlines for full call list
+    # Replace list delimiters with newlines for full call list
     string (REGEX REPLACE "(^|[^\\\\]);" "\\1\n" _es_section_id_defines "${_es_section_id_defines}")
 
-    #Force delimiter at the end
+    # Force delimiter at the end
     list(APPEND _es_section_parent_tree "")
 
-    #Replace list-delimiters with newlines and parentheses, constructing a function call list
+    # Replace list-delimiters with newlines and parentheses, constructing a function call list
     string (REGEX REPLACE "(^|[^\\\\]);" "\\1\(\)\n" _es_section_parent_tree "${_es_section_parent_tree}")
 
     cpp_get_global(ct_debug_mode "CT_DEBUG_MODE")
 
-    #Write subprocess file
-    #Fill in boilerplate, copy to build dir
+    # Write subprocess file
+    # Fill in boilerplate, copy to build dir
     configure_file(
         "${_CT_TEMPLATES_DIR}/expectfail.txt"
         "${CMAKE_CURRENT_BINARY_DIR}/sections/${_es_section_id}_EXPECTFAIL/CMakeLists.txt"
         @ONLY
     )
 
-    #Exec subprocess
+    # Exec subprocess
     file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/sections/${_es_section_id}_EXPECTFAIL/build")
     execute_process(
         COMMAND
@@ -102,7 +102,7 @@ function(ct_expectfail_subprocess _es_curr_section_instance)
         ERROR_VARIABLE _es_expectfail_stderr
     )
 
-    #Check exit code and raise exception if did not fail when expected
+    # Check exit code and raise exception if did not fail when expected
     if (NOT _es_expectfail_result_code)
         cpp_raise(
             EXPECTFAIL_NO_FAILURE_EXCEPTION

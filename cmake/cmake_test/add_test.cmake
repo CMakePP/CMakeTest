@@ -100,7 +100,7 @@ macro(ct_add_test)
 
     if(_at_exec_expectfail AND ("${${CT_ADD_TEST_NAME}}" STREQUAL "" OR "${${CT_ADD_TEST_NAME}}" STREQUAL "_"))
             set("${CT_ADD_TEST_NAME}" "_")
-            set(CMAKETEST_TEST "_" PARENT_SCOPE)
+            set(CMAKETEST_TEST "_")
             # Reset debug mode in case test changed it
             set(CMAKEPP_LANG_DEBUG_MODE "${_at_temp_debug_mode}")
     else()

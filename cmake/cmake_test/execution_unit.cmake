@@ -418,4 +418,25 @@ cpp_class(CTExecutionUnit)
 
     endfunction()
 
+
+    #[[[
+    # Determines whether the unit has a parent
+    # that is the target of the :code:`EXPECTFAIL` invocation.
+    # If true and if in the subprocess, then :obj:`cmake_test/add_section.add_section`
+    # will create the unit even if no name is set, since it was only discovered
+    # in the subprocess.
+    #]]
+    cpp_member(is_in_expect_fail_tgt CTExecutionUnit bool*)
+    function("${is_in_expect_fail_tgt}" self ret)
+        cpp_get_global(expect_fail_tgt "CT_EXPECTFAIL_TGT")
+        CTExecutionUnit(get_parent_list "${self}" parent_list)
+        CTExecutionUnit(GET "${self}" self_test_id test_id)
+
+        if(expect_fail_tgt IN_LIST parent_list OR self_test_id STREQUAL expect_fail_tgt)
+            set("${ret}" "TRUE" PARENT_SCOPE)
+        else()
+            set("${ret}" "FALSE" PARENT_SCOPE)
+        endif()
+    endfunction()
+
 cpp_end_class()

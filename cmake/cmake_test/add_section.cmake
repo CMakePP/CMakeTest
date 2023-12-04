@@ -158,31 +158,54 @@ function(ct_add_section)
     CTExecutionUnit(GET "${_as_curr_instance}" _as_sibling_sections_map section_names_to_ids)
     cpp_map(GET "${_as_sibling_sections_map}" _as_curr_section_id "${CT_ADD_SECTION_NAME}")
 
-    #Unset in main interpreter, TRUE in subprocess
+    # Unset in main interpreter, TRUE in subprocess
     cpp_get_global(_as_exec_expectfail "CT_EXEC_EXPECTFAIL")
 
     # The name is set to "_" in the expectfail subprocess
     # if the test is not intended to be ran
 
+    # Tracks whether the section name was already set, so we don't
+    # try to read it from the siblings map or try to generate one
+    set(_as_name_set FALSE)
+
     if(_as_exec_expectfail)
-        if("${${CT_ADD_SECTION_NAME}}" STREQUAL "" OR "${${CT_ADD_SECTION_NAME}}" STREQUAL "_")
+        CTExecutionUnit(is_in_expect_fail_tgt "${_as_curr_instance}" _as_in_tgt_path)
+        
+        # Checks whether the section's name was set in the expectfail template,
+        # indicating it should run. If it's not set, then we check if the expectfail
+        # target is a parent of this section, since children of an expectfail section
+        # are only discovered in the subprocess.
+        if(("${${CT_ADD_SECTION_NAME}}" STREQUAL "" OR "${${CT_ADD_SECTION_NAME}}" STREQUAL "_") AND NOT _as_in_tgt_path)
             set("${CT_ADD_SECTION_NAME}" "_" PARENT_SCOPE)
             set(CMAKETEST_SECTION "_" PARENT_SCOPE)
             # Reset debug mode in case test changed it
             set(CMAKEPP_LANG_DEBUG_MODE "${_as_temp_debug_mode}")
             return() #If section is not part of the call tree, immediately return
+        elseif(NOT ("${${CT_ADD_SECTION_NAME}}" STREQUAL "" OR "${${CT_ADD_SECTION_NAME}}" STREQUAL "_"))
+            # The name was set by either the expectfail template or by a previous execution
+            set(_as_section_name "${${CT_ADD_SECTION_NAME}}")
+            set(_as_name_set TRUE)
         endif()
     endif()
 
     # Check if the name for this section is set,
-    # if so then retrieve it, else generation
+    # if so then retrieve it, else generate it
+
+    # Get whether we should execute section now
+    CTExecutionUnit(GET "${_as_curr_instance}" _as_exec_section execute_sections)
 
     CTExecutionUnit(GET "${_as_curr_instance}" _as_siblings section_names_to_ids)
     cpp_map(HAS_KEY "${_as_siblings}" _as_unit_created "${CT_ADD_SECTION_NAME}")
-    if(NOT _as_unit_created)
-         cpp_unique_id(_as_section_name) #Generate random section ID
-    else()
+    if(NOT _as_unit_created AND NOT _as_name_set)
+         cpp_unique_id(_as_section_name) # Generate random section ID
+    elseif(_as_unit_created)
          cpp_map(GET "${_as_siblings}" _as_section_name "${CT_ADD_SECTION_NAME}")
+         # The only time that the name would be previously set and it's not time to execute
+         # is when there was a duplicated section in the same scope
+         if(NOT _as_exec_section)
+              cpp_raise(CT_DUPLICATE_SECTION_ERROR "Two sections with the same name '${CT_ADD_SECTION_NAME}' exist in the same scope, please rename one of them.")
+              return()
+         endif()
     endif()
 
 
@@ -203,7 +226,7 @@ function(ct_add_section)
     # Get whether we should execute section now
     CTExecutionUnit(GET "${_as_curr_instance}" _as_exec_section execute_sections)
 
-    if(_as_exec_section) #Time to execute our section
+    if(_as_exec_section) # Time to execute our section
         CTExecutionUnit(GET "${_as_curr_instance}" _as_parent_children children)
         cpp_map(GET "${_as_parent_children}" _as_curr_section_instance "${_as_curr_section_id}")
         # Debug mode reset in execute()

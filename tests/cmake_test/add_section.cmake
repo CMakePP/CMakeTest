@@ -52,6 +52,22 @@ function(${test_add_section_top_level})
         endfunction()
     endfunction()
 
+    ct_add_section(NAME duplicate_names EXPECTFAIL)
+    function("${duplicate_names}")
+        ct_add_section(NAME "duplicate_section")
+        function("${duplicate_section}")
+           message("This cannot be")
+        endfunction()
+
+
+        # When we construct the sections before execution, we should
+        # blow up on this since it's a duplicate of the previous one.
+        ct_add_section(NAME "duplicate_section")
+        function("${duplicate_section}")
+           message("This cannot be")
+        endfunction()
+    endfunction()
+
 endfunction()
 
 ct_add_test(NAME test_sections_were_run)
