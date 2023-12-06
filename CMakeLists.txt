@@ -5,7 +5,7 @@ project(CMakeTest VERSION 1.0.0 LANGUAGES NONE)
 
 if(NOT CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     #Make sure projects using CMakeTest have this variable
-	set(_ct_min_cmake_version "${_ct_min_cmake_version}" PARENT_SCOPE)
+    set(_ct_min_cmake_version "${_ct_min_cmake_version}" PARENT_SCOPE)
 endif()
 
 # Add cmake directory to CMake's module path, iff it's not already there
@@ -14,7 +14,6 @@ if(${path_has_cmake} STREQUAL "-1")
     list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 endif()
 
-# TODO: Should this be in the above if block?
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" CACHE STRING "" FORCE)
 
 # Make sure projects including CMakeTest can find it too

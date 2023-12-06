@@ -15,4 +15,4 @@
 include_guard()
 
 set(CMAKEPP_LANG_VERSION v1.0.0)
-set(CMAIZE_VERSION 9acce67d19097e50fc744d76d0c49897bc69b9da)
+set(CMAIZE_VERSION v0.2.1)
