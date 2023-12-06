@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        cmake: [3.14.7, latest, latestrc]
+        cmake: [3.19.0, latest, latestrc]
     env:
       cmake_version: ${{ matrix.cmake }}
       os: Linux-x86_64
@@ -28,7 +28,7 @@ jobs:
       - name: Configure Project
         run: |
           cmake -H. -Bbuild -DBUILD_TESTING=ON
-      
+
       - name: Run Unit Tests
         run: |
           cd build

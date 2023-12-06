@@ -1,5 +1,5 @@
-#3.14 needed for FetchContent_MakeAvailable()
-set(_ct_min_cmake_version "3.14" CACHE INTERNAL "")
+#3.19 needed because of CMaize
+set(_ct_min_cmake_version "3.19" CACHE INTERNAL "")
 cmake_minimum_required(VERSION "${_ct_min_cmake_version}")
 project(CMakeTest VERSION 1.0.0 LANGUAGES NONE)
 
