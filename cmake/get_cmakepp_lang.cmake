@@ -15,7 +15,7 @@
 #[[[ @module
 # .. warning::
 #    This module is only used when building CMakeTest,
-#    and including it automatically pulls in CMaize through
+#    and including it automatically pulls in CMakePPLang through
 #    FetchContent.
 #]]
 
@@ -23,29 +23,32 @@ include_guard()
 include(versions)
 
 #[[
-# This function encapsulates the process of getting CMakePP using CMake's
-# FetchContent module. We have encapsulated it in a function so we can set
-# the options for its configure step without affecting the options for the
-# parent project's configure step (namely we do not want to build CMakePP's
-# unit tests).
+# This function encapsulates the process of getting CMakePPLang using CMake's
+# FetchContent module. When CMaize supports find_or_build for CMake modules this
+# file will be deprecated.
 #]]
-function(get_cmaize)
-    include(cmaize/cmaize OPTIONAL RESULT_VARIABLE cmaize_found)
-    if(NOT cmaize_found)
+function(get_cmakepp_lang)
+    include(
+        cmakepp_lang/cmakepp_lang
+        OPTIONAL
+        RESULT_VARIABLE cmakepp_lang_found
+    )
+    if(NOT cmakepp_lang_found)
         # Store whether we are building tests or not, then turn off the tests
         set(build_testing_old "${BUILD_TESTING}")
         set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
         # Download CMakePP and bring it into scope
         include(FetchContent)
         FetchContent_Declare(
-            cmaize
-            GIT_REPOSITORY https://github.com/CMakePP/CMaize
-            GIT_TAG ${CMAIZE_VERSION}
+            cmakepp_lang
+            GIT_REPOSITORY https://github.com/CMakePP/CMakePPLang
+            GIT_TAG ${CMAKEPP_LANG_VERSION}
         )
-        FetchContent_MakeAvailable(cmaize)
+        FetchContent_MakeAvailable(cmakepp_lang)
 
         set(
-            CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" "${cmake_test_SOURCE_DIR}/cmake"
+            CMAKE_MODULE_PATH
+            "${CMAKE_MODULE_PATH}" "${cmakepp_lang_SOURCE_DIR}/cmake"
             PARENT_SCOPE
         )
 
@@ -55,7 +58,4 @@ function(get_cmaize)
 endfunction()
 
 # Call the function we just wrote to get CMaize
-get_cmaize()
-
-# Include CMaize
-include(cmaize/cmaize)
+get_cmakepp_lang()
