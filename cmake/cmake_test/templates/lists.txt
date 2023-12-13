@@ -30,5 +30,5 @@ cpp_set_global("CT_DEBUG_MODE" "@ct_debug_mode@")
 include("cmake_test/cmake_test")
 set(CMAKEPP_LANG_DEBUG_MODE "@CMAKEPP_LANG_DEBUG_MODE@")
 
-include("@_ad_test_file@")
+include([[@_ad_test_file@]])
 ct_exec_tests()
