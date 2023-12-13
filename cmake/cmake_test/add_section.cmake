@@ -119,8 +119,14 @@ function(ct_add_section)
     set(_as_options EXPECTFAIL)
     set(_as_one_value_args NAME PRINT_LENGTH)
     set(_as_multi_value_args "")
+    unset(CT_ADD_SECTION_NAME)
     cmake_parse_arguments(CT_ADD_SECTION "${_as_options}" "${_as_one_value_args}"
                           "${_as_multi_value_args}" ${ARGN} )
+
+
+    if(NOT DEFINED CT_ADD_SECTION_NAME OR CT_ADD_SECTION_NAME STREQUAL "")
+        cpp_raise(CT_INVALID_NAME_ERROR "A section was not given a name. Use the NAME keyword argument to provide a non-empty string name.")
+    endif()
 
     # This is to set a default value for the print length
     # argument to prevent any weird empty strings from getting through

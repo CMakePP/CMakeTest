@@ -98,6 +98,10 @@ macro(ct_add_test)
     cmake_parse_arguments(CT_ADD_TEST "${_at_options}" "${_at_one_value_args}"
                           "${_at_multi_value_args}" ${ARGN} )
 
+    if(NOT DEFINED CT_ADD_TEST_NAME OR CT_ADD_TEST_NAME STREQUAL "")
+        cpp_raise(CT_INVALID_NAME_ERROR "A test was not given a name. Use the NAME keyword argument to provide a non-empty string name.")
+    endif()
+
     if(_at_exec_expectfail AND ("${${CT_ADD_TEST_NAME}}" STREQUAL "" OR "${${CT_ADD_TEST_NAME}}" STREQUAL "_"))
             set("${CT_ADD_TEST_NAME}" "_")
             set(CMAKETEST_TEST "_")

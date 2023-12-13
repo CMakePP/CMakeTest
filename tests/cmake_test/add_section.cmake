@@ -5,6 +5,26 @@
 ct_add_test(NAME test_add_section_top_level)
 function(${test_add_section_top_level})
 
+
+    ct_add_section(NAME signature)
+    function(${CMAKETEST_SECTION})
+        ct_add_section(NAME [[No name keyword]] EXPECTFAIL)
+        function(${CMAKETEST_SECTION})
+            ct_add_section([[Ignored the NAME keyword]])
+            function(${CMAKETEST_SECTION})
+
+            endfunction()
+        endfunction()
+
+        ct_add_section(NAME [[No name value]] EXPECTFAIL)
+        function(${CMAKETEST_SECTION})
+            ct_add_section(NAME)
+            function(${CMAKETEST_SECTION})
+
+            endfunction()
+        endfunction()
+    endfunction()
+
     ct_add_section(NAME section_0)
     function(${section_0})
         cpp_set_global(TEST_ADD_SECTION_S0 TRUE)
