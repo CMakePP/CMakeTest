@@ -69,7 +69,7 @@ function(ct_expectfail_subprocess _es_curr_section_instance)
     endforeach()
 
     # Append this section's ID definition so it is executed
-    list(APPEND _es_section_id_defines "set(${_es_section_friendly_name} \"${_es_section_id}\")")
+    list(APPEND _es_section_id_defines "set([[${_es_section_friendly_name}]] \"${_es_section_id}\")")
 
     # Replace list delimiters with newlines for full call list
     string (REGEX REPLACE "(^|[^\\\\]);" "\\1\n" _es_section_id_defines "${_es_section_id_defines}")
