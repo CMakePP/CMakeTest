@@ -48,6 +48,7 @@ function(ct_add_dir _ad_dir)
         file(RELATIVE_PATH _ad_rel_path "${_ad_abs_test_dir}" "${_ad_test_file}")
         file(TO_CMAKE_PATH "${_ad_abs_test_dir}" _ad_normalized_dir)
         string(REPLACE "/" "_" _ad_dir_prefix "${_ad_normalized_dir}")
+        string(REPLACE ":" "_" _ad_dir_prefix "${_ad_dir_prefix}")
 
         #Fill in boilerplate, copy to build dir
         configure_file(
