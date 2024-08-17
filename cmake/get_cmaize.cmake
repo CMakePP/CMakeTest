@@ -23,10 +23,10 @@ include_guard()
 include(versions)
 
 #[[
-# This function encapsulates the process of getting CMakePP using CMake's
+# This function encapsulates the process of getting CMaize using CMake's
 # FetchContent module. We have encapsulated it in a function so we can set
 # the options for its configure step without affecting the options for the
-# parent project's configure step (namely we do not want to build CMakePP's
+# parent project's configure step (namely we do not want to build CMaize's
 # unit tests).
 #]]
 function(get_cmaize)
@@ -35,7 +35,7 @@ function(get_cmaize)
         # Store whether we are building tests or not, then turn off the tests
         set(build_testing_old "${BUILD_TESTING}")
         set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
-        # Download CMakePP and bring it into scope
+        # Download CMaize and bring it into scope
         include(FetchContent)
         FetchContent_Declare(
             cmaize
@@ -45,7 +45,7 @@ function(get_cmaize)
         FetchContent_MakeAvailable(cmaize)
 
         set(
-            CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" "${cmake_test_SOURCE_DIR}/cmake"
+            CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" "${cmaize_SOURCE_DIR}/cmake"
             PARENT_SCOPE
         )
 
