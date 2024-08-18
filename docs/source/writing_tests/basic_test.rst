@@ -21,7 +21,7 @@ a particular string is printed.
 
 .. literalinclude:: ../../../tests/cmake_test/tutorials/1_hello_world.cmake
    :language: cmake
-   :lines: 24-28
+   :lines: 29-33
 
 
 The :obj:`~cmake_test/add_test.ct_add_test` call tells CMakeTest that there is a test
