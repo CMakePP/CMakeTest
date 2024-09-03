@@ -63,6 +63,13 @@ function(ct_add_dir _ad_test_dir)
     # These directories are created from the mangled path to the source test
     # file in the project to help ensure that each path is unique
     foreach(_ad_test_file ${_ad_test_files})
+        # Set the test file path for configuring the test mini-project
+        set(_CT_LISTS_TEMPLATE_TEST_FILE "${_ad_test_file}")
+
+        # Sanitize the full path to the test file to get the mini-project name
+        # for configuring the test mini-project
+        cpp_sanitize_string(_CT_LISTS_TEMPLATE_PROJECT_NAME "${_ad_test_file}")
+
         # Normalize the absolute path to the project test directory, used in
         # the build directory as a prefixing subdirectory to hold all of the
         # test mini-projects from this test directory
@@ -78,28 +85,25 @@ function(ct_add_dir _ad_test_dir)
             "${_ad_test_file}"
         )
 
-        # string(REPLACE "/" "_" _ad_dir_prefix "${_ad_normalized_dir}")
-        # string(REPLACE ":" "_" _ad_dir_prefix "${_ad_dir_prefix}")
-
         # Mangle all of the directory names derived from paths, since path
         # strings commonly have characters that are illegal in file names
-        # mangle_path(_ad_dir_prefix_mangled "${_ad_normalized_abs_test_dir}")
-        # mangle_path(_ad_rel_path_mangled "${_ad_test_file_rel_path}")
         cpp_sanitize_string(_ad_test_dest_prefix
             "${_ad_normalized_abs_test_dir}"
         )
         cpp_sanitize_string(_ad_test_proj_dir "${_ad_test_file_rel_path}")
 
+        # Create the test destination path in the build directory
         set(_ad_test_dest_full_path
             "${CMAKE_CURRENT_BINARY_DIR}/tests/${_ad_test_dest_prefix}/${_ad_test_proj_dir}"
         )
 
-        # Fill in boilerplate, copy to build dir
+        # Configure the test mini-project in the build directory
         configure_file(
-            "${_CT_TEMPLATES_DIR}/lists.txt"
+            "${_CT_TEMPLATES_DIR}/test_project_CMakeLists.txt.in"
             "${_ad_test_dest_full_path}/src/CMakeLists.txt"
             @ONLY
         )
+
         add_test(
         NAME
             "${_ad_test_dest_prefix}_${_ad_test_proj_dir}"
