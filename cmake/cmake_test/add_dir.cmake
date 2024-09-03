@@ -30,6 +30,8 @@ include(cmakepp_lang/cmakepp_lang)
 #
 # **Keyword Arguments**
 #
+# :keyword CT_DEBUG_MODE_ON: Enables debug mode when the tests are run.
+# :type CT_DEBUG_MODE_ON: bool
 # :keyword CMAKE_OPTIONS: List of additional CMake options to be
 #                         passed to all test invocations. Options
 #                         should follow the syntax:
@@ -38,6 +40,10 @@ include(cmakepp_lang/cmakepp_lang)
 #]]
 function(ct_add_dir _ad_test_dir)
     set(_ad_multi_value_args "CMAKE_OPTIONS")
+    # TODO: This name is potentially misleading because it seems to enable
+    #       debug mode for the test projects (see the use of 'ct_debug_mode'
+    #       in cmake/cmake_test/templates/test_project_CMakeLists.txt.in).
+    #       I propose renaming it to something like "ENABLE_DEBUG_MODE_IN_TESTS".
     set(_ad_options CT_DEBUG_MODE_ON)
     cmake_parse_arguments(PARSE_ARGV 1 ADD_DIR "${_ad_options}" "" "${_ad_multi_value_args}")
 
