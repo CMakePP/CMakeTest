@@ -7,7 +7,7 @@ set(_ct_min_cmake_version @_ct_min_cmake_version@) #Propagate min version down
 
 # A language is set so the dummy projects don't complain about not having a
 # linkage language.
-project(@_CT_LISTS_TEMPLATE_PROJECT_NAME@ LANGUAGES C)
+project(@_CT_CMAKELISTS_TEMPLATE_PROJECT_NAME@ LANGUAGES C)
 
 #Enable colors in Unix environments, ignored on Windows. Will not work with pipes
 set(CMAKETEST_USE_COLORS "@CMAKETEST_USE_COLORS@")
@@ -24,6 +24,8 @@ set(CMAKE_MODULE_PATH
     CACHE STRING "" FORCE
 )
 
+# Question: Why not just set this to @ct_debug_mode@? I'm pretty sure that
+#           accomplishes the same thing.
 if(@ct_debug_mode@)
     set(CMAKEPP_LANG_DEBUG_MODE "TRUE")
 endif()
@@ -32,7 +34,8 @@ include(cmakepp_lang/cmakepp_lang)
 cpp_set_global("CT_DEBUG_MODE" "@ct_debug_mode@")
 
 include("cmake_test/cmake_test")
+# Question: Why is this set separately from above?
 set(CMAKEPP_LANG_DEBUG_MODE "@CMAKEPP_LANG_DEBUG_MODE@")
 
-include([[@_CT_LISTS_TEMPLATE_TEST_FILE@]])
+include([[@_CT_CMAKELISTS_TEMPLATE_TEST_FILE@]])
 ct_exec_tests()

@@ -70,11 +70,11 @@ function(ct_add_dir _ad_test_dir)
     # file in the project to help ensure that each path is unique
     foreach(_ad_test_file ${_ad_test_files})
         # Set the test file path for configuring the test mini-project
-        set(_CT_LISTS_TEMPLATE_TEST_FILE "${_ad_test_file}")
+        set(_CT_CMAKELISTS_TEMPLATE_TEST_FILE "${_ad_test_file}")
 
         # Sanitize the full path to the test file to get the mini-project name
         # for configuring the test mini-project
-        cpp_sanitize_string(_CT_LISTS_TEMPLATE_PROJECT_NAME "${_ad_test_file}")
+        cpp_sanitize_string(_CT_CMAKELISTS_TEMPLATE_PROJECT_NAME "${_ad_test_file}")
 
         # Normalize the absolute path to the project test directory, used in
         # the build directory as a prefixing subdirectory to hold all of the
@@ -105,7 +105,7 @@ function(ct_add_dir _ad_test_dir)
 
         # Configure the test mini-project in the build directory
         configure_file(
-            "${_CT_TEMPLATES_DIR}/test_project_CMakeLists.txt.in"
+            "${_CT_TEMPLATES_DIR}/test_CMakeLists.txt.in"
             "${_ad_test_dest_full_path}/src/CMakeLists.txt"
             @ONLY
         )
