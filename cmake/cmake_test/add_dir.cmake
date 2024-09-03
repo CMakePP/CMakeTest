@@ -105,13 +105,13 @@ function(ct_add_dir _ad_test_dir)
         )
 
         add_test(
-        NAME
-            "${_ad_test_dest_prefix}_${_ad_test_proj_dir}"
-        COMMAND
-            "${CMAKE_COMMAND}"
-               -S "${_ad_test_dest_full_path}/src"
-               -B "${_ad_test_dest_full_path}"
-               ${ADD_DIR_CMAKE_OPTIONS}
+            NAME
+                "${_ad_test_dest_prefix}_${_ad_test_proj_dir}"
+            COMMAND
+                "${CMAKE_COMMAND}"
+                -S "${_ad_test_dest_full_path}/src"
+                -B "${_ad_test_dest_full_path}"
+                ${ADD_DIR_CMAKE_OPTIONS}
         )
     endforeach()
 endfunction()
