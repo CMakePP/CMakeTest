@@ -32,6 +32,10 @@ include(cmakepp_lang/cmakepp_lang)
 #
 # :keyword CT_DEBUG_MODE_ON: Enables debug mode when the tests are run.
 # :type CT_DEBUG_MODE_ON: bool
+# :keyword USE_REL_PATH_NAMES: Enables using shorter, relative paths for
+#                              test names, but increases the chance of name
+#                              collisions.
+# :type USE_REL_PATH_NAMES: bool
 # :keyword CMAKE_OPTIONS: List of additional CMake options to be
 #                         passed to all test invocations. Options
 #                         should follow the syntax:
@@ -44,7 +48,7 @@ function(ct_add_dir _ad_test_dir)
     #       debug mode for the test projects (see the use of 'ct_debug_mode'
     #       in cmake/cmake_test/templates/test_project_CMakeLists.txt.in).
     #       I propose renaming it to something like "ENABLE_DEBUG_MODE_IN_TESTS".
-    set(_ad_options CT_DEBUG_MODE_ON)
+    set(_ad_options CT_DEBUG_MODE_ON USE_REL_PATH_NAMES)
     cmake_parse_arguments(PARSE_ARGV 1 ADD_DIR "${_ad_options}" "" "${_ad_multi_value_args}")
 
     # This variable will be picked up by the template
@@ -124,9 +128,37 @@ function(ct_add_dir _ad_test_dir)
             @ONLY
         )
 
-        # The test name is long right now, but it would likely be much more
-        # complicated to make it shorter while still unique and readable
-        set(_ad_test_name "${_ad_test_file}")
+        if (ADD_DIR_USE_REL_PATH_NAMES)
+            # Option 1 - shortest but highest collision likelyhood
+            # Prepend the test name to the relative path to test file from the
+            # given test directory
+
+            # set(_ad_test_name "${}/${_ad_test_file_rel_path}")
+
+
+            # Option 2 - longest but least collision likelyhood
+            # Get the path from the root of the project, with the project name
+            # prepended
+
+            # Generate relative path from project root for the test name
+            # file(RELATIVE_PATH
+            #     _ad_test_file_rel_path_from_proj_root
+            #     "${PROJECT_SOURCE_DIR}"
+            #     "${_ad_test_file}"
+            # )
+            # # Prepend the project name to the relative path
+            # set(_ad_test_name "${PROJECT_NAME}/${_ad_test_file_rel_path_from_proj_root}")
+
+
+            # Option 3 - in-between length and collision likelyhood
+            # Prepend the project name and given test directory name to the
+            # test file relative path
+            
+            get_filename_component(_ad_test_dir_name "${_ad_test_dir}" NAME)
+            set(_ad_test_name "${PROJECT_NAME}::${_ad_test_dir_name}/${_ad_test_file_rel_path}")
+        else()
+            set(_ad_test_name "${_ad_test_file}")
+        endif()
         add_test(
             NAME
                 "${_ad_test_name}"
