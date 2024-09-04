@@ -126,7 +126,7 @@ function(ct_add_dir _ad_test_dir)
 
         # The test name is long right now, but it would likely be much more
         # complicated to make it shorter while still unique and readable
-        set(_ad_test_name "${_CT_CMAKELISTS_TEMPLATE_PROJECT_NAME}")
+        set(_ad_test_name "${_ad_test_file}")
         add_test(
             NAME
                 "${_ad_test_name}"
