@@ -48,13 +48,15 @@ function(ct_add_dir _ad_test_dir)
     cmake_parse_arguments(PARSE_ARGV 1 ADD_DIR "${_ad_options}" "" "${_ad_multi_value_args}")
 
     # This variable will be picked up by the template
+    # TODO: This variable should be made Config File-specific and may end up
+    #       mirroring the rename of CT_DEBUG_MODE_ON above, if that happens
     set(ct_debug_mode "${ADD_DIR_CT_DEBUG_MODE_ON}")
 
     # We expect to be given relative paths wrt the project, like
     # ``ct_add_dir("test")``. This ensures we have an absolute path
-    # to the test directory when we do get a relative path. If we
-    # get an absolute path to begin with, this is essentially a no-op.
+    # to the test directory as well as a CMak-style normalized path.
     get_filename_component(_ad_abs_test_dir "${_ad_test_dir}" REALPATH)
+    file(TO_CMAKE_PATH "${_ad_abs_test_dir}" _ad_abs_test_dir)
 
     # Recurse over the test directory to find all cmake files
     # (assumed to all be test files)
@@ -66,53 +68,68 @@ function(ct_add_dir _ad_test_dir)
 
     # Each test file will get its own directory and "mini-project" in the
     # build directory to facilitate independently running each test case.
-    # These directories are created from the mangled path to the source test
-    # file in the project to help ensure that each path is unique
+    # These directories are created from hashes of the test directory and
+    # test file paths to help ensure that each path is unique
     foreach(_ad_test_file ${_ad_test_files})
         # Set the test file path for configuring the test mini-project
         set(_CT_CMAKELISTS_TEMPLATE_TEST_FILE "${_ad_test_file}")
 
         # Sanitize the full path to the test file to get the mini-project name
         # for configuring the test mini-project
-        cpp_sanitize_string(_CT_CMAKELISTS_TEMPLATE_PROJECT_NAME "${_ad_test_file}")
-
-        # Normalize the absolute path to the project test directory, used in
-        # the build directory as a prefixing subdirectory to hold all of the
-        # test mini-projects from this test directory
-        file(TO_CMAKE_PATH "${_ad_abs_test_dir}" _ad_normalized_abs_test_dir)
+        cpp_sanitize_string(
+            _CT_CMAKELISTS_TEMPLATE_PROJECT_NAME "${_ad_test_file}"
+        )
 
         # Find the relative path to the test file from the test directory to
-        # reduce the path length for the test folders created in the build
-        # directory. This is used for the test mini-project directory in the
-        # build directory
+        # reduce the length of the test names
         file(RELATIVE_PATH
             _ad_test_file_rel_path
             "${_ad_abs_test_dir}"
             "${_ad_test_file}"
         )
 
-        # Mangle all of the directory names derived from paths, since path
-        # strings commonly have characters that are illegal in file names
-        cpp_sanitize_string(_ad_test_dest_prefix
-            "${_ad_normalized_abs_test_dir}"
-        )
+        # Mangle the test directory and test file paths, since path strings
+        # commonly have characters that are illegal in file names
+        cpp_sanitize_string(_ad_test_dest_prefix "${_ad_abs_test_dir}")
         cpp_sanitize_string(_ad_test_proj_dir "${_ad_test_file_rel_path}")
+
+        # Get hashes for the prefix directory and test project directory
+        string(SHA256 _ad_test_dest_prefix_hash "${_ad_test_dest_prefix}")
+        string(SHA256 _ad_test_proj_dir_hash "${_ad_test_proj_dir}")
+
+        # Truncate the hashes to 7 characters
+        set(_ad_hash_length 7)
+        string(SUBSTRING 
+            "${_ad_test_dest_prefix_hash}"
+            0
+            "${_ad_hash_length}"
+            _ad_test_dest_prefix_hash
+        )
+        string(SUBSTRING 
+            "${_ad_test_proj_dir_hash}"
+            0
+            "${_ad_hash_length}"
+            _ad_test_proj_dir_hash
+        )
 
         # Create the test destination path in the build directory
         set(_ad_test_dest_full_path
-            "${CMAKE_CURRENT_BINARY_DIR}/tests/${_ad_test_dest_prefix}/${_ad_test_proj_dir}"
+            "${CMAKE_CURRENT_BINARY_DIR}/tests/${_ad_test_dest_prefix_hash}/${_ad_test_proj_dir_hash}"
         )
 
-        # Configure the test mini-project in the build directory
+        # Configure the CMakeLists.txt for test in the build directory
         configure_file(
             "${_CT_TEMPLATES_DIR}/test_CMakeLists.txt.in"
             "${_ad_test_dest_full_path}/src/CMakeLists.txt"
             @ONLY
         )
 
+        # The test name is long right now, but it would likely be much more
+        # complicated to make it shorter while still unique and readable
+        set(_ad_test_name "${_CT_CMAKELISTS_TEMPLATE_PROJECT_NAME}")
         add_test(
             NAME
-                "${_ad_test_dest_prefix}_${_ad_test_proj_dir}"
+                "${_ad_test_name}"
             COMMAND
                 "${CMAKE_COMMAND}"
                 -S "${_ad_test_dest_full_path}/src"
