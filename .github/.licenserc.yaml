@@ -25,5 +25,6 @@ header:
     - tests/
     - LICENSE
     - requirements.txt
+    - "**/**.txt.in"
 
   comment: never
