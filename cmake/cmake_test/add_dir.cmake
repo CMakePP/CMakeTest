@@ -41,8 +41,8 @@ include(cmakepp_lang/cmakepp_lang)
 #                 Run a group of labeled tests with `ctest -L <label>`
 # :type LABEL: bool
 # :keyword LABEL_NAME: CTest label for all the tests in the directory.
-#                 Run a group of labeled tests with `ctest -L <label>`.
-#                 This argument has higher priority than LABEL
+#                      Run a group of labeled tests with `ctest -L <label>`.
+#                      This argument has higher priority than LABEL
 # :type LABEL_NAME: str
 # :keyword CMAKE_OPTIONS: List of additional CMake options to be
 #                         passed to all test invocations. Options
