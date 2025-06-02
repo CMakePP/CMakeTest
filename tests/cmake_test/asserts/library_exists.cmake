@@ -1,5 +1,4 @@
 include(cmake_test/cmake_test)
-cmake_policy(SET CMP0002 OLD) #Allow duplicate targets by overriding, needed for multiple tests that work with the same target
 
 ct_add_test(NAME assert_library_exists)
 function(${assert_library_exists})
