@@ -25,10 +25,10 @@ include("cmakepp_lang/asserts/signature")
 # :param var: The variable to apply the RegEx to.
 # :type var: str*
 # :param regex: The RegEx to apply to var.
-# :type regex: desc
+# :type regex: str
 #]]
 function(ct_assert_regex_equal _are_var _are_regex)
-    cpp_assert_signature("${ARGV}" str* desc)
+    cpp_assert_signature("${ARGV}" str* str)
 
     # Check separately for empty string
     # since it will blow up the next if statement
@@ -58,10 +58,10 @@ endfunction()
 # :param var: The variable to apply the regex to.
 # :type var: str*
 # :param regex: The regex to apply.
-# :type regex: desc
+# :type regex: str
 #]]
 function(ct_assert_regex_not_equal _arne_var _arne_regex)
-    cpp_assert_signature("${ARGV}" str* desc)
+    cpp_assert_signature("${ARGV}" str* str)
 
     # Check separately for empty string
     # since it will blow up the next if statement
