@@ -1,0 +1,37 @@
+
+##############################
+cmake_test/asserts/regex_equal
+##############################
+
+.. module:: cmake_test/asserts/regex_equal
+
+
+.. function:: ct_assert_regex_equal(var regex)
+
+   Asserts that the contents of the provided variable matches the given regular 
+   expression.
+   
+   :code:`var` must be a non-empty string, otherwise an :code:`ASSERTION_FAILED`
+   exception is raised.
+   
+   :param var: The variable to apply the RegEx to.
+   :type var: str*
+   :param regex: The RegEx to apply to var.
+   :type regex: str
+   
+
+
+.. function:: ct_assert_regex_not_equal(var regex)
+
+   Asserts that the contents of the provided variable don't match the given 
+   regular expression.
+   
+   :code:`var` must be a non-empty string, otherwise an :code:`ASSERTION_FAILED`
+   exception is raised.
+   
+   :param var: The variable to apply the regex to.
+   :type var: str*
+   :param regex: The regex to apply.
+   :type regex: str
+   
+

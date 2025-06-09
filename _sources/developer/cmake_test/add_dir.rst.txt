@@ -6,23 +6,39 @@ cmake_test/add_dir
 .. module:: cmake_test/add_dir
 
 
-.. function:: ct_add_dir(dir **kwargs)
+.. function:: ct_add_dir(test_dir **kwargs)
 
-   This function will find all :code:`*.cmake` files in the specified directory as well as recursively through all subdirectories.
-   It will then configure the boilerplate template to include() each cmake file and register each configured boilerplate
-   with CTest. The configured templates will be executed seperately via CTest during the Test phase, and each *.cmake
-   file found in the specified directory is assumed to contain CMakeTest tests.
+   This function will find all :code:`*.cmake` files in the specified directory
+   as well as recursively through all subdirectories. It will then configure the
+   boilerplate template to include() each cmake file and register each
+   configured boilerplate with CTest. The configured templates will be executed
+   seperately via CTest during the Test phase, and each *.cmake file found in
+   the specified directory is assumed to contain CMakeTest tests.
    
-   :param dir: The directory to search for *.cmake files. Subdirectories will be recursively searched.
-   :type dir: path
+   :param test_dir: The directory to search for *.cmake files containing tests.
+                    Subdirectories will be recursively searched.
+   :type test_dir: path
    
    **Keyword Arguments**
    
+   :keyword CT_DEBUG_MODE_ON: Enables debug mode when the tests are run.
+   :type CT_DEBUG_MODE_ON: bool
+   :keyword USE_REL_PATH_NAMES: Enables using shorter, relative paths for
+                                test names, but increases the chance of name
+                                collisions.
+   :type USE_REL_PATH_NAMES: bool
+   :keyword LABEL: Use relative directory name for CTest label for all the tests
+                   in the directory.
+                   Run a group of labeled tests with `ctest -L <label>`
+   :type LABEL: bool
+   :keyword LABEL_NAME: CTest label for all the tests in the directory.
+                        Run a group of labeled tests with `ctest -L <label>`.
+                        This argument has higher priority than LABEL
+   :type LABEL_NAME: str
    :keyword CMAKE_OPTIONS: List of additional CMake options to be
                            passed to all test invocations. Options
-                           should follow the syntax: :code:`-D<variable_name>=<value>`
+                           should follow the syntax:
+                           :code:`-D<variable_name>=<value>`
    :type CMAKE_OPTIONS: list
-   
-   
    
 

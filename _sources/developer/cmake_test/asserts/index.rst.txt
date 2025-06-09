@@ -14,6 +14,7 @@ cmake_test/asserts
    library_exists
    list
    prints
+   regex_equal
    string
    target_exists
    target_has_property
