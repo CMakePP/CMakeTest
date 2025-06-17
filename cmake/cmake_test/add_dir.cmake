@@ -130,6 +130,7 @@ function(ct_add_dir _ad_test_dir)
         )
 
         # Configure the CMakeLists.txt for test in the build directory
+        cpp_enabled_languages(_CT_LANGUAGES)
         configure_file(
             "${_CT_TEMPLATES_DIR}/test_CMakeLists.txt.in"
             "${_ad_test_dest_full_path}/src/CMakeLists.txt"

@@ -7,7 +7,7 @@ set(_ct_min_cmake_version @_ct_min_cmake_version@) #Propagate min version down
 
 # A language is set so the dummy projects don't complain about not having a
 # linkage language.
-project(@_CT_CMAKELISTS_TEMPLATE_PROJECT_NAME@ LANGUAGES C)
+project(@_CT_CMAKELISTS_TEMPLATE_PROJECT_NAME@ LANGUAGES @_CT_LANGUAGES@)
 
 #Enable colors in Unix environments, ignored on Windows. Will not work with pipes
 set(CMAKETEST_USE_COLORS "@CMAKETEST_USE_COLORS@")
