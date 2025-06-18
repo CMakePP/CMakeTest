@@ -33,31 +33,46 @@ include(cmakepp_lang/cmakepp_lang)
 # :keyword CT_DEBUG_MODE_ON: Enables debug mode when the tests are run.
 # :type CT_DEBUG_MODE_ON: bool
 # :keyword USE_REL_PATH_NAMES: Enables using shorter, relative paths for
-#                              test names, but increases the chance of name
-#                              collisions.
+#     test names, but increases the chance of name collisions.
 # :type USE_REL_PATH_NAMES: bool
 # :keyword LABEL: Use relative directory name for CTest label for all the tests
-#                 in the directory.
-#                 Run a group of labeled tests with `ctest -L <label>`
+#     in the directory. In a group of labeled tests with `ctest -L <label>`
 # :type LABEL: bool
 # :keyword LABEL_NAME: CTest label for all the tests in the directory.
-#                      Run a group of labeled tests with `ctest -L <label>`.
-#                      This argument has higher priority than LABEL
+#     Run a group of labeled tests with `ctest -L <label>`. This argument has 
+#     higher priority than LABEL
 # :type LABEL_NAME: str
-# :keyword CMAKE_OPTIONS: List of additional CMake options to be
-#                         passed to all test invocations. Options
-#                         should follow the syntax:
-#                         :code:`-D<variable_name>=<value>`
+# :keyword CMAKE_OPTIONS: List of additional CMake options to be passed to all 
+#     test invocations. Options should follow the syntax: 
+#     :code:`-D<variable_name>=<value>`
 # :type CMAKE_OPTIONS: list
+# :keyword LANGUAGES: List of coding languages to set in the 
+#    `project() <https://cmake.org/cmake/help/latest/command/project.html>` 
+#    command. The list will be forwarded to all tests in the directory. If the
+#    user does not want all tests to use the same language set, they can set
+#    this keyword to ``NONE`` and then call
+#    `enable_language() <https://cmake.org/cmake/help/latest/command/enable_language.html>`
+#    as appropriate on a test-by-test basis. For convenience, the user may set
+#    the ``LANGUAGES`` keyword to ``FORWARD_LANGUAGES`` and the tests will use
+#    the languages enabled when ``ct_add_dir`` is called. If ``LANGUAGES`` is
+#    not specified only the ``C`` language will be enabled (this is done to
+#    silence warnings about not specifying a language).
+# :type LANGUAGES: list
+#
 #]]
 function(ct_add_dir _ad_test_dir)
-    set(_ad_multi_value_args "CMAKE_OPTIONS")
+    set(_ad_multi_value_args "CMAKE_OPTIONS" "LANGUAGES")
     # TODO: This name is potentially misleading because it seems to enable
     #       debug mode for the test projects (see the use of 'ct_debug_mode'
     #       in cmake/cmake_test/templates/test_project_CMakeLists.txt.in).
-    #       I propose renaming it to something like "ENABLE_DEBUG_MODE_IN_TESTS".
+    #       I propose renaming to something like "ENABLE_DEBUG_MODE_IN_TESTS".
     set(_ad_options CT_DEBUG_MODE_ON USE_REL_PATH_NAMES LABEL)
-    cmake_parse_arguments(PARSE_ARGV 1 ADD_DIR "${_ad_options}" "LABEL_NAME" "${_ad_multi_value_args}")
+    cmake_parse_arguments(PARSE_ARGV 
+        1 
+        ADD_DIR "${_ad_options}" 
+        "LABEL_NAME" 
+        "${_ad_multi_value_args}"
+    )
 
     # This variable will be picked up by the template
     # TODO: This variable should be made Config File-specific and may end up
@@ -77,6 +92,18 @@ function(ct_add_dir _ad_test_dir)
         LIST_DIRECTORIES FALSE
         FOLLOW_SYMLINKS "${_ad_abs_test_dir}/*.cmake"
     )
+
+    # Determine the programming languages to hard-code into the template's
+    # project(...) command
+    if("${ADD_DIR_LANGUAGES}" STREQUAL "")
+        set(_CT_LANGUAGES "C")
+    elseif("${ADD_DIR_LANGUAGES}" STREQUAL "FORWARD_LANGUAGES")
+        cpp_enabled_languages(_CT_LANGUAGES)
+    else()
+        # Could check for parsing problems
+        set(_CT_LANGUAGES "${ADD_DIR_LANGUAGES}")
+    endif()
+
 
     # Each test file will get its own directory and "mini-project" in the
     # build directory to facilitate independently running each test case.
@@ -130,7 +157,7 @@ function(ct_add_dir _ad_test_dir)
         )
 
         # Configure the CMakeLists.txt for test in the build directory
-        cpp_enabled_languages(_CT_LANGUAGES)
+
         configure_file(
             "${_CT_TEMPLATES_DIR}/test_CMakeLists.txt.in"
             "${_ad_test_dest_full_path}/src/CMakeLists.txt"
