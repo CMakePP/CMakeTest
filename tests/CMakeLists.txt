@@ -12,5 +12,6 @@ ct_set_print_length("${CT_DEFAULT_PRINT_LENGTH}")
 
 set(CMAKEPP_LANG_DEBUG_MODE ON)
 
+add_subdirectory("add_dir_test")
 ct_add_dir("./cmake_test" CT_DEBUG_MODE_ON)
 ct_add_dir("./test_directory_2" CT_DEBUG_MODE_ON)
