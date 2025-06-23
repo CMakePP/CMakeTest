@@ -122,18 +122,26 @@ Subdirectories will be recursively searched.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>CT_DEBUG_MODE_ON</strong> (<em>bool</em>) – Enables debug mode when the tests are run.</p></li>
 <li><p><strong>USE_REL_PATH_NAMES</strong> (<em>bool</em>) – Enables using shorter, relative paths for
-test names, but increases the chance of name
-collisions.</p></li>
+test names, but increases the chance of name collisions.</p></li>
 <li><p><strong>LABEL</strong> (<em>bool</em>) – Use relative directory name for CTest label for all the tests
-in the directory.
-Run a group of labeled tests with <cite>ctest -L &lt;label&gt;</cite></p></li>
+in the directory. In a group of labeled tests with <cite>ctest -L &lt;label&gt;</cite></p></li>
 <li><p><strong>LABEL_NAME</strong> (<em>str</em>) – CTest label for all the tests in the directory.
-Run a group of labeled tests with <cite>ctest -L &lt;label&gt;</cite>.
-This argument has higher priority than LABEL</p></li>
-<li><p><strong>CMAKE_OPTIONS</strong> (<em>list</em>) – List of additional CMake options to be
-passed to all test invocations. Options
-should follow the syntax:
+Run a group of labeled tests with <cite>ctest -L &lt;label&gt;</cite>. This argument has
+higher priority than LABEL</p></li>
+<li><p><strong>CMAKE_OPTIONS</strong> (<em>list</em>) – List of additional CMake options to be passed to all
+test invocations. Options should follow the syntax:
 <code class="code docutils literal notranslate"><span class="pre">-D&lt;variable_name&gt;=&lt;value&gt;</span></code></p></li>
+<li><p><strong>LANGUAGES</strong> (<em>list</em>) – List of coding languages to set in the
+<cite>project() &lt;https://cmake.org/cmake/help/latest/command/project.html&gt;</cite>
+command. The list will be forwarded to all tests in the directory. If the
+user does not want all tests to use the same language set, they can set
+this keyword to <code class="docutils literal notranslate"><span class="pre">NONE</span></code> and then call
+<cite>enable_language() &lt;https://cmake.org/cmake/help/latest/command/enable_language.html&gt;</cite>
+as appropriate on a test-by-test basis. For convenience, the user may set
+the <code class="docutils literal notranslate"><span class="pre">LANGUAGES</span></code> keyword to <code class="docutils literal notranslate"><span class="pre">FORWARD_LANGUAGES</span></code> and the tests will use
+the languages enabled when <code class="docutils literal notranslate"><span class="pre">ct_add_dir</span></code> is called. If <code class="docutils literal notranslate"><span class="pre">LANGUAGES</span></code> is
+not specified only the <code class="docutils literal notranslate"><span class="pre">C</span></code> language will be enabled (this is done to
+silence warnings about not specifying a language).</p></li>
 </ul>
 </dd>
 </dl>

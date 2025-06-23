@@ -24,21 +24,31 @@ cmake_test/add_dir
    :keyword CT_DEBUG_MODE_ON: Enables debug mode when the tests are run.
    :type CT_DEBUG_MODE_ON: bool
    :keyword USE_REL_PATH_NAMES: Enables using shorter, relative paths for
-                                test names, but increases the chance of name
-                                collisions.
+       test names, but increases the chance of name collisions.
    :type USE_REL_PATH_NAMES: bool
    :keyword LABEL: Use relative directory name for CTest label for all the tests
-                   in the directory.
-                   Run a group of labeled tests with `ctest -L <label>`
+       in the directory. In a group of labeled tests with `ctest -L <label>`
    :type LABEL: bool
    :keyword LABEL_NAME: CTest label for all the tests in the directory.
-                        Run a group of labeled tests with `ctest -L <label>`.
-                        This argument has higher priority than LABEL
+       Run a group of labeled tests with `ctest -L <label>`. This argument has 
+       higher priority than LABEL
    :type LABEL_NAME: str
-   :keyword CMAKE_OPTIONS: List of additional CMake options to be
-                           passed to all test invocations. Options
-                           should follow the syntax:
-                           :code:`-D<variable_name>=<value>`
+   :keyword CMAKE_OPTIONS: List of additional CMake options to be passed to all 
+       test invocations. Options should follow the syntax: 
+       :code:`-D<variable_name>=<value>`
    :type CMAKE_OPTIONS: list
+   :keyword LANGUAGES: List of coding languages to set in the 
+      `project() <https://cmake.org/cmake/help/latest/command/project.html>` 
+      command. The list will be forwarded to all tests in the directory. If the
+      user does not want all tests to use the same language set, they can set
+      this keyword to ``NONE`` and then call
+      `enable_language() <https://cmake.org/cmake/help/latest/command/enable_language.html>`
+      as appropriate on a test-by-test basis. For convenience, the user may set
+      the ``LANGUAGES`` keyword to ``FORWARD_LANGUAGES`` and the tests will use
+      the languages enabled when ``ct_add_dir`` is called. If ``LANGUAGES`` is
+      not specified only the ``C`` language will be enabled (this is done to
+      silence warnings about not specifying a language).
+   :type LANGUAGES: list
+   
    
 
