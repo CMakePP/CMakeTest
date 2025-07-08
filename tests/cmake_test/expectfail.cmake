@@ -5,7 +5,7 @@ include(cmake_test/cmake_test)
 # in an EXPECTFAIL test will allow the test to succeed.
 #]]
 ct_add_test(NAME "make_sure_function_fails" EXPECTFAIL)
-function("${CMAKETEST_TEST}")
+function("${make_sure_function_fails}")
 
     function(failing_fxn)
         message(FATAL_ERROR "I have erred.")
