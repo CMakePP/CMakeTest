@@ -45,11 +45,15 @@ function(message)
     set(_m_temp_debug_mode "${CMAKEPP_LANG_DEBUG_MODE}")
     cpp_get_global(_m_ct_debug_mode "CT_DEBUG_MODE")
     set(CMAKEPP_LANG_DEBUG_MODE "${_m_ct_debug_mode}")
+
     if(ARGC GREATER 1)
         set(_msg_message_with_level "${ARGV}")
         list(REMOVE_AT _msg_message_with_level 0)
         cpp_set_global(CT_LAST_MESSAGE "${_msg_message_with_level}")
+
+        # Our override turns the FATAL_ERROR level into a CMakePPLang GENERIC_ERROR
         if(ARGV0 STREQUAL "FATAL_ERROR")
+            # Check if any exception handlers are active
             cpp_get_global(_m_exception_handlers "_CPP_EXCEPTION_HANDLERS_")
             cpp_map(GET "${_m_exception_handlers}" _m_handlers_list "GENERIC_ERROR")
             cpp_map(GET "${_m_exception_handlers}" _m_all_handlers_list "ALL_EXCEPTIONS")
