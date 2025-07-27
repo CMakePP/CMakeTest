@@ -25,9 +25,20 @@ include_guard(GLOBAL)
 
 
 #[[[
-# This function overrides the standard message() function to convert fatal_errors into CMakePP GENERIC_ERROR exceptions.
-# This is useful for executing tests which are expected to fail without requiring subprocesses.
-# If the first argument is not FATAL_ERROR, this function will behave exactly as the original message().
+# Overrides the standard ``message()`` to handle errors as CMakePP exceptions.
+#
+# This function overrides the standard ``message()`` function to convert
+# fatal_errors into CMakePP ``GENERIC_ERROR`` exceptions. This is useful for
+# executing tests which are expected to fail without requiring subprocesses.
+# If the first argument is not ``FATAL_ERROR``, this function will behave exactly
+# as the original ``message()``.
+#
+# It should be noted that redefining CMake commands is `highly discouraged
+# https://crascit.com/2018/09/14/do-not-redefine-cmake-commands/`__.
+#
+# :param *args: A variadiac list of arguments intended for the ``message()``
+#               function.
+# :type *args: str
 #]]
 function(message)
     # Set debug mode to what it should be for cmaketest, in case the test changed it
