@@ -42,26 +42,59 @@ function(message)
             cpp_get_global(_m_exception_handlers "_CPP_EXCEPTION_HANDLERS_")
             cpp_map(GET "${_m_exception_handlers}" _m_handlers_list "GENERIC_ERROR")
             cpp_map(GET "${_m_exception_handlers}" _m_all_handlers_list "ALL_EXCEPTIONS")
+            
             if("${_m_handlers_list}" STREQUAL "" AND "${_m_all_handlers_list}" STREQUAL "" )
-                #No handlers set, will cause infinite recursion if we raise error
-                #so force terminate
+                # No handlers set, this will cause infinite recursion if we raise an error
+                # because cpp_raise() invokes message(FATAL_ERROR ...), so just terminate CMake here
                 ct_exit("Uncaught exception: ${ARGN}")
-
             else()
                 cpp_raise(GENERIC_ERROR "${ARGV1}")
                 set(CMAKEPP_LANG_DEBUG_MODE "${_m_temp_debug_mode}")
                 return()
             endif()
         endif()
-
     else()
         cpp_set_global(CT_LAST_MESSAGE "${ARGV}")
     endif()
 
-    if("${ARGV}" STREQUAL "")
-        _message("")
+    if (${ARGC} EQUAL 0)
+         _message("")
+    elseif (${ARGC} EQUAL 1)
+        _message("${ARGV0}")
     else()
-        _message(${ARGV})
+        # For a list of valid message modes, see
+        # https://cmake.org/cmake/help/latest/command/message.html
+        set(valid_message_modes
+            # Log Levels
+            # "FATAL_ERROR"  # Handled above
+            "SEND_ERROR"
+            "WARNING"
+            "AUTHOR_WARNING"
+            "DEPRECATION"
+            "NOTICE"  # Added in 3.15
+            "STATUS"
+            "VERBOSE"  # Added in 3.15
+            "DEBUG"  # Added in 3.15
+            "TRACE"  # Added in 3.15
+            # Reporting Checks
+            "CHECK_START"  # Added in 3.17
+            "CHECK_PASS"  # Added in 3.17
+            "CHECK_FAIL"  # Added in 3.17
+            # Configure Log
+            "CONFIGURE_LOG"  # Added in 3.26
+        )
+        set(first_arg "${ARGV0}")
+        if ("${first_arg}" IN_LIST valid_message_modes)
+            list(REMOVE_AT ARGV 0)
+            if(${ARGC} EQUAL 2)
+                 _message("${first_arg}" "${ARGV}")
+            else()
+                 string(JOIN "" msg ${ARGV})
+                _message("${first_arg}" "${msg}")
+            endif()
+        else()
+            _message(${ARGV})
+        endif()
     endif()
 
     set(CMAKEPP_LANG_DEBUG_MODE "${_m_temp_debug_mode}")
